@@ -95,4 +95,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Dominic W. Berry, Andrew M. Childs, Aaron Ostrander, Guoming Wang, [Quantum algorithm for linear differential equations with exponentially improved dependence on precision](https://arxiv.org/abs/1701.03684), Sections 2–7: Taylor history system, conditioning, preparation, and final-time selection.
 - Dong An, Jin-Peng Liu, Lin Lin, [Linear combination of Hamiltonian simulation for nonunitary dynamics with optimal state preparation cost](https://arxiv.org/abs/2303.01029): LCHS alternative and supported nonunitary setting; abstract verified.
-- The Euler, second-order Taylor, and exact two-dimensional contractions are tested in `scripts/check-matrix-examples.py`; none is represented as a general quantum ODE implementation.
+- The Euler, second-order Taylor, and exact two-dimensional contractions are tested in [the downloadable matrix checks](/examples/matrix-checks.py); none is represented as a general quantum ODE implementation.

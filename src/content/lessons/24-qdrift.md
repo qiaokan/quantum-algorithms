@@ -82,4 +82,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Earl Campbell, [A random compiler for fast Hamiltonian simulation](https://arxiv.org/abs/1811.08017), main construction and appendices on channel error and controlled evolution. Supports qDRIFT probabilities, scaling, and the ensemble-versus-single-circuit distinction.
 - Andrew M. Childs et al., [A Theory of Trotter Error](https://arxiv.org/abs/1912.08854), for the deterministic comparison and importance of commutation structure.
-- The one-step instance is original to this lesson; numerical verification is in `scripts/check-matrix-examples.py`.
+- The one-step instance is original to this lesson; numerical verification is in [the downloadable matrix checks](/examples/matrix-checks.py).

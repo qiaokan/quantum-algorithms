@@ -92,4 +92,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Dominic W. Berry, Andrew M. Childs, Richard Cleve, Robin Kothari, Rolando D. Somma, [Simulating Hamiltonian dynamics with a truncated Taylor series](https://arxiv.org/abs/1412.4687): segmented Taylor/LCU construction and robust amplification.
 - Guang Hao Low, Nathan Wiebe, [Hamiltonian Simulation in the Interaction Picture](https://arxiv.org/abs/1805.00675): exploiting a cheaply simulable dominant part and time-dependent interaction.
-- The explicit degree-two example is checked in `scripts/check-matrix-examples.py`; it is not labeled a full general Taylor-simulation implementation.
+- The explicit degree-two example is checked in [the downloadable matrix checks](/examples/matrix-checks.py); it is not labeled a full general Taylor-simulation implementation.

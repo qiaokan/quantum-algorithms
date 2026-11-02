@@ -92,4 +92,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 ## References
 
 - Andrew M. Childs, Yuan Su, Minh C. Tran, Nathan Wiebe, Shuchen Zhu, [A Theory of Trotter Error](https://arxiv.org/abs/1912.08854), especially product-formula definitions and first-/second-order commutator bounds. Supports the error discussion, not a claimed hardware speedup.
-- The one-qubit example and its numerical values are calculations developed for this lesson. A reproducible calculation is included in `scripts/check-matrix-examples.py`.
+- The one-qubit example and its numerical values are calculations developed for this lesson. A reproducible calculation is included in [the downloadable matrix checks](/examples/matrix-checks.py).

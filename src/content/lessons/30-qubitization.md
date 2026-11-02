@@ -84,4 +84,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Guang Hao Low, Isaac L. Chuang, [Hamiltonian Simulation by Qubitization](https://arxiv.org/abs/1610.06546), Sections 3–5: encoding conditions, invariant subspaces, and signal processing.
 - John M. Martyn et al., [A Grand Unification of Quantum Algorithms](https://arxiv.org/abs/2105.02859), Sections II.1–II.3: polynomial interpretation and conventions.
-- Explicit dilation and powers are verified in `scripts/check-matrix-examples.py`.
+- Explicit dilation and powers are verified in [the downloadable matrix checks](/examples/matrix-checks.py).

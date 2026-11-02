@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent stdlib arithmetic checks for the authored 2x2 examples.
 These are classical ideal simulations, not hardware runs or large algorithms.
-Run: python3 scripts/check-matrix-examples.py
+Run after downloading: python3 matrix-checks.py
 """
 import cmath
 import math

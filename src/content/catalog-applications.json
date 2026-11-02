@@ -40,7 +40,7 @@
     "module": 7,
     "title": "Continuous-time quantum walks",
     "kind": "primitive",
-    "summary": "An adjacency Hamiltonian moves a state across one edge and back.",
+    "summary": "Derive graph evolution, then solve complete-graph search with a fixed-strength oracle Hamiltonian.",
     "why": "Connects graph motion to Hamiltonian simulation and eigenphases.",
     "prerequisites": [
       "product-formulas"
@@ -56,11 +56,14 @@
       "continuous-walks-worked"
     ],
     "sourceIds": [
-      "app-continuous-walk"
+      "app-continuous-walk",
+      "app-spatial-search",
+      "app-analog-search",
+      "app-glued-trees"
     ],
     "path": "main",
     "editorial": "complete",
-    "advantage": "Model-dependent theoretical applications; this two-state instance is classically easy.",
+    "advantage": "Exact complete-graph search in O(√N) continuous oracle time; exponential glued-trees separation cited under a different promise.",
     "aliases": [
       "CTQW",
       "adjacency matrix"
@@ -129,20 +132,22 @@
       "app-distinctness"
     ],
     "path": "branch",
-    "editorial": "complete",
+    "editorial": "partial",
     "advantage": "Proven oracle-model O(N^(2/3)) bound; implemented teaching variant has explicit reload cost.",
     "aliases": [
       "duplicate finding",
       "Ambainis"
     ],
     "file": "41-element-distinctness.md",
-    "gaps": []
+    "gaps": [
+      "The elementary subset-amplification algorithm is worked end to end and costs Θ(N) queries. The optimal O(N^(2/3)) theorem is explained through setup/update/gap costs, but its coherent data-retaining subset-walk implementation is not worked through."
+    ]
   },
   {
     "id": "triangle-finding",
     "sequence": 42,
     "module": 7,
-    "title": "Triangle finding",
+    "title": "Triangle finding via Grover search",
     "kind": "algorithm",
     "summary": "An explicit four-vertex Grover search with all six adjacency calls counted.",
     "why": "Separates an elementary algorithm from graph-structured improved bounds.",
@@ -164,7 +169,7 @@
     ],
     "path": "branch",
     "editorial": "complete",
-    "advantage": "Proven oracle-model bounds; no wall-clock advantage established here.",
+    "advantage": "The worked algorithm uses O(n^(3/2)) adjacency queries. Le Gall’s stronger bound is a cited extension, not a taught construction.",
     "aliases": [
       "triangle detection",
       "Le Gall"

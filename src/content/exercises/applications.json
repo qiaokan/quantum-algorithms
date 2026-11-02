@@ -6,8 +6,8 @@
   },
   {
     "lesson": "coined-walks",
-    "question": "Change the initial coin from |0〉 to |1〉. What changes after one step?",
-    "answer": "Hadamard maps it to (|0〉−|1〉)/√2, so the shifted state is (|−1,0〉−|1,1〉)/√2. Immediate position probabilities are unchanged, but relative phase differs and can affect later interference."
+    "question": "Change the initial coin from $|0\\rangle$ to $|1\\rangle$. What changes after one step?",
+    "answer": "Hadamard maps it to ($|0\\rangle$−$|1\\rangle$)/√2, so the shifted state is (|−1,0〉−|1,1〉)/√2. Immediate position probabilities are unchanged, but relative phase differs and can affect later interference."
   },
   {
     "lesson": "continuous-walks",
@@ -52,7 +52,7 @@
   {
     "lesson": "formula-evaluation",
     "question": "For x=0011, construct a normalized zero-phase vector and compute its initial overlap.",
-    "answer": "The vector (2,0,0,−1,1)/√6 lies in the kernel of A and uses only available labels. Both reflections fix it, hence its walk eigenvalue is 1. Its squared overlap with |0⟩ is 4/6=2/3. The finite eight-bin zero probability is slightly larger, 52436/78125, because other eigenphases leak into the zero bin."
+    "answer": "The vector (2,0,0,−1,1)/√6 lies in the kernel of A and uses only available labels. Both reflections fix it, hence its walk eigenvalue is 1. Its squared overlap with $|0\\rangle$ is 4/6=2/3. The finite eight-bin zero probability is slightly larger, 52436/78125, because other eigenphases leak into the zero bin."
   },
   {
     "lesson": "formula-evaluation",
@@ -72,7 +72,7 @@
   {
     "lesson": "vqe",
     "question": "For H=Z+X and θ=π/2, compute energy and Z-basis probabilities.",
-    "answer": "The state is |+〉, so Z probabilities are 1/2,1/2. The X expectation is 1 and Z expectation 0, giving energy 1. Uniform Z probabilities do not mean energy zero."
+    "answer": "The state is $|+\\rangle$, so Z probabilities are 1/2,1/2. The X expectation is 1 and Z expectation 0, giving energy 1. Uniform Z probabilities do not mean energy zero."
   },
   {
     "lesson": "vqe",
@@ -97,7 +97,7 @@
   {
     "lesson": "qaoa",
     "question": "Can a three-vertex triangle have cut value three?",
-    "answer": "No. If vertex0 differs from1 and1 differs from2, then0 and2 are on the same side. At least one edge is uncut, so the maximum is two. An algorithm must respect this combinatorial optimum."
+    "answer": "No. If vertex 0 differs from 1 and 1 differs from 2, then 0 and 2 are on the same side. At least one edge is uncut, so the maximum is two. An algorithm must respect this combinatorial optimum."
   },
   {
     "lesson": "imaginary-time",
@@ -117,32 +117,32 @@
   {
     "lesson": "adiabatic-annealing",
     "question": "For the constant-gap schedule with T=20, what conservative failure bound follows?",
-    "answer": "Substitute T into π²/(16T²+π²), giving about0.001540. This bounds ideal finite-time transition error only; a digitally synthesized or noisy device requires additional error accounting."
+    "answer": "Substitute T into π²/(16T²+π²), giving about 0.001540. This bounds ideal finite-time transition error only; a digitally synthesized or noisy device requires additional error accounting."
   },
   {
     "lesson": "tomography",
     "question": "Reconstruct the one-qubit state with x=0,y=0,z=0.",
-    "answer": "The formula gives ρ=I/2=diag(1/2,1/2), the maximally mixed state. It is not the pure superposition |+〉, which has x=1 and nonzero off-diagonal entries."
+    "answer": "The formula gives ρ=I/2=diag(1/2,1/2), the maximally mixed state. It is not the pure superposition $|+\\rangle$, which has x=1 and nonzero off-diagonal entries."
   },
   {
     "lesson": "tomography",
     "question": "A reconstruction yields x=0.8,y=0.8,z=0. Is it physical?",
-    "answer": "No. The squared Bloch length is1.28>1. The eigenvalues are (1±√1.28)/2, one negative. Sampling noise or a model/calibration problem requires a constrained reconstruction and honest uncertainty reporting."
+    "answer": "No. The squared Bloch length is 1.28>1. The eigenvalues are (1±√1.28)/2, one negative. Sampling noise or a model/calibration problem requires a constrained reconstruction and honest uncertainty reporting."
   },
   {
     "lesson": "classical-shadows",
-    "question": "For |0〉, a Z-basis shadow has eigenvalues2 and−1. Why does this not violate physical positivity?",
+    "question": "For $|0\\rangle$, a Z-basis shadow has eigenvalues 2 and −1. Why does this not violate physical positivity?",
     "answer": "The shadow is a classical inverse estimator, not a quantum state prepared on hardware. Its expectation over randomized measurements is the physical density matrix. Individual estimators need not be positive."
   },
   {
     "lesson": "classical-shadows",
     "question": "How does the worst second moment grow for a k-qubit Pauli string under random local Pauli measurements?",
-    "answer": "The matching basis probability is3^(−k), and a matching value has magnitude3^k. Thus the second moment is3^(−k)·3^(2k)=3^k, making long strings expensive."
+    "answer": "The matching basis probability is 3^(−k), and a matching value has magnitude 3^k. Thus the second moment is 3^(−k)·3^(2k)=3^k, making long strings expensive."
   },
   {
     "lesson": "quantum-kernels",
     "question": "For the R_y feature map, compute K(0,π/3).",
-    "answer": "The overlap is cos(π/6)=√3/2; its squared magnitude is3/4. A zero-outcome frequency estimates this value, not the unsquared overlap."
+    "answer": "The overlap is cos(π/6)=√3/2; its squared magnitude is 3/4. A zero-outcome frequency estimates this value, not the unsquared overlap."
   },
   {
     "lesson": "quantum-kernels",
@@ -162,27 +162,27 @@
   {
     "lesson": "iqp-sampling",
     "question": "At θ=π/2, what is the final output of the two-qubit IQP example?",
-    "answer": "The vector is i|11〉. Therefore outcome11 is certain. The common phase i does not change that outcome."
+    "answer": "The vector is i$|11\\rangle$. Therefore outcome 11 is certain. The common phase i does not change that outcome."
   },
   {
     "lesson": "iqp-sampling",
     "question": "Why is the diagonal central layer insufficient to obtain a nonuniform distribution?",
-    "answer": "Before the final basis change, all four magnitudes remain1/2. Only the final Hadamards sum paths into common amplitudes, allowing reinforcement and cancellation."
+    "answer": "Before the final basis change, all four magnitudes remain 1/2. Only the final Hadamards sum paths into common amplitudes, allowing reinforcement and cancellation."
   },
   {
     "lesson": "boson-sampling",
     "question": "What is the probability discarded when a λ=1/2 squeezed-pair input is truncated to k≤3 pairs?",
-    "answer": "The geometric tail is(1/4)^4=1/256. Renormalizing a truncated simulator without reporting this discarded probability would conceal approximation error."
+    "answer": "The geometric tail is (1/4)^4=1/256. Renormalizing a truncated simulator without reporting this discarded probability would conceal approximation error."
   },
   {
     "lesson": "boson-sampling",
     "question": "After the beam splitter, what is the total four-photon probability in the Gaussian example?",
-    "answer": "It is9/512+3/256+9/512=24/512=3/64. Lossless optical mixing preserves total photon number within each sector even though it redistributes occupations."
+    "answer": "It is 9/512+3/256+9/512=24/512=3/64. Lossless optical mixing preserves total photon number within each sector even though it redistributes occupations."
   },
   {
     "lesson": "random-circuit-sampling",
-    "question": "Why is the ideal expected XEB score3/4 rather than1 for this circuit?",
-    "answer": "The distribution is not assumed to follow a large random-circuit statistical ensemble. Direct substitution gives4Σp(z)²−1=4·7/16−1=3/4. The score normalization does not force every ideal circuit to have score1."
+    "question": "Why is the ideal expected XEB score 3/4 rather than 1 for this circuit?",
+    "answer": "The distribution is not assumed to follow a large random-circuit statistical ensemble. Direct substitution gives 4Σp(z)²−1=4·7/16−1=3/4. The score normalization does not force every ideal circuit to have score 1."
   },
   {
     "lesson": "random-circuit-sampling",
@@ -192,12 +192,12 @@
   {
     "lesson": "kuperberg",
     "question": "For N=8 and labels k=3,ℓ=1, which labels emerge from the combining measurement?",
-    "answer": "The sum branch gives4 and the difference branch2 modulo8. Each occurs with probability1/2. Label4 reveals parity after a Hadamard; label2 has a less simplified phase."
+    "answer": "The sum branch gives 4 and the difference branch 2 modulo 8. Each occurs with probability 1/2. Label 4 reveals parity after a Hadamard; label 2 has a less simplified phase."
   },
   {
     "lesson": "kuperberg",
-    "question": "If the recovered parity is p=0 and the hidden shift is s=6 modulo8, what reduced shift remains?",
-    "answer": "The new modulus is4 and shift(s−p)/2=3. Recovering its bits recursively gives6=0+2·3. The parity bit alone does not recover the whole shift."
+    "question": "If the recovered parity is p=0 and the hidden shift is s=6 modulo 8, what reduced shift remains?",
+    "answer": "The new modulus is 4 and shift (s−p)/2=3. Recovering its bits recursively gives 6=0+2·3. The parity bit alone does not recover the whole shift."
   },
   {
     "lesson": "hallgren",
@@ -212,22 +212,22 @@
   {
     "lesson": "jones-polynomial",
     "question": "Why is the crossing matrix unitary in the two-path example?",
-    "answer": "It is diagonal with entries−A³ and A^(−1), each magnitude1 because |A|=1. Thus multiplying by its conjugate transpose gives identity."
+    "answer": "It is diagonal with entries −A³ and A^(−1), each magnitude 1 because |A|=1. Thus multiplying by its conjugate transpose gives identity."
   },
   {
     "lesson": "jones-polynomial",
     "question": "If the weighted-trace estimate has error ε, what happens to absolute error after multiplication by d^(n−1)?",
-    "answer": "The phase correction has magnitude1, but the positive factor multiplies the error to d^(n−1)ε. A normalized additive guarantee is therefore not a uniform relative-error guarantee for the polynomial value."
+    "answer": "The phase correction has magnitude 1, but the positive factor multiplies the error to d^(n−1)ε. A normalized additive guarantee is therefore not a uniform relative-error guarantee for the polynomial value."
   },
   {
     "lesson": "quantum-metropolis",
     "question": "Verify detailed balance for the two-state Gibbs sampler.",
-    "answer": "The equilibrium flow upward is(2/3)(1/2)=1/3, and downward is(1/3)(1)=1/3. Equal flows ensure stationarity, but the time to approach it still needs a mixing analysis."
+    "answer": "The equilibrium flow upward is (2/3)(1/2)=1/3, and downward is (1/3)(1)=1/3. Equal flows ensure stationarity, but the time to approach it still needs a mixing analysis."
   },
   {
     "lesson": "quantum-metropolis",
-    "question": "If upward and downward transition rates are both multiplied by0.001, does the target distribution change?",
-    "answer": "No: their ratio and detailed balance remain unchanged. Continuous-time relaxation becomes1000times slower. Correct equilibrium weights and efficient convergence are distinct requirements."
+    "question": "If upward and downward transition rates are both multiplied by 0.001, does the target distribution change?",
+    "answer": "No: their ratio and detailed balance remain unchanged. Continuous-time relaxation becomes 1000 times slower. Correct equilibrium weights and efficient convergence are distinct requirements."
   },
   {
     "lesson": "forrelation",
@@ -236,7 +236,7 @@
   },
   {
     "lesson": "forrelation",
-    "question": "In the high case of the two-query circuit, why are ten repetitions enough for failure below0.012?",
-    "answer": "Each run sees zero with probability at least0.36. Independent failure in all ten runs is at most(1−0.36)^10=0.64^10≈0.01153. Repetitions and independence are part of the guarantee."
+    "question": "In the high case of the two-query circuit, why are ten repetitions enough for failure below 0.012?",
+    "answer": "Each run sees zero with probability at least 0.36. Independent failure in all ten runs is at most(1−0.36)^10=0.64^10≈0.01153. Repetitions and independence are part of the guarantee."
   }
 ]

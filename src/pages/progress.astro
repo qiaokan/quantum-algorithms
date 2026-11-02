@@ -3,8 +3,9 @@ import Book from '../layouts/Book.astro';import{lessons,label}from'../lib/conten
 ---
 <Book title="Your reading progress"><span class="eyebrow">LOCAL TO THIS BROWSER</span><h1>Your reading progress</h1><p class="dek">Your assessment is separate from whether a chapter has been editorially completed or reviewed.</p><p class="small muted">Stored only in this browser. Clearing site data removes it. Scrolling records a return location, never a learning status.</p><ul class="catalog-list">{lessons.filter(l=>l.editorial!=='planned').map(l=><li><a href={`/lessons/${l.id}/`}>{label(l)}</a><p data-status-for={l.id}>Not marked</p></li>)}</ul><button id="export-progress">Export progress JSON</button> <button id="clear-progress">Clear learning statuses</button><p id="progress-message" role="status" class="small"></p></Book>
 <script>
-let progress:Record<string,string>={};try{progress=JSON.parse(localStorage.getItem('qa-progress')||'{}')}catch{}
+import {storage,parseProgress} from '../lib/storage';
+let progress=parseProgress(storage.get('qa-progress','{}'));
 function draw(){document.querySelectorAll<HTMLElement>('[data-status-for]').forEach(el=>el.textContent=progress[el.dataset.statusFor!]||'Not marked')};draw();
-document.querySelector<HTMLButtonElement>('#clear-progress')!.onclick=()=>{progress={};try{localStorage.removeItem('qa-progress')}catch{}draw();document.querySelector('#progress-message')!.textContent='Learning statuses cleared. Reading locations are preserved.'};
+document.querySelector<HTMLButtonElement>('#clear-progress')!.onclick=()=>{progress=parseProgress('{}');storage.remove('qa-progress');draw();document.querySelector('#progress-message')!.textContent='Learning statuses cleared. Reading locations are preserved.'};
 document.querySelector<HTMLButtonElement>('#export-progress')!.onclick=()=>{const blob=new Blob([JSON.stringify({format:'quantum-algorithms-progress-v1',progress},null,2)],{type:'application/json'});const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='quantum-learning-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 </script>

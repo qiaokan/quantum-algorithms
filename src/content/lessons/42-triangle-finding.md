@@ -32,7 +32,7 @@ Every candidate is marked, so the phase oracle adds only a global minus sign. Ev
 
 </details>
 
-If no triple is marked, the diffusion preserves the uniform state. A measurement still returns a triple; verification rejects it. Repeated unsuccessful samples alone do not establish an exact impossibility certificate. The bounded-error decision procedure needs a calibrated search schedule and a known candidate count.
+If no triple is marked, the diffusion preserves the uniform state. A measurement still returns a triple; verification rejects it. Repeated unsuccessful samples alone do not establish an exact impossibility certificate. The bounded-error decision procedure needs a calibrated search schedule using the known **total** candidate count $M=\binom n3$, with a search budget of order $\sqrt M$ for constant error. The number $K$ of actual triangles may remain unknown; BBHT handles that uncertainty.
 
 ## Variant boundary and connections
 

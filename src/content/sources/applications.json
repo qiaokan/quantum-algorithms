@@ -278,5 +278,35 @@
     "verified": "2026-11-02",
     "verification": "full-text",
     "note": "Sections 1 and 3 including error 2/5 versus conventional 1/3 distinction inspected."
+  },
+  {
+    "id": "app-spatial-search",
+    "title": "Spatial search by quantum walk",
+    "authors": "Andrew M. Childs and Jeffrey Goldstone",
+    "url": "https://arxiv.org/abs/quant-ph/0306054",
+    "supports": "Complete-graph continuous-time search and graph-dependent speedup limits.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Primary abstract opened during independent-review revisions. Numerical search example derived and checked locally."
+  },
+  {
+    "id": "app-analog-search",
+    "title": "An Analog Analogue of a Digital Quantum Computation",
+    "authors": "Edward Farhi and Sam Gutmann",
+    "url": "https://arxiv.org/abs/quant-ph/9612026",
+    "supports": "Continuous-time oracle search with a fixed oracle energy scale.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Primary abstract opened during independent-review revisions. Numerical search example derived and checked locally."
+  },
+  {
+    "id": "app-glued-trees",
+    "title": "Exponential algorithmic speedup by quantum walk",
+    "authors": "Andrew M. Childs, Richard Cleve, Enrico Deotto, Edward Farhi, Sam Gutmann, Daniel A. Spielman",
+    "url": "https://arxiv.org/abs/quant-ph/0209131",
+    "supports": "Exponential separation for a black-box graph traversal problem, not arbitrary explicit graphs.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Primary abstract opened during independent-review revisions. Numerical search example derived and checked locally."
   }
 ]

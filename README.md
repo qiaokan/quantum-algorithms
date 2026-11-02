@@ -63,6 +63,8 @@ The GitHub Actions workflow in [.github/workflows/ci.yml](.github/workflows/ci.y
 
 The simulator never silently renormalizes a bad unitary result. Tests distinguish amplitudes from probabilities and compare states up to global phase only when appropriate. Inspection of simulator amplitudes is explicitly not claimed as an operation available on quantum hardware.
 
+The `katex` override keeps the Markdown math plugins on the same patched renderer as the site's KaTeX styles and fonts. The plugins' declared ranges otherwise install an older renderer. Recheck rendering and the dependency audit before changing this override.
+
 ## Content and code architecture
 
 ```text
@@ -114,3 +116,7 @@ The full authoring requirements are preserved in [docs/SPECIFICATION.md](docs/SP
 ## Deliberate limits
 
 The demonstrations are ideal simulations; no hardware experiments or physical speed claims are presented. Advanced examples isolate an explicitly stated transformation rather than masquerading as full scalable circuits. Complexity guarantees apply to their specified access, output, precision, and success models. Automated tests are not peer review of every theorem. Source verification levels and unfinished derivations are public in the site, not hidden in this README.
+
+## Review record
+
+The [self-review and three Claude review rounds](research/review-disposition.md) record findings, fixes, executed tests, and the final scoped agreement. The optimized element-distinctness walk is explicitly marked partial; review agreement does not imply full-book mathematical peer review.

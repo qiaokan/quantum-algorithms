@@ -1,3 +1,4 @@
-import{it,expect}from'vitest';import{render}from'../src/lib/content';
+import{it,expect}from'vitest';import{render,plainText}from'../src/lib/content';
 it('renders multiline display math with inline closing delimiters',async()=>{const r=await render('Before\n\n$$H=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\quad\nH^2=I.$$\n\nAfter');expect(r.html).toContain('katex-display');expect(r.html).toContain('After');expect(r.html).not.toContain('katex-error')});
 it('does not confuse ket bars in math with GFM table columns',async()=>{const r=await render('| State | Result |\n|---|---|\n| $|+\\rangle$ | $|0\\rangle$ |');expect((r.html.match(/<td>/g)||[]).length).toBe(2);expect((r.html.match(/class="katex"/g)||[]).length).toBe(2);expect(r.html).not.toMatch(/<td>\$/)});
+it('indexes each rendered formula once and preserves encoded text',async()=>{const r=await render('Apply $H$ then $X$. Compare A & B.');expect(r.text).toBe('Apply H then X . Compare A & B.');expect(plainText('<p>A &lt; B &amp; C &gt; D</p>')).toBe('A < B & C > D')});

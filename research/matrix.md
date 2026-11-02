@@ -64,7 +64,7 @@ Open-system/Lindblad simulation, quantum chemistry mappings/resource-estimation 
 
 ## Numerical verification actually executed
 
-Command: `python3 scripts/check-matrix-examples.py`
+Command at initial authoring: `python3 scripts/check-matrix-examples.py`. The maintained, CI-tested copy is now `public/examples/matrix-checks.py`; the duplicate was removed during independent review.
 
 Result: **16 tests passed**, using only Python standard-library arithmetic and `unittest`. These are ideal classical calculations, not hardware experiments. Tests include:
 

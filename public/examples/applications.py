@@ -80,6 +80,48 @@ class WorkedExamples(unittest.TestCase):
         w=rb@ra;self.assertClose(w.T@w,np.eye(4))
         self.assertClose(w[:,0],[1/4,-np.sqrt(3)/4,np.sqrt(3)/4,3/4])
         pi=np.r_[p0,p1]/np.sqrt(2);self.assertClose(w@pi,pi)
+    def test_complete_graph_search(self):
+        for n in [4,9,16]:
+            initial=np.ones(n)/np.sqrt(n); marked=np.eye(n)[:,2]
+            h=-np.outer(initial,initial)-np.outer(marked,marked)
+            for t in [0,np.pi/2,np.pi*np.sqrt(n)/2]:
+                actual=exp_hermitian(h,t)@initial
+                expected=np.exp(1j*t)*(np.cos(t/np.sqrt(n))*initial+1j*np.sin(t/np.sqrt(n))*marked)
+                self.assertClose(actual,expected)
+                self.assertClose(np.vdot(actual,actual),1)
+            self.assertClose(abs(actual)**2,abs(marked)**2)
+        s=np.ones(4)/2;h=-np.outer(s,s)-np.diag([0,0,1,0])
+        self.assertClose(abs(exp_hermitian(h,np.pi/2)@s)**2,[1/8,1/8,5/8,1/8])
+    def test_szegedy_spectrum_and_coherent_filter(self):
+        p=np.array([[.75,.25],[.25,.75]])
+        a=np.zeros((4,2));a[:2,0]=np.sqrt(p[0]);a[2:,1]=np.sqrt(p[1])
+        swap=np.eye(4)[[0,2,1,3]];b=swap@a
+        w=(2*b@b.T-np.eye(4))@(2*a@a.T-np.eye(4))
+        stationary=a@np.ones(2)/np.sqrt(2)
+        extra=np.array([1,-np.sqrt(3),-np.sqrt(3),1])/(2*np.sqrt(2))
+        self.assertClose(w@extra,extra)
+        self.assertClose(a.T@extra,[0,0]);self.assertClose(b.T@extra,[0,0])
+        self.assertClose(a.T@b,p)
+        eig,vec=np.linalg.eig(w)
+        phases=np.sort(np.angle(eig));self.assertClose(phases,[-2*np.pi/3,0,0,2*np.pi/3])
+        self.assertClose(qpe_zero_branch(w,stationary,4),stationary)
+        for j,z in enumerate(eig):
+            if abs(z-1)<1e-9:continue
+            v=vec[:,j];self.assertClose(qpe_zero_branch(w,v,4),v/4)
+            # Build the actual four-label controlled-power/QFT circuit.
+            f=np.exp(-2j*np.pi*np.outer(np.arange(4),np.arange(4))/4)/2
+            prep=np.kron(H,H);phase=np.diag(z**np.arange(4));qpe=f@phase@prep
+            reflection=qpe.conj().T@np.diag([1,-1,-1,-1])@qpe
+            e0=np.eye(4)[:,0];self.assertClose(np.linalg.norm(reflection@e0+e0),1/2)
+            self.assertClose(abs((qpe@e0)[0])**2,1/16)
+    def test_bell_partial_trace(self):
+        bell=np.array([1,0,0,1])/np.sqrt(2)
+        rho=np.outer(bell,bell).reshape(2,2,2,2)
+        reduced=np.trace(rho,axis1=1,axis2=3)
+        self.assertClose(reduced,np.eye(2)/2)
+        plus=np.ones(2)/np.sqrt(2)
+        self.assertClose(H@np.outer(plus,plus)@H,np.diag([1,0]))
+        self.assertClose(H@reduced@H,np.eye(2)/2)
     def test_subset_amplification(self):
         s=np.ones(6)/np.sqrt(6);marked=s.copy();marked[1]*=-1
         final=(2*np.outer(s,s)-np.eye(6))@marked

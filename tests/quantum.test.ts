@@ -1,9 +1,31 @@
 import {describe,it,expect} from 'vitest';
-import {c,H,X,Z,basis,gate,oracle,permutation,tensor,matvec,dagger,norm,probabilities,marginal,equivalent,qft,markedOracle,diffusion,sample,parity,shorPostprocess,hhlDiagonal,modPow,scale,add,mul,type State} from '../src/lib/quantum';
+import {c,H,X,Z,basis,gate,oracle,permutation,tensor,matvec,dagger,norm,probabilities,marginal,equivalent,qft,qftRegister,markedOracle,diffusion,sample,parity,shorPostprocess,hhlDiagonal,modPow,scale,add,mul,type State} from '../src/lib/quantum';
 import {makeDemo,resultProbabilities} from '../src/lib/demos';
 function close(a:number[],b:number[],digits=10){expect(a.length).toBe(b.length);a.forEach((x,i)=>expect(x).toBeCloseTo(b[i],digits))}
 const final=(id:string,value:string)=>{const d=makeDemo(id,value);return {d,frame:d.frames.at(-1)!,p:resultProbabilities(d,d.frames.length-1)}};
 describe('linear algebra and legal operations',()=>{
+ it('rejects nonfinite probabilities and random draws instead of inventing counts',()=>{
+  for(const p of [[NaN,1],[Infinity,0],[-Infinity,Infinity],[]])expect(()=>sample(p,1)).toThrow();
+  expect(()=>sample([.5,.5],1,()=>NaN)).toThrow();
+ });
+ it('rejects fractional or oversized registers and nonfinite state components',()=>{
+  expect(()=>gate(basis(2),0,X,.5)).toThrow();
+  expect(()=>marginal(basis(2),[.5])).toThrow();
+  expect(()=>qftRegister(basis(2),3)).toThrow();
+  expect(()=>qftRegister(basis(2),1.5)).toThrow();
+  expect(()=>oracle(basis(2),.5,1.5,()=>0)).toThrow();
+  expect(()=>gate([c(1),c(),c()],0,H)).toThrow();
+  expect(()=>qft([c(NaN),c()])).toThrow();
+  expect(()=>tensor(basis(5),basis(4))).toThrow();
+  expect(()=>markedOracle(basis(2),[4])).toThrow();
+ });
+ it('rejects undefined HHL postselection',()=>{
+  const b=[Math.SQRT1_2,Math.SQRT1_2];
+  expect(()=>hhlDiagonal([1,2],b,0)).toThrow();
+  expect(()=>hhlDiagonal([1,NaN],b,1)).toThrow();
+  expect(()=>hhlDiagonal([1,2],[NaN,0],1)).toThrow();
+  expect(()=>hhlDiagonal([1,2],b,Number.MIN_VALUE)).toThrow();
+ });
  it('expands a tensor in documented big-endian order',()=>{const s=tensor([c(1/Math.sqrt(2)),c(1/Math.sqrt(2))],[c(1/Math.sqrt(2)),c(-1/Math.sqrt(2))]);close(s.map(z=>z.re),[.5,-.5,.5,-.5]);expect(norm(s)).toBeCloseTo(1,12)});
  it.each([H,X,Z,[[c(1),c()],[c(),c(0,1)]]])('small gate is unitary on every basis direction',(row0,row1)=>{const m=[row0,row1];for(let i=0;i<2;i++)expect(equivalent(matvec(dagger(m),matvec(m,basis(1,i))),basis(1,i))).toBe(true)});
  it('controlled X is its own inverse and changes the correct bit',()=>{for(let i=0;i<8;i++){const s=gate(basis(3,i),2,X,0);expect(probabilities(s).indexOf(1)).toBe((i&4)?i^1:i);expect(equivalent(gate(s,2,X,0),basis(3,i))).toBe(true)}});

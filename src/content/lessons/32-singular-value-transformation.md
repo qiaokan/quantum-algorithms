@@ -97,4 +97,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 - András Gilyén, Yuan Su, Guang Hao Low, Nathan Wiebe, [Quantum singular value transformation and beyond](https://arxiv.org/abs/1806.01838): singular-value polynomial transformations, parity, block access, and applications.
 - John M. Martyn, Zane M. Rossi, Andrew K. Tan, Isaac L. Chuang, [A Grand Unification of Quantum Algorithms](https://arxiv.org/abs/2105.02859), Sections II.4–II.5: singular-vector subspaces and conventions.
 - Dominic W. Berry et al., [Simulating Hamiltonian dynamics with a truncated Taylor series](https://arxiv.org/abs/1412.4687), good-block identity used for the concrete cubic.
-- Full $4\times4$ circuit and its distinction from ordinary matrix powers are checked in `scripts/check-matrix-examples.py`.
+- Full $4\times4$ circuit and its distinction from ordinary matrix powers are checked in [the downloadable matrix checks](/examples/matrix-checks.py).

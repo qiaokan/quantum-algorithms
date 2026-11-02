@@ -41,6 +41,8 @@ jobs:
         run: npm test
       - name: Audit content and build
         run: npm run build
+      - name: Audit built links and fragments
+        run: npm run audit:links
       - name: Numerical example checks
         run: |
           python public/examples/search-fourier-checks.py

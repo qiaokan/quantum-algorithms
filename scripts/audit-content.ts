@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {lessons,definitions,sources,exercises,lessonMarkdown,definitionMarkdown,render,counts} from '../src/lib/content';
+import revisits from '../src/content/module-revisits.json';
 const errors:string[]=[],warnings:string[]=[];
 const unique=(items:{id:string}[],name:string)=>{const seen=new Set<string>();for(const item of items){if(seen.has(item.id))errors.push(`Duplicate ${name}: ${item.id}`);seen.add(item.id)}return seen};
 const lessonIds=unique(lessons,'lesson'),defIds=unique(definitions,'definition'),sourceIds=unique(sources,'source');
@@ -36,6 +37,13 @@ const definitionEdges = new Map(definitions.map(d=>[d.id,[...definitionMarkdown(
 const definitionDone=new Set<string>(),definitionStack:string[]=[];
 function visitDefinition(id:string){if(definitionStack.includes(id)){errors.push(`Definition cycle: ${[...definitionStack,id].join(' -> ')}`);return}if(definitionDone.has(id))return;definitionStack.push(id);for(const dep of definitionEdges.get(id)??[])visitDefinition(dep);definitionStack.pop();definitionDone.add(id)}
 for(const d of definitions)visitDefinition(d.id);
+// Audit prose-number boundaries outside formulas; short mathematical names stay valid.
+const proseNumberAllowlist=new Set(['ln','log']);
+for(const item of [...exercises.map(e=>({id:e.lesson,text:e.question+'\n\n'+e.answer})),...revisits.map(r=>({id:r.lesson,text:r.body}))]){
+ const prose=item.text.replace(/\$[\s\S]*?\$/g,'');
+ for(const m of prose.matchAll(/\b([A-Za-z]{2,})(?=\d)/g))if(!proseNumberAllowlist.has(m[1]))errors.push(`${item.id}: missing prose/number space after ${m[1]}`);
+ try{await render(item.text)}catch(e){errors.push(`${item.id}: practice/revisit math rendering: ${e}`)}
+}
 for(const s of sources){if(!/^https?:\/\//.test(s.url))errors.push(`Invalid URL for ${s.id}`);if(!s.verified)warnings.push(`Source not verified: ${s.id}`)}
 if(lessons[0]?.id!=='deutsch'||lessons[1]?.id!=='grover')errors.push('First algorithm lessons must be Deutsch then Grover');
 for(let n=1;n<=61;n++)if(!sequences.has(n))errors.push(`Required lesson number ${n} absent`);

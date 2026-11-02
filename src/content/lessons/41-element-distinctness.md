@@ -22,7 +22,7 @@ Label the six subsets by three-qubit integers 0 through 5. Prepare a uniform lab
 
 The correct reflection on the **joint label-and-data state** is $A(2|0\cdots0\rangle\langle0\cdots0|-I)A^\dagger$. Its implementation reverses the two value queries and lookup, flips phase on every state except the all-zero state, and re-runs A. This uses four value-oracle calls, not a free diffusion on labels while pretending the stored data is absent. Preparation plus one such reflection uses six value queries. The equality phase check uses the already loaded values. The toy success probability 49/54 remains exactly the calculation above.
 
-This elementary subset-amplification algorithm is complete but does not achieve the optimal asymptotic query bound. Its reflection reloads the data. The optimized walk construction below is precisely what removes that expensive repeated setup.
+This elementary subset-amplification algorithm uses $\Theta(N)$ value queries for a single hidden duplicate pair, so it has **no asymptotic query advantage** over reading the input. Setup costs $r$, each reflection costs $2r$, and order $1/\sqrt\epsilon\approx N/r$ iterations cost $\Theta(r(N/r))=\Theta(N)$. Its reflection reloads the data. The optimized walk construction below is precisely what removes that expensive repeated setup.
 
 ## Where the exponent comes from
 

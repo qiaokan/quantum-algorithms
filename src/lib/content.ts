@@ -38,7 +38,17 @@ export const exercises: Exercise[] = fs.readdirSync(path.join(root,'exercises'))
 export const definitions: Definition[] = fs.readdirSync(root).filter(f=>/^definitions(?:-.*)?\.json$/.test(f)).flatMap(f=>readJson<Definition[]>(path.join(root,f)));
 export function lessonMarkdown(lesson: Lesson): string { return lesson.file && fs.existsSync(path.join(root,'lessons',lesson.file)) ? fs.readFileSync(path.join(root,'lessons',lesson.file),'utf8') : ''; }
 export function definitionMarkdown(d: Definition): string { return fs.readFileSync(path.join(root,'definitions',d.file),'utf8'); }
-export function plainText(html: string): string { return html.replace(/<annotation[\s\S]*?<\/annotation>/g,'').replace(/<[^>]+>/g,' ').replace(/&(?:[a-z]+|#\d+);/g,' ').replace(/\s+/g,' ').trim(); }
+export function plainText(html: string): string {
+  const entities:Record<string,string>={amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '};
+  // KaTeX MathML contains no nested HTML spans; omit its duplicate accessible copy only for indexing.
+  return html.replace(/<span class="katex-mathml">[\s\S]*?<\/span>/g,'')
+    .replace(/<annotation[\s\S]*?<\/annotation>/g,'').replace(/<[^>]+>/g,' ')
+    .replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity:string)=>{
+      if(!entity.startsWith('#'))return entities[entity.toLowerCase()];
+      const code=entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1));
+      return code>0&&code<=0x10ffff&&!(code>=0xd800&&code<=0xdfff)?String.fromCodePoint(code):'�';
+    }).replace(/\s+/g,' ').trim();
+}
 export async function render(markdown: string): Promise<Rendered> {
   const tableSafe = markdown.split('\n').map(line => line.trimStart().startsWith('|') ? line.replace(/\$([^$]+)\$/g, (_, math: string) => '$' + math.replace(/(?<!\\)\|/g, '\\vert ') + '$') : line).join('\n');
   const normalized = tableSafe.replace(/\$\$([\s\S]*?)\$\$/g, (_, math: string) => '\n$$\n' + math.trim() + '\n$$\n');

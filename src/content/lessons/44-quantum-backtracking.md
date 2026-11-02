@@ -74,7 +74,11 @@ This formula is not a classical shortcut assumed available on hardware; it is th
 |2|0.146667|−0.276557|0.075425|0.175991|0.930238|
 |3|0.201778|−0.569038|−0.153364|−0.546410|0.559819|
 
-Continuing the same matrix recurrence gives $v_0\approx(0.506456,-0.343153,0.012197,0.005502,0.354823)^T$. Its squared norm is 0.5003304993, the probability of the zero phase bin. If d is instead unmarked, change only $R_A[d,d]$ from +1 to −1; the corresponding zero-bin probability is 0.0018190816. [The runnable check](/examples/applications.py) constructs both matrices and computes all 64 terms without renormalizing them.
+Continuing the same matrix recurrence gives
+
+$$v_0\approx(0.506456,-0.343153,0.012197,0.005502,0.354823)^T.$$
+
+Its squared norm is 0.5003304993, the probability of the zero phase bin. If d is instead unmarked, change only $R_A[d,d]$ from +1 to −1; the corresponding zero-bin probability is 0.0018190816. [The runnable check](/examples/applications.py) constructs both matrices and computes all 64 terms without renormalizing them.
 
 ## Finish detection and witness extraction
 

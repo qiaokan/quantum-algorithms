@@ -2,17 +2,24 @@
   "date": "2026-11-02",
   "counts": {
     "reviewed": 5,
-    "complete": 57,
-    "partial": 0,
+    "complete": 56,
+    "partial": 1,
     "planned": 0
   },
   "lessons": 62,
   "definitions": 42,
-  "sources": 80,
+  "sources": 83,
   "exercises": 124,
-  "words": 67876,
+  "words": 69275,
   "errors": [],
   "warnings": [],
   "limitations": "Automated structure/link/math checks are not independent scientific or pedagogical peer review.",
-  "gaps": []
+  "gaps": [
+    {
+      "id": "element-distinctness",
+      "gaps": [
+        "The elementary subset-amplification algorithm is worked end to end and costs Θ(N) queries. The optimal O(N^(2/3)) theorem is explained through setup/update/gap costs, but its coherent data-retaining subset-walk implementation is not worked through."
+      ]
+    }
+  ]
 }

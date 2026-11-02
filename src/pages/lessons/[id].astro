@@ -8,13 +8,17 @@ export function getStaticPaths(){return lessons.filter(l=>l.editorial!=='planned
 interface Props{lesson:Lesson}
 const {lesson}=Astro.props;
 const body=await render(lessonMarkdown(lesson));
-const practice=exercises.filter(e=>e.lesson===lesson.id);
+const practice=await Promise.all(exercises.filter(e=>e.lesson===lesson.id).map(async e=>({question:(await render(e.question)).html,answer:(await render(e.answer)).html})));
+const referencesOffset=body.html.indexOf('<h2 id="references">');
+const mainHtml=referencesOffset<0?body.html:body.html.slice(0,referencesOffset);
+const referencesHtml=referencesOffset<0?'':body.html.slice(referencesOffset);
 const index=lessons.findIndex(l=>l.id===lesson.id);
 const previous=lessons.slice(0,index).reverse().find(l=>l.editorial!=='planned');
 const next=lessons.slice(index+1).find(l=>l.editorial!=='planned');
 const demo=demoIds.includes(lesson.id);
 const revisit=revisits.find(r=>r.lesson===lesson.id);
-const sections=[...body.sections,...(demo?[{id:'interactive-example',title:'Step through the example'}]:[]),...(revisit?[{id:'module-revisit',title:'Revisit the module'}]:[]),{id:'practice',title:'Practice & explained answers'}];
+const revisitHtml=revisit?(await render(revisit.body)).html:'';
+const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'interactive-example',title:'Step through the example'}]:[]),...(revisit?[{id:'module-revisit',title:'Revisit the module'}]:[]),{id:'practice',title:'Practice & explained answers'},...body.sections.filter(s=>s.id==='references')];
 ---
 <Book title={lesson.title} current={lesson.id} sections={sections} description={lesson.summary}>
 <article data-lesson-id={lesson.id}>
@@ -24,10 +28,11 @@ const sections=[...body.sections,...(demo?[{id:'interactive-example',title:'Step
 <div class="lesson-metadata"><span>{lesson.kind}</span><span>{lesson.path==='main'?'Main path':'Optional branch'}</span><span>{Math.ceil(body.text.split(/\s+/).length/150)} min reading + calculation</span><span>Lesson {String(lesson.sequence).padStart(2,'0')}</span></div>
 <div class="context-box"><p><strong>The point of this lesson.</strong> {lesson.why}</p><p><strong>Useful prerequisites.</strong> {lesson.prerequisites.length?lesson.prerequisites.map((id,i)=><Fragment>{i>0?' · ':''}<a href={`/lessons/${id}/`}>{lessons.find(l=>l.id===id)?.title??id}</a></Fragment>):'Start here. Essential mathematics is introduced in the worked example.'}</p><p class="small"><strong>Advantage status:</strong> {lesson.advantage}</p></div>
 {lesson.editorial==='partial'&&<aside class="partial-notice"><strong>This chapter is partial.</strong> The material below is usable, but these teaching gaps remain:<ul>{lesson.gaps.map(g=><li>{g}</li>)}</ul></aside>}
-<div class="prose" set:html={body.html}/>
+<div class="prose" set:html={mainHtml}/>
 {demo&&<><h2 id="interactive-example">Step through the example</h2><Demo id={lesson.id}/></>}
-{revisit&&<section class="prose" id="module-revisit"><h2>Revisit the module</h2><p>{revisit.body}</p></section>}
-<section id="practice" class="prose"><h2>Practice & explained answers</h2><p>Predict first. Then calculate with the definitions available. A correct prediction after changing one operation is stronger evidence of understanding than recognizing a formula.</p>{practice.map((e,i)=><div><h3>Check {i+1}</h3><p>{e.question}</p><details><summary>Reveal worked answer</summary><p>{e.answer}</p></details></div>)}</section>
+{revisit&&<section class="prose" id="module-revisit"><h2>Revisit the module</h2><div set:html={revisitHtml}/></section>}
+<section id="practice" class="prose"><h2>Practice & explained answers</h2><p>Predict first. Then calculate with the definitions available. A correct prediction after changing one operation is stronger evidence of understanding than recognizing a formula.</p>{practice.map((e,i)=><div><h3>Check {i+1}</h3><div set:html={e.question}/><details><summary>Reveal worked answer</summary><div set:html={e.answer}/></details></div>)}</section>
+<div class="prose" set:html={referencesHtml}/>
 <div class="lesson-actions"><p>Record your own assessment. Scrolling never marks a lesson understood.</p><div class="progress-controls"><button data-progress="read" aria-pressed="false">Read</button><button data-progress="practiced" aria-pressed="false">Practiced</button><button data-progress="revisit" aria-pressed="false">Revisit</button></div><p class="small muted" data-progress-status></p></div>
 <nav class="prev-next" aria-label="Lesson sequence">{previous?<a href={`/lessons/${previous.id}/`}><span>← PREVIOUS LESSON</span>{label(previous)}</a>:<a href="/"><span>← ORIENTATION</span>How to use this book</a>}{next?<a href={`/lessons/${next.id}/`}><span>NEXT LESSON →</span>{label(next)}</a>:<a href="/coverage/"><span>THE WHOLE PICTURE →</span>Coverage and next reading</a>}</nav>
 </article>

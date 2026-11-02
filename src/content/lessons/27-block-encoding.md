@@ -39,7 +39,7 @@ $$U=\begin{pmatrix}B&C\\C&B\end{pmatrix},\quad
 B=\frac{Z+X}{2}=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix},\quad
 C=\frac{Z-X}{2}=\frac12\begin{pmatrix}1&-1\\-1&-1\end{pmatrix}.$$
 
-For example, the first column is $(1,1,1,-1)^T/2$, matching the state just calculated. Compute $B^2=I/2$, $C^2=I/2$, and $BC+CB=0$. Thus $U^2$ has diagonal blocks $I$ and zero off-diagonal blocks; $U$ is unitary. The “discarded” corner is essential to this check.
+For example, the first column is $(1,1,1,-1)^T/2$, matching the state just calculated. Compute $B^2=I/2$, $C^2=I/2$, and $BC+CB=0$. Thus $U^2$ has diagonal blocks $I$ and zero off-diagonal blocks. Since $B$ and $C$ are real symmetric, $U^\dagger=U$, so $U^\dagger U=U^2=I$: $U$ is unitary. Squaring to identity alone would not establish unitarity. The “discarded” corner is essential to this check.
 
 ## Why PREPARE and its inverse produce coefficients
 

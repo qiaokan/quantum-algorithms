@@ -83,7 +83,7 @@ The 00 output is $\frac12(-1/2+1/2-1/2+1/2)=0$. Each cancellation is a sum of co
 
 A valid deterministic gate preserves vector length. Here rows have squared length $4(1/4)=1$; distinct rows have inner product zero, since their four products contain two $+1/4$ and two $-1/4$. Therefore $D^TD=I$: it is [unitary](/definitions/unitarity/). Superscript $T$ transposes a real matrix. For complex matrices the corresponding condition uses conjugate transpose $\dagger$.
 
-<details>
+<details data-derivation>
 <summary>Show algebra: why “reflection about the uniform state” means this matrix</summary>
 
 The [outer product](/definitions/outer-products/) $|s\rangle\langle s|$ is the column $s$ multiplied by its transposed row. Every entry is $(1/2)(1/2)=1/4$. Therefore $2|s\rangle\langle s|-I$ has off-diagonal entries $1/2$ and diagonal entries $1/2-1=-1/2$, precisely $D$.
@@ -100,7 +100,7 @@ Define $S_0=\operatorname{diag}(1,-1,-1,-1)$: it preserves 00 and negates every 
 
 $$D=(H\otimes H)S_0(H\otimes H).$$
 
-Operations act right-to-left: two Hadamards, then $S_0$, then two more Hadamards. Since $(H\otimes H)|00\rangle=|s\rangle$, this is the zero-state reflection expressed around the uniform direction. We can also verify it without assuming the reflection formula: $H\otimes H$ has rows $(1,1,1,1),(1,-1,1,-1),(1,1,-1,-1),(1,-1,-1,1)$ divided by 2. Multiplication with the sign diagonal gives the displayed $D$.
+Operations act right-to-left: two Hadamards, then $S_0$, then two more Hadamards. Since $(H\otimes H)|00\rangle=|s\rangle$, this is the zero-state reflection expressed around the uniform direction. We can also verify it without assuming the reflection formula: $H\otimes H$ has rows $(1,1,1,1)$, $(1,-1,1,-1)$, $(1,1,-1,-1)$, and $(1,-1,-1,1)$, each divided by 2. Multiplication with the sign diagonal gives the displayed $D$.
 
 A controlled-$Z$ gate negates only 11. Surround it by $X$ on both qubits to negate only 00: this realizes $\operatorname{diag}(-1,1,1,1)=-S_0$. The resulting diffusion is $-D$, physically equivalent here because it differs by a global minus sign. For larger search registers, the zero-state phase flip uses a multi-controlled operation decomposed into elementary gates and workspace. These gates are fixed; the marked predicate is the function-dependent component.
 

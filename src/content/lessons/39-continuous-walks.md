@@ -46,6 +46,34 @@ For $|+\rangle=(1,1)^T/\sqrt2$, multiplication by X yields the same vector: its 
 
 Starting from $|0\rangle=(|+\rangle+|-\rangle)/\sqrt2$, evolve the two components separately. At $t=\pi/4$, their phase factors are $(1-i)/\sqrt2$ and $(1+i)/\sqrt2$. Converting back to the original basis, the amplitude of |0〉 is their sum divided by two, $1/\sqrt2$; the amplitude of |1〉 is their difference divided by two, $-i/\sqrt2$. This reproduces the direct matrix calculation. We needed eigenvectors to find directions that only rotate in phase, then returned to the position basis where those phases interfere.
 
+## An actual search algorithm: a complete graph
+
+The edge oscillation teaches evolution, but solves no hard search problem. Now suppose exactly one of $N$ labels is marked, with unknown label $w$. We can prepare $|s\rangle=N^{-1/2}\sum_x|x\rangle$ and evolve under an oracle Hamiltonian of **fixed strength** $H_w=-|w\rangle\langle w|$, together with a known driver $-|s\rangle\langle s|$. The task is to output $w$. Charging oracle strength times evolution time prevents a fake speedup obtained by arbitrarily multiplying the Hamiltonian by a huge number. Classical randomized membership queries need $\Theta(N)$ queries for constant worst-case success with a unique unknown mark.
+
+Let $H=-|s\rangle\langle s|-|w\rangle\langle w|$. For the complete graph, adjacency is $A=N|s\rangle\langle s|-I$, so this differs from $-A/N-|w\rangle\langle w|$ only by $-I/N$, an irrelevant global energy shift. The negative sign here is a declared choice of generator, unlike the positive adjacency in the first example. This is the complete-graph search discussed by [Childs and Goldstone](https://arxiv.org/abs/quant-ph/0306054), related to the [Farhi–Gutmann continuous-time search](https://arxiv.org/abs/quant-ph/9612026).
+
+Define $|r\rangle=(N-1)^{-1/2}\sum_{x\ne w}|x\rangle$. Although the algorithm does not know $w$, these two vectors make its evolution easy to analyze. In the ordered basis $(|w\rangle,|r\rangle)$,
+
+$$H=-I-\frac1N\begin{pmatrix}1&\sqrt{N-1}\\\sqrt{N-1}&-1\end{pmatrix}=-I-B,\qquad B^2=\frac1N I.$$
+
+The same even/odd power calculation used for $X$ now gives
+
+$$e^{-itH}=e^{it}\left[\cos(t/\sqrt N)I+i\sqrt N\sin(t/\sqrt N)B\right].$$
+
+The initial vector is $|s\rangle=(1,\sqrt{N-1})^T/\sqrt N$. Multiplication gives $B|s\rangle=(1,0)^T/\sqrt N=|w\rangle/\sqrt N$. Thus the complete evolving state is
+
+$$e^{-itH}|s\rangle=e^{it}\left[\cos(t/\sqrt N)|s\rangle+i\sin(t/\sqrt N)|w\rangle\right].$$
+
+Its marked probability is $\sin^2(t/\sqrt N)+\cos^2(t/\sqrt N)/N$. At $t=\pi\sqrt N/2$ it is exactly one. Measuring and verifying the label solves the search problem in $O(\sqrt N)$ continuous oracle time. This is not a single query: implementing a continuous oracle digitally has its own simulation cost.
+
+For $N=4,w=2$, in the original vertex basis $H$ is minus one quarter of the all-ones matrix, minus one on diagonal entry $(2,2)$. Initially each amplitude is $1/2$. At $t=\pi/2$, each unmarked amplitude is $i/(2\sqrt2)$; the marked amplitude is $-1/\sqrt2+i/(2\sqrt2)$. The probabilities are $1/8,1/8,5/8,1/8$. At $t=\pi$, the state is $-i|2\rangle$, so output 2 is certain. The norm is one at both times.
+
+The driver and oracle need not be simultaneously available as native hardware interactions. A digital implementation must synthesize their combined evolution, bound simulation error, and count oracle use; finite-step product formulas are approximate. On other graphs the same search time need not hold: connectivity and spectrum matter. A sparse-neighbor oracle is a different access contract from a physical complete graph with fixed couplings.
+
+## An exponential separation, with a different promise
+
+[Childs and coauthors](https://arxiv.org/abs/quant-ph/0209131) construct a black-box glued-trees traversal problem with polynomial quantum and exponential classical cost in the depth parameter. Vertex labels hide the graph's useful structure; the algorithm receives local neighbor access and an entrance, and must find the exit. This is a separation against general classical oracle algorithms, not merely a comparison with one slow random walk. It is not an exponential improvement for arbitrary explicit graphs. The complete-graph derivation above is the algorithm taught here; the glued-trees construction and its classical lower-bound proof are a separate research extension.
+
 ## How to implement the evolution
 
 On one qubit use $R_x(2t)=e^{-itX}$. The rotation angle is $2t$, not $t$, under the common convention $R_x(\theta)=e^{-i\theta X/2}$. This is a mathematical convention, not a library call. On a general graph, one must construct Hamiltonian simulation from its edge descriptions or sparse-neighbor oracle. [Product formulas](/lessons/product-formulas/), [qubitization](/lessons/qubitization/), and [QSVT](/lessons/singular-value-transformation/) supply different implementations and error bounds. An adjacency matrix with exponentially many explicitly supplied entries is not a free input.
@@ -64,3 +92,7 @@ The [downloadable NumPy checks](/examples/applications.py) contain independent s
 
 - Edward Farhi and Sam Gutmann, [Quantum Computation and Decision Trees](https://arxiv.org/abs/quant-ph/9706062). Supports continuous-time graph evolution and the need for a fair classical comparison.
 - Julia Kempe, [Quantum random walks — an introductory overview](https://arxiv.org/abs/quant-ph/0303081). Connects discrete and continuous walk models. The two-vertex derivation is original and exact.
+
+- Andrew M. Childs and Jeffrey Goldstone, [Spatial search by quantum walk](https://arxiv.org/abs/quant-ph/0306054): complete-graph search and graph-dependent limits.
+- Edward Farhi and Sam Gutmann, [An Analog Analogue of a Digital Quantum Computation](https://arxiv.org/abs/quant-ph/9612026): continuous-time oracle search with bounded Hamiltonian strength.
+- Andrew M. Childs and coauthors, [Exponential algorithmic speedup by quantum walk](https://arxiv.org/abs/quant-ph/0209131): glued-trees black-box traversal separation.

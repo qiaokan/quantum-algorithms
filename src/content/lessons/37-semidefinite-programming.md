@@ -83,7 +83,7 @@ $$\frac{\epsilon T}{2}<\eta T+\frac{\log D}{\eta}.$$
 
 With $\eta=\epsilon/4$ and $T>16\log D/\epsilon^2$, the right-hand side is strictly less than $\epsilon T/2$, a contradiction. Therefore an exactly feasible instance must terminate by returning an approximately feasible candidate. This is the reason for the iteration cap, not a heuristic convergence hope.
 
-<details><summary>Show the potential-function derivation</summary>
+<details data-derivation><summary>Show the potential-function derivation</summary>
 
 Let $Z_t=\operatorname{Tr}(e^{-\eta K_{t-1}})$, initially $Z_1=D$. For a Hermitian matrix with eigenvalues in $[-1,1]$, the scalar inequality $e^{-\eta a}\leq1-\eta a+\eta^2$ for $0<\eta\leq1/2$ extends to the matrix in its eigenbasis. The Golden–Thompson trace inequality, $\operatorname{Tr}(e^{B+C})\leq\operatorname{Tr}(e^Be^C)$ for Hermitian $B,C$, then gives
 
@@ -143,4 +143,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Fernando G. S. L. Brandão, Krysta Svore, [Quantum Speed-ups for Semidefinite Programming](https://arxiv.org/abs/1609.05537), input/output model and main algorithm: sparse oracles, Gibbs states, matrix multiplicative weights, and parameter dependence.
 - John M. Martyn et al., [A Grand Unification of Quantum Algorithms](https://arxiv.org/abs/2105.02859): polynomial/Gibbs transformations used as possible implementation primitives.
-- The diagonal optimum, purification, success probability, and expectation value are checked in `scripts/check-matrix-examples.py`.
+- The diagonal optimum, purification, success probability, and expectation value are checked in [the downloadable matrix checks](/examples/matrix-checks.py).

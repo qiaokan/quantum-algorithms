@@ -179,7 +179,7 @@ For the square above, choose $u=v=0,w=1$. Then $k=2$, $a_3=1$, and the argument 
 
 The general construction adjusts the reduced product by a short sequence of forward or backward reduction steps until it reaches the first cycle ideal at or beyond the desired summed distance. Reduced products may overshoot; the distance correction is tracked, not discarded. Reduced-pair sizes, the correction distance, and the number of local reduction steps are polynomially bounded in $\log D$. Successive squarings make jumps whose distances grow at least geometrically. Build this table until a jump exceeds $x$, combine smaller jumps to approach $x$, then finish with local reduction. The operation count is polynomial in $\log D$, $\log x$, and requested precision. [Jozsa, §7.1 and Theorem 5](https://arxiv.org/html/quant-ph/0302134)
 
-<details><summary>Show the backward step and the evaluator's control flow</summary>
+<details data-derivation><summary>Show the backward step and the evaluator's control flow</summary>
 
 The forward formula alone does not explain “step backward.” For a reduced pair $(a,b)$, compute
 

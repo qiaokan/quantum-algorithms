@@ -98,4 +98,4 @@ Download the [standalone matrix-example checks](/examples/matrix-checks.py) and 
 
 - Aram W. Harrow, Avinatan Hassidim, Seth Lloyd, [Quantum algorithm for linear systems of equations](https://arxiv.org/abs/0811.3171), algorithm and appendix on access, conditioning, success, and readout.
 - Andrew M. Childs, Robin Kothari, Rolando D. Somma, [Quantum algorithm for systems of linear equations with exponentially improved dependence on precision](https://arxiv.org/abs/1511.02306), for the distinction between original HHL and improved solvers.
-- Numerical state, flag probability, and classical-solution cross-check: `scripts/check-matrix-examples.py`.
+- Numerical state, flag probability, and classical-solution cross-check: [the downloadable matrix checks](/examples/matrix-checks.py).
