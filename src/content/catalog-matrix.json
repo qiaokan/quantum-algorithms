@@ -1,0 +1,519 @@
+[
+  {
+    "id": "product-formulas",
+    "sequence": 23,
+    "module": 5,
+    "title": "Hamiltonian simulation with product formulas",
+    "kind": "algorithm",
+    "summary": "Turn simple term evolutions into an approximation of a sum Hamiltonian.",
+    "why": "The first concrete route from a Hamiltonian description to executable time evolution.",
+    "prerequisites": [
+      "phase-estimation"
+    ],
+    "concepts": [
+      "hamiltonians",
+      "matrix-functions",
+      "trigonometry"
+    ],
+    "reusedConcepts": [
+      "matrices",
+      "unitarity"
+    ],
+    "exampleIds": [
+      "matrix-product-formulas"
+    ],
+    "sourceIds": [
+      "trotter-error"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Theoretical simulation guarantees; practical advantage depends on structure and output.",
+    "aliases": [],
+    "file": "23-product-formulas.md",
+    "gaps": []
+  },
+  {
+    "id": "qdrift",
+    "sequence": 24,
+    "module": 5,
+    "title": "Randomized simulation and qDRIFT",
+    "kind": "algorithm",
+    "summary": "Sample Hamiltonian terms while distinguishing a channel average from one random circuit.",
+    "why": "Introduces randomized simulation and the essential pure-state versus mixture distinction.",
+    "prerequisites": [
+      "product-formulas"
+    ],
+    "concepts": [
+      "density-matrices"
+    ],
+    "reusedConcepts": [
+      "hamiltonians",
+      "matrix-functions",
+      "probability"
+    ],
+    "exampleIds": [
+      "matrix-qdrift"
+    ],
+    "sourceIds": [
+      "qdrift-paper",
+      "trotter-error"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven channel-error bound under term access; comparative benefit is instance-dependent.",
+    "aliases": [
+      "randomized product formula"
+    ],
+    "file": "24-qdrift.md",
+    "gaps": []
+  },
+  {
+    "id": "energy-estimation",
+    "sequence": 25,
+    "module": 5,
+    "title": "Energy estimation and ground-state preparation",
+    "kind": "application",
+    "summary": "Turn time-evolution phases into energies and expose the cost of initial overlap.",
+    "why": "Connects phase estimation and simulation to a central scientific use case.",
+    "prerequisites": [
+      "phase-estimation",
+      "product-formulas"
+    ],
+    "concepts": [
+      "eigenvalues"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "measurement",
+      "conditional-probability"
+    ],
+    "exampleIds": [
+      "matrix-energy-estimation"
+    ],
+    "sourceIds": [
+      "hhl",
+      "filtering-paper",
+      "qdrift-paper"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Theoretical conditional guarantees; overlap, gap and simulation access can dominate.",
+    "aliases": [],
+    "file": "25-energy-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "hhl",
+    "sequence": 26,
+    "module": 5,
+    "title": "HHL: a complete two-equation example",
+    "kind": "algorithm",
+    "summary": "Label eigenvalues, rotate a reciprocal flag, uncompute, and check against classical inversion.",
+    "why": "Makes state-output linear solving and postselection costs explicit before modern abstractions.",
+    "prerequisites": [
+      "energy-estimation"
+    ],
+    "concepts": [
+      "norms"
+    ],
+    "reusedConcepts": [
+      "eigenvalues",
+      "ancillas",
+      "uncomputation",
+      "controlled-gates"
+    ],
+    "exampleIds": [
+      "matrix-hhl"
+    ],
+    "sourceIds": [
+      "hhl",
+      "cks-paper"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Conditional advantage in sparse/coherent access models; no generic full-vector speedup.",
+    "aliases": [
+      "Harrow Hassidim Lloyd",
+      "linear equations"
+    ],
+    "file": "26-hhl.md",
+    "gaps": []
+  },
+  {
+    "id": "block-encoding",
+    "sequence": 27,
+    "module": 6,
+    "title": "Block encoding and linear combinations of unitaries",
+    "kind": "primitive",
+    "summary": "Embed a scaled matrix in a larger unitary with a visible success branch.",
+    "why": "Provides the shared input representation for modern matrix algorithms.",
+    "prerequisites": [
+      "hhl"
+    ],
+    "concepts": [
+      "oracles"
+    ],
+    "reusedConcepts": [
+      "ancillas",
+      "unitarity",
+      "norms"
+    ],
+    "exampleIds": [
+      "matrix-block-encoding"
+    ],
+    "sourceIds": [
+      "qsvt",
+      "taylor-paper",
+      "qsvt-tutorial"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Primitive; speedup is meaningful only after constructing access and specifying an application.",
+    "aliases": [
+      "LCU",
+      "linear combination of unitaries"
+    ],
+    "file": "27-block-encoding.md",
+    "gaps": []
+  },
+  {
+    "id": "oblivious-amplification",
+    "sequence": 28,
+    "module": 6,
+    "title": "Oblivious amplitude amplification",
+    "kind": "primitive",
+    "summary": "Amplify an encoded unitary without knowing the system input.",
+    "why": "Explains when ancilla-only reflections work and when they distort a nonunitary map.",
+    "prerequisites": [
+      "block-encoding",
+      "amplitude-amplification"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "ancillas",
+      "conjugate-transpose",
+      "trigonometry"
+    ],
+    "exampleIds": [
+      "matrix-oblivious-amplification"
+    ],
+    "sourceIds": [
+      "taylor-paper",
+      "qsvt"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven coherent amplification under unitary or controlled near-unitary block promises.",
+    "aliases": [],
+    "file": "28-oblivious-amplification.md",
+    "gaps": []
+  },
+  {
+    "id": "taylor-simulation",
+    "sequence": 29,
+    "module": 6,
+    "title": "Taylor-series and LCU Hamiltonian simulation",
+    "kind": "algorithm",
+    "summary": "Construct a finite exponential polynomial and account for truncation and amplification.",
+    "why": "Shows a simulation strategy with improved precision dependence and its interaction-picture extension.",
+    "prerequisites": [
+      "oblivious-amplification",
+      "product-formulas"
+    ],
+    "concepts": [
+      "polynomials"
+    ],
+    "reusedConcepts": [
+      "matrix-functions",
+      "norms"
+    ],
+    "exampleIds": [
+      "matrix-taylor-simulation"
+    ],
+    "sourceIds": [
+      "taylor-paper",
+      "interaction-picture"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven term-access simulation bounds; toy LCU does not claim a scalable implementation.",
+    "aliases": [],
+    "file": "29-taylor-simulation.md",
+    "gaps": []
+  },
+  {
+    "id": "qubitization",
+    "sequence": 30,
+    "module": 6,
+    "title": "Qubitization: eigenvalues become rotations",
+    "kind": "primitive",
+    "summary": "Calculate the invariant two-dimensional plane and its Chebyshev response.",
+    "why": "Links Hamiltonian access, quantum walks, and polynomial transformations.",
+    "prerequisites": [
+      "block-encoding"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "eigenvalues",
+      "trigonometry",
+      "polynomials"
+    ],
+    "exampleIds": [
+      "matrix-qubitization"
+    ],
+    "sourceIds": [
+      "qubitization-paper",
+      "qsvt-tutorial"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model construction; not itself a physical time-evolution operator.",
+    "aliases": [],
+    "file": "30-qubitization.md",
+    "gaps": []
+  },
+  {
+    "id": "signal-processing",
+    "sequence": 31,
+    "module": 6,
+    "title": "Quantum signal processing",
+    "kind": "primitive",
+    "summary": "Use a phase sequence to change a signal-dependent amplitude polynomial.",
+    "why": "Makes the mechanism and admissibility constraints behind modern matrix transformations visible.",
+    "prerequisites": [
+      "qubitization"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "phase",
+      "polynomials",
+      "unitarity"
+    ],
+    "exampleIds": [
+      "matrix-signal-processing"
+    ],
+    "sourceIds": [
+      "qsvt-tutorial",
+      "qubitization-paper",
+      "qsvt"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven polynomial synthesis framework with access and phase-computation costs.",
+    "aliases": [
+      "QSP"
+    ],
+    "file": "31-signal-processing.md",
+    "gaps": []
+  },
+  {
+    "id": "singular-value-transformation",
+    "sequence": 32,
+    "module": 6,
+    "title": "Quantum singular value transformation",
+    "kind": "framework",
+    "summary": "Compute a non-Hermitian cubic through a complete four-dimensional unitary.",
+    "why": "Generalizes eigenvalue transformations while distinguishing singular-value polynomials from ordinary powers.",
+    "prerequisites": [
+      "signal-processing",
+      "oblivious-amplification"
+    ],
+    "concepts": [
+      "singular-values"
+    ],
+    "reusedConcepts": [
+      "conjugate-transpose",
+      "polynomials"
+    ],
+    "exampleIds": [
+      "matrix-singular-value-transformation"
+    ],
+    "sourceIds": [
+      "qsvt",
+      "qsvt-tutorial",
+      "taylor-paper"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model framework; end-to-end benefit depends on application promises.",
+    "aliases": [
+      "QSVT"
+    ],
+    "file": "32-singular-value-transformation.md",
+    "gaps": []
+  },
+  {
+    "id": "modern-linear-solvers",
+    "sequence": 33,
+    "module": 6,
+    "title": "Modern quantum linear-system solvers",
+    "kind": "algorithm family",
+    "summary": "Invert a two-point spectrum with a tested Chebyshev/LCU construction.",
+    "why": "Explains improvements beyond HHL without erasing conditioning, access or readout costs.",
+    "prerequisites": [
+      "singular-value-transformation",
+      "hhl"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "singular-values",
+      "norms",
+      "polynomials"
+    ],
+    "exampleIds": [
+      "matrix-modern-linear-solvers"
+    ],
+    "sourceIds": [
+      "cks-paper",
+      "optimal-qlsa",
+      "qsvt",
+      "tang-paper"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Conditional access-model speedups; optimal query bounds are not full-runtime claims.",
+    "aliases": [],
+    "file": "33-modern-linear-solvers.md",
+    "gaps": []
+  },
+  {
+    "id": "polynomial-filtering",
+    "sequence": 34,
+    "module": 6,
+    "title": "Polynomial filtering and ground/thermal preparation",
+    "kind": "algorithm family",
+    "summary": "Compare ground-state selection with preparation of a genuinely mixed Gibbs state.",
+    "why": "Covers overlap, gap, thermal normalization and the QET-U access-model extension.",
+    "prerequisites": [
+      "singular-value-transformation",
+      "energy-estimation"
+    ],
+    "concepts": [
+      "trace"
+    ],
+    "reusedConcepts": [
+      "density-matrices",
+      "conditional-probability"
+    ],
+    "exampleIds": [
+      "matrix-polynomial-filtering"
+    ],
+    "sourceIds": [
+      "filtering-paper",
+      "qsvt-tutorial",
+      "qetu-paper"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Theoretical conditional guarantees; arbitrary ground or Gibbs preparation is not efficient.",
+    "aliases": [],
+    "file": "34-polynomial-filtering.md",
+    "gaps": []
+  },
+  {
+    "id": "singular-value-estimation",
+    "sequence": 35,
+    "module": 6,
+    "title": "Singular-value estimation and quantum PCA",
+    "kind": "algorithm family",
+    "summary": "Separate block, row-state and copy-access models with a calculated partial-SWAP step.",
+    "why": "Prevents conflating matrix algorithms and quantum-data PCA or hiding data-loading/copy costs.",
+    "prerequisites": [
+      "singular-value-transformation",
+      "phase-estimation"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "singular-values",
+      "density-matrices",
+      "trace"
+    ],
+    "exampleIds": [
+      "matrix-singular-value-estimation"
+    ],
+    "sourceIds": [
+      "qpca-paper",
+      "recommendation-paper",
+      "tang-paper",
+      "qsvt"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Access-model-dependent theoretical advantages; classical sampling methods change some comparisons.",
+    "aliases": [
+      "SVE",
+      "qPCA",
+      "principal components"
+    ],
+    "file": "35-singular-value-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "differential-equations",
+    "sequence": 36,
+    "module": 6,
+    "title": "Quantum algorithms for differential equations",
+    "kind": "application",
+    "summary": "Encode a time history as a linear system and calculate final-time extraction cost.",
+    "why": "Connects matrix algorithms to nonunitary dynamics while exposing discretization, norm and readout costs.",
+    "prerequisites": [
+      "modern-linear-solvers",
+      "taylor-simulation"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "matrix-functions",
+      "norms"
+    ],
+    "exampleIds": [
+      "matrix-differential-equations"
+    ],
+    "sourceIds": [
+      "ode-paper",
+      "lchs-paper"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Conditional theoretical speedups for specified stable/access models; no general nonlinear claim.",
+    "aliases": [
+      "ODE",
+      "LCHS"
+    ],
+    "file": "36-differential-equations.md",
+    "gaps": []
+  },
+  {
+    "id": "semidefinite-programming",
+    "sequence": 37,
+    "module": 6,
+    "title": "Quantum semidefinite programming",
+    "kind": "framework",
+    "summary": "Work a Gibbs update, then derive a general feasibility loop, stopping certificate and measurement budget.",
+    "why": "Connects Gibbs-state primitives to constrained matrix optimization with explicit output restrictions.",
+    "prerequisites": [
+      "polynomial-filtering",
+      "amplitude-estimation"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "density-matrices",
+      "trace",
+      "expectation-estimation"
+    ],
+    "exampleIds": [
+      "matrix-semidefinite-programming"
+    ],
+    "sourceIds": [
+      "sdp-paper",
+      "qsvt-tutorial"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Oracle-model speedups with norm, sparsity and precision factors; practical advantage unestablished.",
+    "aliases": [
+      "SDP"
+    ],
+    "file": "37-semidefinite-programming.md",
+    "gaps": []
+  }
+]

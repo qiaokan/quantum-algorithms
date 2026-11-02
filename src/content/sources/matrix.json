@@ -1,0 +1,152 @@
+[
+  {
+    "id": "trotter-error",
+    "title": "A Theory of Trotter Error",
+    "authors": "Andrew M. Childs; Yuan Su; Minh C. Tran; Nathan Wiebe; Shuchen Zhu",
+    "url": "https://arxiv.org/abs/1912.08854",
+    "supports": "Product-formula definitions and commutator-sensitive first/second-order error bounds.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "qdrift-paper",
+    "title": "A random compiler for fast Hamiltonian simulation",
+    "authors": "Earl Campbell",
+    "url": "https://arxiv.org/abs/1811.08017",
+    "supports": "qDRIFT sampling rule, ensemble/channel error, and controlled-evolution/phase-estimation costs.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "taylor-paper",
+    "title": "Simulating Hamiltonian dynamics with a truncated Taylor series",
+    "authors": "Dominic W. Berry; Andrew M. Childs; Richard Cleve; Robin Kothari; Rolando D. Somma",
+    "url": "https://arxiv.org/abs/1412.4687",
+    "supports": "LCU construction, segmented Taylor simulation, and robust oblivious amplification polynomial.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "qubitization-paper",
+    "title": "Hamiltonian Simulation by Qubitization",
+    "authors": "Guang Hao Low; Isaac L. Chuang",
+    "url": "https://arxiv.org/abs/1610.06546",
+    "supports": "Block-access conditions, invariant two-dimensional subspaces, eigenvalue/angle relation.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "cks-paper",
+    "title": "Quantum algorithm for systems of linear equations with exponentially improved dependence on precision",
+    "authors": "Andrew M. Childs; Robin Kothari; Rolando D. Somma",
+    "url": "https://arxiv.org/abs/1511.02306",
+    "supports": "Sparse input/output model and Fourier/Chebyshev improvement over HHL precision dependence.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "filtering-paper",
+    "title": "Optimal polynomial based quantum eigenstate filtering with application to solving quantum linear systems",
+    "authors": "Lin Lin; Yu Tong",
+    "url": "https://arxiv.org/abs/1910.14596",
+    "supports": "Eigenstate overlap/gap promises and polynomial filtering/linear-system connections.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "qpca-paper",
+    "title": "Quantum principal component analysis",
+    "authors": "Seth Lloyd; Masoud Mohseni; Patrick Rebentrost",
+    "url": "https://arxiv.org/abs/1307.0401",
+    "supports": "Copy-based density matrix exponentiation and quantum PCA input/output model.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "recommendation-paper",
+    "title": "Quantum Recommendation Systems",
+    "authors": "Iordanis Kerenidis; Anupam Prakash",
+    "url": "https://arxiv.org/abs/1603.08675",
+    "supports": "Structured data access and sampling output in quantum recommendation/SVE approaches.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  },
+  {
+    "id": "tang-paper",
+    "title": "A quantum-inspired classical algorithm for recommendation systems",
+    "authors": "Ewin Tang",
+    "url": "https://arxiv.org/abs/1807.04271",
+    "supports": "Classical sample/query comparison for low-rank recommendation tasks.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  },
+  {
+    "id": "ode-paper",
+    "title": "Quantum algorithm for linear differential equations with exponentially improved dependence on precision",
+    "authors": "Dominic W. Berry; Andrew M. Childs; Aaron Ostrander; Guoming Wang",
+    "url": "https://arxiv.org/abs/1701.03684",
+    "supports": "Taylor history-system construction, state output and final-time selection assumptions.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "sdp-paper",
+    "title": "Quantum Speed-ups for Semidefinite Programming",
+    "authors": "Fernando G. S. L. Brand\u00e3o; Krysta Svore",
+    "url": "https://arxiv.org/abs/1609.05537",
+    "supports": "Sparse SDP access model, Gibbs/multiplicative-weight mechanism, compact output and parameter dependence.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant HTML algorithm/input-model sections inspected; this label does not claim independent verification of every proof."
+  },
+  {
+    "id": "interaction-picture",
+    "title": "Hamiltonian Simulation in the Interaction Picture",
+    "authors": "Guang Hao Low; Nathan Wiebe",
+    "url": "https://arxiv.org/abs/1805.00675",
+    "supports": "Extension exploiting an efficiently simulable dominant Hamiltonian.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  },
+  {
+    "id": "optimal-qlsa",
+    "title": "Optimal scaling quantum linear systems solver via discrete adiabatic theorem",
+    "authors": "Pedro C. S. Costa; Dong An; Yuval R. Sanders; Yuan Su; Ryan Babbush; Dominic W. Berry",
+    "url": "https://arxiv.org/abs/2111.08152",
+    "supports": "Discrete-adiabatic solver and O(kappa log(1/epsilon)) normalized block-oracle query bound.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  },
+  {
+    "id": "qetu-paper",
+    "title": "Ground state preparation and energy estimation on early fault-tolerant quantum computers via quantum eigenvalue transformation of unitary matrices",
+    "authors": "Yulong Dong; Lin Lin; Yu Tong",
+    "url": "https://arxiv.org/abs/2204.05955",
+    "supports": "QET-U controlled-evolution input model as distinct from Hamiltonian block encoding.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  },
+  {
+    "id": "lchs-paper",
+    "title": "Linear combination of Hamiltonian simulation for nonunitary dynamics with optimal state preparation cost",
+    "authors": "Dong An; Jin-Peng Liu; Lin Lin",
+    "url": "https://arxiv.org/abs/2303.01029",
+    "supports": "LCHS alternative to history-state reductions for supported nonunitary dynamics.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract verified; used only for the bounded extension/access-model claim stated in the lesson."
+  }
+]

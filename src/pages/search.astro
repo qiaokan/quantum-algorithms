@@ -1,0 +1,14 @@
+---
+import Book from '../layouts/Book.astro';
+---
+<Book title="Search"><span class="eyebrow">FIND A STEP, SYMBOL, OR IDEA</span><h1>Search the textbook</h1><p class="dek">Search full lesson text, definitions, symbols, and common aliases.</p><form action="/search/" method="get" role="search"><label for="query" class="small">Search term</label><input class="search-input" id="query" name="q" type="search" placeholder="Try phase kickback, QSVT, or postselection" autocomplete="off"/><button type="submit" style="margin-top:10px">Search</button></form><p id="search-status" class="small muted" role="status"></p><div id="search-results"></div><noscript>Search requires JavaScript. The <a href="/index/">algorithm index</a> and <a href="/glossary/">glossary</a> are readable without it.</noscript></Book>
+<script>
+import {searchRecords,type SearchRecord} from '../lib/search';
+const input=document.querySelector<HTMLInputElement>('#query')!,results=document.querySelector<HTMLElement>('#search-results')!,status=document.querySelector<HTMLElement>('#search-status')!;
+let records:SearchRecord[]=[];let ready=false;
+const search=()=>{const query=input.value.trim();if(!ready){status.textContent='Loading the local search index…';return}results.replaceChildren();if(!query){status.textContent='Enter a word or phrase. No request is sent to an external service.';return}const matches=searchRecords(records,query);status.textContent=`${matches.length} matching sections${matches.length===100?' (showing the first 100)':''}`;for(const item of matches){const wrap=document.createElement('article');wrap.className='search-result';const h=document.createElement('h2'),a=document.createElement('a');a.href=item.url;a.textContent=`${item.title} · ${item.section}`;h.append(a);const snippet=document.createElement('p');snippet.textContent=item.snippet;const kind=document.createElement('span');kind.className='badge';kind.textContent=item.kind;wrap.append(h,snippet,kind);results.append(wrap)}};
+input.value=new URLSearchParams(location.search).get('q')||'';
+fetch('/search-index.json').then(r=>{if(!r.ok)throw new Error('Missing search index');return r.json()}).then(data=>{records=data;ready=true;search()}).catch(()=>status.textContent='The local index could not be loaded. Use the algorithm index or glossary.');
+document.querySelector('form')!.addEventListener('submit',e=>{e.preventDefault();history.replaceState(null,'',`/search/?q=${encodeURIComponent(input.value)}`);search()});
+input.addEventListener('input',search);
+</script>

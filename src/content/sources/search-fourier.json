@@ -1,0 +1,164 @@
+[
+  {
+    "id": "bhmt",
+    "title": "Quantum Amplitude Amplification and Estimation",
+    "authors": "Gilles Brassard, Peter Høyer, Michele Mosca, Alain Tapp",
+    "url": "https://arxiv.org/html/quant-ph/0005055",
+    "supports": "Sections 2–4: amplification construction and amplitude-estimation error theorem.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "bbht",
+    "title": "Tight bounds on quantum searching",
+    "authors": "Michel Boyer, Gilles Brassard, Peter Høyer, Alain Tapp",
+    "url": "https://arxiv.org/abs/quant-ph/9605034",
+    "supports": "Multiple/unknown solution counts, randomized iteration lengths and query scaling. Abstract and author-paper indexed text checked; not a full proof audit.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ylc",
+    "title": "Fixed-point quantum search with an optimal number of queries",
+    "authors": "Theodore J. Yoder, Guang Hao Low, Isaac L. Chuang",
+    "url": "https://arxiv.org/html/1409.3305",
+    "supports": "Equations 1, 13–14: bounded polynomial and phase schedule; pi/3 distinction.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "minimum",
+    "title": "A Quantum Algorithm for Finding the Minimum",
+    "authors": "Christoph Dürr, Peter Høyer",
+    "url": "https://arxiv.org/abs/quant-ph/9607014",
+    "supports": "Threshold algorithm and O(sqrt N) bounded-error oracle complexity; author-hosted full text at cs.au.dk/~ivan/findmin.pdf checked.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "collision",
+    "title": "Quantum Algorithm for the Collision Problem",
+    "authors": "Gilles Brassard, Peter Høyer, Alain Tapp",
+    "url": "https://arxiv.org/html/quant-ph/9705002",
+    "supports": "Section 2/Theorem 1: k + sqrt(N/k) query/storage tradeoff and two-to-one promise.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ibm-qpe",
+    "title": "The phase-estimation procedure",
+    "authors": "IBM Quantum Learning / John Watrous",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring/phase-estimation-procedure",
+    "supports": "QFT circuit, controlled phases, QPE exact/inexact analysis and nearest-grid probability bound.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ipea",
+    "title": "Arbitrary accuracy iterative phase estimation algorithm as a two qubit benchmark",
+    "authors": "Miroslav Dobšíček, Göran Johansson, Vitaly Shumeiko, Göran Wendin",
+    "url": "https://arxiv.org/html/quant-ph/0610214",
+    "supports": "Single-ancilla QFT-based iteration, comparison with Kitaev and powered-U resource warning.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "semiclassical-qft",
+    "title": "Semiclassical Fourier Transform for Quantum Computation",
+    "authors": "Robert B. Griffiths, Chi-Sheng Niu",
+    "url": "https://arxiv.org/html/quant-ph/9511007",
+    "supports": "Terminal Fourier measurement replaced by classical feed-forward; not coherent-transform equivalence.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "shor-paper",
+    "title": "Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+    "authors": "Peter W. Shor",
+    "url": "https://arxiv.org/html/quant-ph/9508027",
+    "supports": "Sections 3–6: arithmetic, QFT, order finding, factoring postprocessing and discrete logarithms.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ibm-shor",
+    "title": "Shor’s algorithm",
+    "authors": "IBM Quantum Learning / John Watrous",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring/shor-algorithm",
+    "supports": "Classical factoring reduction and efficient modular multiplication powers.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "algebraic-survey",
+    "title": "Quantum algorithms for algebraic problems",
+    "authors": "Andrew M. Childs, Wim van Dam",
+    "url": "https://arxiv.org/html/0812.0380",
+    "supports": "Sections III–IV: group Fourier sampling and abelian hidden-subgroup model; nonabelian boundaries.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "mlae",
+    "title": "Amplitude Estimation without Phase Estimation",
+    "authors": "Yohichi Suzuki, Shumpei Uno, Rudy Raymond, Tomoki Tanaka, Tamiya Onodera, Naoki Yamamoto",
+    "url": "https://arxiv.org/html/1904.10246",
+    "supports": "Section 3: likelihood from Grover-depth measurements; statistical rather than universal finite-sample guarantees.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "iqae",
+    "title": "Iterative Quantum Amplitude Estimation",
+    "authors": "Dmitry Grinko, Julien Gacon, Christa Zoufal, Stefan Woerner",
+    "url": "https://arxiv.org/html/1912.05559",
+    "supports": "Adaptive angle intervals, confidence allocation and near-quadratic ideal query theorem.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "monte-carlo",
+    "title": "Quantum speedup of Monte Carlo methods",
+    "authors": "Ashley Montanaro",
+    "url": "https://arxiv.org/abs/1504.06987",
+    "supports": "Bounded-output/variance assumptions and coherent mean estimation; author full text introduction checked at people.maths.bris.ac.uk/~csxam/papers/montecarlo.pdf.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "jordan-gradient",
+    "title": "Fast Quantum Algorithm for Numerical Gradient Estimation",
+    "authors": "Stephen P. Jordan",
+    "url": "https://arxiv.org/html/quant-ph/0405146",
+    "supports": "Finite-precision modular-addition oracle and phase-ramp gradient construction, smoothness requirements.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "vtaa",
+    "title": "Variable time amplitude amplification and a faster quantum algorithm for solving systems of linear equations",
+    "authors": "Andris Ambainis",
+    "url": "https://arxiv.org/html/1010.4458",
+    "supports": "Section 2.1: coherent stopping flags, root-mean-square stopping time and maximum-time term.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "regev",
+    "title": "An Efficient Quantum Factoring Algorithm",
+    "authors": "Oded Regev",
+    "url": "https://arxiv.org/abs/2308.06572",
+    "supports": "Conditional factoring development, shorter repeated quantum circuits and classical lattice postprocessing.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "gradient-improved",
+    "title": "Optimizing quantum optimization algorithms via faster quantum gradient computation",
+    "authors": "András Gilyén, Srinivasan Arunachalam, Nathan Wiebe",
+    "url": "https://arxiv.org/abs/1711.00465",
+    "supports": "Audited omission/development: improved function-evaluation precision dependence and probability-to-phase oracle conversion, with smoothness assumptions.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  }
+]

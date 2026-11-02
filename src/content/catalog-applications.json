@@ -1,0 +1,846 @@
+[
+  {
+    "id": "coined-walks",
+    "sequence": 38,
+    "module": 7,
+    "title": "Discrete-time coined quantum walks",
+    "kind": "primitive",
+    "summary": "A position-and-coin walk with every amplitude calculated through three steps.",
+    "why": "Explains coherent propagation before graph-search applications.",
+    "prerequisites": [
+      "grover"
+    ],
+    "concepts": [
+      "tensor-products",
+      "unitarity"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "measurement"
+    ],
+    "exampleIds": [
+      "coined-walks-worked"
+    ],
+    "sourceIds": [
+      "app-walk-review"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "No generic advantage from the primitive alone.",
+    "aliases": [
+      "quantum random walk",
+      "Hadamard walk"
+    ],
+    "file": "38-coined-walks.md",
+    "gaps": []
+  },
+  {
+    "id": "continuous-walks",
+    "sequence": 39,
+    "module": 7,
+    "title": "Continuous-time quantum walks",
+    "kind": "primitive",
+    "summary": "An adjacency Hamiltonian moves a state across one edge and back.",
+    "why": "Connects graph motion to Hamiltonian simulation and eigenphases.",
+    "prerequisites": [
+      "product-formulas"
+    ],
+    "concepts": [
+      "hamiltonians"
+    ],
+    "reusedConcepts": [
+      "eigenvalues",
+      "complex-numbers"
+    ],
+    "exampleIds": [
+      "continuous-walks-worked"
+    ],
+    "sourceIds": [
+      "app-continuous-walk"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Model-dependent theoretical applications; this two-state instance is classically easy.",
+    "aliases": [
+      "CTQW",
+      "adjacency matrix"
+    ],
+    "file": "39-continuous-walks.md",
+    "gaps": []
+  },
+  {
+    "id": "szegedy-mnrs",
+    "sequence": 40,
+    "module": 7,
+    "title": "Szegedy walks and MNRS search",
+    "kind": "framework",
+    "summary": "Build two reflections, obtain a stationary reflection, and search with explicit access costs.",
+    "why": "Unifies quantum-walk search and explains setup/update/check tradeoffs.",
+    "prerequisites": [
+      "coined-walks",
+      "phase-estimation",
+      "amplitude-amplification"
+    ],
+    "concepts": [
+      "probability"
+    ],
+    "reusedConcepts": [
+      "outer-products",
+      "eigenvalues"
+    ],
+    "exampleIds": [
+      "szegedy-mnrs-worked"
+    ],
+    "sourceIds": [
+      "app-mnrs",
+      "app-fast-forwarding"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven bounded-error oracle-model search bound under reversible-chain access assumptions.",
+    "aliases": [
+      "Markov chain",
+      "MNRS",
+      "Szegedy",
+      "quantum fast-forwarding"
+    ],
+    "file": "40-szegedy-mnrs.md",
+    "gaps": []
+  },
+  {
+    "id": "element-distinctness",
+    "sequence": 41,
+    "module": 7,
+    "title": "Element distinctness",
+    "kind": "algorithm",
+    "summary": "Search six stored subsets for an equal pair, then account for the optimized walk bound.",
+    "why": "Shows how retained queried data changes query complexity.",
+    "prerequisites": [
+      "szegedy-mnrs"
+    ],
+    "concepts": [
+      "oracles"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [
+      "element-distinctness-worked"
+    ],
+    "sourceIds": [
+      "app-distinctness"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model O(N^(2/3)) bound; implemented teaching variant has explicit reload cost.",
+    "aliases": [
+      "duplicate finding",
+      "Ambainis"
+    ],
+    "file": "41-element-distinctness.md",
+    "gaps": []
+  },
+  {
+    "id": "triangle-finding",
+    "sequence": 42,
+    "module": 7,
+    "title": "Triangle finding",
+    "kind": "algorithm",
+    "summary": "An explicit four-vertex Grover search with all six adjacency calls counted.",
+    "why": "Separates an elementary algorithm from graph-structured improved bounds.",
+    "prerequisites": [
+      "grover",
+      "element-distinctness"
+    ],
+    "concepts": [
+      "oracles"
+    ],
+    "reusedConcepts": [
+      "uncomputation"
+    ],
+    "exampleIds": [
+      "triangle-finding-worked"
+    ],
+    "sourceIds": [
+      "app-triangle"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model bounds; no wall-clock advantage established here.",
+    "aliases": [
+      "triangle detection",
+      "Le Gall"
+    ],
+    "file": "42-triangle-finding.md",
+    "gaps": []
+  },
+  {
+    "id": "formula-evaluation",
+    "sequence": 43,
+    "module": 7,
+    "title": "NAND-tree and formula evaluation",
+    "kind": "algorithm",
+    "summary": "Evaluate a four-leaf NAND formula with an explicit span-program walk, finite phase estimation, and exact measured-error certificate.",
+    "why": "Represents spectral algorithms for logical formula evaluation.",
+    "prerequisites": [
+      "phase-estimation",
+      "continuous-walks"
+    ],
+    "concepts": [
+      "matrices",
+      "eigenvalues",
+      "unitarity"
+    ],
+    "reusedConcepts": [
+      "oracles",
+      "inner-products",
+      "uncomputation"
+    ],
+    "exampleIds": [
+      "formula-evaluation-worked"
+    ],
+    "sourceIds": [
+      "nand-span-formulas",
+      "nand-reflections"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven query advantages for optimized formula families; complete unoptimized discrete toy circuit uses 84 bit queries versus at most four classically.",
+    "aliases": [
+      "NAND tree",
+      "span programs"
+    ],
+    "file": "43-formula-evaluation.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-backtracking",
+    "sequence": 44,
+    "module": 7,
+    "title": "Quantum backtracking and branch-and-bound",
+    "kind": "algorithm",
+    "summary": "Build a weighted five-node walk, detect zero phase, and extract a verified witness.",
+    "why": "Connects quantum walks to classical search trees and pruning.",
+    "prerequisites": [
+      "szegedy-mnrs",
+      "phase-estimation"
+    ],
+    "concepts": [
+      "oracles"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [
+      "quantum-backtracking-worked"
+    ],
+    "sourceIds": [
+      "app-backtracking"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven predicate-test speedup for a specified tree; explicit toy calculation is not a practical speedup.",
+    "aliases": [
+      "DPLL",
+      "constraint satisfaction",
+      "branch and bound"
+    ],
+    "file": "44-quantum-backtracking.md",
+    "gaps": []
+  },
+  {
+    "id": "vqe",
+    "sequence": 45,
+    "module": 8,
+    "title": "Variational quantum eigensolver",
+    "kind": "algorithm",
+    "summary": "Optimize Z+X on one qubit and derive the actual measurement statistics.",
+    "why": "Introduces the hybrid variational workflow and its limitations.",
+    "prerequisites": [
+      "energy-estimation"
+    ],
+    "concepts": [
+      "observables"
+    ],
+    "reusedConcepts": [
+      "state-preparation",
+      "expectation-estimation"
+    ],
+    "exampleIds": [
+      "vqe-worked"
+    ],
+    "sourceIds": [
+      "app-vqe-source"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Heuristic for general applications; no general practical speedup established.",
+    "aliases": [
+      "VQE",
+      "ansatz"
+    ],
+    "file": "45-vqe.md",
+    "gaps": []
+  },
+  {
+    "id": "adapt-vqe",
+    "sequence": 46,
+    "module": 8,
+    "title": "ADAPT-VQE and adaptive circuits",
+    "kind": "algorithm",
+    "summary": "Measure pool gradients, select a Y rotation, and re-optimize to the exact toy ground state.",
+    "why": "Shows how measured derivatives can construct an ansatz.",
+    "prerequisites": [
+      "vqe"
+    ],
+    "concepts": [
+      "observables"
+    ],
+    "reusedConcepts": [
+      "matrix-multiplication"
+    ],
+    "exampleIds": [
+      "adapt-vqe-worked"
+    ],
+    "sourceIds": [
+      "app-adapt"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Heuristic application framework with specific numerical evidence; no general practical speedup.",
+    "aliases": [
+      "ADAPT",
+      "operator pool",
+      "commutator"
+    ],
+    "file": "46-adapt-vqe.md",
+    "gaps": []
+  },
+  {
+    "id": "qaoa",
+    "sequence": 47,
+    "module": 8,
+    "title": "Quantum approximate optimization algorithm",
+    "kind": "algorithm",
+    "summary": "Calculate a one-edge Max-Cut circuit from uniform state to optimal sampled cuts.",
+    "why": "Makes objective phases, mixing, and sampled optimization explicit.",
+    "prerequisites": [
+      "vqe",
+      "grover"
+    ],
+    "concepts": [
+      "hamiltonians"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "tensor-products"
+    ],
+    "exampleIds": [
+      "qaoa-worked"
+    ],
+    "sourceIds": [
+      "app-qaoa-source"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Specific theoretical approximation results; general practical advantage unestablished.",
+    "aliases": [
+      "QAOA",
+      "Max-Cut"
+    ],
+    "file": "47-qaoa.md",
+    "gaps": []
+  },
+  {
+    "id": "imaginary-time",
+    "sequence": 48,
+    "module": 8,
+    "title": "Imaginary-time evolution and variational alternatives",
+    "kind": "algorithm",
+    "summary": "Compare normalized filtering, a state-dependent unitary, and an exact variational trajectory.",
+    "why": "Prevents conflation of local QITE, variational imaginary time, and postselected filters.",
+    "prerequisites": [
+      "vqe",
+      "polynomial-filtering"
+    ],
+    "concepts": [
+      "hamiltonians"
+    ],
+    "reusedConcepts": [
+      "normalization",
+      "state-preparation"
+    ],
+    "exampleIds": [
+      "imaginary-time-worked"
+    ],
+    "sourceIds": [
+      "app-qite",
+      "app-variational-imaginary"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Conditional on overlap, ansatz/domain quality, precision and implementation costs.",
+    "aliases": [
+      "QITE",
+      "VarQITE",
+      "McLachlan"
+    ],
+    "file": "48-imaginary-time.md",
+    "gaps": []
+  },
+  {
+    "id": "adiabatic-annealing",
+    "sequence": 49,
+    "module": 8,
+    "title": "Adiabatic algorithms and quantum annealing",
+    "kind": "framework",
+    "summary": "Follow a two-level ground-state path and calculate a finite-time success bound.",
+    "why": "Distinguishes ideal adiabatic computation from physical annealing.",
+    "prerequisites": [
+      "product-formulas",
+      "qaoa"
+    ],
+    "concepts": [
+      "hamiltonians"
+    ],
+    "reusedConcepts": [
+      "eigenvalues"
+    ],
+    "exampleIds": [
+      "adiabatic-annealing-worked"
+    ],
+    "sourceIds": [
+      "app-adiabatic",
+      "app-adiabatic-review"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven guarantees for specified gaps/schedules; no general efficient optimizer.",
+    "aliases": [
+      "AQC",
+      "quantum annealing",
+      "spectral gap"
+    ],
+    "file": "49-adiabatic-annealing.md",
+    "gaps": []
+  },
+  {
+    "id": "tomography",
+    "sequence": 50,
+    "module": 9,
+    "title": "Quantum state tomography",
+    "kind": "protocol",
+    "summary": "Reconstruct a complex one-qubit density matrix from three measurement bases.",
+    "why": "Makes full-state output and measurement costs explicit.",
+    "prerequisites": [
+      "vqe"
+    ],
+    "concepts": [
+      "density-matrices"
+    ],
+    "reusedConcepts": [
+      "measurement",
+      "observables"
+    ],
+    "exampleIds": [
+      "tomography-worked"
+    ],
+    "sourceIds": [
+      "app-tomography-source"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Measurement-estimation task; arbitrary-state output and sample costs grow with dimension.",
+    "aliases": [
+      "state reconstruction",
+      "Bloch vector"
+    ],
+    "file": "50-tomography.md",
+    "gaps": []
+  },
+  {
+    "id": "classical-shadows",
+    "sequence": 51,
+    "module": 9,
+    "title": "Classical shadows",
+    "kind": "protocol",
+    "summary": "Derive a randomized Pauli snapshot, its unbiasedness, and its variance.",
+    "why": "Shows how many observable queries differ from full tomography.",
+    "prerequisites": [
+      "tomography"
+    ],
+    "concepts": [
+      "expectation-estimation"
+    ],
+    "reusedConcepts": [
+      "density-matrices",
+      "probability"
+    ],
+    "exampleIds": [
+      "classical-shadows-worked"
+    ],
+    "sourceIds": [
+      "app-shadows"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven sample bounds depending on observable norms/locality, accuracy and confidence.",
+    "aliases": [
+      "shadow tomography",
+      "randomized measurements"
+    ],
+    "file": "51-classical-shadows.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-kernels",
+    "sequence": 52,
+    "module": 9,
+    "title": "Quantum kernel estimation",
+    "kind": "application",
+    "summary": "Estimate overlaps and finish a tiny kernel classification example.",
+    "why": "Audits quantum feature-map input, sampling, and classical model costs.",
+    "prerequisites": [
+      "tomography"
+    ],
+    "concepts": [
+      "inner-products"
+    ],
+    "reusedConcepts": [
+      "uncomputation",
+      "measurement"
+    ],
+    "exampleIds": [
+      "quantum-kernels-worked"
+    ],
+    "sourceIds": [
+      "app-kernels"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "No general practical speedup; depends on feature-map and data assumptions.",
+    "aliases": [
+      "quantum SVM",
+      "kernel matrix"
+    ],
+    "file": "52-quantum-kernels.md",
+    "gaps": []
+  },
+  {
+    "id": "variational-classifiers",
+    "sequence": 53,
+    "module": 9,
+    "title": "Variational quantum classifiers",
+    "kind": "application",
+    "summary": "Train a one-parameter classifier and calculate a parameter-shift derivative.",
+    "why": "Separates trainable-circuit workflows from kernel estimation.",
+    "prerequisites": [
+      "vqe",
+      "quantum-kernels"
+    ],
+    "concepts": [
+      "expectation-estimation"
+    ],
+    "reusedConcepts": [
+      "probability"
+    ],
+    "exampleIds": [
+      "variational-classifiers-worked"
+    ],
+    "sourceIds": [
+      "app-classifiers"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Heuristic learning workflow; no general practical speedup established.",
+    "aliases": [
+      "QNN",
+      "quantum machine learning",
+      "parameter shift"
+    ],
+    "file": "53-variational-classifiers.md",
+    "gaps": []
+  },
+  {
+    "id": "iqp-sampling",
+    "sequence": 54,
+    "module": 9,
+    "title": "IQP sampling",
+    "kind": "application",
+    "summary": "Calculate a commuting phase circuit and its output distribution.",
+    "why": "Introduces sampling complexity with a precise error-model boundary.",
+    "prerequisites": [
+      "deutsch-jozsa"
+    ],
+    "concepts": [
+      "phase"
+    ],
+    "reusedConcepts": [
+      "matrix-multiplication"
+    ],
+    "exampleIds": [
+      "iqp-sampling-worked"
+    ],
+    "sourceIds": [
+      "app-iqp"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Conditional classical-hardness evidence for specified approximation models.",
+    "aliases": [
+      "instantaneous quantum polynomial time",
+      "commuting circuits"
+    ],
+    "file": "54-iqp-sampling.md",
+    "gaps": []
+  },
+  {
+    "id": "boson-sampling",
+    "sequence": 55,
+    "module": 9,
+    "title": "Boson and Gaussian boson sampling",
+    "kind": "application",
+    "summary": "Derive photon bunching and Gaussian-input output sectors with a truncation bound.",
+    "why": "Covers a physically distinct sampling family and permanent/hafnian mechanisms.",
+    "prerequisites": [
+      "iqp-sampling"
+    ],
+    "concepts": [
+      "normalization"
+    ],
+    "reusedConcepts": [
+      "probability"
+    ],
+    "exampleIds": [
+      "boson-sampling-worked"
+    ],
+    "sourceIds": [
+      "app-boson",
+      "app-gbs"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Conditional sampling-hardness evidence; easy toy instances do not establish advantage.",
+    "aliases": [
+      "GBS",
+      "hafnian",
+      "permanent",
+      "Hong-Ou-Mandel"
+    ],
+    "file": "55-boson-sampling.md",
+    "gaps": []
+  },
+  {
+    "id": "random-circuit-sampling",
+    "sequence": 56,
+    "module": 9,
+    "title": "Random-circuit sampling",
+    "kind": "application",
+    "summary": "Compute a four-gate distribution and a concrete XEB counterexample.",
+    "why": "Separates sampling, verification metrics, and application value.",
+    "prerequisites": [
+      "iqp-sampling",
+      "tomography"
+    ],
+    "concepts": [
+      "probability"
+    ],
+    "reusedConcepts": [
+      "tensor-products"
+    ],
+    "exampleIds": [
+      "random-circuit-sampling-worked"
+    ],
+    "sourceIds": [
+      "app-rcs"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Conditional complexity evidence; no hardware or useful-application advantage claimed here.",
+    "aliases": [
+      "RCS",
+      "XEB",
+      "cross entropy"
+    ],
+    "file": "56-random-circuit-sampling.md",
+    "gaps": []
+  },
+  {
+    "id": "kuperberg",
+    "sequence": 57,
+    "module": 10,
+    "title": "Kuperberg hidden-shift sieve",
+    "kind": "algorithm",
+    "summary": "Combine phase qubits and recover all three bits of a modulus-eight hidden shift.",
+    "why": "Demonstrates coherent postprocessing beyond abelian Fourier sampling.",
+    "prerequisites": [
+      "abelian-hidden-subgroup",
+      "qft"
+    ],
+    "concepts": [
+      "groups"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "controlled-gates"
+    ],
+    "exampleIds": [
+      "kuperberg-worked"
+    ],
+    "sourceIds": [
+      "app-kuperberg-source"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven subexponential oracle-model time/query bound with storage tradeoffs.",
+    "aliases": [
+      "dihedral hidden subgroup",
+      "hidden shift"
+    ],
+    "file": "57-kuperberg.md",
+    "gaps": []
+  },
+  {
+    "id": "hallgren",
+    "sequence": 58,
+    "module": 10,
+    "title": "Hallgren and Pell-type problems",
+    "kind": "algorithm",
+    "summary": "Construct a reduced-ideal oracle, Fourier-sample its irrational period, and recover a Pell solution.",
+    "why": "Shows why compact outputs and real-period number theory extend Shor.",
+    "prerequisites": [
+      "order-finding",
+      "qft"
+    ],
+    "concepts": [
+      "modular-arithmetic"
+    ],
+    "reusedConcepts": [
+      "continued-fractions",
+      "reversible-computation",
+      "uncomputation",
+      "complex-numbers"
+    ],
+    "exampleIds": [
+      "hallgren-worked"
+    ],
+    "sourceIds": [
+      "app-hallgren-source",
+      "hallgren-jozsa"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven polynomial-time compact-output regulator/Pell algorithm; no proven classical lower bound or practical hardware speedup.",
+    "aliases": [
+      "Pell equation",
+      "regulator",
+      "principal ideal"
+    ],
+    "file": "58-hallgren.md",
+    "gaps": []
+  },
+  {
+    "id": "jones-polynomial",
+    "sequence": 59,
+    "module": 10,
+    "title": "Approximating the Jones polynomial",
+    "kind": "algorithm",
+    "summary": "Turn a one-crossing braid into a weighted trace and recover the value one.",
+    "why": "Adds a topological application with a different output guarantee.",
+    "prerequisites": [
+      "phase-estimation"
+    ],
+    "concepts": [
+      "hadamard-test"
+    ],
+    "reusedConcepts": [
+      "complex-numbers",
+      "expectation-estimation"
+    ],
+    "exampleIds": [
+      "jones-polynomial-worked"
+    ],
+    "sourceIds": [
+      "app-jones"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven normalized additive approximation; closure and normalization matter.",
+    "aliases": [
+      "AJL",
+      "braid",
+      "Markov trace"
+    ],
+    "file": "59-jones-polynomial.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-metropolis",
+    "sequence": 60,
+    "module": 10,
+    "title": "Quantum Metropolis and Gibbs sampling",
+    "kind": "algorithm",
+    "summary": "Run a coherent thermal proposal, repair rejection by alternating measurements, and calculate the Gibbs output.",
+    "why": "Covers equilibrium preparation and modern detailed-balance developments.",
+    "prerequisites": [
+      "energy-estimation",
+      "polynomial-filtering",
+      "szegedy-mnrs"
+    ],
+    "concepts": [
+      "density-matrices"
+    ],
+    "reusedConcepts": [
+      "conditional-probability"
+    ],
+    "exampleIds": [
+      "quantum-metropolis-worked"
+    ],
+    "sourceIds": [
+      "app-metropolis",
+      "app-modern-gibbs",
+      "app-discrete-gibbs"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Ideal algorithm with explicit mixing and retry costs; no general fast thermalization guarantee.",
+    "aliases": [
+      "Gibbs state",
+      "thermal state",
+      "detailed balance"
+    ],
+    "file": "60-quantum-metropolis.md",
+    "gaps": []
+  },
+  {
+    "id": "forrelation",
+    "sequence": 61,
+    "module": 10,
+    "title": "Forrelation and oracle separations",
+    "kind": "algorithm",
+    "summary": "Calculate two-query and genuinely one-indexed-query experiments with explicit error bounds.",
+    "why": "Shows a separation against randomized classical queries and audits one-query claims.",
+    "prerequisites": [
+      "deutsch-jozsa",
+      "qft"
+    ],
+    "concepts": [
+      "oracles"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "complexity"
+    ],
+    "exampleIds": [
+      "forrelation-worked"
+    ],
+    "sourceIds": [
+      "app-forrelation-source"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model separation under an explicit promise and bounded-error convention.",
+    "aliases": [
+      "Fourier checking",
+      "oracle separation"
+    ],
+    "file": "61-forrelation.md",
+    "gaps": []
+  }
+]

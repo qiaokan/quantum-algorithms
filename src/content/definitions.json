@@ -1,0 +1,395 @@
+[
+  {
+    "id": "complex-numbers",
+    "title": "Complex numbers",
+    "aliases": [
+      "i",
+      "imaginary",
+      "complex conjugate",
+      "Euler formula"
+    ],
+    "file": "complex-numbers.md",
+    "summary": "A complex number stores two real coordinates: z=a+bi. The symbol i is defined by i^2=-1; a is the real part and b the imaginary part. Complex amplitudes let rotations carry more information than a positive/negative sign."
+  },
+  {
+    "id": "vectors",
+    "title": "Vectors and ket notation",
+    "aliases": [
+      "ket",
+      "amplitude",
+      "state vector",
+      "psi"
+    ],
+    "file": "vectors.md",
+    "summary": "A column vector is an ordered list of numbers. In a quantum state its entries are amplitudes, indexed by the possible measurement labels. The notation |\\psi\\rangle (\u201cket psi\u201d) names the whole column; it is not an extra operation."
+  },
+  {
+    "id": "matrices",
+    "title": "Matrices as operations",
+    "aliases": [
+      "matrix",
+      "linear map",
+      "identity"
+    ],
+    "file": "matrices.md",
+    "summary": "A matrix is a rectangular table of numbers. A square matrix acts on a column vector: each output entry is a weighted sum of input entries. For quantum gates, columns describe where each input basis state goes."
+  },
+  {
+    "id": "matrix-multiplication",
+    "title": "Matrix multiplication",
+    "aliases": [
+      "row times column",
+      "composition"
+    ],
+    "file": "matrix-multiplication.md",
+    "summary": "We need this rule to calculate what a gate actually does. Multiply each row of the matrix by the input column, pair corresponding entries, then add:"
+  },
+  {
+    "id": "tensor-products",
+    "title": "Tensor products",
+    "aliases": [
+      "tensor",
+      "Kronecker",
+      "\u2297"
+    ],
+    "file": "tensor-products.md",
+    "summary": "For independently prepared registers, the joint amplitude of a pair is the product of its two amplitudes. The tensor product records those products in a fixed order:"
+  },
+  {
+    "id": "normalization",
+    "title": "Normalization",
+    "aliases": [
+      "norm",
+      "unit vector"
+    ],
+    "file": "normalization.md",
+    "summary": "Measurement probabilities must add to one. If amplitudes are a_j, normalization means \\sum_j|a_j|^2=1, where \\sum_j says \u201cadd over all labels j.\u201d The norm is \\|a\\|=\\sqrt{\\sum_j|a_j|^2}."
+  },
+  {
+    "id": "probability",
+    "title": "Probability and sampling",
+    "aliases": [
+      "Born rule",
+      "shots",
+      "variance"
+    ],
+    "file": "probability.md",
+    "summary": "A probability is a number from zero to one assigning a chance to an outcome. Disjoint outcomes add: if labels 00 and 01 have probabilities 1/8 and 3/8, the chance that the left bit is 0 is 4/8=1/2. This sum is called a marginal probability."
+  },
+  {
+    "id": "conditional-probability",
+    "title": "Conditional probability",
+    "aliases": [
+      "postselection",
+      "conditioning"
+    ],
+    "file": "conditional-probability.md",
+    "summary": "Conditioning means retaining only trials satisfying an event. If A and B are events and P(B)>0, then P(A\\mid B)=P(A\\text{ and }B)/P(B). The vertical bar means \u201cgiven.\u201d"
+  },
+  {
+    "id": "basis",
+    "title": "Basis and basis changes",
+    "aliases": [
+      "computational basis",
+      "Hadamard basis"
+    ],
+    "file": "basis.md",
+    "summary": "A basis is a set of independent reference vectors in which every vector has unique coordinates. For one qubit the computational basis is |0\\rangle=(1,0)^T, |1\\rangle=(0,1)^T. Another orthonormal basis is |+\\rangle=(1,1)^T/\\sqrt2, |-\\rangle=(1,-1)^T/\\sqrt2; \u201corthonormal\u201d means unit length and zero [inner product](/definitions/inner-products/) between distinct members."
+  },
+  {
+    "id": "inner-products",
+    "title": "Inner products",
+    "aliases": [
+      "bra",
+      "overlap",
+      "orthogonal",
+      "\u27e8"
+    ],
+    "file": "inner-products.md",
+    "summary": "The inner product measures how much one vector aligns with another. Conjugate the first vector's entries, multiply corresponding pairs, and add. A bra \\langle u| is the [conjugate transpose](/definitions/conjugate-transpose/) of a ket |u\\rangle:"
+  },
+  {
+    "id": "outer-products",
+    "title": "Outer products and projectors",
+    "aliases": [
+      "projector",
+      "rank one",
+      "|\u03c8><\u03c8|"
+    ],
+    "file": "outer-products.md",
+    "summary": "An outer product multiplies a column by a row, producing a matrix. It is not the scalar inner product. For normalized u=(1,1)^T/\\sqrt2,"
+  },
+  {
+    "id": "conjugate-transpose",
+    "title": "Conjugate transpose",
+    "aliases": [
+      "dagger",
+      "adjoint",
+      "\u2020"
+    ],
+    "file": "conjugate-transpose.md",
+    "summary": "A dagger \\dagger means transpose and complex-conjugate. Transpose exchanges rows and columns; conjugation changes i to -i."
+  },
+  {
+    "id": "unitarity",
+    "title": "Unitarity and reversibility",
+    "aliases": [
+      "unitary",
+      "inverse gate"
+    ],
+    "file": "unitarity.md",
+    "summary": "A matrix U is unitary when U^\\dagger U=I. This guarantees preserved lengths and inner products, hence preserved total probability. The dagger is the [conjugate transpose](/definitions/conjugate-transpose/)."
+  },
+  {
+    "id": "eigenvalues",
+    "title": "Eigenvalues and eigenvectors",
+    "aliases": [
+      "eigenstate",
+      "spectrum",
+      "\u03bb"
+    ],
+    "file": "eigenvalues.md",
+    "summary": "Sometimes a matrix acts on a vector only by scaling it. If Av=\\lambda v with nonzero v, then v is an eigenvector and \\lambda its eigenvalue. The collection of eigenvalues is the spectrum. We need this to identify what phase estimation estimates."
+  },
+  {
+    "id": "singular-values",
+    "title": "Singular values",
+    "aliases": [
+      "SVD",
+      "\u03c3",
+      "condition number"
+    ],
+    "file": "singular-values.md",
+    "summary": "Singular values describe the stretching of a matrix even when its input and output directions differ. A decomposition A=U\\Sigma V^\\dagger uses unitary matrices U,V and a diagonal matrix \\Sigma of nonnegative numbers \\sigma_j. In matching directions, A|v_j\\rangle=\\sigma_j|u_j\\rangle."
+  },
+  {
+    "id": "reversible-computation",
+    "title": "Reversible computation",
+    "aliases": [
+      "XOR",
+      "Toffoli",
+      "garbage"
+    ],
+    "file": "reversible-computation.md",
+    "summary": "A reversible function maps distinct inputs to distinct outputs. Ordinary AND loses information: 00, 01, 10 all produce 0. Retain the inputs and write the answer by XOR into a target to make it reversible:"
+  },
+  {
+    "id": "controlled-gates",
+    "title": "Controlled gates",
+    "aliases": [
+      "CNOT",
+      "controlled U",
+      "control qubit"
+    ],
+    "file": "controlled-gates.md",
+    "summary": "A controlled gate applies an operation only in the branch where a control bit equals 1. It must preserve coherent superpositions, not measure the control first. With left control and right target, CNOT swaps 10 and 11 and leaves 00,01 unchanged:"
+  },
+  {
+    "id": "ancillas",
+    "title": "Ancillas and workspace",
+    "aliases": [
+      "auxiliary qubit",
+      "target register"
+    ],
+    "file": "ancillas.md",
+    "summary": "An ancilla is an auxiliary qubit or register used to implement a computation. Its role must be specified: scratch space, an oracle target, a success flag, or a phase-estimation register. It is not free memory."
+  },
+  {
+    "id": "uncomputation",
+    "title": "Uncomputation",
+    "aliases": [
+      "compute copy uncompute",
+      "garbage cleanup"
+    ],
+    "file": "uncomputation.md",
+    "summary": "Uncomputation reverses a computation to remove its temporary records. Suppose a reversible circuit computes |x,0\\rangle\\mapsto|x,g(x)\\rangle. After using g(x) to change a phase or another output, apply the inverse circuit to restore the workspace to zero."
+  },
+  {
+    "id": "measurement",
+    "title": "Measurement",
+    "aliases": [
+      "projective measurement",
+      "collapse",
+      "readout"
+    ],
+    "file": "measurement.md",
+    "summary": "A computational-basis measurement returns one basis label, with probability equal to the squared magnitude of that label's amplitude. For (3|0\\rangle+4|1\\rangle)/5, it returns 0 with 9/25 or 1 with 16/25. It does not print the amplitudes 3/5 and 4/5."
+  },
+  {
+    "id": "phase",
+    "title": "Global and relative phase",
+    "aliases": [
+      "phase kickback",
+      "sign",
+      "minus sign"
+    ],
+    "file": "phase.md",
+    "summary": "A phase is a unit-magnitude complex factor, e^{i\\theta}. A global phase multiplies every amplitude by the same factor; it changes no measurement predictions. A relative phase changes some amplitudes relative to others and can alter later interference."
+  },
+  {
+    "id": "density-matrices",
+    "title": "Density matrices",
+    "aliases": [
+      "mixed state",
+      "\u03c1",
+      "trace",
+      "partial trace"
+    ],
+    "file": "density-matrices.md",
+    "summary": "A density matrix represents both pure states and classical uncertainty about prepared states. For a pure state |\\psi\\rangle, it is the [outer product](/definitions/outer-products/) \\rho=|\\psi\\rangle\\langle\\psi|. For a mixture that chooses state \\psi_j with probability p_j, it is \\rho=\\sum_j p_j|\\psi_j\\rangle\\langle\\psi_j|."
+  },
+  {
+    "id": "observables",
+    "title": "Observables and expectations",
+    "aliases": [
+      "Hermitian",
+      "expectation value",
+      "Pauli"
+    ],
+    "file": "observables.md",
+    "summary": "An observable is represented by a Hermitian matrix O=O^\\dagger. Its eigenvalues are the possible numerical outcomes in its eigenbasis measurement. The expected value is \\langle\\psi|O|\\psi\\rangle, or \\operatorname{Tr}(\\rho O) for a mixture."
+  },
+  {
+    "id": "complexity",
+    "title": "Query, gate, and runtime complexity",
+    "aliases": [
+      "Big O",
+      "\u0398",
+      "epsilon",
+      "logical gates",
+      "physical gates"
+    ],
+    "file": "complexity.md",
+    "summary": "A query is one use of a specified oracle. Gate complexity counts elementary logical operations, including the oracle's implementation if it is not treated as a free box. Runtime also includes scheduling, state preparation, repetitions, readout, classical work, and error correction."
+  },
+  {
+    "id": "oracles",
+    "title": "Classical and coherent oracles",
+    "aliases": [
+      "query access",
+      "black box",
+      "phase oracle"
+    ],
+    "file": "oracles.md",
+    "summary": "An oracle specifies how the input problem can be accessed. A classical oracle accepts a classical x and returns f(x). A coherent reversible oracle is the unitary U_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle, including its action on superpositions. Coherent access is a different interface, not a classical API called on a Python list."
+  },
+  {
+    "id": "state-preparation",
+    "title": "State preparation",
+    "aliases": [
+      "amplitude encoding",
+      "data loading",
+      "QRAM"
+    ],
+    "file": "state-preparation.md",
+    "summary": "An algorithm needs a circuit that creates its input state. Writing a normalized vector is not enough. Uniform amplitudes over 2^n labels are easy: apply H to each of n zero qubits."
+  },
+  {
+    "id": "reversible-arithmetic",
+    "title": "Reversible arithmetic",
+    "aliases": [
+      "modular multiplication",
+      "addition circuit"
+    ],
+    "file": "reversible-arithmetic.md",
+    "summary": "Arithmetic inside a quantum algorithm must be a reversible circuit. Addition can retain its input and act modulo a fixed power of two: on a two-bit target, add 1 via the permutation 0\\to1\\to2\\to3\\to0. Its inverse subtracts 1."
+  },
+  {
+    "id": "hadamard-test",
+    "title": "The Hadamard test",
+    "aliases": [
+      "overlap estimation",
+      "real part"
+    ],
+    "file": "hadamard-test.md",
+    "summary": "This circuit estimates the real part of \\langle\\psi|U|\\psi\\rangle using controlled-U. Prepare control 0 and target \\psi, apply H to control, then controlled-U, then H again. The joint state becomes"
+  },
+  {
+    "id": "swap-test",
+    "title": "The SWAP test",
+    "aliases": [
+      "fidelity",
+      "overlap squared"
+    ],
+    "file": "swap-test.md",
+    "summary": "The SWAP test estimates squared overlap of two pure states. Prepare control |0\\rangle and target registers |u\\rangle|v\\rangle. Apply H, controlled exchange of the two targets, then H. The control-0 branch is (|u\\rangle|v\\rangle+|v\\rangle|u\\rangle)/2."
+  },
+  {
+    "id": "expectation-estimation",
+    "title": "Expectation-value estimation",
+    "aliases": [
+      "shots",
+      "Hoeffding",
+      "measurement budget"
+    ],
+    "file": "expectation-estimation.md",
+    "summary": "Suppose measuring an observable returns values +1 or \u22121. Averaging m independent prepared-and-measured shots estimates its expectation. If 75 of 100 shots return +1, the estimate is (75-25)/100=0.5."
+  },
+  {
+    "id": "modular-arithmetic",
+    "title": "Modular arithmetic",
+    "aliases": [
+      "mod",
+      "gcd",
+      "coprime",
+      "order"
+    ],
+    "file": "modular-arithmetic.md",
+    "summary": "a\\bmod N is the remainder after division by positive integer N. For example 17\\bmod5=2. Congruence a\\equiv b\\pmod N means the two remainders agree. You may reduce after each multiplication: 3^4\\bmod7=(2^2)\\bmod7=4 because 3^2\\bmod7=2."
+  },
+  {
+    "id": "continued-fractions",
+    "title": "Continued fractions and rational reconstruction",
+    "aliases": [
+      "convergent",
+      "denominator",
+      "rational approximation"
+    ],
+    "file": "continued-fractions.md",
+    "summary": "Fourier measurement often gives a fraction close to s/r, with unknown period r. A continued fraction writes a real number as an integer plus the reciprocal of another such expression. Truncating it gives especially accurate rational approximations, called convergents."
+  },
+  {
+    "id": "binary-linear-algebra",
+    "title": "Linear equations modulo two",
+    "aliases": [
+      "GF(2)",
+      "Gaussian elimination",
+      "XOR equations"
+    ],
+    "file": "binary-linear-algebra.md",
+    "summary": "In binary linear algebra, addition is XOR and multiplication is ordinary multiplication of bits. Everything is reduced modulo 2. An equation s_0\\oplus s_2=0 says the two bits agree."
+  },
+  {
+    "id": "hamiltonians",
+    "title": "Hamiltonians and time evolution",
+    "aliases": [
+      "energy",
+      "Hermitian generator",
+      "exp(-iHt)"
+    ],
+    "file": "hamiltonians.md",
+    "summary": "A Hamiltonian H is a Hermitian matrix describing energy and generating time evolution. In units where the constant \\hbar=1, evolution for time t is e^{-iHt}. Unlike a measured energy, this is an operation on amplitudes."
+  },
+  {
+    "id": "polynomials",
+    "title": "Polynomials as matrix transformations",
+    "aliases": [
+      "degree",
+      "Chebyshev",
+      "polynomial approximation"
+    ],
+    "file": "polynomials.md",
+    "summary": "A polynomial is a finite sum of powers with coefficients, such as p(x)=3x-4x^3. Its degree is the highest nonzero power, here 3. At x=1/2, p(1/2)=3/2-4/8=1."
+  },
+  {
+    "id": "groups",
+    "title": "Groups, characters, and hidden subgroups",
+    "aliases": [
+      "abelian",
+      "coset",
+      "homomorphism"
+    ],
+    "file": "groups.md",
+    "summary": "A group is a set with an associative combining rule, an identity, and an inverse for each element. Integers modulo 4 with addition form a group: identity 0, inverse of 1 is 3. It is abelian because order of addition does not matter."
+  }
+]

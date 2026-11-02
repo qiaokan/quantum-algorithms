@@ -1,0 +1,64 @@
+---
+interface Props { id: string }
+const {id}=Astro.props;
+const defaults:Record<string,string>={deutsch:'01',grover:'2','bernstein-vazirani':'5','deutsch-jozsa':'balanced',simon:'3',qft:'1','phase-estimation':'0.25'};
+const choices:Record<string,[string,string][]>={
+ deutsch:[['00','f(0)=0, f(1)=0'],['01','f(0)=0, f(1)=1'],['10','f(0)=1, f(1)=0'],['11','f(0)=1, f(1)=1']],
+ grover:[['0','Marked 00'],['1','Marked 01'],['2','Marked 10'],['3','Marked 11']],
+ 'bernstein-vazirani':Array.from({length:8},(_,i)=>[String(i),`Hidden string ${i.toString(2).padStart(3,'0')}`]),
+ 'deutsch-jozsa':[['zero','Constant 0'],['one','Constant 1'],['balanced','Balanced parity'],['broken','Broken promise']],
+ simon:[['3','Hidden XOR mask 011'],['5','Hidden XOR mask 101'],['6','Hidden XOR mask 110']],
+ qft:[['0','Input 00'],['1','Input 01'],['2','Input 10'],['3','Input 11']],
+ 'phase-estimation':[['0.25','Exact phase θ = 1/4'],['0.375','Exact phase θ = 3/8'],['0.3','Inexact phase θ = 0.3']],
+};
+---
+<section class="demo" data-demo={id} aria-label="Interactive ideal simulation">
+  <div class="demo-header"><span class="eyebrow">COMPUTE THE EXAMPLE</span><span class="badge">Ideal simulator · ≤ 8 qubits</span></div>
+  <label>Small instance <select data-instance>{choices[id].map(([value,label])=><option value={value} selected={value===defaults[id]}>{label}</option>)}</select></label>
+  <p class="muted small">Changing the problem also changes the oracle. Revealing its setting here is a teaching aid; the algorithm accesses it only through the displayed oracle calls.</p>
+  <div data-circuit class="circuit-steps" aria-label="Circuit operations"></div>
+  <div class="demo-controls"><button data-prev>← Previous step</button><button data-next class="primary">Next step →</button><button data-reset>Reset</button></div>
+  <div aria-live="polite"><h3 data-operation></h3><p data-explanation></p><p class="small muted" data-query-count></p></div>
+  <details class="state-inspector" open><summary>Inspect amplitudes · simulator privilege</summary><p data-labels></p><div class="table-scroll" tabindex="0" role="region" aria-label="Amplitude table"><table><thead><tr><th>Basis</th><th>Amplitude</th><th>Probability</th></tr></thead><tbody data-state></tbody></table></div></details>
+  <h4>Ideal measurement probabilities</h4><div data-probabilities class="probability-bars"></div>
+  <div class="sample-controls"><button data-sample>Sample 256 measurements</button><button data-clear-samples>Clear samples</button></div>
+  <p data-samples role="status">No measurements sampled yet.</p>
+  {id==='simon'&&<p data-simon-equations class="context-box">After sampling, use each measured row y as the equation y · s = 0 (mod 2).</p>}
+  <p data-note class="small muted"></p><p class="small muted">The simulator stores 2ⁿ complex amplitudes, so memory doubles with each qubit. It caps n at 8. No hardware data is shown.</p>
+  <noscript>Enable JavaScript to step through the simulator. The full worked derivation above is available without JavaScript.</noscript>
+</section>
+<script>
+import {makeDemo,resultProbabilities} from '../lib/demos';
+import {abs2,sample,parity} from '../lib/quantum';
+for(const container of document.querySelectorAll<HTMLElement>('[data-demo]')){
+ const $=<T extends HTMLElement>(s:string)=>container.querySelector<T>(s)!;
+ const select=$<HTMLSelectElement>('[data-instance]');
+ let demo=makeDemo(container.dataset.demo!,select.value),index=0;
+ const clean=(v:number)=>Math.abs(v)<1e-9?'0':v.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');
+ function draw(){
+  const frame=demo.frames[index];
+  $('[data-operation]').textContent=`Step ${index} / ${demo.frames.length-1} — ${frame.name}`;
+  $('[data-explanation]').textContent=frame.explanation;
+  $('[data-query-count]').textContent=`Function-dependent base-oracle calls so far: ${frame.queries}`;
+  $('[data-labels]').textContent=`Ordering: ${demo.labels}. Leftmost bit is most significant. Zero-amplitude rows are omitted.`;
+  $('[data-note]').textContent=demo.note;
+  $<HTMLButtonElement>('[data-prev]').disabled=index===0;
+  $<HTMLButtonElement>('[data-next]').disabled=index===demo.frames.length-1;
+  $('[data-circuit]').replaceChildren(...demo.frames.map((f,i)=>{const b=document.createElement('button');b.textContent=`${i}. ${f.name}`;b.setAttribute('aria-current',i===index?'step':'false');b.onclick=()=>{index=i;draw()};return b}));
+  $('[data-state]').replaceChildren(...frame.state.flatMap((z,i)=>{
+   if(abs2(z)<1e-12)return [];const row=document.createElement('tr');
+   [i.toString(2).padStart(Math.log2(frame.state.length),'0'),`${clean(z.re)}${z.im>=0?' + ':' − '}${clean(Math.abs(z.im))}i`,`${(100*abs2(z)).toFixed(3)}%`].forEach(v=>{const td=document.createElement('td');td.textContent=v;row.append(td)});return [row];
+  }));
+  const p=resultProbabilities(demo,index);
+  $('[data-probabilities]').replaceChildren(...p.map((v,i)=>{const row=document.createElement('div');row.className='probability-row';const label=document.createElement('span');label.textContent=i.toString(2).padStart(demo.measuredQubits.length,'0');const track=document.createElement('span');track.className='bar-track';const bar=document.createElement('span');bar.className='bar';bar.style.width=`${100*v}%`;track.append(bar);const value=document.createElement('span');value.textContent=`${(100*v).toFixed(2)}%`;row.append(label,track,value);return row}));
+  $('[data-samples]').textContent='No measurements sampled at this step.';
+  const equations=container.querySelector<HTMLElement>('[data-simon-equations]');if(equations)equations.textContent='After sampling, each row y supplies y · s = 0 (mod 2). Collect enough independent equations to identify a nonzero mask.';
+ }
+ $('[data-next]').onclick=()=>{index=Math.min(index+1,demo.frames.length-1);draw()};
+ $('[data-prev]').onclick=()=>{index=Math.max(index-1,0);draw()};
+ $('[data-reset]').onclick=()=>{index=0;draw()};
+ select.onchange=()=>{demo=makeDemo(container.dataset.demo!,select.value);index=0;draw()};
+ $('[data-sample]').onclick=()=>{const counts=sample(resultProbabilities(demo,index),256);$('[data-samples]').textContent=`Random sample of 256 (not hardware): ${counts.map((n,i)=>`${i.toString(2).padStart(demo.measuredQubits.length,'0')}: ${n}`).join(' · ')}`;const equations=container.querySelector<HTMLElement>('[data-simon-equations]');if(equations){const rows=counts.flatMap((n,y)=>n>0?[y]:[]);const candidates=Array.from({length:7},(_,i)=>i+1).filter(s=>rows.every(y=>parity(y&s)===0));equations.textContent=`Sampled equation rows: ${rows.map(y=>y.toString(2).padStart(3,'0')).join(', ')}. Each row has binary dot product zero with s. Nonzero masks consistent with all sampled equations: ${candidates.map(s=>s.toString(2).padStart(3,'0')).join(', ')}. ${candidates.length===1?'The samples determine one mask.':'More independent rows are needed.'}`}};
+ $('[data-clear-samples]').onclick=()=>{$('[data-samples]').textContent='No measurements sampled yet.';const equations=container.querySelector<HTMLElement>('[data-simon-equations]');if(equations)equations.textContent='No sampled equations yet.'};draw();
+}
+</script>

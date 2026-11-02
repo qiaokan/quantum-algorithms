@@ -1,0 +1,625 @@
+[
+  {
+    "id": "amplitude-amplification",
+    "sequence": 6,
+    "module": 2,
+    "title": "General amplitude amplification",
+    "kind": "primitive",
+    "summary": "Amplify a reversible procedure’s success probability by reflecting in its good/bad plane.",
+    "why": "Shows how Grover extends beyond uniform candidate preparation.",
+    "prerequisites": [
+      "grover"
+    ],
+    "concepts": [
+      "trigonometry",
+      "outer-products"
+    ],
+    "reusedConcepts": [
+      "phase",
+      "unitarity"
+    ],
+    "exampleIds": [
+      "amplification-quarter"
+    ],
+    "sourceIds": [
+      "bhmt",
+      "vtaa"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model quadratic improvement in preparation/checker calls; total runtime depends on their implementation.",
+    "aliases": [
+      "AA",
+      "success probability"
+    ],
+    "file": "06-amplitude-amplification.md",
+    "gaps": []
+  },
+  {
+    "id": "bbht-search",
+    "sequence": 7,
+    "module": 2,
+    "title": "Multiple marked items and BBHT search",
+    "kind": "algorithm",
+    "summary": "Randomize iteration lengths when the number of solutions is unknown.",
+    "why": "Makes overshoot, absence and stopping budgets explicit.",
+    "prerequisites": [
+      "amplitude-amplification"
+    ],
+    "concepts": [
+      "probability"
+    ],
+    "reusedConcepts": [
+      "oracles",
+      "measurement"
+    ],
+    "exampleIds": [
+      "bbht-two-of-eight"
+    ],
+    "sourceIds": [
+      "bbht",
+      "bhmt"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven expected query advantage for unstructured search; bounded-error absence needs a timeout.",
+    "aliases": [
+      "unknown solution count",
+      "Boyer Brassard Hoyer Tapp"
+    ],
+    "file": "07-bbht-search.md",
+    "gaps": []
+  },
+  {
+    "id": "fixed-point-amplification",
+    "sequence": 8,
+    "module": 2,
+    "title": "Fixed-point amplitude amplification",
+    "kind": "algorithm",
+    "summary": "Design selective phases to guarantee a small failure probability over an interval.",
+    "why": "Connects robust search with polynomial design.",
+    "prerequisites": [
+      "amplitude-amplification"
+    ],
+    "concepts": [
+      "polynomials"
+    ],
+    "reusedConcepts": [
+      "complex-numbers",
+      "outer-products",
+      "trigonometry"
+    ],
+    "exampleIds": [
+      "fixed-point-L3"
+    ],
+    "sourceIds": [
+      "ylc"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model bounded-error quadratic scaling with a valid lower bound; no monotonic-per-gate claim.",
+    "aliases": [
+      "Yoder Low Chuang",
+      "Chebyshev",
+      "fixed point"
+    ],
+    "file": "08-fixed-point-amplification.md",
+    "gaps": []
+  },
+  {
+    "id": "minimum-finding",
+    "sequence": 9,
+    "module": 2,
+    "title": "Dürr–Høyer minimum finding",
+    "kind": "algorithm",
+    "summary": "Find an unsorted table’s minimum by repeatedly searching below a threshold.",
+    "why": "Demonstrates adaptive classical control around quantum search.",
+    "prerequisites": [
+      "bbht-search"
+    ],
+    "concepts": [
+      "complexity"
+    ],
+    "reusedConcepts": [
+      "oracles",
+      "reversible-computation"
+    ],
+    "exampleIds": [
+      "minimum-four"
+    ],
+    "sourceIds": [
+      "minimum",
+      "bbht"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven bounded-error O(sqrt N) value-oracle queries, subject to coherent table/comparison costs.",
+    "aliases": [
+      "Durr Hoyer",
+      "optimization"
+    ],
+    "file": "09-minimum-finding.md",
+    "gaps": []
+  },
+  {
+    "id": "collision-finding",
+    "sequence": 10,
+    "module": 2,
+    "title": "Brassard–Høyer–Tapp collision finding",
+    "kind": "algorithm",
+    "summary": "Trade stored function values for a larger marked set in quantum search.",
+    "why": "Separates promise collision finding from element distinctness and exposes lookup costs.",
+    "prerequisites": [
+      "bbht-search"
+    ],
+    "concepts": [
+      "complexity"
+    ],
+    "reusedConcepts": [
+      "oracles",
+      "probability"
+    ],
+    "exampleIds": [
+      "collision-eight"
+    ],
+    "sourceIds": [
+      "collision"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven two-to-one oracle-model query/storage tradeoff; gate advantage depends on coherent membership implementation.",
+    "aliases": [
+      "BHT",
+      "birthday problem"
+    ],
+    "file": "10-collision-finding.md",
+    "gaps": []
+  },
+  {
+    "id": "qft",
+    "sequence": 11,
+    "module": 3,
+    "title": "Quantum Fourier transform and inverse QFT",
+    "kind": "primitive",
+    "summary": "Turn phase patterns and periodic packets into informative measurement distributions.",
+    "why": "Provides the explicitly calculated Fourier primitive used in order finding and phase estimation.",
+    "prerequisites": [
+      "deutsch"
+    ],
+    "concepts": [
+      "complex-numbers",
+      "trigonometry"
+    ],
+    "reusedConcepts": [
+      "matrix-multiplication",
+      "controlled-gates",
+      "phase"
+    ],
+    "exampleIds": [
+      "qft-four"
+    ],
+    "sourceIds": [
+      "shor-paper",
+      "ibm-qpe"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Efficient amplitude transformation; not a direct speedup for producing an explicit classical Fourier vector.",
+    "aliases": [
+      "QFT",
+      "IQFT",
+      "Fourier transform"
+    ],
+    "file": "11-qft.md",
+    "gaps": []
+  },
+  {
+    "id": "phase-estimation",
+    "sequence": 12,
+    "module": 3,
+    "title": "Quantum phase estimation",
+    "kind": "algorithm",
+    "summary": "Estimate a unitary eigenphase using controlled powers and an inverse QFT.",
+    "why": "Central bridge from coherent transformations to numerical estimates.",
+    "prerequisites": [
+      "qft"
+    ],
+    "concepts": [
+      "eigenvalues"
+    ],
+    "reusedConcepts": [
+      "controlled-gates",
+      "phase",
+      "complex-numbers"
+    ],
+    "exampleIds": [
+      "qpe-exact",
+      "qpe-inexact"
+    ],
+    "sourceIds": [
+      "ibm-qpe",
+      "ipea"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven precision/confidence guarantees under controlled-unitary access; powered blocks are not free base-U calls.",
+    "aliases": [
+      "QPE",
+      "eigenphase"
+    ],
+    "file": "12-phase-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "iterative-phase-estimation",
+    "sequence": 13,
+    "module": 3,
+    "title": "Iterative phase estimation and semiclassical Fourier measurement",
+    "kind": "algorithm",
+    "summary": "Reuse a counting qubit with adaptive corrections and distinguish terminal measurement transformations.",
+    "why": "Prevents confusing fewer qubits with fewer powered-unitary applications.",
+    "prerequisites": [
+      "phase-estimation"
+    ],
+    "concepts": [
+      "conditional-probability"
+    ],
+    "reusedConcepts": [
+      "measurement",
+      "controlled-gates"
+    ],
+    "exampleIds": [
+      "ipea-three-eighths"
+    ],
+    "sourceIds": [
+      "ipea",
+      "semiclassical-qft"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven ideal measurement equivalence and width tradeoff; no universal runtime advantage.",
+    "aliases": [
+      "IPEA",
+      "semiclassical QFT",
+      "Kitaev"
+    ],
+    "file": "13-iterative-phase-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "order-finding",
+    "sequence": 14,
+    "module": 3,
+    "title": "Period finding and modular order finding",
+    "kind": "algorithm",
+    "summary": "Fourier-sample periodic arithmetic states and reconstruct a candidate denominator.",
+    "why": "Supplies the quantum subroutine needed by Shor.",
+    "prerequisites": [
+      "qft"
+    ],
+    "concepts": [
+      "modular-arithmetic",
+      "continued-fractions"
+    ],
+    "reusedConcepts": [
+      "reversible-arithmetic",
+      "measurement"
+    ],
+    "exampleIds": [
+      "order-fifteen"
+    ],
+    "sourceIds": [
+      "shor-paper",
+      "ibm-shor"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven polynomial quantum modular-order algorithm with efficient arithmetic; generic period oracles need separate access promises.",
+    "aliases": [
+      "period finding",
+      "modular exponentiation"
+    ],
+    "file": "14-order-finding.md",
+    "gaps": []
+  },
+  {
+    "id": "shor",
+    "sequence": 15,
+    "module": 3,
+    "title": "Shor’s factoring algorithm",
+    "kind": "algorithm",
+    "summary": "Use a quantum order sample, classical verification and gcds to split a composite integer.",
+    "why": "Combines all quantum and classical steps and explicitly rejects unsuccessful trials.",
+    "prerequisites": [
+      "order-finding"
+    ],
+    "concepts": [
+      "modular-arithmetic"
+    ],
+    "reusedConcepts": [
+      "continued-fractions",
+      "reversible-arithmetic"
+    ],
+    "exampleIds": [
+      "shor-twenty-one",
+      "shor-rejections"
+    ],
+    "sourceIds": [
+      "shor-paper",
+      "ibm-shor",
+      "regev"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven polynomial-time quantum factoring; advantage is against best known classical methods, not a proved classical exponential lower bound.",
+    "aliases": [
+      "Shor",
+      "factorization",
+      "RSA",
+      "Regev"
+    ],
+    "file": "15-shor.md",
+    "gaps": []
+  },
+  {
+    "id": "discrete-logarithms",
+    "sequence": 16,
+    "module": 3,
+    "title": "Quantum discrete logarithms",
+    "kind": "algorithm",
+    "summary": "Recover a hidden modular slope using a two-register Fourier transform.",
+    "why": "Shows a second number-theoretic use of Fourier sampling with a different classical reconstruction.",
+    "prerequisites": [
+      "qft",
+      "order-finding"
+    ],
+    "concepts": [
+      "groups"
+    ],
+    "reusedConcepts": [
+      "modular-arithmetic",
+      "reversible-arithmetic"
+    ],
+    "exampleIds": [
+      "discrete-log-seventeen"
+    ],
+    "sourceIds": [
+      "shor-paper",
+      "algebraic-survey"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven polynomial quantum algorithm in efficient group models; classical baseline depends on the group.",
+    "aliases": [
+      "discrete logarithm",
+      "DLP",
+      "elliptic curve"
+    ],
+    "file": "16-discrete-logarithms.md",
+    "gaps": []
+  },
+  {
+    "id": "abelian-hidden-subgroup",
+    "sequence": 17,
+    "module": 3,
+    "title": "The abelian hidden-subgroup framework",
+    "kind": "framework",
+    "summary": "Unify coset preparation, character cancellation and classical reconstruction.",
+    "why": "Connects demonstrated Simon, order-finding and discrete-logarithm mechanisms.",
+    "prerequisites": [
+      "simon",
+      "discrete-logarithms"
+    ],
+    "concepts": [
+      "groups"
+    ],
+    "reusedConcepts": [
+      "modular-arithmetic",
+      "binary-linear-algebra"
+    ],
+    "exampleIds": [
+      "hsp-mod-eight"
+    ],
+    "sourceIds": [
+      "algebraic-survey",
+      "shor-paper"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Proven efficient algorithms for suitable finite abelian representations; does not extend automatically to nonabelian HSP.",
+    "aliases": [
+      "HSP",
+      "coset",
+      "character",
+      "annihilator"
+    ],
+    "file": "17-abelian-hidden-subgroup.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-counting",
+    "sequence": 18,
+    "module": 4,
+    "title": "Quantum counting",
+    "kind": "algorithm",
+    "summary": "Infer a marked count from the Grover operator’s eigenphases.",
+    "why": "Connects search oscillations with numerical estimation.",
+    "prerequisites": [
+      "amplitude-amplification",
+      "phase-estimation"
+    ],
+    "concepts": [
+      "eigenvalues"
+    ],
+    "reusedConcepts": [
+      "probability",
+      "trigonometry"
+    ],
+    "exampleIds": [
+      "count-two-of-four"
+    ],
+    "sourceIds": [
+      "bhmt",
+      "bbht"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven oracle-model approximate-counting guarantees; exact and relative counting have different precision costs.",
+    "aliases": [
+      "approximate counting"
+    ],
+    "file": "18-quantum-counting.md",
+    "gaps": []
+  },
+  {
+    "id": "amplitude-estimation",
+    "sequence": 19,
+    "module": 4,
+    "title": "Canonical quantum amplitude estimation",
+    "kind": "algorithm",
+    "summary": "Estimate a nonuniform preparation’s good probability by QPE.",
+    "why": "Provides the probability-estimation primitive for Monte Carlo applications.",
+    "prerequisites": [
+      "quantum-counting"
+    ],
+    "concepts": [
+      "state-preparation"
+    ],
+    "reusedConcepts": [
+      "eigenvalues",
+      "probability"
+    ],
+    "exampleIds": [
+      "amplitude-quarter-eight"
+    ],
+    "sourceIds": [
+      "bhmt",
+      "iqae"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven ideal coherent-query precision advantage; preparation, inverse access and readout assumptions remain.",
+    "aliases": [
+      "QAE",
+      "AE"
+    ],
+    "file": "19-amplitude-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "iterative-amplitude-estimation",
+    "sequence": 20,
+    "module": 4,
+    "title": "Iterative and maximum-likelihood amplitude estimation",
+    "kind": "algorithm",
+    "summary": "Infer amplitudes from multiple Grover depths, with distinct adaptive and likelihood methods.",
+    "why": "Separates width savings, alias resolution and finite-sample confidence.",
+    "prerequisites": [
+      "amplitude-estimation"
+    ],
+    "concepts": [
+      "conditional-probability"
+    ],
+    "reusedConcepts": [
+      "probability",
+      "trigonometry"
+    ],
+    "exampleIds": [
+      "mlae-synthetic",
+      "iqae-interval"
+    ],
+    "sourceIds": [
+      "mlae",
+      "iqae"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "IQAE has rigorous ideal query bounds; the original MLAE analysis has different statistical guarantees and is not a universal confidence theorem.",
+    "aliases": [
+      "IQAE",
+      "MLAE",
+      "maximum likelihood"
+    ],
+    "file": "20-iterative-amplitude-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-monte-carlo",
+    "sequence": 21,
+    "module": 4,
+    "title": "Quantum mean estimation and Monte Carlo",
+    "kind": "application",
+    "summary": "Encode a bounded payoff’s expectation in a flag and estimate it.",
+    "why": "Makes probability estimation useful while exposing loading, payoff arithmetic and precision costs.",
+    "prerequisites": [
+      "amplitude-estimation"
+    ],
+    "concepts": [
+      "expectation-estimation",
+      "state-preparation"
+    ],
+    "reusedConcepts": [
+      "probability",
+      "ancillas",
+      "uncomputation"
+    ],
+    "exampleIds": [
+      "monte-carlo-four"
+    ],
+    "sourceIds": [
+      "monte-carlo",
+      "bhmt"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Proven coherent-query advantages with bounded-output or variance assumptions; practical workload advantage is not established generally.",
+    "aliases": [
+      "Monte Carlo",
+      "mean estimation",
+      "integration",
+      "payoff"
+    ],
+    "file": "21-quantum-monte-carlo.md",
+    "gaps": []
+  },
+  {
+    "id": "quantum-gradient",
+    "sequence": 22,
+    "module": 4,
+    "title": "Jordan’s quantum gradient estimation",
+    "kind": "algorithm",
+    "summary": "Encode a local linear function as multidimensional phase ramps.",
+    "why": "Clarifies the powerful coherent oracle behind a one-query gradient claim.",
+    "prerequisites": [
+      "qft",
+      "bernstein-vazirani"
+    ],
+    "concepts": [
+      "trigonometry"
+    ],
+    "reusedConcepts": [
+      "complex-numbers",
+      "oracles",
+      "reversible-arithmetic"
+    ],
+    "exampleIds": [
+      "gradient-linear-two-dimensional",
+      "gradient-nonlinear-curvature"
+    ],
+    "sourceIds": [
+      "jordan-gradient",
+      "algebraic-survey",
+      "gradient-improved"
+    ],
+    "path": "branch",
+    "editorial": "complete",
+    "advantage": "Oracle-model query advantage for appropriately smooth finite-precision functions; not a general advantage over automatic differentiation.",
+    "aliases": [
+      "Jordan",
+      "gradient",
+      "derivative"
+    ],
+    "file": "22-quantum-gradient.md",
+    "gaps": []
+  }
+]

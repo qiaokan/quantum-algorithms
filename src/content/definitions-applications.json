@@ -1,0 +1,25 @@
+[
+  {
+    "id": "derivatives",
+    "title": "Derivatives and small-step updates",
+    "aliases": [
+      "gradient",
+      "derivative",
+      "dot notation",
+      "Euler update"
+    ],
+    "file": "derivatives.md",
+    "summary": "A derivative describes how a quantity changes per small change of its input. If $f(x)=x^2$, changing x from 2 to 2.01 changes f from 4 to 4.0401. The ratio is 0.0401/0.01=4.01. As the change shrinks, the ratio approaches 4, written $f'(2)=4$. The prime marks a derivative; it does not mean a different function chosen arbitrarily."
+  },
+  {
+    "id": "positive-semidefinite",
+    "title": "Positive semidefinite matrices",
+    "aliases": [
+      "PSD",
+      "positive matrix",
+      "kernel positivity"
+    ],
+    "file": "positive-semidefinite.md",
+    "summary": "A Hermitian matrix M is positive semidefinite when $v^\\dagger Mv\\ge0$ for every vector v. The dagger means [conjugate transpose](/definitions/conjugate-transpose/). For $M=\\operatorname{diag}(2,0)$ and $v=(a,b)^T$, the expression is $2|a|^2$, never negative. Zero eigenvalues are allowed; “positive definite” requires strict positivity for every nonzero v."
+  }
+]

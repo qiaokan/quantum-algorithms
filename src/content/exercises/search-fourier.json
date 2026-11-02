@@ -1,0 +1,172 @@
+[
+  {
+    "lesson": "amplitude-amplification",
+    "question": "For the a = 1/4 example, what is the state after a second Q iteration, and why is it worse?",
+    "answer": "Q rotates the (B,G) coordinates by pi/3. Starting after one iteration at (0,1), multiplication gives (-sqrt(3)/2,1/2). Success drops from 1 to 1/4. The bad amplitude is negative, but its probability is positive 3/4."
+  },
+  {
+    "lesson": "amplitude-amplification",
+    "question": "Why can a measured classical random sampler not automatically replace A?",
+    "answer": "The reflection A(2|0><0|-I)A-dagger needs coherent inverse preparation. Measurement or discarded garbage prevents that inverse. One must retain random seeds and intermediate data reversibly, account for cleanup, and then assess cost."
+  },
+  {
+    "lesson": "bbht-search",
+    "question": "For M/N = 3/4, compare j = 0, j = 1 and a uniform choice of j in {0,1}.",
+    "answer": "Theta = pi/3. The two success probabilities are sin²(pi/3)=3/4 and sin²(pi)=0. Their equal mixture succeeds with probability 3/8. Randomizing avoids deterministic overshoot failure, though direct sampling is best for this known abundant case."
+  },
+  {
+    "lesson": "bbht-search",
+    "question": "Why must a zero-solution search have a timeout?",
+    "answer": "If M=0, every measured candidate fails verification. An until-success loop runs forever. A finite budget gives a bounded-error none-found statement, which is not a certificate of absence."
+  },
+  {
+    "lesson": "fixed-point-amplification",
+    "question": "Check the phase z = (1+15 i sqrt(3))/26 and the L=3 guarantee interval.",
+    "answer": "Its squared magnitude is (1+225*3)/676=1. Gamma=4/5 gives 1-gamma²=9/25=0.36. For a at least 0.36, the scaled Chebyshev argument lies within [-1,1], so failure is at most (16/65)²."
+  },
+  {
+    "lesson": "fixed-point-amplification",
+    "question": "Does optimal fixed-point amplification promise success rises after every gate?",
+    "answer": "No. The guarantee bounds the final failure over an interval of initial probabilities. Intermediate gates and separately redesigned sequence lengths need not be monotonic. Strict monotonic recursive pi/3 search has a different query scaling."
+  },
+  {
+    "lesson": "minimum-finding",
+    "question": "In T=(7,2,9,4), if the initial threshold is index 0, which indices are marked?",
+    "answer": "The threshold is 7, so indices 1 and 3 are marked. The marked fraction is 1/2. Ordinary Grover iterations keep success at 1/2, so an unknown-count schedule still needs verified samples and its stopping rule."
+  },
+  {
+    "lesson": "minimum-finding",
+    "question": "Why is verification of a lower value not verification of the global minimum?",
+    "answer": "Checking T[x]<T[y] only proves improvement over the current threshold. An unseen entry may still be smaller. The bounded-error minimum guarantee comes from the total search budget and repetition, not one local comparison."
+  },
+  {
+    "lesson": "collision-finding",
+    "question": "Why exclude sampled inputs from the membership predicate?",
+    "answer": "An input x already in the sample automatically matches its own stored output. Returning that x would create the invalid pair (x,x). A collision requires distinct inputs, so the predicate must exclude those self-matches."
+  },
+  {
+    "lesson": "collision-finding",
+    "question": "Derive the balancing sample size from k + sqrt(N/k).",
+    "answer": "Set the two leading costs equal: k=sqrt(N/k). Squaring gives k²=N/k, and multiplying by k gives k³=N. Thus k=N^(1/3), with matching order N^(1/3) search-query and storage scales. Coherent lookup gate cost remains separate."
+  },
+  {
+    "lesson": "qft",
+    "question": "Compute F4 applied to (|01> + |11>)/sqrt(2).",
+    "answer": "Add columns 1 and 3 of F4 and divide by sqrt(2): (2,0,-2,0)/(2 sqrt(2))=(1,0,-1,0)/sqrt(2). The probabilities are 1/2 at labels 0 and 2, unchanged by the coset offset."
+  },
+  {
+    "lesson": "qft",
+    "question": "Why is a QFT not a free FFT for a classical data array?",
+    "answer": "Its input and output are quantum amplitudes. Arbitrary data preparation and estimating all Fourier coefficients incur additional work. Measuring the QFT state returns one label distributed by squared magnitudes, not the full coefficient array."
+  },
+  {
+    "lesson": "phase-estimation",
+    "question": "How many base-U uses implement an m=5 standard QPE run?",
+    "answer": "The controlled powers require 16+8+4+2+1=31 base-U uses, unless a justified implementation supplies cheaper powered operations. Five control blocks are not five elementary oracle calls."
+  },
+  {
+    "lesson": "phase-estimation",
+    "question": "If the target has weights 3/4 and 1/4 on two exact-grid eigenphases, what is measured?",
+    "answer": "QPE samples the first phase with probability 3/4 and the second with 1/4. It does not return their average. The counting register becomes correlated with the corresponding target eigenvectors."
+  },
+  {
+    "lesson": "iterative-phase-estimation",
+    "question": "Why do the observed bits 1,1,0 reconstruct 3/8 rather than 6/8 in the example?",
+    "answer": "The rounds determine b3, then b2, then b1. The final binary fraction is 0.b1b2b3=0.011, equal to 1/4+1/8=3/8. Arrival order and significance order differ."
+  },
+  {
+    "lesson": "iterative-phase-estimation",
+    "question": "What fails if the target is independently re-prepared as a superposition for every bit?",
+    "answer": "Different rounds may sample different eigenphases. Combining their bits can produce a number corresponding to no eigenvalue. The target must remain in the relevant eigenstate branch, or the protocol must explicitly handle mixtures and inference."
+  },
+  {
+    "lesson": "order-finding",
+    "question": "For a=2,N=15,Q=16, what does measurement y=8 tell us?",
+    "answer": "The fraction is 8/16=1/2, whose denominator 2 is only a divisor of the true order 4. Verification gives 2² mod 15=4, so 2 is not an order. Retry, combine samples, or test justified small multiples."
+  },
+  {
+    "lesson": "order-finding",
+    "question": "Why is Q=16 not the generic precision prescription for factoring 15?",
+    "answer": "The standard rational-reconstruction guarantee asks for Q at least N²=225, so a power-of-two choice is 256. The smaller Q=16 is a teaching instance that works neatly because its true period divides the grid."
+  },
+  {
+    "lesson": "shor",
+    "question": "For N=21 and base a=20, why does a correct order of 2 still fail?",
+    "answer": "The halfway power is t=20, congruent to -1 modulo 21. The gcds are gcd(19,21)=1 and gcd(21,21)=21, both trivial. A different base is required."
+  },
+  {
+    "lesson": "shor",
+    "question": "What should happen if gcd(a,N)>1 before order finding?",
+    "answer": "If it is a proper divisor, return that factor immediately. This is a lucky classical trial, not evidence that a quantum subroutine ran. For example a=3,N=21 gives factor 3 directly."
+  },
+  {
+    "lesson": "discrete-logarithms",
+    "question": "Solve the sample equation 2s+2=0 mod 8.",
+    "answer": "It gives 2s=6 mod 8, hence s=3 mod 4. The candidates modulo 8 are 3 and 7. There is no inverse of 2 modulo 8, so more evidence or direct candidate verification is needed."
+  },
+  {
+    "lesson": "discrete-logarithms",
+    "question": "For the sample (u,v)=(3,7), recover s modulo 8.",
+    "answer": "The equation is 3s+7=0, so 3s=1 mod 8. Since 3*3=9=1 mod 8, multiply by 3 to get s=3. Verify 2³ mod 17=8."
+  },
+  {
+    "lesson": "abelian-hidden-subgroup",
+    "question": "For H={0,4} in Z8, why do odd Fourier labels vanish?",
+    "answer": "The two coset contributions differ by exp(2*pi*i*4*y/8)=(-1)^y. Odd y therefore produces a factor 1-1=0; even y produces 2. The unknown coset offset contributes only a unit-length phase."
+  },
+  {
+    "lesson": "abelian-hidden-subgroup",
+    "question": "Does one sample y=4 uniquely establish H={0,4}?",
+    "answer": "No. It says hidden elements h obey 4h=0 mod 8, so h must be even. That still permits more than one candidate subgroup. More independent constraints and a confidence analysis are necessary."
+  },
+  {
+    "lesson": "quantum-counting",
+    "question": "With N=4,K=4, why do phase labels 1 and 3 yield the same count?",
+    "answer": "The estimate is 4 sin²(pi*y/4). Both sin²(pi/4) and sin²(3*pi/4) equal 1/2, so both return 2. They are conjugate eigenphases of the same Grover rotation."
+  },
+  {
+    "lesson": "quantum-counting",
+    "question": "If the fraction estimate has error 0.01 and N=1,000,000, is the count exact?",
+    "answer": "No. The induced count error can be 10,000. Rounding to an exact integer needs an error below 1/2, while relative counting of rare events may need an even more application-specific precision choice."
+  },
+  {
+    "lesson": "amplitude-estimation",
+    "question": "For A|00> = |00>/sqrt(2)+|10>/2+|11>/2 and good meaning last bit 1, find a.",
+    "answer": "Only |11> is good. Its amplitude is 1/2, so a=1/4. The probability is not 1/2, and the unoccupied |01> basis state contributes nothing."
+  },
+  {
+    "lesson": "amplitude-estimation",
+    "question": "Why add the two eigenbranch probabilities rather than their amplitudes in the finite-grid table?",
+    "answer": "The branches retain perpendicular target eigenvectors. When the target is not measured in a way that recombines them, the counting marginal traces over distinguishable branches, adding their weighted squared magnitudes. Adding amplitudes would invent interference that does not occur."
+  },
+  {
+    "lesson": "iterative-amplitude-estimation",
+    "question": "Why can p1=1 alone fit both a=1/4 and a=1?",
+    "answer": "For a=1/4, theta=pi/6 and sin²(3 theta)=1. For a=1, theta=pi/2 and sin²(3 theta)=1 as well. Data at other depths or a restricted angle interval resolves this alias."
+  },
+  {
+    "lesson": "iterative-amplitude-estimation",
+    "question": "What query accounting is needed for n_k shots at each depth k?",
+    "answer": "There are sum(n_k) initial preparations and sum(k*n_k) Grover iterates. Each iterate also contains preparation/inverse and checker work. Report the primitive being counted, total coherent work, maximum depth and confidence; shots alone do not specify cost."
+  },
+  {
+    "lesson": "quantum-monte-carlo",
+    "question": "For a payoff range [10,30], what probability precision gives payoff error at most 0.1?",
+    "answer": "Normalize h=(g-10)/20. Since mu=10+20*a, error is 20 times the probability error. Therefore a must be estimated to additive error 0.005, with the chosen confidence preserved."
+  },
+  {
+    "lesson": "quantum-monte-carlo",
+    "question": "In the four-outcome example, calculate the good-flag probability from amplitudes.",
+    "answer": "The flag-1 amplitudes are 1/4,1/4,1/2 on distinct indices. Sum their squares: 1/16+1/16+1/4=3/8. Summing amplitudes first and squaring would be wrong because those index states are distinguishable."
+  },
+  {
+    "lesson": "quantum-gradient",
+    "question": "Why use modular addition rather than assume an XOR value oracle gives the same multibit phase?",
+    "answer": "The phase-gradient state is an eigenstate of cyclic addition. A shift by k multiplies it by i^k in the size-four example. Bitwise XOR has different eigenvectors and generally does not implement the same arithmetic phase ramp."
+  },
+  {
+    "lesson": "quantum-gradient",
+    "question": "What does Fourier label 3 mean on a size-four signed-frequency grid?",
+    "answer": "It may encode -1 modulo 4. Without a known derivative range and scale, slopes differing by 4 alias. The oracle-model result therefore requires bounds that let classical decoding select the intended signed slope."
+  }
+]

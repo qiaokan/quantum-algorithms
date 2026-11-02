@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.astro/
+test-results/
+playwright-report/
+.venv/
+__pycache__/
+*.pyc
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.npmrc
+.python-version.local
+
+# Editor / operating-system files
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local logs and caches
+*.log
+.cache/
+.pytest_cache/
+.coverage
+coverage/

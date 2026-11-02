@@ -1,0 +1,12 @@
+[
+  {
+    "id": "hallgren-jozsa",
+    "title": "Notes on Hallgren's efficient quantum algorithm for solving Pell's equation",
+    "authors": "Richard Jozsa",
+    "url": "https://arxiv.org/html/quant-ph/0302134",
+    "supports": "Quadratic ideals, canonical reduced pairs, reduction steps, ideal composition, logarithmic generator distance, and efficient real-position evaluation.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Sections2–10 read. Distances consistently use J=O/alpha and ln(alpha), not the later Hallgren conjugate-ratio convention. General composition formula independently checked on d=3. Hallgren2006 random shifts supply the finite-precision safeguard; do not rely on inter-ideal separation alone."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "lesson": "deutsch",
+    "question": "For f(0)=1,f(1)=0, calculate the input after the oracle and after its last H. Why does the minus sign not change the answer?",
+    "answer": "The input is (\u22121,1)/\u221a2 = \u2212|\u2212\u27e9. H gives (0,\u22121) = \u2212|1\u27e9. Its outcome-1 probability is (\u22121)\u00b2=1; the minus sign multiplies the whole joint state globally."
+  },
+  {
+    "lesson": "deutsch",
+    "question": "Replace the final H by X. Can the input measurement still distinguish constant and balanced?",
+    "answer": "No. X merely swaps the two equal-magnitude input amplitudes. Every function still produces probabilities 1/2,1/2. H combines amplitudes by addition/subtraction; X does not."
+  },
+  {
+    "lesson": "grover",
+    "question": "For N=4 and mark 11, write the mean immediately after the first oracle and all four post-diffusion amplitudes.",
+    "answer": "Oracle amplitudes are (1/2,1/2,1/2,\u22121/2), mean1/4. Apply 2mean\u2212a to get (0,0,0,1). The probabilities sum to one and label11 is certain."
+  },
+  {
+    "lesson": "grover",
+    "question": "Does running two iterations from the uniform state improve on one for four candidates? Calculate success.",
+    "answer": "After one iteration the marked state has amplitude1. The next oracle makes it\u22121, mean\u22121/4. Diffusion gives marked amplitude1/2 and each other amplitude\u22121/2. Success is1/4, down from1."
+  },
+  {
+    "lesson": "bernstein-vazirani",
+    "question": "A hidden string is 010. What input state follows the phase oracle, and what does readout return?",
+    "answer": "It is |+\u27e9|\u2212\u27e9|+\u27e9, whose eight signs in binary order are (++\u2212\u2212++\u2212\u2212)/\u221a8. The three H gates return |010\u27e9 exactly. Only the middle sign pattern was negative between its branches."
+  },
+  {
+    "lesson": "bernstein-vazirani",
+    "question": "If f(x)=s\u00b7x XOR1, will the experiment recover the added constant?",
+    "answer": "No. Complementing every answer negates every amplitude. The final state is \u2212|s\u27e9, with the same measured bits s. Another query, e.g. f(0), can learn the constant; it is additional information and additional cost."
+  },
+  {
+    "lesson": "deutsch-jozsa",
+    "question": "For a three-bit function with six zero answers and two one answers, what is the probability of reading 000?",
+    "answer": "The all-zero amplitude is (6\u22122)/8=1/2, hence probability1/4. This table violates the constant-or-balanced promise, so the circuit is not guaranteed to classify it."
+  },
+  {
+    "lesson": "deutsch-jozsa",
+    "question": "How many independent classical random queries suffice for error at most1/128 on a balanced function?",
+    "answer": "Error is2^(1\u2212k). Setting k=8 gives1/128. Constant functions are never misclassified by this test. This small-error baseline removes the claimed exponential advantage over all classical randomized algorithms."
+  },
+  {
+    "lesson": "simon",
+    "question": "Samples are 101 and 010 for a nonzero three-bit mask. Recover the mask.",
+    "answer": "The equations are s0 XORs2=0 and s1=0. Solutions are000 and101; the nonzero promise selects101. A repeated row adds no rank."
+  },
+  {
+    "lesson": "simon",
+    "question": "For hidden mask101, can y=100 occur ideally? What about y=010?",
+    "answer": "100\u00b7101=1, so the two equal-output contributions cancel and its probability is0. 010\u00b7101=0, so it is allowed, with probability1/4. Samples need not equal the hidden mask."
+  },
+  {
+    "lesson": "synthesis",
+    "question": "A phase-estimation diagram has six controlled blocks U, U\u00b2, \u2026, U\u00b3\u00b2. How many base-U calls are needed without a shortcut?",
+    "answer": "The sum is1+2+4+8+16+32=63. Six blocks describe the register control structure; they are not six base-oracle calls. A specialized powered circuit can change the cost only if its construction is explicitly justified."
+  },
+  {
+    "lesson": "synthesis",
+    "question": "A linear solver prepares |x\u27e9 on20qubits. Does that mean it has supplied a million-entry classical answer?",
+    "answer": "No. One measurement yields a sampled20-bit label with probabilities proportional to squared entries. Recovering all signed or complex coordinates requires many preparations and further measurements. A small number of requested observables is a different output contract and may preserve an advantage."
+  }
+]

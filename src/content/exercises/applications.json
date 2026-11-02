@@ -1,0 +1,242 @@
+[
+  {
+    "lesson": "coined-walks",
+    "question": "At the end of step two, can the two branches at position zero be combined into one amplitude?",
+    "answer": "No: they have different coin labels, |0,0〉 and |0,1〉. They are orthogonal states. Position measurement adds their probabilities, 1/4+1/4=1/2. A later coin operation can mix them and enable interference."
+  },
+  {
+    "lesson": "coined-walks",
+    "question": "Change the initial coin from |0〉 to |1〉. What changes after one step?",
+    "answer": "Hadamard maps it to (|0〉−|1〉)/√2, so the shifted state is (|−1,0〉−|1,1〉)/√2. Immediate position probabilities are unchanged, but relative phase differs and can affect later interference."
+  },
+  {
+    "lesson": "continuous-walks",
+    "question": "For the two-vertex adjacency walk, what are the probabilities at t=π/6?",
+    "answer": "The vector is (√3/2,−i/2). Squaring magnitudes gives P(0)=3/4 and P(1)=1/4. The imaginary amplitude does not create an imaginary probability."
+  },
+  {
+    "lesson": "continuous-walks",
+    "question": "What happens if the Hamiltonian becomes X+3I?",
+    "answer": "The evolution is e^(−i3t)e^(−itX), since I commutes with X. The common factor changes global phase only, so all position probabilities remain unchanged."
+  },
+  {
+    "lesson": "szegedy-mnrs",
+    "question": "Verify reversibility of the two-state chain using π=(1/2,1/2).",
+    "answer": "Flow 0→1 is (1/2)(1/4)=1/8, equal to flow 1→0. The diagonal flows trivially agree. This classical detailed-balance property is separate from unitary reversibility."
+  },
+  {
+    "lesson": "szegedy-mnrs",
+    "question": "A search has marked mass 1/100, spectral gap 1/25, setup 40, update 2, and check 3. Substitute into the MNRS cost expression.",
+    "answer": "The expression is 40+10(5·2+3)=170 in the chosen abstract cost units, up to theorem constants. This does not mean 170 nanoseconds or physical gates; the access-operation implementations define those units."
+  },
+  {
+    "lesson": "element-distinctness",
+    "question": "For N=6,r=3 and exactly one equal pair, what fraction of subsets is marked?",
+    "answer": "The fraction is r(r−1)/(N(N−1))=6/30=1/5. Equivalently choose the remaining member in four ways among 20 total three-subsets, giving 4/20."
+  },
+  {
+    "lesson": "element-distinctness",
+    "question": "Why does reflecting only the label register fail when subset values remain entangled with labels?",
+    "answer": "Different labels carry different stored-value states. A label-only diffusion does not generally reflect about the joint prepared state. The explicit toy implementation uses A, a zero-state reflection, and A†, clearing and reloading data with the oracle calls counted."
+  },
+  {
+    "lesson": "triangle-finding",
+    "question": "How many adjacency calls are used by the explicitly described phase-marking oracle per candidate superposition?",
+    "answer": "Three calls load the three edge bits and three inverse calls clear them: six calls. AND/phase/uncomputation gates add gate cost but no new adjacency access. Calling this one elementary edge query would be wrong."
+  },
+  {
+    "lesson": "triangle-finding",
+    "question": "Delete edge 12 from the four-vertex example. Does a measured triple still certify a triangle?",
+    "answer": "No. There is now no triangle. A candidate index is still produced by measurement, but checking its edges rejects it. A calibrated bounded-error search decision is needed to report absence."
+  },
+  {
+    "lesson": "formula-evaluation",
+    "question": "For x=0011, construct a normalized zero-phase vector and compute its initial overlap.",
+    "answer": "The vector (2,0,0,−1,1)/√6 lies in the kernel of A and uses only available labels. Both reflections fix it, hence its walk eigenvalue is 1. Its squared overlap with |0⟩ is 4/6=2/3. The finite eight-bin zero probability is slightly larger, 52436/78125, because other eigenphases leak into the zero bin."
+  },
+  {
+    "lesson": "formula-evaluation",
+    "question": "Why does the controlled leaf reflection use two bit-oracle calls, and why is one zero result among six trials an unsuitable acceptance rule?",
+    "answer": "The first query computes the leaf bit, a controlled phase uses it, and the second query erases it. Leaving it uncomputed entangles the work labels with the auxiliary bit and changes subsequent interference. On false input 0101, p0=3136/78125≈0.04014; accepting any zero among six trials gives error 1−(1−p0)^6≈0.218. Requiring at least two zeros instead bounds false acceptance by 15p0²<5/192."
+  },
+  {
+    "lesson": "quantum-backtracking",
+    "question": "Apply the displayed local reflection to the uniform neighborhood vector.",
+    "answer": "Multiplying each row by (1,1,1)/√3 gives (−1+2+2)/(3√3)=1/√3. Thus the uniform direction is unchanged. Orthogonal directions change sign."
+  },
+  {
+    "lesson": "quantum-backtracking",
+    "question": "A predicate circuit takes one million logical gates per evaluation. Can a bound stated only in predicate tests determine the practical runtime?",
+    "answer": "No. Multiply by reversible predicate cost, then add coherent navigation, phase estimation, witness extraction and fault-tolerance overhead. A smaller number of expensive coherent predicate calls may still lose to a classical solver."
+  },
+  {
+    "lesson": "vqe",
+    "question": "For H=Z+X and θ=π/2, compute energy and Z-basis probabilities.",
+    "answer": "The state is |+〉, so Z probabilities are 1/2,1/2. The X expectation is 1 and Z expectation 0, giving energy 1. Uniform Z probabilities do not mean energy zero."
+  },
+  {
+    "lesson": "vqe",
+    "question": "If a normalized state has excited-state weight 0.1 in this two-level Hamiltonian, what is its energy error above the ground?",
+    "answer": "The gap is 2√2. Weighted averaging gives error 0.1·2√2≈0.282843. This relation uses the known spectral decomposition; low energy implies high ground overlap only relative to an appropriate gap."
+  },
+  {
+    "lesson": "adapt-vqe",
+    "question": "Why select the largest gradient magnitude rather than the most negative gradient?",
+    "answer": "The new parameter can move positively or negatively. A positive derivative of +1 allows a negative angle step to lower energy just as a derivative of −1 allows a positive step. Magnitude measures the available first-order change."
+  },
+  {
+    "lesson": "adapt-vqe",
+    "question": "Can an operator selected once appear again later?",
+    "answer": "Yes. Selecting a generator does not remove it from the pool. Its effect at a later position in a noncommuting circuit can differ. Re-optimization changes all existing parameters, so old gradient measurements cannot simply be reused without justification."
+  },
+  {
+    "lesson": "qaoa",
+    "question": "In the one-edge example with γ=π/2 and β=0, what is the expected cut?",
+    "answer": "It remains 1/2. The cost gate changes phases but not magnitudes, and there is no mixing to convert those phases to unequal probabilities."
+  },
+  {
+    "lesson": "qaoa",
+    "question": "Can a three-vertex triangle have cut value three?",
+    "answer": "No. If vertex0 differs from1 and1 differs from2, then0 and2 are on the same side. At least one edge is uncut, so the maximum is two. An algorithm must respect this combinatorial optimum."
+  },
+  {
+    "lesson": "imaginary-time",
+    "question": "For the diagonal example at τ=ln3, calculate the normalized state and energy.",
+    "answer": "The unnormalized state is (1,1/3)/√2. Normalizing yields (3,1)/√10, so the excited probability and energy are 1/10. The successful filter norm squared is (1+1/9)/2=5/9."
+  },
+  {
+    "lesson": "imaginary-time",
+    "question": "Why can the exact state-dependent Y rotation be deterministic while the diagonal filter needs postselection?",
+    "answer": "The rotation is designed to map one specified input to one target and preserves norms on every input. The desired filter changes component magnitudes for arbitrary inputs, so its successful branch is nonunitary and success probability depends on input."
+  },
+  {
+    "lesson": "adiabatic-annealing",
+    "question": "For the linear path at s=1/2, what is the energy gap?",
+    "answer": "The eigenvalues are ±1/√2, so their difference is √2. Confusing the ground-energy magnitude with the gap would miss a factor of two."
+  },
+  {
+    "lesson": "adiabatic-annealing",
+    "question": "For the constant-gap schedule with T=20, what conservative failure bound follows?",
+    "answer": "Substitute T into π²/(16T²+π²), giving about0.001540. This bounds ideal finite-time transition error only; a digitally synthesized or noisy device requires additional error accounting."
+  },
+  {
+    "lesson": "tomography",
+    "question": "Reconstruct the one-qubit state with x=0,y=0,z=0.",
+    "answer": "The formula gives ρ=I/2=diag(1/2,1/2), the maximally mixed state. It is not the pure superposition |+〉, which has x=1 and nonzero off-diagonal entries."
+  },
+  {
+    "lesson": "tomography",
+    "question": "A reconstruction yields x=0.8,y=0.8,z=0. Is it physical?",
+    "answer": "No. The squared Bloch length is1.28>1. The eigenvalues are (1±√1.28)/2, one negative. Sampling noise or a model/calibration problem requires a constrained reconstruction and honest uncertainty reporting."
+  },
+  {
+    "lesson": "classical-shadows",
+    "question": "For |0〉, a Z-basis shadow has eigenvalues2 and−1. Why does this not violate physical positivity?",
+    "answer": "The shadow is a classical inverse estimator, not a quantum state prepared on hardware. Its expectation over randomized measurements is the physical density matrix. Individual estimators need not be positive."
+  },
+  {
+    "lesson": "classical-shadows",
+    "question": "How does the worst second moment grow for a k-qubit Pauli string under random local Pauli measurements?",
+    "answer": "The matching basis probability is3^(−k), and a matching value has magnitude3^k. Thus the second moment is3^(−k)·3^(2k)=3^k, making long strings expensive."
+  },
+  {
+    "lesson": "quantum-kernels",
+    "question": "For the R_y feature map, compute K(0,π/3).",
+    "answer": "The overlap is cos(π/6)=√3/2; its squared magnitude is3/4. A zero-outcome frequency estimates this value, not the unsquared overlap."
+  },
+  {
+    "lesson": "quantum-kernels",
+    "question": "Using the trained two-point kernel classifier, predict the score at z=2π/3.",
+    "answer": "K(z,0)=1/4 and K(z,π)=3/4, so f(z)=−1/2. The negative prediction follows the chosen interpolation rule; held-out labels are needed to assess accuracy."
+  },
+  {
+    "lesson": "variational-classifiers",
+    "question": "At θ=π, what is the training loss on the two examples?",
+    "answer": "q=sin²(π/2)=1, so L=q²=1. Both labels are reversed. The circuit is expressive enough, but not every parameter choice works."
+  },
+  {
+    "lesson": "variational-classifiers",
+    "question": "Does zero loss on the two training points establish useful generalization?",
+    "answer": "No. Infinitely many labeling rules agree on those two points and differ elsewhere. Report held-out performance and matched classical baselines; a circuit demonstration alone cannot establish predictive value."
+  },
+  {
+    "lesson": "iqp-sampling",
+    "question": "At θ=π/2, what is the final output of the two-qubit IQP example?",
+    "answer": "The vector is i|11〉. Therefore outcome11 is certain. The common phase i does not change that outcome."
+  },
+  {
+    "lesson": "iqp-sampling",
+    "question": "Why is the diagonal central layer insufficient to obtain a nonuniform distribution?",
+    "answer": "Before the final basis change, all four magnitudes remain1/2. Only the final Hadamards sum paths into common amplitudes, allowing reinforcement and cancellation."
+  },
+  {
+    "lesson": "boson-sampling",
+    "question": "What is the probability discarded when a λ=1/2 squeezed-pair input is truncated to k≤3 pairs?",
+    "answer": "The geometric tail is(1/4)^4=1/256. Renormalizing a truncated simulator without reporting this discarded probability would conceal approximation error."
+  },
+  {
+    "lesson": "boson-sampling",
+    "question": "After the beam splitter, what is the total four-photon probability in the Gaussian example?",
+    "answer": "It is9/512+3/256+9/512=24/512=3/64. Lossless optical mixing preserves total photon number within each sector even though it redistributes occupations."
+  },
+  {
+    "lesson": "random-circuit-sampling",
+    "question": "Why is the ideal expected XEB score3/4 rather than1 for this circuit?",
+    "answer": "The distribution is not assumed to follow a large random-circuit statistical ensemble. Direct substitution gives4Σp(z)²−1=4·7/16−1=3/4. The score normalization does not force every ideal circuit to have score1."
+  },
+  {
+    "lesson": "random-circuit-sampling",
+    "question": "A sampler always emits the most probable string. Has it sampled the target distribution?",
+    "answer": "No. It omits other outcomes with nonzero target probability. Its high XEB score in the worked counterexample shows that one scalar diagnostic is not a general distributional certificate."
+  },
+  {
+    "lesson": "kuperberg",
+    "question": "For N=8 and labels k=3,ℓ=1, which labels emerge from the combining measurement?",
+    "answer": "The sum branch gives4 and the difference branch2 modulo8. Each occurs with probability1/2. Label4 reveals parity after a Hadamard; label2 has a less simplified phase."
+  },
+  {
+    "lesson": "kuperberg",
+    "question": "If the recovered parity is p=0 and the hidden shift is s=6 modulo8, what reduced shift remains?",
+    "answer": "The new modulus is4 and shift(s−p)/2=3. Recovering its bits recursively gives6=0+2·3. The parity bit alone does not recover the whole shift."
+  },
+  {
+    "lesson": "hallgren",
+    "question": "Verify that (99,70) solves Pell with d=2.",
+    "answer": "99²−2·70²=9801−9800=1. It is the coefficient pair in(3+2√2)^3=99+70√2."
+  },
+  {
+    "lesson": "hallgren",
+    "question": "Why does a real period require a different treatment from an exact integer order?",
+    "answer": "A finite input grid generally does not line up exactly with the real period. Rounding, finite precision, and nonuniform fibers affect Fourier peaks and reconstruction. Merely substituting a real number for Shor’s integer r omits those issues."
+  },
+  {
+    "lesson": "jones-polynomial",
+    "question": "Why is the crossing matrix unitary in the two-path example?",
+    "answer": "It is diagonal with entries−A³ and A^(−1), each magnitude1 because |A|=1. Thus multiplying by its conjugate transpose gives identity."
+  },
+  {
+    "lesson": "jones-polynomial",
+    "question": "If the weighted-trace estimate has error ε, what happens to absolute error after multiplication by d^(n−1)?",
+    "answer": "The phase correction has magnitude1, but the positive factor multiplies the error to d^(n−1)ε. A normalized additive guarantee is therefore not a uniform relative-error guarantee for the polynomial value."
+  },
+  {
+    "lesson": "quantum-metropolis",
+    "question": "Verify detailed balance for the two-state Gibbs sampler.",
+    "answer": "The equilibrium flow upward is(2/3)(1/2)=1/3, and downward is(1/3)(1)=1/3. Equal flows ensure stationarity, but the time to approach it still needs a mixing analysis."
+  },
+  {
+    "lesson": "quantum-metropolis",
+    "question": "If upward and downward transition rates are both multiplied by0.001, does the target distribution change?",
+    "answer": "No: their ratio and detailed balance remain unchanged. Continuous-time relaxation becomes1000times slower. Correct equilibrium weights and efficient convergence are distinct requirements."
+  },
+  {
+    "lesson": "forrelation",
+    "question": "How many separate phase queries does the transparent H–Of–H–Og–H experiment make?",
+    "answer": "Two: one to f and one to g. Calling the combined software wrapper once does not reduce the elementary oracle count. The separate selector-indexed construction is what permits one coherent indexed query."
+  },
+  {
+    "lesson": "forrelation",
+    "question": "In the high case of the two-query circuit, why are ten repetitions enough for failure below0.012?",
+    "answer": "Each run sees zero with probability at least0.36. Independent failure in all ten runs is at most(1−0.36)^10=0.64^10≈0.01153. Repetitions and independence are part of the guarantee."
+  }
+]

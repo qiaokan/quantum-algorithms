@@ -1,0 +1,26 @@
+test_adapt_gradients (__main__.WorkedExamples.test_adapt_gradients) ... ok
+test_backtracking_walk_and_phase_filter (__main__.WorkedExamples.test_backtracking_walk_and_phase_filter) ... ok
+test_classifier_parameter_shift (__main__.WorkedExamples.test_classifier_parameter_shift) ... ok
+test_coined_three_steps (__main__.WorkedExamples.test_coined_three_steps) ... ok
+test_continuous_transfer (__main__.WorkedExamples.test_continuous_transfer) ... ok
+test_finite_adiabatic_path (__main__.WorkedExamples.test_finite_adiabatic_path) ... ok
+test_forrelation_two_and_one_query (__main__.WorkedExamples.test_forrelation_two_and_one_query) ... ok
+test_gaussian_photon_sectors (__main__.WorkedExamples.test_gaussian_photon_sectors) ... ok
+test_imaginary_time_filter (__main__.WorkedExamples.test_imaginary_time_filter) ... ok
+test_iqp (__main__.WorkedExamples.test_iqp) ... ok
+test_jones_trace_and_correction (__main__.WorkedExamples.test_jones_trace_and_correction) ... ok
+test_kernel_classifier (__main__.WorkedExamples.test_kernel_classifier) ... ok
+test_kuperberg_label_combination (__main__.WorkedExamples.test_kuperberg_label_combination) ... ok
+test_metropolis_rejection_and_stationary_state (__main__.WorkedExamples.test_metropolis_rejection_and_stationary_state) ... ok
+test_qaoa_one_edge (__main__.WorkedExamples.test_qaoa_one_edge) ... ok
+test_rcs_and_metric_counterexample (__main__.WorkedExamples.test_rcs_and_metric_counterexample) ... ok
+test_shadow_unbiasedness (__main__.WorkedExamples.test_shadow_unbiasedness) ... ok
+test_subset_amplification (__main__.WorkedExamples.test_subset_amplification) ... ok
+test_szegedy_reflections (__main__.WorkedExamples.test_szegedy_reflections) ... ok
+test_tomography (__main__.WorkedExamples.test_tomography) ... ok
+test_vqe_against_eigensolver (__main__.WorkedExamples.test_vqe_against_eigensolver) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.094s
+
+OK

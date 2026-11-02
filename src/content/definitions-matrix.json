@@ -1,0 +1,53 @@
+[
+  {
+    "id": "trigonometry",
+    "title": "Trigonometry and rotations",
+    "aliases": [
+      "sine",
+      "cosine",
+      "sin",
+      "cos",
+      "radians",
+      "arcsin",
+      "arccos"
+    ],
+    "file": "trigonometry.md",
+    "summary": "On a circle of radius one, turn counterclockwise through angle $\\theta$ from the point $(1,0)$."
+  },
+  {
+    "id": "matrix-functions",
+    "title": "Matrix powers and functions",
+    "aliases": [
+      "matrix exponential",
+      "expm",
+      "factorial",
+      "Taylor series"
+    ],
+    "file": "matrix-functions.md",
+    "summary": "For a square matrix $A$, $A^2=AA$ and $A^3=AAA$; these are [row-by-column matrix products](/definitions/matrix-multiplication/), not entrywise powers."
+  },
+  {
+    "id": "norms",
+    "title": "Vector norms, operator norms, and conditioning",
+    "aliases": [
+      "norm",
+      "operator norm",
+      "condition number",
+      "kappa",
+      "\u03ba"
+    ],
+    "file": "norms.md",
+    "summary": "For a complex vector $v=(v_0,\\ldots,v_{D-1})^T$, its Euclidean norm is $\\|v\\|=\\sqrt{\\sum_j|v_j|^2}$."
+  },
+  {
+    "id": "trace",
+    "title": "Trace, expectations, and subsystem states",
+    "aliases": [
+      "Tr",
+      "partial trace",
+      "partition function"
+    ],
+    "file": "trace.md",
+    "summary": "For a square matrix $A$, $\\operatorname{Tr}(A)=\\sum_jA_{jj}$."
+  }
+]

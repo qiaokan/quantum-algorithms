@@ -1,0 +1,229 @@
+[
+  {
+    "id": "deutsch",
+    "sequence": 1,
+    "module": 1,
+    "title": "Deutsch\u2019s algorithm",
+    "kind": "algorithm",
+    "summary": "One coherent query: turn equal or opposite signs into a measured bit.",
+    "why": "The smallest exact coherent-query advantage exposes every amplitude and separates phase from probability.",
+    "prerequisites": [],
+    "concepts": [
+      "vectors",
+      "matrix-multiplication",
+      "tensor-products",
+      "normalization",
+      "phase",
+      "oracles"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [
+      "deutsch"
+    ],
+    "sourceIds": [
+      "ibm-deutsch",
+      "ibm-single",
+      "ibm-multiple"
+    ],
+    "path": "main",
+    "editorial": "reviewed",
+    "advantage": "Proven exact oracle separation: one coherent query versus two classical queries.",
+    "aliases": [
+      "Deutsch parity"
+    ],
+    "file": "01-deutsch.md",
+    "gaps": []
+  },
+  {
+    "id": "grover",
+    "sequence": 2,
+    "module": 1,
+    "title": "Grover\u2019s algorithm",
+    "kind": "algorithm",
+    "summary": "Find one of four candidates by calculating a sign flip and reflection about the mean.",
+    "why": "Four candidates let one full search iteration be calculated exactly, including its failure when repeated too long.",
+    "prerequisites": [],
+    "concepts": [
+      "vectors",
+      "tensor-products",
+      "outer-products",
+      "unitarity",
+      "oracles"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [
+      "grover"
+    ],
+    "sourceIds": [
+      "grover-original",
+      "ibm-grover"
+    ],
+    "path": "main",
+    "editorial": "reviewed",
+    "advantage": "Proven quadratic query advantage for unstructured search; practical advantage not established by the toy instance.",
+    "aliases": [
+      "unstructured search",
+      "amplitude amplification"
+    ],
+    "file": "02-grover.md",
+    "gaps": []
+  },
+  {
+    "id": "bernstein-vazirani",
+    "sequence": 3,
+    "module": 1,
+    "title": "Bernstein\u2013Vazirani",
+    "kind": "algorithm",
+    "summary": "Recover a hidden parity string; follow every sign through three readout gates.",
+    "why": "A structured parity function demonstrates recovery of several hidden bits with one coherent query.",
+    "prerequisites": [
+      "deutsch"
+    ],
+    "concepts": [
+      "binary-linear-algebra"
+    ],
+    "reusedConcepts": [
+      "vectors",
+      "tensor-products",
+      "phase",
+      "oracles"
+    ],
+    "exampleIds": [
+      "bernstein-vazirani"
+    ],
+    "sourceIds": [
+      "ibm-dj"
+    ],
+    "path": "main",
+    "editorial": "reviewed",
+    "advantage": "Proven oracle separation: one quantum query versus order n classical queries.",
+    "aliases": [
+      "BV",
+      "hidden parity"
+    ],
+    "file": "03-bernstein-vazirani.md",
+    "gaps": []
+  },
+  {
+    "id": "deutsch-jozsa",
+    "sequence": 4,
+    "module": 1,
+    "title": "Deutsch\u2013Jozsa",
+    "kind": "algorithm",
+    "summary": "Test a constant-or-balanced promise, then deliberately break it.",
+    "why": "A promise problem makes the exact-versus-randomized classical baseline distinction unavoidable.",
+    "prerequisites": [
+      "deutsch",
+      "bernstein-vazirani"
+    ],
+    "concepts": [
+      "probability",
+      "complexity"
+    ],
+    "reusedConcepts": [
+      "vectors",
+      "tensor-products",
+      "phase",
+      "oracles"
+    ],
+    "exampleIds": [
+      "deutsch-jozsa"
+    ],
+    "sourceIds": [
+      "ibm-dj"
+    ],
+    "path": "main",
+    "editorial": "reviewed",
+    "advantage": "Exponential exact deterministic oracle separation; no exponential advantage over bounded-error randomized sampling.",
+    "aliases": [
+      "DJ",
+      "constant balanced"
+    ],
+    "file": "04-deutsch-jozsa.md",
+    "gaps": []
+  },
+  {
+    "id": "simon",
+    "sequence": 5,
+    "module": 1,
+    "title": "Simon\u2019s algorithm",
+    "kind": "algorithm",
+    "summary": "Equal-output pairs produce random parity constraints; finish with classical elimination.",
+    "why": "Equal-output pairs introduce entanglement, repeated Fourier samples, and classical equation solving.",
+    "prerequisites": [
+      "bernstein-vazirani",
+      "deutsch-jozsa"
+    ],
+    "concepts": [
+      "conditional-probability",
+      "binary-linear-algebra",
+      "density-matrices"
+    ],
+    "reusedConcepts": [
+      "vectors",
+      "tensor-products",
+      "phase",
+      "oracles"
+    ],
+    "exampleIds": [
+      "simon"
+    ],
+    "sourceIds": [
+      "ibm-simon"
+    ],
+    "path": "main",
+    "editorial": "reviewed",
+    "advantage": "Proven exponential bounded-error oracle-query separation for the promised unstructured oracle.",
+    "aliases": [
+      "hidden XOR mask"
+    ],
+    "file": "05-simon.md",
+    "gaps": []
+  },
+  {
+    "id": "synthesis",
+    "sequence": 62,
+    "module": 11,
+    "title": "Synthesis: connect the mechanisms",
+    "kind": "synthesis",
+    "summary": "Trace the shared calculations without erasing their different access models, outputs, and costs.",
+    "why": "Turn the curriculum into a way to analyze an unfamiliar quantum algorithm.",
+    "prerequisites": [
+      "grover",
+      "simon",
+      "phase-estimation",
+      "shor",
+      "hhl",
+      "singular-value-transformation",
+      "coined-walks",
+      "vqe",
+      "classical-shadows"
+    ],
+    "concepts": [],
+    "reusedConcepts": [
+      "phase",
+      "oracles",
+      "complexity",
+      "eigenvalues",
+      "observables"
+    ],
+    "exampleIds": [
+      "synthesis-comparisons"
+    ],
+    "sourceIds": [
+      "ibm",
+      "end-to-end",
+      "qsvt-tutorial"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "No new advantage claim: connects earlier proved, conditional, and heuristic results without conflating their models.",
+    "aliases": [
+      "connections",
+      "end to end",
+      "algorithm families"
+    ],
+    "file": "62-synthesis.md",
+    "gaps": []
+  }
+]

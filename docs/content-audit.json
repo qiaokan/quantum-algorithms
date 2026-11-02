@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-02",
+  "counts": {
+    "reviewed": 5,
+    "complete": 57,
+    "partial": 0,
+    "planned": 0
+  },
+  "lessons": 62,
+  "definitions": 42,
+  "sources": 80,
+  "exercises": 124,
+  "words": 67876,
+  "errors": [],
+  "warnings": [],
+  "limitations": "Automated structure/link/math checks are not independent scientific or pedagogical peer review.",
+  "gaps": []
+}

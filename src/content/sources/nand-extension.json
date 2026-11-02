@@ -1,0 +1,22 @@
+[
+  {
+    "id": "nand-span-formulas",
+    "title": "Span-program-based quantum algorithm for evaluating formulas",
+    "authors": "Ben W. Reichardt; Robert Špalek",
+    "url": "https://arxiv.org/html/0710.2630",
+    "supports": "Span-program definition, formula composition, graph spectral mechanism, and balanced AND-OR/NAND classical versus quantum query comparisons.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read the introduction and Sections 2.1–2.4, including the span definition and target/eigenvector correspondence. The lesson uses an original finite four-input instance and does not assert that its 84-query circuit realizes the asymptotic theorem."
+  },
+  {
+    "id": "nand-reflections",
+    "title": "Reflections for quantum query algorithms",
+    "authors": "Ben W. Reichardt",
+    "url": "https://arxiv.org/html/1005.1601",
+    "supports": "Fixed kernel reflection, input-dependent reflection, zero-phase detection, spectral completeness/soundness mechanism, and query-versus-gate-cost distinction.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read Section 2 algorithms and relevant Section 3 spectral analysis. The lesson reverses reflection order (taking the inverse), uses its own target scale, and establishes finite error by exact rational enumeration of all 16 inputs."
+  }
+]

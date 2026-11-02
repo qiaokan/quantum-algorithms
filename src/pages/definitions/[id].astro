@@ -1,0 +1,10 @@
+---
+import Book from '../../layouts/Book.astro';
+import {definitions,definitionMarkdown,render,type Definition} from '../../lib/content';
+export function getStaticPaths(){return definitions.map(definition=>({params:{id:definition.id},props:{definition}}))}
+interface Props{definition:Definition}
+const{definition}=Astro.props;const body=await render(definitionMarkdown(definition));
+---
+<Book title={definition.title} sections={body.sections}>
+<div class="breadcrumb"><a href="/">The textbook</a> / <a href="/glossary/">Prerequisite library</a></div><span class="eyebrow">ON-DEMAND MATHEMATICS</span><h1>{definition.title}</h1><p class="muted small">From a lesson, this explanation opens in a returnable stack. This address is its standalone shareable page.</p><div class="prose" set:html={body.html}/><a href="/glossary/">← All definitions</a>
+</Book>

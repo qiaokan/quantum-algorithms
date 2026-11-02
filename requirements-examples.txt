@@ -1,0 +1,2 @@
+# Tested numerical-example dependency. Python 3.11+ recommended.
+numpy==2.3.5

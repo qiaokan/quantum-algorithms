@@ -1,0 +1,2 @@
+# Version used for the verified applications.py run on 2026-11-02.
+numpy==2.3.5

@@ -1,0 +1,4 @@
+---
+import Book from '../layouts/Book.astro';import{definitions}from'../lib/content';
+---
+<Book title="Definitions and symbols"><span class="eyebrow">MODULE 00 · OPTIONAL PREREQUISITE LIBRARY</span><h1>Definitions & symbols</h1><p class="dek">Short, worked explanations you can open precisely when an algorithm needs them.</p><p class="small muted">Every link opens a navigable explanation stack. Its “Open as a page” link supplies a stable URL. You can also search aliases such as ket, dagger, XOR, or postselection.</p><div class="definition-index">{definitions.map(d=><div><a href={`/definitions/${d.id}/`}>{d.title}</a><p>{d.aliases.join(' · ')}</p></div>)}</div></Book>

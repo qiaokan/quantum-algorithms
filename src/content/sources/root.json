@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ibm",
+    "title": "Fundamentals of Quantum Algorithms",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms",
+    "supports": "Curriculum backbone and query/Fourier/search organization.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-single",
+    "title": "Single-system quantum information",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/basics-of-quantum-information/single-systems/quantum-information",
+    "supports": "State vectors, squared-magnitude probabilities, unitarity.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-multiple",
+    "title": "Multiple-system quantum information",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/basics-of-quantum-information/multiple-systems/quantum-information",
+    "supports": "Joint states, tensor products, subsystem ordering.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-deutsch",
+    "title": "Deutsch\u2019s algorithm",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/deutsch-algorithm",
+    "supports": "Exact Deutsch query circuit and phase mechanism.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-dj",
+    "title": "Deutsch\u2013Jozsa and Bernstein\u2013Vazirani",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/deutsch-jozsa-algorithm",
+    "supports": "Promised function classes, output interpretation, cancellation.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-simon",
+    "title": "Simon\u2019s algorithm",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/simon-algorithm",
+    "supports": "XOR promise, Fourier constraints and classical elimination.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ibm-grover",
+    "title": "Grover\u2019s algorithm",
+    "authors": "John Watrous / IBM",
+    "url": "https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/grover-algorithm/introduction",
+    "supports": "Search query advantage, conceptual and practical context.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "grover-original",
+    "title": "A fast quantum mechanical algorithm for database search",
+    "authors": "Lov K. Grover",
+    "url": "https://arxiv.org/abs/quant-ph/9605043",
+    "supports": "Original search result; record and abstract verified, matrix example independently derived.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "zoo",
+    "title": "Quantum Algorithm Zoo",
+    "authors": "Stephen Jordan",
+    "url": "https://quantumalgorithmzoo.org/",
+    "supports": "Topic discovery and coverage audit; not a substitute for technical primary sources.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "end-to-end",
+    "title": "Quantum algorithms: A survey of applications and end-to-end complexities",
+    "authors": "Alexander M. Dalzell and coauthors",
+    "url": "https://arxiv.org/abs/2310.03011",
+    "supports": "Access/preparation/readout audit framework. Version record notes updates through mid-2024; not a complete November2026 literature census.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "qsvt",
+    "title": "Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics",
+    "authors": "Andr\u00e1s Gily\u00e9n, Yuan Su, Guang Hao Low, Nathan Wiebe",
+    "url": "https://arxiv.org/abs/1806.01838",
+    "supports": "Scope of QSVT primitive and matrix transformations. Detailed lesson sources specify sections actually read.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "qsvt-tutorial",
+    "title": "A Grand Unification of Quantum Algorithms",
+    "authors": "John M. Martyn, Zane M. Rossi, Andrew K. Tan, Isaac L. Chuang",
+    "url": "https://arxiv.org/abs/2105.02859",
+    "supports": "Pedagogical bridge from QSP to QSVT and applications.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "hhl",
+    "title": "Quantum algorithm for solving linear systems of equations",
+    "authors": "Aram W. Harrow, Avinatan Hassidim, Seth Lloyd",
+    "url": "https://arxiv.org/abs/0811.3171",
+    "supports": "Quantum-state/observable output model for linear systems.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "aaronson",
+    "title": "PHYS771 Lecture 9: Quantum",
+    "authors": "Scott Aaronson",
+    "url": "https://www.scottaaronson.com/democritus/lec9.html",
+    "supports": "Amplitude-first conceptual introduction; foundational rather than a current hardware survey.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  }
+]

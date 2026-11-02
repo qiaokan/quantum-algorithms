@@ -1,0 +1,282 @@
+[
+  {
+    "id": "app-walk-review",
+    "title": "Quantum random walks — an introductory overview",
+    "authors": "Julia Kempe",
+    "url": "https://arxiv.org/abs/quant-ph/0303081",
+    "supports": "Coined and continuous walk models; worked examples derived independently.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-continuous-walk",
+    "title": "Quantum Computation and Decision Trees",
+    "authors": "Edward Farhi; Sam Gutmann",
+    "url": "https://arxiv.org/abs/quant-ph/9706062",
+    "supports": "Continuous-time graph-computation model and limitation of comparing only with a particular classical walk.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-mnrs",
+    "title": "Search via Quantum Walk",
+    "authors": "Frédéric Magniez; Ashwin Nayak; Jérémie Roland; Miklos Santha",
+    "url": "https://arxiv.org/html/quant-ph/0608026",
+    "supports": "Sections 2–4: reversible-chain reflections, stationary-phase filtering, setup/update/check bound.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant construction and theorem sections inspected; not an independent proof audit of the whole paper."
+  },
+  {
+    "id": "app-fast-forwarding",
+    "title": "Quantum Fast-Forwarding: Markov Chains and Graph Property Testing",
+    "authors": "Simon Apers; Alain Sarlette",
+    "url": "https://arxiv.org/abs/1804.02321",
+    "supports": "Normalized discriminant-matrix powering; inverse-output-norm and accuracy dependence.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-distinctness",
+    "title": "Quantum walk algorithm for element distinctness",
+    "authors": "Andris Ambainis",
+    "url": "https://arxiv.org/abs/quant-ph/0311001",
+    "supports": "O(N^(2/3)) query upper bound and distinction from promised collision finding.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-triangle",
+    "title": "Improved Quantum Algorithm for Triangle Finding via Combinatorial Arguments",
+    "authors": "François Le Gall",
+    "url": "https://arxiv.org/abs/1407.0085",
+    "supports": "Unweighted triangle query upper bound and weighted/nonadaptive distinction.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-nand",
+    "title": "A Quantum Algorithm for the Hamiltonian NAND Tree",
+    "authors": "Edward Farhi; Jeffrey Goldstone; Sam Gutmann",
+    "url": "https://arxiv.org/abs/quant-ph/0702144",
+    "supports": "Balanced NAND-tree square-root result specifically in Hamiltonian oracle model.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-backtracking",
+    "title": "Quantum walk speedup of backtracking algorithms",
+    "authors": "Ashley Montanaro",
+    "url": "https://arxiv.org/html/1509.02374",
+    "supports": "Sections 2–2.1: weighted local reflections, phase-zero detection and witness-finding distinction.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant construction sections inspected; authored small matrices and probabilities checked independently."
+  },
+  {
+    "id": "app-vqe-source",
+    "title": "A variational eigenvalue solver on a quantum processor",
+    "authors": "Alberto Peruzzo; Jarrod McClean; Peter Shadbolt; Man-Hong Yung; Xiao-Qi Zhou; Peter J. Love; Alán Aspuru-Guzik; Jeremy L. O’Brien",
+    "url": "https://arxiv.org/abs/1304.3061",
+    "supports": "Hybrid variational framework; historical experimental context separate from authored ideal calculations.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-adapt",
+    "title": "An adaptive variational algorithm for exact molecular simulations on a quantum computer",
+    "authors": "Harper R. Grimsley; Sophia E. Economou; Edwin Barnes; Nicholas J. Mayhall",
+    "url": "https://arxiv.org/html/1812.11173",
+    "supports": "Algorithm steps 5–8: commutator gradients, operator selection, parameter re-optimization, measurement cost.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Algorithm and gradient-selection sections inspected."
+  },
+  {
+    "id": "app-qaoa-source",
+    "title": "A Quantum Approximate Optimization Algorithm",
+    "authors": "Edward Farhi; Jeffrey Goldstone; Sam Gutmann",
+    "url": "https://arxiv.org/html/1411.4028",
+    "supports": "Cost/mixer convention and alternating variational construction.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Definitions of the layers and fixed-depth objective inspected."
+  },
+  {
+    "id": "app-qite",
+    "title": "Determining eigenstates and thermal states on a quantum computer using quantum imaginary time evolution",
+    "authors": "Mario Motta; Chong Sun; Adrian Teck Keng Tan; Matthew J. O’Rourke; Erika Ye; Austin J. Minnich; Fernando G. S. L. Brandão; Garnet Kin-Lic Chan",
+    "url": "https://arxiv.org/abs/1901.07653",
+    "supports": "Local state-dependent QITE approach; not interchangeable with variational imaginary time.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-variational-imaginary",
+    "title": "Variational ansatz-based quantum simulation of imaginary time evolution",
+    "authors": "Sam McArdle; Tyson Jones; Suguru Endo; Ying Li; Simon Benjamin; Xiao Yuan",
+    "url": "https://arxiv.org/abs/1804.03023",
+    "supports": "Parameter-space imaginary-time framework; one-qubit equations derived independently.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-adiabatic",
+    "title": "Quantum Computation by Adiabatic Evolution",
+    "authors": "Edward Farhi; Jeffrey Goldstone; Sam Gutmann; Michael Sipser",
+    "url": "https://arxiv.org/abs/quant-ph/0001106",
+    "supports": "Ground-state interpolation and dependence on minimum spectral gap.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-adiabatic-review",
+    "title": "Adiabatic Quantum Computing",
+    "authors": "Tameem Albash; Daniel A. Lidar",
+    "url": "https://arxiv.org/abs/1611.04471",
+    "supports": "Ideal closed-system model, theorem variants and limitations.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-tomography-source",
+    "title": "Sample-optimal tomography of quantum states",
+    "authors": "Jeongwan Haah; Aram W. Harrow; Zhengfeng Ji; Xiaodi Wu; Nengkun Yu",
+    "url": "https://arxiv.org/abs/1508.01797",
+    "supports": "Dimension/rank/error-metric dependence and collective versus independent measurement models.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-shadows",
+    "title": "Predicting Many Properties of a Quantum System from Very Few Measurements",
+    "authors": "Hsin-Yuan Huang; Richard Kueng; John Preskill",
+    "url": "https://arxiv.org/html/2002.08953",
+    "supports": "Random Pauli inverse map, observable-dependent sample costs, nonlocal limitations.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Random Pauli construction and locality/non-example sections inspected."
+  },
+  {
+    "id": "app-kernels",
+    "title": "Supervised learning with quantum enhanced feature spaces",
+    "authors": "Vojtěch Havlíček; Antonio D. Córcoles; Kristan Temme; Aram W. Harrow; Abhinav Kandala; Jerry M. Chow; Jay M. Gambetta",
+    "url": "https://arxiv.org/abs/1804.11326",
+    "supports": "Kernel-estimation versus variational-classifier workflows.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-classifiers",
+    "title": "Classification with Quantum Neural Networks on Near Term Processors",
+    "authors": "Edward Farhi; Hartmut Neven",
+    "url": "https://arxiv.org/abs/1802.06002",
+    "supports": "Parameterized-circuit classifier and original exploratory classical-simulation scope.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-iqp",
+    "title": "Classical simulation of commuting quantum computations implies collapse of the polynomial hierarchy",
+    "authors": "Michael J. Bremner; Richard Jozsa; Dan J. Shepherd",
+    "url": "https://arxiv.org/abs/1005.1407",
+    "supports": "IQP conditional hardness for the paper’s specified multiplicative-error model.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-boson",
+    "title": "The Computational Complexity of Linear Optics",
+    "authors": "Scott Aaronson; Alex Arkhipov",
+    "url": "https://arxiv.org/abs/1011.3245",
+    "supports": "Boson-sampling model and explicit conjectures underlying approximate-sampling arguments.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-gbs",
+    "title": "Gaussian Boson Sampling",
+    "authors": "Craig S. Hamilton; Regina Kruse; Linda Sansoni; Sonja Barkhofen; Christine Silberhorn; Igor Jex",
+    "url": "https://arxiv.org/abs/1612.01199",
+    "supports": "Squeezed-input sampling and hafnian mechanism.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-rcs",
+    "title": "Quantum Supremacy and the Complexity of Random Circuit Sampling",
+    "authors": "Adam Bouland; Bill Fefferman; Chinmay Nirkhe; Umesh Vazirani",
+    "url": "https://arxiv.org/abs/1803.04402",
+    "supports": "Random-circuit sampling complexity and verification problem.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-kuperberg-source",
+    "title": "A subexponential-time quantum algorithm for the dihedral hidden subgroup problem",
+    "authors": "Greg Kuperberg",
+    "url": "https://arxiv.org/html/quant-ph/0302112",
+    "supports": "SectionIII: phase qubits, sum/difference extraction, parity recursion, sieve.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Basic algorithm section inspected; explicit modulus 8 example derived independently."
+  },
+  {
+    "id": "app-hallgren-source",
+    "title": "Polynomial-Time Quantum Algorithms for Pell’s Equation and the Principal Ideal Problem",
+    "authors": "Sean Hallgren",
+    "url": "https://www.cse.psu.edu/~sjh26/pell.pdf",
+    "supports": "Compact Pell/regulator output, efficient shifted real-period oracle, pseudo-periodic Fourier sampling, continued-fraction reconstruction, and scope of principal-ideal/class-group extensions.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Full author-hosted May 2006 manuscript downloaded; technical sections1–3 read using university-hosted PDF text, including Claim2.1, Algorithm3.1 and Theorem2. Section4 algorithm and abstract checked for related extensions. Chapter58 now works the regulator/Pell branch end to end. Individual ideal distances use the separately cited Jozsa convention."
+  },
+  {
+    "id": "app-jones",
+    "title": "A Polynomial Quantum Algorithm for Approximating the Jones Polynomial",
+    "authors": "Dorit Aharonov; Vaughan Jones; Zeph Landau",
+    "url": "https://arxiv.org/html/quant-ph/0511096",
+    "supports": "Crossing representation, Markov trace, path weights, writhe correction, trace/plat distinction.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Sections 2.6–2.12 and 3.3 read; crossing and writhe conventions aligned to source."
+  },
+  {
+    "id": "app-metropolis",
+    "title": "Quantum Metropolis Sampling",
+    "authors": "Kristan Temme; Tobias J. Osborne; Karl Gerd H. Vollbrecht; David Poulin; Frank Verstraete",
+    "url": "https://arxiv.org/html/0911.3635",
+    "supports": "Sections 3 and 7: energy-label acceptance, alternating P/Q recovery, and finite retry/precision limitations.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Relevant construction sections inspected; authored small matrices and probabilities checked independently."
+  },
+  {
+    "id": "app-modern-gibbs",
+    "title": "An efficient and exact noncommutative quantum Gibbs sampler",
+    "authors": "Chi-Fang Chen; Michael J. Kastoryano; András Gilyén",
+    "url": "https://arxiv.org/abs/2311.09207",
+    "supports": "Exact detailed-balance construction with mixing-time and temperature dependence; v2 October 2025.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-discrete-gibbs",
+    "title": "Quantum generalizations of Glauber and Metropolis dynamics",
+    "authors": "András Gilyén; Chi-Fang Chen; Joao F. Doriguello; Michael J. Kastoryano",
+    "url": "https://arxiv.org/abs/2405.20322",
+    "supports": "Discrete-time counterparts and improved Metropolis-style construction; v2 January 2026.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "app-forrelation-source",
+    "title": "Forrelation: A Problem that Optimally Separates Quantum from Classical Computing",
+    "authors": "Scott Aaronson; Andris Ambainis",
+    "url": "https://arxiv.org/html/1411.5729",
+    "supports": "Promise, indexed phase query, one-query success convention and randomized classical lower bound.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Sections 1 and 3 including error 2/5 versus conventional 1/3 distinction inspected."
+  }
+]
