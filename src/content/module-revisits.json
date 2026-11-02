@@ -2,7 +2,7 @@
   {
     "module": 1,
     "lesson": "simon",
-    "body": "Deutsch used one final bit as the answer. Simon's sample 000 instead gives the equation 0=0 and no information; the sample 100 for mask 011 gives only the constraint that its left bit is zero. Both use a Hadamard readout, but their output contracts differ. Before leaving this module, calculate why Deutsch's balanced signs cancel at output 0, then identify the two equal-output contributions that cancel at a forbidden Simon sample."
+    "body": "Deutsch used one final bit as the answer. Simon's sample 000 instead gives the equation 0=0 and no information; the sample 100 for mask 011 gives only the constraint $s_0=0$: the mask's left bit is zero. Both use a Hadamard readout, but their output contracts differ. Before leaving this module, calculate why Deutsch's balanced signs cancel at output 0, then identify the two equal-output contributions that cancel at a forbidden Simon sample."
   },
   {
     "module": 2,

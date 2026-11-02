@@ -52,3 +52,19 @@ The author ran type checking (0 errors/warnings/hints), 67 unit tests, 38 browse
 [Hosted run 41409922696](https://github.com/qiaokan/quantum-algorithms/actions/runs/41409922696) passed the build, unit, numerical and link checks but found a 9-pixel mobile overflow in random-circuit-sampling (37 of 38 browser tests passed). Three long inline expressions are now scrollable display equations without changing the mathematics. The all-chapters test preserves its strict width bound, reports the problematic math, and collects all affected chapters with soft assertions that still fail CI.
 
 Local full validation passed again: 67 unit and 38 browser tests, plus build/audits. Claude round 4 verified the mathematical equivalence, display-renderer accessibility and unchanged test pass criterion, found no regressions, and agreed with the narrow fix. Its unedited report is `claude-review-round-4.md`. The author agrees. Hosted CI must pass on the follow-up commit; the definitive hosted result is attached to that commit in GitHub Actions.
+
+## Learning-flow edits after review (not independently re-reviewed)
+
+A read-only review of the entry experience and lessons 01–06 recomputed every amplitude, probability and exercise there and found no arithmetic errors. Its learning-speed findings were then applied. Edits to the reviewed lessons 01–05 add text and change no derivation:
+- They define ket notation before the first oracle in Deutsch and Grover, and define "superposition" in Deutsch.
+- They link existing definitions at first use (oracle, Hadamard, controlled gates, eigenstate, inner product, entangled, mixture, span, ancilla, uncompute).
+- In Deutsch–Jozsa, the uniform state is renamed from $|s\rangle$ to $|u\rangle$, so `s` is no longer reused within lessons 02–06 for unrelated objects.
+- They add signposts between Grover, Bernstein–Vazirani and amplitude amplification.
+
+Other changes:
+- New `hadamard` definition.
+- "The idea in 30 seconds" boxes for lessons 01–06 (`src/content/lesson-ideas.json`).
+- Next/previous links follow the main path, with optional branches offered rather than forced.
+- Two wording corrections: the Simon check 1 answer and the module 1 revisit.
+
+These edits passed the build, the content audit, unit tests, browser tests and the four standard-library numerical suites. No independent reviewer has re-read the changed prose, so the `reviewed` labels rest on the earlier review of the unchanged derivations.

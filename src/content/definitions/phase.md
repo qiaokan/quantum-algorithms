@@ -1,4 +1,4 @@
-A phase is a unit-magnitude complex factor, $e^{i\theta}$. A global phase multiplies every amplitude by the same factor; it changes no measurement predictions. A relative phase changes some amplitudes relative to others and can alter later interference.
+For real amplitudes, a phase is simply a sign: $+1$ or $-1$. In general it is a unit-magnitude complex factor, $e^{i\theta}$; $\theta=0$ gives $+1$ and $\theta=\pi$ gives $-1$. A global phase multiplies every amplitude by the same factor; it changes no measurement predictions. A relative phase changes some amplitudes relative to others and can alter later interference.
 
 The states $(1,1)^T/\sqrt2$ and $(-1,-1)^T/\sqrt2$ differ globally by −1. The states $(1,1)^T/\sqrt2$ and $(1,-1)^T/\sqrt2$ differ relatively. All four have immediate probabilities $1/2,1/2$. Applying $H$ to the first pair yields $|0\rangle$ and $-|0\rangle$, with identical outcomes. Applying $H$ to $(1,-1)^T/\sqrt2$ gives $|1\rangle$.
 

@@ -1,8 +1,9 @@
 ---
 import Book from '../../layouts/Book.astro';
 import Demo from '../../components/Demo.astro';
-import {lessons,exercises,lessonMarkdown,render,moduleNames,label,type Lesson} from '../../lib/content';
+import {lessons,definitions,exercises,lessonMarkdown,render,readingMinutes,moduleNames,label,type Lesson} from '../../lib/content';
 import revisits from '../../content/module-revisits.json';
+import ideas from '../../content/lesson-ideas.json';
 import {demoIds} from '../../lib/demos';
 export function getStaticPaths(){return lessons.filter(l=>l.editorial!=='planned'&&l.file).map(lesson=>({params:{id:lesson.id},props:{lesson}}))}
 interface Props{lesson:Lesson}
@@ -13,8 +14,18 @@ const referencesOffset=body.html.indexOf('<h2 id="references">');
 const mainHtml=referencesOffset<0?body.html:body.html.slice(0,referencesOffset);
 const referencesHtml=referencesOffset<0?'':body.html.slice(referencesOffset);
 const index=lessons.findIndex(l=>l.id===lesson.id);
-const previous=lessons.slice(0,index).reverse().find(l=>l.editorial!=='planned');
-const next=lessons.slice(index+1).find(l=>l.editorial!=='planned');
+// Main-path lessons step along the main path; an adjacent optional branch is offered, not forced.
+const isMain=lesson.path==='main';
+const before=lessons.slice(0,index).reverse().filter(l=>l.editorial!=='planned');
+const after=lessons.slice(index+1).filter(l=>l.editorial!=='planned');
+const nextMain=after.find(l=>l.path==='main');
+const previous=isMain?(before.find(l=>l.path==='main')??before[0]):before[0];
+const next=isMain?(nextMain??after[0]):after[0];
+const branchOffer=isMain&&after[0]?.path==='branch'?after[0]:undefined;
+const backToMain=!isMain&&nextMain&&nextMain!==next?nextMain:undefined;
+const idea=ideas.find(i=>i.lesson===lesson.id);
+const ideaHtml=idea?(await render(idea.idea)).html:'';
+const conceptLinks=lesson.concepts.map(id=>definitions.find(d=>d.id===id)).filter(d=>!!d);
 const demo=demoIds.includes(lesson.id);
 const revisit=revisits.find(r=>r.lesson===lesson.id);
 const revisitHtml=revisit?(await render(revisit.body)).html:'';
@@ -25,8 +36,9 @@ const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'i
 <div class="breadcrumb"><a href="/">The textbook</a> / <a href={`/index/#module-${lesson.module}`}>Module {String(lesson.module).padStart(2,'0')}</a> / Lesson {String(lesson.sequence).padStart(2,'0')}</div>
 <div class="lesson-kicker"><span class="eyebrow">{moduleNames[lesson.module]}</span><span class:list={['badge',{partial:lesson.editorial==='partial'}]}>{lesson.editorial==='complete'?'Authored · not independently reviewed':lesson.editorial==='reviewed'?'Reviewed':lesson.editorial}</span></div>
 <h1>{lesson.title}</h1><p class="dek">{lesson.summary}</p>
-<div class="lesson-metadata"><span>{lesson.kind}</span><span>{lesson.path==='main'?'Main path':'Optional branch'}</span><span>{Math.ceil(body.text.split(/\s+/).length/150)} min reading + calculation</span><span>Lesson {String(lesson.sequence).padStart(2,'0')}</span></div>
-<div class="context-box"><p><strong>The point of this lesson.</strong> {lesson.why}</p><p><strong>Useful prerequisites.</strong> {lesson.prerequisites.length?lesson.prerequisites.map((id,i)=><Fragment>{i>0?' · ':''}<a href={`/lessons/${id}/`}>{lessons.find(l=>l.id===id)?.title??id}</a></Fragment>):'Start here. Essential mathematics is introduced in the worked example.'}</p><p class="small"><strong>Advantage status:</strong> {lesson.advantage}</p></div>
+<div class="lesson-metadata"><span>{lesson.kind}</span><span>{lesson.path==='main'?'Main path':'Optional branch'}</span><span>{await readingMinutes(lesson)} min reading + calculation</span><span>Lesson {String(lesson.sequence).padStart(2,'0')}</span></div>
+{idea&&<section class="idea-box" aria-labelledby="idea-heading"><p class="eyebrow" id="idea-heading">THE IDEA IN 30 SECONDS</p><div class="idea-text" set:html={ideaHtml}/><pre class="circuit-sketch" tabindex="0" aria-label="Circuit sketch">{idea.circuit}</pre>{demo&&<p class="small"><a href="#interactive-example">Step through this circuit in the simulator ↓</a></p>}</section>}
+<div class="context-box"><p><strong>The point of this lesson.</strong> {lesson.why}</p><p><strong>Useful prerequisites.</strong> {lesson.prerequisites.length?lesson.prerequisites.map((id,i)=><Fragment>{i>0?' · ':''}<a href={`/lessons/${id}/`}>{lessons.find(l=>l.id===id)?.title??id}</a></Fragment>):'Start here. Essential mathematics is introduced in the worked example.'}</p>{conceptLinks.length>0&&<p><strong>Concepts used here.</strong> {conceptLinks.map((d,i)=><Fragment>{i>0?' · ':''}<a href={`/definitions/${d!.id}/`}>{d!.title}</a></Fragment>)}</p>}<p class="small"><strong>Advantage status:</strong> {lesson.advantage}</p></div>
 {lesson.editorial==='partial'&&<aside class="partial-notice"><strong>This chapter is partial.</strong> The material below is usable, but these teaching gaps remain:<ul>{lesson.gaps.map(g=><li>{g}</li>)}</ul></aside>}
 <div class="prose" set:html={mainHtml}/>
 {demo&&<><h2 id="interactive-example">Step through the example</h2><Demo id={lesson.id}/></>}
@@ -34,6 +46,7 @@ const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'i
 <section id="practice" class="prose"><h2>Practice & explained answers</h2><p>Predict first. Then calculate with the definitions available. A correct prediction after changing one operation is stronger evidence of understanding than recognizing a formula.</p>{practice.map((e,i)=><div><h3>Check {i+1}</h3><div set:html={e.question}/><details><summary>Reveal worked answer</summary><div set:html={e.answer}/></details></div>)}</section>
 <div class="prose" set:html={referencesHtml}/>
 <div class="lesson-actions"><p>Record your own assessment. Scrolling never marks a lesson understood.</p><div class="progress-controls"><button data-progress="read" aria-pressed="false">Read</button><button data-progress="practiced" aria-pressed="false">Practiced</button><button data-progress="revisit" aria-pressed="false">Revisit</button></div><p class="small muted" data-progress-status></p></div>
-<nav class="prev-next" aria-label="Lesson sequence">{previous?<a href={`/lessons/${previous.id}/`}><span>← PREVIOUS LESSON</span>{label(previous)}</a>:<a href="/"><span>← ORIENTATION</span>How to use this book</a>}{next?<a href={`/lessons/${next.id}/`}><span>NEXT LESSON →</span>{label(next)}</a>:<a href="/coverage/"><span>THE WHOLE PICTURE →</span>Coverage and next reading</a>}</nav>
+<nav class="prev-next" aria-label="Lesson sequence">{previous?<a href={`/lessons/${previous.id}/`}><span>← PREVIOUS LESSON</span>{label(previous)}</a>:<a href="/"><span>← ORIENTATION</span>How to use this book</a>}{next?<a href={`/lessons/${next.id}/`}><span>{isMain&&next.path==='main'?'NEXT LESSON · MAIN PATH →':'NEXT LESSON →'}</span>{label(next)}</a>:<a href="/coverage/"><span>THE WHOLE PICTURE →</span>Coverage and next reading</a>}</nav>
+{(branchOffer||backToMain)&&<p class="path-note small">{branchOffer?<Fragment>Optional detour first: <a href={`/lessons/${branchOffer.id}/`}>{label(branchOffer)}</a>. It deepens this family; the main path continues without it.</Fragment>:<Fragment>This is an optional branch. <a href={`/lessons/${backToMain!.id}/`}>Back to the main path: {label(backToMain!)} →</a></Fragment>}</p>}
 </article>
 </Book>

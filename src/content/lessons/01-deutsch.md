@@ -9,7 +9,7 @@ You are given access to a function $f$ that accepts one bit and returns one bit.
 | 1, 0 | balanced | 1 |
 | 1, 1 | constant | 0 |
 
-Our quantum access is a coherent, reversible operation called $U_f$, pronounced “U sub f.” It acts on two bits' worth of quantum state:
+Our quantum access is a coherent, reversible black box, called an [oracle](/definitions/oracles/) and named $U_f$ (pronounced “U sub f”). It acts on two bits' worth of quantum state. Read $|x,y\rangle$ (“ket x, y”) as the name of the joint state whose input bit is $x$ and target bit is $y$. A quantum state attaches a number called an **amplitude** to each such label; [the few numbers we need](#the-few-numbers-we-need) below makes this precise.
 
 $$U_f|x,y\rangle=|x,y\oplus f(x)\rangle.$$
 
@@ -23,11 +23,11 @@ Deutsch uses **one coherent oracle call**, plus fixed gates and one measured bit
 
 ## The few numbers we need
 
-A qubit's state is a two-entry column of **amplitudes**. The labels $|0\rangle$ and $|1\rangle$ (“ket zero” and “ket one”) abbreviate the columns $(1,0)^T$ and $(0,1)^T$. The superscript $T$ means that the displayed row is written vertically. A general state $a|0\rangle+b|1\rangle$ means the column $(a,b)^T$. In this lesson every amplitude is real, so probabilities are simply $a^2$ and $b^2$; their sum must be 1. Later [complex amplitudes](/definitions/complex-numbers/) use squared magnitudes.
+A qubit's state is a two-entry column of **amplitudes**. The labels $|0\rangle$ and $|1\rangle$ (“ket zero” and “ket one”) abbreviate the columns $(1,0)^T$ and $(0,1)^T$. The superscript $T$ means that the displayed row is written vertically. A general state $a|0\rangle+b|1\rangle$ means the column $(a,b)^T$. In this lesson every amplitude is real, so probabilities are simply $a^2$ and $b^2$; their sum must be 1. A state with two or more nonzero amplitudes, such as $|+\rangle$ below, is called a **superposition**. It is not secretly one of its labels: later gates combine the amplitudes themselves, signs included. Later [complex amplitudes](/definitions/complex-numbers/) use squared magnitudes.
 
 The minus sign in $-1/\sqrt2$ is allowed: squaring gives positive probability $1/2$. Here $\sqrt2$ is the positive number whose square is 2. We use this scale so two equal-magnitude amplitudes have total probability one.
 
-Our main fixed gate is the **Hadamard**, named $H$:
+Our main fixed gate is the **[Hadamard](/definitions/hadamard/)**, named $H$:
 
 $$H=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad
 H\begin{pmatrix}a\\b\end{pmatrix}=\begin{pmatrix}(a+b)/\sqrt2\\(a-b)/\sqrt2\end{pmatrix}.$$
@@ -97,7 +97,7 @@ $$\frac{|00\rangle-|01\rangle-|10\rangle+|11\rangle}{2}
 =\frac{|0\rangle-|1\rangle}{\sqrt2}\otimes\frac{|0\rangle-|1\rangle}{\sqrt2}
 =|-\rangle|-\rangle.$$
 
-This factoring is the same state written compactly. No scalar physically moves between qubits. The name **phase kickback** describes this effect of a controlled operation on an eigenstate target; it does not add an unlisted gate. A relative minus sign is a relative [phase](/definitions/phase/).
+This factoring is the same state written compactly. No scalar physically moves between qubits. The name **phase kickback** describes this effect of a [controlled operation](/definitions/controlled-gates/) on an [eigenstate](/definitions/eigenvalues/) target, meaning a state the operation only multiplies by a number (here $-1$); it does not add an unlisted gate. A relative minus sign is a relative [phase](/definitions/phase/).
 
 ## Interference and final output
 
@@ -139,7 +139,7 @@ A minus sign on the **entire state** is global phase; squaring amplitudes erases
 
 ## Implementation and honest cost
 
-For these tiny functions, the oracle constructions are: identity for 00; $X$ on target for 11; CNOT from input to target for 01; CNOT plus $X$ on target for 10. The last case has **two function-dependent elementary gates**, despite being one call to the specified oracle. The fixed part uses initial target $X$, two preparation Hadamards, one readout Hadamard, and input measurement. A device compiler may decompose CNOT differently on a particular native gate set.
+For these tiny functions, the oracle constructions are: identity for 00; $X$ on target for 11; [CNOT](/definitions/controlled-gates/) (controlled-NOT: flip the target when the input is 1) from input to target for 01; CNOT plus $X$ on target for 10. The last case has **two function-dependent elementary gates**, despite being one call to the specified oracle. The fixed part uses initial target $X$, two preparation Hadamards, one readout Hadamard, and input measurement. A device compiler may decompose CNOT differently on a particular native gate set.
 
 If the oracle is given as a classical truth table, someone must read that table to build the quantum circuit. The algorithm's query comparison assumes the required coherent interface is already supplied; it does not hide construction costs. The browser simulator uses classical loops to apply the oracle permutation and is not itself a quantum computer. Every demonstrated run is ideal, with no device noise or error-correction overhead. In that ideal model success is exactly 1; hardware errors would invalidate that guarantee.
 
@@ -150,7 +150,7 @@ The underlying pattern generalizes, but the two-entry exact cancellation is spec
 <details>
 <summary>What if the target is prepared in |+⟩ instead of |−⟩?</summary>
 
-$X|+\rangle=|+\rangle$, so every function acts identically on it. The input stays $|+\rangle$ and the final $H$ always yields 0, incorrectly reporting constant for balanced functions. A superposition alone does not supply useful information; the chosen target eigenvalue is essential.
+$X|+\rangle=|+\rangle$, so every function acts identically on it. The input stays $|+\rangle$ and the final $H$ always yields 0, incorrectly reporting constant for balanced functions. A superposition alone does not supply useful information; the chosen target [eigenvalue](/definitions/eigenvalues/) ($-1$ for $|-\rangle$, versus $+1$ for $|+\rangle$) is essential.
 
 </details>
 

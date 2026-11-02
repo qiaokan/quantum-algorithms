@@ -50,7 +50,9 @@
     "aliases": [
       "tensor",
       "Kronecker",
-      "\u2297"
+      "\u2297",
+      "entangled",
+      "entanglement"
     ],
     "file": "tensor-products.md",
     "summary": "For independently prepared registers, the joint amplitude of a pair is the product of its two amplitudes. The tensor product records those products in a fixed order:"
@@ -95,6 +97,21 @@
     ],
     "file": "basis.md",
     "summary": "A basis is a set of independent reference vectors in which every vector has unique coordinates. For one qubit the computational basis is |0\\rangle=(1,0)^T, |1\\rangle=(0,1)^T. Another orthonormal basis is |+\\rangle=(1,1)^T/\\sqrt2, |-\\rangle=(1,-1)^T/\\sqrt2; \u201corthonormal\u201d means unit length and zero [inner product](/definitions/inner-products/) between distinct members."
+  },
+  {
+    "id": "hadamard",
+    "title": "The Hadamard gate",
+    "aliases": [
+      "H",
+      "H gate",
+      "Hadamard gate",
+      "plus state",
+      "minus state",
+      "|+\u27e9",
+      "|\u2212\u27e9"
+    ],
+    "file": "hadamard.md",
+    "summary": "H maps a pair of amplitudes (a,b) to ((a+b)/\u221a2,(a\u2212b)/\u221a2). It sends |0\u27e9 to |+\u27e9 and |1\u27e9 to |\u2212\u27e9, and applying it twice changes nothing, so a final H turns a relative sign into a readable bit."
   },
   {
     "id": "inner-products",

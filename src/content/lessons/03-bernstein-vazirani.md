@@ -1,6 +1,6 @@
 ## Problem and access model
 
-A hidden bit string $s$ has $n$ bits. An oracle accepts another $n$-bit string $x$ and returns $f_s(x)=s\cdot x$, where the **binary dot product** means multiply matching bits, add, and keep the parity (the remainder modulo 2). For $s=101$ and $x=110$, it is $1(1)\oplus0(1)\oplus1(0)=1$. The goal is to return the entire string $s$, not merely classify the function. This is the Bernstein–Vazirani promise problem; [IBM develops it alongside Deutsch–Jozsa](https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/deutsch-jozsa-algorithm#the-bernstein-vazirani-problem).
+This lesson returns to [Deutsch's](/lessons/deutsch/) sign trick, now on several input bits. A hidden bit string $s$ has $n$ bits; here $s$ is a string of bits, not Grover's state $|s\rangle$. An oracle accepts another $n$-bit string $x$ and returns $f_s(x)=s\cdot x$, where the **binary dot product** means multiply matching bits, add, and keep the parity (the remainder modulo 2). For $s=101$ and $x=110$, it is $1(1)\oplus0(1)\oplus1(0)=1$. The goal is to return the entire string $s$, not merely classify the function. This is the Bernstein–Vazirani promise problem; [IBM develops it alongside Deutsch–Jozsa](https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/deutsch-jozsa-algorithm#the-bernstein-vazirani-problem).
 
 Assume a coherent reversible oracle $U_f|x,y\rangle=|x,y\oplus f_s(x)\rangle$. $y$ is one auxiliary bit. The promise that $f$ is linear over XOR is essential; a generic Boolean function is not described by a hidden $n$-bit string. The problem provider supplies this oracle. Our access does not include permission to inspect its circuit for the answer.
 
@@ -17,7 +17,7 @@ Choose $n=3$, hidden $s=101$. Our input labels are ordered $000,\allowbreak 001,
 $$\begin{array}{c|rrrrrrrr}x&000&001&010&011&100&101&110&111\\\hline
 f_s(x)&0&1&0&1&1&0&1&0\end{array}.$$
 
-A state vector has one amplitude per label; probabilities are squared magnitudes. Prepare input $|000\rangle$, target $|1\rangle$. Apply the [Hadamard](/definitions/matrix-multiplication/) $H=(1/\sqrt2)\left(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\right)$ to every bit. Each input bit becomes $|+\rangle=(1,1)^T/\sqrt2$; target becomes $|-\rangle=(1,-1)^T/\sqrt2$.
+A state vector has one amplitude per label; probabilities are squared magnitudes. Prepare input $|000\rangle$, target $|1\rangle$. Apply the [Hadamard](/definitions/hadamard/) $H=(1/\sqrt2)\left(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\right)$ to every bit. Each input bit becomes $|+\rangle=(1,1)^T/\sqrt2$; target becomes $|-\rangle=(1,-1)^T/\sqrt2$.
 
 The input tensor product therefore has eight entries, each $(1/\sqrt2)^3=1/\sqrt8$. It is
 
@@ -76,7 +76,7 @@ An equivalent cancellation calculation gives the amplitude of output $y$ as $2^{
 
 ## Implementation, cost, and counterexamples
 
-For the example, two CNOTs from input bits 0 and 2 into the target implement the oracle. For an $n$-bit string this construction uses one CNOT per hidden 1, up to $n$. The outer algorithm calls the full provided oracle once and uses $2n+1$ Hadamards plus target initialization and readout. One query is therefore not one elementary gate. The classical simulator scans amplitudes; this is an exponentially large representation in general, not a fast classical implementation of the oracle separation.
+For the example, two [CNOTs](/definitions/controlled-gates/) from input bits 0 and 2 into the target implement the oracle. For an $n$-bit string this construction uses one CNOT per hidden 1, up to $n$. The outer algorithm calls the full provided oracle once and uses $2n+1$ Hadamards plus target initialization and readout. One query is therefore not one elementary gate. The classical simulator scans amplitudes; this is an exponentially large representation in general, not a fast classical implementation of the oracle separation.
 
 If the function is affine, $f(x)=s\cdot x\oplus b$ for one constant bit $b$, the extra factor $(-1)^b$ is global. The experiment still returns $s$ but does not return $b$. If $f(x)=x_0x_1$ for two inputs, the signs $(1,1,1,-1)/2$ do not factor into independent $+,-$ patterns. Applying two Hadamards yields $(1,1,1,-1)/2$ again: all four outputs occur. There is no promised hidden linear string to recover.
 

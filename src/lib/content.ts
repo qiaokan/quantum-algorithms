@@ -65,4 +65,6 @@ export async function render(markdown: string): Promise<Rendered> {
   return {html,sections,text:plainText(html)};
 }
 export function counts() { return Object.fromEntries(['reviewed','complete','partial','planned'].map(s=>[s,lessons.filter(l=>l.editorial===s).length])); }
+// Same estimate the lesson page shows: rendered lesson words at 150 per minute.
+export async function readingMinutes(l: Lesson) { return Math.ceil((await render(lessonMarkdown(l))).text.split(/\s+/).length/150); }
 export function label(l: Lesson) { return `${String(l.sequence).padStart(2,'0')}. ${l.title}`; }

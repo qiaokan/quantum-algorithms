@@ -12,9 +12,9 @@ It does **not** establish an exponential separation against bounded-error random
 
 ## Fixed instance and preparation
 
-Take two input bits, label order 00,01,10,11, and $f(x_0x_1)=x_0\oplus x_1$. The table is $(0,1,1,0)$, balanced. Initialize $|00\rangle|1\rangle$ and apply Hadamard $H$ to each of the three qubits. $H$ maps $(a,b)^T$ to $((a+b)/\sqrt2,(a-b)/\sqrt2)^T$. Thus the input becomes uniform and the target becomes $|-\rangle$:
+Take two input bits, label order 00,01,10,11, and $f(x_0x_1)=x_0\oplus x_1$. The table is $(0,1,1,0)$, balanced. Initialize $|00\rangle|1\rangle$ and apply Hadamard $H$ to each of the three qubits. $H$ maps $(a,b)^T$ to $((a+b)/\sqrt2,(a-b)/\sqrt2)^T$. Thus the input becomes the uniform state, written $|u\rangle$, and the target becomes $|-\rangle$:
 
-$$|s\rangle|-\rangle=\frac12(1,1,1,1)^T\otimes\frac1{\sqrt2}(1,-1)^T.$$
+$$|u\rangle|-\rangle=\frac12(1,1,1,1)^T\otimes\frac1{\sqrt2}(1,-1)^T.$$
 
 The tensor product multiplies each input entry by each target entry, giving eight amplitudes of magnitude $1/(2\sqrt2)$. Their probabilities add to $8(1/8)=1$. Input-first register ordering is used throughout.
 
@@ -65,7 +65,7 @@ Every oracle sign is negated, so the entire post-query input vector gains global
 
 ## Implementation and end-to-end cost
 
-Preparation uses $n+1$ Hadamards plus initialization; readout uses $n$ more, followed by $n$ measured bits and a classical OR. The coherent oracle is called once. For the two-bit parity example, two CNOTs into the target implement it. For the broken-promise AND example, one Toffoli implements it. Those are different function-dependent circuits; the outer algorithm is the same.
+Preparation uses $n+1$ Hadamards plus initialization; readout uses $n$ more, followed by $n$ measured bits and a classical OR. The coherent oracle is called once. For the two-bit parity example, two [CNOTs](/definitions/controlled-gates/) into the target implement it. For the broken-promise AND example, one Toffoli (a NOT controlled by two bits) implements it. Those are different function-dependent circuits; the outer algorithm is the same.
 
 An arbitrary promised truth table can still have an expensive reversible implementation. One coherent call to a large circuit is not constant gate cost, nor is storing $2^n$ table entries free. The theoretical ideal exactness assumes exact operations and no noise; it is distinct from a measured hardware success rate. The classical simulator enumerates amplitudes, so its exponential memory is not an implementation of a quantum advantage on a classical CPU.
 

@@ -1,0 +1,32 @@
+[
+  {
+    "lesson": "deutsch",
+    "idea": "Prepare the target in $|-\\rangle$. Then the single oracle call writes $f(x)$ as a sign $(-1)^{f(x)}$ on the input branch instead of as a bit on the target. This is called phase kickback. The input ends up as $|+\\rangle$ when $f(0)=f(1)$, and as $|-\\rangle$ up to a global sign when they differ. A final $H$ turns that sign pattern into a measured 0 or 1.",
+    "circuit": "input   |0> --H--[     ]--H-- measure: 0 = constant, 1 = balanced\n                 [ U_f ]\ntarget  |1> --H--[     ]----- stays |->, not measured"
+  },
+  {
+    "lesson": "grover",
+    "idea": "The oracle marks the answer by negating its amplitude. Diffusion then replaces every amplitude $a_x$ with $2\\bar a-a_x$, a reflection about the mean $\\bar a$. That shrinks the unmarked amplitudes and grows the marked one. With four labels, one round reaches certainty. With $N$ labels and one answer, about $(\\pi/4)\\sqrt N$ rounds are needed, and extra rounds overshoot.",
+    "circuit": "bit 0  |0> --H--[     ]--[           ]-- measure\n                [ O_f ]  [ diffusion ]      (one round for N = 4)\nbit 1  |0> --H--[     ]--[           ]-- measure"
+  },
+  {
+    "lesson": "bernstein-vazirani",
+    "idea": "This is Deutsch's kickback trick applied to $n$ input bits at once. Because $f_s(x)=s\\cdot x$ is a parity, the sign pattern $(-1)^{s\\cdot x}$ factors into one state per bit: $|-\\rangle$ where $s$ has a 1, and $|+\\rangle$ where it has a 0. One Hadamard per bit converts each of those into the matching bit of $s$, so a single query reveals all $n$ bits.",
+    "circuit": "x0  |0> --H--[     ]--H-- measure -> s0\nx1  |0> --H--[ U_f ]--H-- measure -> s1\nx2  |0> --H--[     ]--H-- measure -> s2\ny   |1> --H--[     ]----- stays |->, not measured"
+  },
+  {
+    "lesson": "deutsch-jozsa",
+    "idea": "The circuit is the same as Bernstein–Vazirani, but the question is different. After the query and the final Hadamards, every input $x$ contributes $(-1)^{f(x)}/N$ to the amplitude of the all-zeros output, where $N=2^n$. A constant function gives amplitude $\\pm1$ there, so the result is always all zeros. A balanced function cancels it to exactly 0, so the result is never all zeros.",
+    "circuit": "x (n bits)  |0...0> --H--[     ]--H-- measure: all zeros = constant\n                         [ U_f ]                   otherwise = balanced\ny           |1>     --H--[     ]----- stays |->, not measured"
+  },
+  {
+    "lesson": "simon",
+    "idea": "Simon uses equal-output pairs instead of signs. The output register starts at zero and records $f(x)$, which groups the inputs into pairs $\\{x,x\\oplus s\\}$. The final Hadamards make each pair's two paths cancel on every $y$ with $s\\cdot y=1$. So each run returns a random $y$ satisfying $s\\cdot y=0$. About $n$ runs give $n-1$ independent equations, and classical elimination over bits solves them for $s$.",
+    "circuit": "x (n bits)  |0...0> --H--[     ]--H-- measure y   (y . s = 0)\n                         [ U_f ]\nf (n bits)  |0...0> -----[     ]----- ignored\nrepeat about n times, then solve the equations classically"
+  },
+  {
+    "lesson": "amplitude-amplification",
+    "idea": "This is Grover's method with any reversible preparation circuit $A$ in place of the Hadamards. Negate the good candidates ($S_f$), then reflect about the prepared state $A|0\\rangle$ ($R_s$). Each round rotates the state by $2\\theta$ toward the good part, where $\\sin\\theta=\\sqrt a$. In the worked example $a=1/4$, so $\\theta=\\pi/6$ and one round reaches success probability 1. For small $a$, about $1/\\sqrt a$ rounds replace the roughly $1/a$ tries of measure-and-retry.",
+    "circuit": "|0> --[ A ]--( [ S_f ] then [ R_s ] ) repeated j times-- measure\n\nR_s = A (2|0><0| - I) A^dagger : undo A, reflect about all-zeros (negate every other label), redo A"
+  }
+]
