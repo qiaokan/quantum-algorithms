@@ -1,4 +1,5 @@
 ---
+import {makeDemo} from '../lib/demos';
 interface Props { id: string }
 const {id}=Astro.props;
 const defaults:Record<string,string>={deutsch:'01',grover:'2','bernstein-vazirani':'5','deutsch-jozsa':'balanced',simon:'3',qft:'1','phase-estimation':'0.25'};
@@ -11,6 +12,8 @@ const choices:Record<string,[string,string][]>={
  qft:[['0','Input 00'],['1','Input 01'],['2','Input 10'],['3','Input 11']],
  'phase-estimation':[['0.25','Exact phase θ = 1/4'],['0.375','Exact phase θ = 3/8'],['0.3','Inexact phase θ = 0.3']],
 };
+// Server-render the first frame so the heading and explanation are not empty before (or without) JavaScript.
+const initial=makeDemo(id,defaults[id]);
 ---
 <section class="demo" data-demo={id} aria-label="Interactive ideal simulation">
   <div class="demo-header"><span class="eyebrow">COMPUTE THE EXAMPLE</span><span class="badge">Ideal simulator · ≤ 8 qubits</span></div>
@@ -18,7 +21,7 @@ const choices:Record<string,[string,string][]>={
   <p class="muted small">Changing the problem also changes the oracle. Revealing its setting here is a teaching aid; the algorithm accesses it only through the displayed oracle calls.</p>
   <div data-circuit class="circuit-steps" role="group" aria-label="Circuit operations"></div>
   <div class="demo-controls"><button data-prev>← Previous step</button><button data-next class="primary">Next step →</button><button data-reset>Reset</button></div>
-  <div aria-live="polite"><h3 data-operation></h3><p data-explanation></p><p class="small muted" data-query-count></p></div>
+  <div aria-live="polite"><h3 data-operation>{`Step 0 / ${initial.frames.length-1} — ${initial.frames[0].name}`}</h3><p data-explanation>{initial.frames[0].explanation}</p><p class="small muted" data-query-count></p></div>
   <details class="state-inspector" open><summary>Inspect amplitudes · simulator privilege</summary><p data-labels></p><div class="table-scroll" tabindex="0" role="region" aria-label="Amplitude table"><table><thead><tr><th>Basis</th><th>Amplitude</th><th>Probability</th></tr></thead><tbody data-state></tbody></table></div></details>
   <h4>Ideal measurement probabilities</h4><div data-probabilities class="probability-bars"></div>
   <div class="sample-controls"><button data-sample>Sample 256 measurements</button><button data-clear-samples>Clear samples</button></div>

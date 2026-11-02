@@ -10,7 +10,7 @@ Instead retain a subset of $r$ queried items. A subset is marked if it already c
 
 ## A six-subset worked search
 
-Take $a=(3,8,3,5)$ and $r=2$. The subset basis order is $01,02,03,12,13,23$; these labels mean pairs of indices. Their stored value pairs are $(3,8),(3,3),(3,5),(8,3),(8,5),(3,5)$. Only subset 02 is marked. Preparing an equal superposition yields six amplitudes $1/\sqrt6$. The actual value loading uses two value-oracle calls per branch coherently, not twelve classical evaluations counted as one quantum query.
+Take $a=(3,8,3,5)$ and $r=2$. The subset basis order is $01,02,03,12,13,23$; these labels mean pairs of indices. Their stored value pairs are $(3,8),\allowbreak (3,3),\allowbreak (3,5),\allowbreak (8,3),\allowbreak (8,5),\allowbreak (3,5)$. Only subset 02 is marked. Preparing an equal superposition yields six amplitudes $1/\sqrt6$. The actual value loading uses two value-oracle calls per branch coherently, not twelve classical evaluations counted as one quantum query.
 
 Compute equality on the stored values, flip the phase of equal branches, and uncompute the equality bit. The amplitudes become $(1,-1,1,1,1,1)/\sqrt6$. Their mean is $4/(6\sqrt6)=2/(3\sqrt6)$. An **exact stationary reflection for this toy subset space** gives $a'_j=2\bar a-a_j$. Thus the marked amplitude is $4/(3\sqrt6)+1/\sqrt6=7/(3\sqrt6)$; each other amplitude is $1/(3\sqrt6)$. The marked probability is $49/54$, and five wrong subsets together have probability $5/54$.
 

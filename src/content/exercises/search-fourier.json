@@ -2,17 +2,17 @@
   {
     "lesson": "amplitude-amplification",
     "question": "For the a = 1/4 example, what is the state after a second Q iteration, and why is it worse?",
-    "answer": "Q rotates the (B,G) coordinates by pi/3. Starting after one iteration at (0,1), multiplication gives (-sqrt(3)/2,1/2). Success drops from 1 to 1/4. The bad amplitude is negative, but its probability is positive 3/4."
+    "answer": "$Q$ rotates the $(B,G)$ coordinates by $\\pi/3$. Starting after one iteration at $(0,1)$, multiplication gives $(-\\sqrt3/2,\\,1/2)$. Success drops from 1 to $1/4$. The bad amplitude is negative, but its probability is positive $3/4$."
   },
   {
     "lesson": "amplitude-amplification",
     "question": "Why can a measured classical random sampler not automatically replace A?",
-    "answer": "The reflection A(2$|0\\rangle$<0|-I)A-dagger needs coherent inverse preparation. Measurement or discarded garbage prevents that inverse. One must retain random seeds and intermediate data reversibly, account for cleanup, and then assess cost."
+    "answer": "The reflection $A(2|0\\rangle\\langle0|-I)A^\\dagger$ needs coherent inverse preparation. Measurement or discarded garbage prevents that inverse. One must retain random seeds and intermediate data reversibly, account for cleanup, and then assess cost."
   },
   {
     "lesson": "bbht-search",
     "question": "For M/N = 3/4, compare j = 0, j = 1 and a uniform choice of j in {0,1}.",
-    "answer": "Theta = pi/3. The two success probabilities are sin²(pi/3)=3/4 and sin²(pi)=0. Their equal mixture succeeds with probability 3/8. Randomizing avoids deterministic overshoot failure, though direct sampling is best for this known abundant case."
+    "answer": "$\\theta=\\pi/3$. The two success probabilities are $\\sin^2(\\pi/3)=3/4$ and $\\sin^2\\pi=0$. Their equal mixture succeeds with probability $3/8$. Randomizing avoids deterministic overshoot failure, though direct sampling is best for this known abundant case."
   },
   {
     "lesson": "bbht-search",
@@ -21,13 +21,13 @@
   },
   {
     "lesson": "fixed-point-amplification",
-    "question": "Check the phase z = (1+15 i sqrt(3))/26 and the L=3 guarantee interval.",
+    "question": "Check the phase $z=(1+15i\\sqrt3)/26$ and the $L=3$ guarantee interval.",
     "answer": "Its squared magnitude is (1+225*3)/676=1. Gamma=4/5 gives 1-gamma²=9/25=0.36. For a at least 0.36, the scaled Chebyshev argument lies within [-1,1], so failure is at most (16/65)²."
   },
   {
     "lesson": "fixed-point-amplification",
     "question": "Does optimal fixed-point amplification promise success rises after every gate?",
-    "answer": "No. The guarantee bounds the final failure over an interval of initial probabilities. Intermediate gates and separately redesigned sequence lengths need not be monotonic. Strict monotonic recursive pi/3 search has a different query scaling."
+    "answer": "No. The guarantee bounds the final failure over an interval of initial probabilities. Intermediate gates and separately redesigned sequence lengths need not be monotonic. Strict monotonic recursive $\\pi/3$ search has a different query scaling."
   },
   {
     "lesson": "minimum-finding",
@@ -46,8 +46,8 @@
   },
   {
     "lesson": "collision-finding",
-    "question": "Derive the balancing sample size from k + sqrt(N/k).",
-    "answer": "Set the two leading costs equal: k=sqrt(N/k). Squaring gives k²=N/k, and multiplying by k gives k³=N. Thus k=N^(1/3), with matching order N^(1/3) search-query and storage scales. Coherent lookup gate cost remains separate."
+    "question": "Derive the balancing sample size from $k+\\sqrt{N/k}$.",
+    "answer": "Set the two leading costs equal: $k=\\sqrt{N/k}$. Squaring gives $k^2=N/k$, and multiplying by $k$ gives $k^3=N$. Thus $k=N^{1/3}$, with matching order $N^{1/3}$ search-query and storage scales. Coherent lookup gate cost remains separate."
   },
   {
     "lesson": "qft",
@@ -122,7 +122,7 @@
   {
     "lesson": "quantum-counting",
     "question": "With N=4,K=4, why do phase labels 1 and 3 yield the same count?",
-    "answer": "The estimate is 4 sin²(pi*y/4). Both sin²(pi/4) and sin²(3*pi/4) equal 1/2, so both return 2. They are conjugate eigenphases of the same Grover rotation."
+    "answer": "The estimate is $4\\sin^2(\\pi y/4)$. Both $\\sin^2(\\pi/4)$ and $\\sin^2(3\\pi/4)$ equal $1/2$, so both return 2. They are conjugate eigenphases of the same Grover rotation."
   },
   {
     "lesson": "quantum-counting",
@@ -142,7 +142,7 @@
   {
     "lesson": "iterative-amplitude-estimation",
     "question": "Why can p1=1 alone fit both a=1/4 and a=1?",
-    "answer": "For a=1/4, theta=pi/6 and sin²(3 theta)=1. For a=1, theta=pi/2 and sin²(3 theta)=1 as well. Data at other depths or a restricted angle interval resolves this alias."
+    "answer": "For $a=1/4$, $\\theta=\\pi/6$ and $\\sin^2(3\\theta)=1$. For $a=1$, $\\theta=\\pi/2$ and $\\sin^2(3\\theta)=1$ as well. Data at other depths or a restricted angle interval resolves this alias."
   },
   {
     "lesson": "iterative-amplitude-estimation",

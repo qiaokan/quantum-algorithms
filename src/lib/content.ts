@@ -9,6 +9,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
+import katex from 'katex';
 
 export interface Lesson {
   id: string; sequence: number; module: number; title: string; kind: string;
@@ -51,7 +52,9 @@ export function plainText(html: string): string {
 }
 export async function render(markdown: string): Promise<Rendered> {
   const tableSafe = markdown.split('\n').map(line => line.trimStart().startsWith('|') ? line.replace(/\$([^$]+)\$/g, (_, math: string) => '$' + math.replace(/(?<!\\)\|/g, '\\vert ') + '$') : line).join('\n');
-  const normalized = tableSafe.replace(/\$\$([\s\S]*?)\$\$/g, (_, math: string) => '\n$$\n' + math.trim() + '\n$$\n');
+  const displaySafe = tableSafe.replace(/\$\$([\s\S]*?)\$\$/g, (_, math: string) => '\n$$\n' + math.trim() + '\n$$\n');
+  // remark-math does not parse inside raw HTML, so inline math in <summary> labels is rendered here.
+  const normalized = displaySafe.replace(/<summary>([\s\S]*?)<\/summary>/g, (_, label: string) => '<summary>' + label.replace(/\$([^$]+)\$/g, (_m, math: string) => katex.renderToString(math, { strict: 'error', trust: false })) + '</summary>');
   const file = await unified().use(remarkParse).use(remarkGfm).use(remarkMath)
     .use(remarkRehype,{allowDangerousHtml:true}).use(rehypeRaw)
     .use(rehypeKatex,{strict:'error',trust:false})
