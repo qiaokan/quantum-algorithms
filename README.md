@@ -6,12 +6,13 @@ Read online: **[quantum-algorithms-rho.vercel.app](https://quantum-algorithms-rh
 
 ## Addendum, 2 November 2026: decision path and error-correction module
 
-The default route is now the [decision path](https://quantum-algorithms-rho.vercel.app/path/), from useful application to hardware. The former main path is the "Complete algorithms path" at `/path/complete/`. A new module, "FT: Error correction and fault tolerance", is being added in phases. Lessons FT-01 to FT-05 are published, with catalog sequences 63–67 and displayed as FT-01…FT-05. The counts elsewhere in this README describe the original 61-topic edition and are kept as written. Supporting code:
+The default route is now the [decision path](https://quantum-algorithms-rho.vercel.app/path/), from useful application to hardware. The former main path is the "Complete algorithms path" at `/path/complete/`. A new module, "FT: Error correction and fault tolerance", adds FT-01 to FT-12 and a synthesis page, "The full chain" (FT-13), with catalog sequences 63–75 and an interactive resource calculator. The counts elsewhere in this README describe the original 61-topic edition and are kept as written. Supporting code:
 
 - `src/lib/stabilizer.ts`: a stabilizer-tableau simulator for Clifford circuits with Pauli noise, up to 512 qubits.
 - `src/lib/surface-code.ts`: rotated surface-code layouts and decoding graphs.
 - `src/lib/decoders.ts`: exact minimum-weight matching and a union-find decoder.
-- `public/examples/ft-checks.py`: recomputes the FT lessons' numbers.
+- `src/lib/resource-estimate.ts` and `src/components/ResourceCalculator.astro`: the teaching resource model and calculator.
+- `public/examples/ft-checks.py`: recomputes the FT lessons' numbers, including an independent version of the resource model.
 
 The task specification and its source verification are in `docs/proposals/decision-path-ft-spec.md`.
 

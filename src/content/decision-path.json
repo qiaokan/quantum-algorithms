@@ -17,7 +17,15 @@
     "ft-02-stabilizers-gottesman-knill",
     "ft-03-surface-code",
     "ft-04-noise-thresholds",
-    "ft-05-decoding-matching"
+    "ft-05-decoding-matching",
+    "ft-06-decoding-union-find",
+    "ft-07-real-time-decoding",
+    "ft-08-lattice-surgery",
+    "ft-09-magic-states",
+    "ft-10-control-calibration",
+    "ft-11-resource-estimation",
+    "ft-12-hardware-roadmaps",
+    "ft-13-full-chain"
   ],
   "callouts": {
     "deutsch": "Every estimate on this path counts oracle calls, then the gates inside each call, then the qubits those gates need. Deutsch is the smallest case where that accounting matters: one coherent call replaces two classical calls, but the call is a circuit whose gates still have to be counted. Its oracles use only $X$ and CNOT. Those belong to the Clifford gates, which the error-correction module later shows are the cheap kind on fault-tolerant hardware.",

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ft3-horsman-lattice-surgery",
+    "title": "Surface code quantum computing by lattice surgery",
+    "authors": "Dominic Horsman; Austin G. Fowler; Simon Devitt; Rodney Van Meter",
+    "url": "https://arxiv.org/abs/1111.4022",
+    "supports": "New J. Phys. 14, 123011 (2012). Lattice surgery by merging and splitting planar patches; rough merge measures X_L X_L (strip in |0>), smooth merge measures Z_L Z_L (strip in |+>), each with d rounds of error correction; CNOT via an intermediate |+>_L patch, reducible to d rounds; 53-qubit distance-3 lattice-surgery CNOT; corrections applied by reinterpreting later outcomes.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-litinski-game",
+    "title": "A Game of Surface Codes: Large-Scale Quantum Computing with Lattice Surgery",
+    "authors": "Daniel Litinski",
+    "url": "https://arxiv.org/abs/1808.02892",
+    "supports": "Quantum 3, 128 (2019). Pauli product measurements via lattice surgery in about d code cycles; Clifford gates commuted to the end and absorbed into measurements; magic state consumed via P⊗Z measurement with P_{π/4} correction on -1 and Pauli correction after X measurement; controlled-Pauli gates from a |+> ancilla and Pauli product measurements (Fig. 33b); compact block 1.5n+3 tiles; time-optimal scheme runs n_L T layers in n_L·t_m; 10^8 T gates in 10 s at 10 µs feed-forward.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-boykin-universal",
+    "title": "On Universal and Fault-Tolerant Quantum Computing",
+    "authors": "P. Oscar Boykin; Tal Mor; Matthew Pulver; Vwani Roychowdhury; Farrokh Vatan",
+    "url": "https://arxiv.org/abs/quant-ph/9906054",
+    "supports": "arXiv quant-ph/9906054 (1999). Hadamard, σz^{1/4} (the T gate up to phase) and CNOT form a universal fault-tolerant basis; CNOT and Hadamard alone are not universal.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Journal version not checked; cited by its arXiv identifier."
+  },
+  {
+    "id": "ft3-eastin-knill",
+    "title": "Restrictions on Transversal Encoded Quantum Gate Sets",
+    "authors": "Bryan Eastin; Emanuel Knill",
+    "url": "https://arxiv.org/abs/0811.4262",
+    "supports": "Phys. Rev. Lett. 102, 110502 (2009). A code that detects arbitrary errors on any single physical subsystem cannot have a universal transversal encoded gate set.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-bravyi-koenig",
+    "title": "Classification of topologically protected gates for local stabilizer codes",
+    "authors": "Sergey Bravyi; Robert Koenig",
+    "url": "https://arxiv.org/abs/1206.1609",
+    "supports": "Phys. Rev. Lett. 110, 170503 (2013). For 2D topological stabilizer codes, logical gates implementable by constant-depth circuits are restricted to the Clifford group.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-bravyi-kitaev",
+    "title": "Universal quantum computation with ideal Clifford gates and noisy ancillas",
+    "authors": "Sergei Bravyi; Alexei Kitaev",
+    "url": "https://arxiv.org/abs/quant-ph/0403025",
+    "supports": "Phys. Rev. A 71, 022316 (2005). Clifford operations plus noisy magic states give universality via distillation; 15-to-1 protocol distilling |A0>=(|0>+e^{iπ/4}|1>)/√2 with success probability (1+15(1-2ε)^8)/16 (Eq. 35), exact output error (Eq. 36), threshold ε0≈0.141 (Eq. 37), ε_out≈35ε^3 (Eq. 38), recursion (1/√35)(√35 ε)^{3^k}.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-litinski-msd",
+    "title": "Magic State Distillation: Not as Costly as You Think",
+    "authors": "Daniel Litinski",
+    "url": "https://arxiv.org/abs/1905.06903",
+    "supports": "Quantum 3, 205 (2019). Table 1: at p=1e-3, (15-to-1)_{17,7,7} gives 4.5e-8 with 4,620 qubits and 42.6 cycles; (15-to-1)^6_{13,5,5}×(20-to-4)_{23,11,13} gives 1.4e-10 with 43,300 qubits and 130 cycles; (15-to-1)^6_{17,7,7}×(15-to-1)_{41,17,17} gives 4.5e-20 with 73,400 qubits and 128 cycles; historical designs up to 800,000 qubits. Origin of 35p^3 (35 undetected weight-3 fault combinations; exact 3.501e-11 at p=1e-4). About 10% of qubits for distillation in a 100-qubit example at p=1e-3.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-cultivation",
+    "title": "Magic state cultivation: growing T states as cheap as CNOT gates",
+    "authors": "Craig Gidney; Noah Shutty; Cody Jones",
+    "url": "https://arxiv.org/abs/2409.17595",
+    "supports": "arXiv preprint 2409.17595 (2024). Cultivation fits in one surface-code patch, uses roughly the gate count of a lattice-surgery CNOT of equivalent reliability and an order of magnitude fewer qubit-rounds than prior work; simulated logical error about 2e-9 at 1e-3 noise and 4e-11 at 5e-4; Figure 2 lists a 99% end-to-end discard rate for the 2e-9 case and Li 2015 injection at 5e-3 error.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Preprint; results are simulations, not hardware data."
+  },
+  {
+    "id": "ft3-gidney-ekera-details",
+    "title": "How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits (full-text details)",
+    "authors": "Craig Gidney; Martin Ekerå",
+    "url": "https://arxiv.org/abs/1905.09749",
+    "supports": "Quantum 5, 433 (2021). Abstract formulas: 0.3n^3+0.0005n^3 lg n Toffolis and 500n^2+n^2 lg n measurement depth; definition of reaction time (trigger a logical measurement, collect and error-correct the result, choose the next basis); 14 CCZ factories needed for the reaction-limited rate at d=27; lookup addition about 37 ms of which about 22 ms reaction-limited; Table 2 single-factory row: 16 million qubits, 6 days.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Complements the existing abstract-level record dp-gidney-ekera-2021."
+  }
+]

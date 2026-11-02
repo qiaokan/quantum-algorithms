@@ -117,4 +117,89 @@ check(distance_for(1e-4) == 15 and isclose(eps(15), 6.82e-5, rel_tol=1e-2) and i
 check(isclose(0.57 / 0.2, 2.85) and isclose(0.57 / 2.14, 0.266, rel_tol=1e-2), "exercise: Λ comparison")
 check(isclose(w(0.01), 4.595, rel_tol=1e-3) and isclose(2 * log(999), 13.81, rel_tol=1e-3), "exercise: weights")
 
+# FT-11 and FT-13: independent re-implementation of the teaching resource model.
+def model(p, cycle, react, budget, ops, q, factories, routing, fpatches, c=5.5):
+    data, fac = q * routing, factories * fpatches
+    for d in range(3, 103, 2):
+        supply = c * d * cycle / factories
+        op = max(react, supply)
+        runtime = ops * op * 1e-6
+        eps_d = 0.1 * (p / 0.01) ** ((d + 1) / 2)
+        fail = min(1.0, data * (runtime * 1e6 / cycle) * eps_d)
+        if fail <= budget:
+            return dict(d=d, op=op, runtime=runtime, qubits=(data + fac) * 2 * d * d, fail=fail, lim='factories' if supply > react else 'reaction')
+    raise ValueError('no distance')
+check(isclose(3 * 2048 + 0.002 * 2048 * 11, 6189.056) and isclose(0.3 * 2048**3 + 0.0005 * 2048**3 * 11, 2.624e9, rel_tol=1e-3), "Gidney–Ekerå abstract formulas at n=2048")
+check(all(isclose(0.1 * (1e-3 / 0.01) ** ((d + 1) / 2), 10 ** -((d + 1) / 2 + 1)) for d in (3, 9, 27)), "model reproduces 10^-ceil(d/2+1) at p=1e-3")
+GE = (1e-3, 1, 10, 0.3, 2.7e9, 6189, 28, 1.725, 127)
+ge = model(*GE)
+check(ge['d'] == 27 and ge['lim'] == 'reaction' and isclose(ge['runtime'] / 3600, 7.5) and isclose(ge['qubits'] / 1e6, 20.75, rel_tol=1e-3) and isclose(ge['fail'], 0.288, rel_tol=1e-2), "RSA preset")
+check(isclose(6189 * 1.725 + 28 * 127, 226 * 63, rel_tol=1e-3), "board 226 x 63 patches")
+check(isclose(10676 * 2.7e10 * 1e-14, 2.88, rel_tol=1e-2), "d=25 fails the RSA budget")
+check(isclose(5.5 * 27 / 28, 5.30, rel_tol=1e-2), "RSA factory supply interval")
+one = model(*GE[:6], 1, 1.725, 127)
+check(one['d'] == 31 and one['lim'] == 'factories' and isclose(one['runtime'] / 86400, 5.33, rel_tol=1e-2), "RSA with one factory")
+tight = model(1e-3, 1, 10, 0.05, 2.7e9, 6189, 28, 1.725, 127)
+check(tight['d'] == 29 and isclose(tight['qubits'] / ge['qubits'], 1.154, rel_tol=1e-2) and isclose(tight['fail'], 0.0288, rel_tol=1e-2), "RSA at 5% budget")
+lee = model(1e-3, 1, 10, 0.01, 6.7e9, 2142, 4, 1, 10)
+check(lee['d'] == 31 and lee['lim'] == 'factories' and isclose(lee['op'], 42.625) and isclose(lee['runtime'] / 86400, 3.31, rel_tol=1e-2) and isclose(lee['qubits'] / 1e6, 4.19, rel_tol=1e-2), "FeMoco preset")
+check(model(1e-3, 1, 20, 0.01, 6.7e9, 2142, 4, 1, 10)['runtime'] == lee['runtime'], "FeMoco: doubling reaction time changes nothing")
+lee2 = model(2e-3, 1, 10, 0.01, 6.7e9, 2142, 4, 1, 10)
+check(lee2['d'] == 45 and isclose(lee2['qubits'] / 1e6, 8.84, rel_tol=1e-2) and isclose(lee2['runtime'] / 86400, 4.80, rel_tol=1e-2), "FeMoco: doubling p")
+goog = model(0.01 / 2.14, 1.1, 63, 0.3, 2.7e9, 6189, 28, 1.725, 127)
+check(goog['d'] == 89 and isclose(goog['runtime'] / 3600, 47.25) and isclose(goog['qubits'] / 1e6, 225.5, rel_tol=1e-2), "RSA at Google 2024 noise")
+check(isclose(model(0.01 / 2.14, *GE[1:])['qubits'] / 1e6, 205.6, rel_tol=1e-2), "Λ alone: about 206 million")
+fast = model(1e-3, 0.5, 10, 0.3, 2.7e9, 6189, 28, 1.725, 127)
+check(fast['d'] == 29 and fast['runtime'] == ge['runtime'] and isclose(fast['qubits'] / 1e6, 23.94, rel_tol=1e-2), "faster cycle: same runtime, larger distance")
+check(isclose(2182 * 960, 2_094_720) and isclose(14232 * 728 / 1e6, 10.36, rel_tol=1e-3), "syndrome data rates")
+check(isclose((3.141592653589793 / 4) * 1.7e7, 1.335e7, rel_tol=1e-3) and isclose(1.335e7**2, 1.78e14, rel_tol=1e-2) and isclose(1.78e14 * 1e-9 / 3600, 49.4, rel_tol=1e-2), "Grover crossover illustration")
+check(isclose(5.5 * 25 / 2, 68.75) and isclose(1e9 * 68.75e-6 / 3600, 19.1, rel_tol=1e-2) and 1000 * (21 * 21 - 1) == 440000, "FT-11/13 practice answers")
+
+# FT-06: union-find versus matching on the distance-3 surface code (defects A, B, C).
+# Errors consistent with that syndrome split into matching's class and union-find's class.
+def lightest(cls):
+    return min(len(e) for e in cls), sum(1 for e in cls if len(e) == min(len(x) for x in cls))
+target = (1, 1, 1, 0)
+errs = [set(e) for k in range(10) for e in combinations(range(9), k) if zsyndrome(set(e)) == target]
+match_cls = [e for e in errs if len(e ^ {0, 4}) % 2 == 0 and len((e ^ {0, 4}) & logical_z) % 2 == 0]
+uf_cls = [e for e in errs if len((e ^ {0, 1, 6}) & logical_z) % 2 == 0]
+check(lightest(match_cls) == (2, 3) and lightest(uf_cls) == (3, 7), "FT-06 lightest errors per class")
+odds = sum(0.01**len(e) * 0.99**(9 - len(e)) for e in match_cls) / sum(0.01**len(e) * 0.99**(9 - len(e)) for e in uf_cls)
+check(isclose(odds, 42.4, rel_tol=1e-2) and isclose(3 / (7 * 0.01), 42.86, rel_tol=1e-3), "FT-06 odds about 42:1")
+check(isclose(1.71 / 1.43, 1.196, rel_tol=1e-3) and (25 * 25 - 1) // 2 == 312, "FT-06 decoder ratio, nodes per round")
+
+# FT-07: syndrome rates and backlog.
+check(25 * 25 - 1 == 624 and isclose(624 / 1.1, 567.27, rel_tol=1e-4), "FT-07 rates")
+check(isclose((624 - 624 / 1.1) * 3600 / 8 / 1000, 25.53, rel_tol=1e-3), "FT-07 queue after 1 hour, GB")
+check(isclose(1.1**10, 2.594, rel_tol=1e-3) and isclose(1.1**100, 13781, rel_tol=1e-3) and isclose(1.1**1000, 2.47e41, rel_tol=1e-2) and isclose(1.01**1000, 20959, rel_tol=1e-3), "FT-07 slowdown table")
+check(isclose(1.1**1000 * 1e-5 / 3.156e7, 7.8e28, rel_tol=2e-2) and isclose(log(2) / log(1.01), 69.7, rel_tol=1e-3), "FT-07 stall time and doubling")
+check(isclose(1e9 * 63e-6 / 3600, 17.5) and 2 * 1000 / 100 == 20, "FT-07 latency comparison, parallel workers")
+
+# FT-08: measurement-based CNOT and T teleportation, computed directly.
+import cmath
+w = cmath.exp(1j * cmath.pi / 4)
+after = {(0, 0): 0.6 / 2**0.5, (0, 1): 0.6 * w / 2**0.5, (1, 0): 0.8 * w / 2**0.5, (1, 1): 0.8 / 2**0.5}
+for m in (0, 1):
+    d0, d1 = after[(0, m)], after[(1, m)]
+    n = (abs(d0)**2 + abs(d1)**2) ** 0.5
+    d0, d1 = d0 / n, (d1 / n) * (1j if m else 1)
+    check(isclose(n * n, 0.5) and abs(d1 - (d0 / 0.6) * 0.8 * w) < 1e-12, f"FT-08 T teleportation outcome {m}")
+
+# FT-09: distillation and the logical clock.
+ps = lambda e: (1 + 15 * (1 - 2 * e) ** 8) / 16
+check(isclose(35e-9, 3.5e-8) and isclose(ps(1e-3), 0.9851, rel_tol=1e-4) and isclose(ps(1e-2), 0.860, rel_tol=1e-3), "FT-09 success probabilities")
+check(isclose(35 * (3.5e-8) ** 3, 1.50e-21, rel_tol=1e-2) and isclose(35 * (3.5e-5) ** 3, 1.5e-12, rel_tol=1e-2), "FT-09 two levels")
+check(isclose(2.6e9 * 1e-5 / 3600, 7.22, rel_tol=1e-2) and isclose(2.6e9 * 1.7e-4 / 86400, 5.12, rel_tol=1e-2), "FT-09 runtimes")
+check(170 / 10 == 17 and 13 * 43300 == 562900 and isclose(2.6e9 * 60e-6 / 3600, 43.3, rel_tol=1e-2), "FT-09 factories and extra latency")
+
+# FT-10: heat budget (Krinner et al. Tables 1 and 2) and calibration counts.
+check([int(30 / 0.101), int(1.5 / 0.0022), int(200 / 0.69), round(19 / 0.038)] == [297, 681, 289, 500], "FT-10 qubits per stage")
+check(round(19 / 0.088) == 216 and round(19 / (0.038 / 4 + 0.2)) == 91 and int(150 / 2.48) == 60, "FT-10 flux load, thin cables, ports")
+check(6 * 100 + 2 * 10 * 9 == 780 and 6 * 10**6 + 2 * 1000 * 999 == 7998000 and 780 * 30 == 23400, "FT-10 calibration graph")
+check(isclose(728 / 1.1e-6, 6.6e8, rel_tol=1e-2), "FT-10 data rate")
+
+# FT-12: gross code comparison and reaction-limited clocks.
+check(12 * (2 * 12 * 12 - 1) == 3444 and round(3444 / 288) == 12, "FT-12 gross code versus surface code")
+check(isclose(1e9 * 1e-3 / 86400, 11.57, rel_tol=1e-3) and isclose(1e9 * 0.2 / 3.156e7, 6.34, rel_tol=1e-2) and isclose(604800 / 1e9 * 1e6, 604.8), "FT-12 clocks")
+
 print(f"{checks} FT checks passed")

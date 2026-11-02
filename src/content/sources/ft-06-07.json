@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ft3-union-find",
+    "title": "Almost-linear time decoding algorithm for topological codes",
+    "authors": "Nicolas Delfosse; Naomi H. Nickerson",
+    "url": "https://arxiv.org/abs/1709.06218",
+    "supports": "Quantum 5, 595 (2021), DOI 10.22331/q-2021-12-02-595; arXiv 1709.06218 (2017). Union-find decoder: odd clusters grow by half-edges, merge, then peeling (Algorithm 1, Lemma 1); worst case O(n α(n)) with α(n) ≤ 3 in practice; optimal up to weight (d-1)/2; toric-code thresholds 9.9% (perfect measurement) and 2.6% (faulty) vs 10.3% and 2.9% cited for MWPM (Table 1); weighted growth raises 9.2%→9.9% and 2.4%→2.6%; MWPM worst case cited as O(n^3) to O(n^7); boundaries handled by letting clusters merge with the boundary.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read the arXiv v3 PDF (accepted Quantum version). Thresholds are simulations on the toric code under phase-flip noise."
+  },
+  {
+    "id": "ft3-alphaqubit",
+    "title": "Learning high-accuracy error decoding for quantum processors",
+    "authors": "Johannes Bausch; Andrew W. Senior; Francisco J. H. Heras; et al.",
+    "url": "https://doi.org/10.1038/s41586-024-08148-8",
+    "supports": "Nature 635, 834–840 (2024). AlphaQubit, a recurrent transformer-based decoder, outperforms other state-of-the-art decoders on Google Sycamore distance-3 and 5 data and keeps its advantage in simulation up to distance 11; the authors state its throughput is slower than the 1 µs per round target for superconducting qubits.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read via PubMed Central (PMC11602728); the Methods timing section was not read in detail."
+  },
+  {
+    "id": "ft3-battistel-review",
+    "title": "Real-time decoding for fault-tolerant quantum computing: progress, challenges and outlook",
+    "authors": "F. Battistel; C. Chamberland; K. Johar; R. W. J. Overwater; F. Sebastiano; L. Skoric; Y. Ueno; M. Usman",
+    "url": "https://doi.org/10.1088/2399-1984/aceba6",
+    "supports": "Nano Futures 7, 032003 (2023); arXiv 2303.00054. Throughput needs ≲O(1) µs for transmons; estimate of a few tens of Mbps per logical qubit; CPU/FPGA/ASIC/SFQ comparison (FPGA integration with control, 100s MHz, cost at scale; ASIC 1–2 GHz, low power, premature); hard real-time and WCET; cryogenic cooling O(1) mW below 100 mK and several W at 1–4 K; cabling bottleneck; two-stage decoders reduce cryostat I/O; neural-network decoders have constant inference time. Uses 'latency' for transport time and 'throughput' for decode time.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read the arXiv v2 PDF (May 2023). The review does not assess GPUs."
+  },
+  {
+    "id": "ft3-skoric-parallel-window",
+    "title": "Parallel window decoding enables scalable fault tolerant quantum computation",
+    "authors": "Luka Skoric; Dan E. Browne; Kenton M. Barnes; Neil I. Gillespie; Earl T. Campbell",
+    "url": "https://doi.org/10.1038/s41467-023-42482-1",
+    "supports": "Nature Communications 14, 7040 (2023); arXiv 2209.08552. Sliding window commits n_com of n_com+n_buf rounds and needs τ_W < n_com τ_rd; n_buf = n_com = d shows no noticeable accuracy loss; parallel window uses layer A windows of 3w rounds (w = d) committing the middle w, then buffer-free layer B windows; backlog avoided when N_par ≥ 2τ_W/((n_com+n_W)τ_rd); response time ≈ 2τ_W per T-gate layer; speedups measured in Python simulations.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Read the arXiv preprint PDF; publication metadata and window structure confirmed on PubMed Central (PMC10624853)."
+  },
+  {
+    "id": "ft3-tan-parallel",
+    "title": "Scalable surface-code decoders with parallelization in time",
+    "authors": "Xinyu Tan; Fang Zhang; Rui Chao; Yaoyun Shi; Jianxin Chen",
+    "url": "https://doi.org/10.1103/PRXQuantum.4.040344",
+    "supports": "PRX Quantum 4, 040344 (2023); arXiv 2209.09219. Overlapping time windows decoded in parallel with any inner decoder; simulated circuit-level thresholds about 0.68% with MWPM (0.70% batch) and 0.55% with union-find (same as batch).",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "The fifth author is Jianxin Chen, not 'Sun' as in the task brief."
+  },
+  {
+    "id": "ft3-barber-collision-clustering",
+    "title": "A real-time, scalable, fast and highly resource efficient decoder for a quantum computer",
+    "authors": "Ben Barber; Kenton M. Barnes; Tomasz Bialas; Okan Buğdaycı; Earl T. Campbell; Neil I. Gillespie; Kauser Johar; Ram Rajan; Adam W. Richardson; Luka Skoric; Canberk Topal; Mark L. Turner; Abbas B. Ziad",
+    "url": "https://arxiv.org/abs/2309.05558",
+    "supports": "arXiv 2309.05558 (2023, v2 2024); Nature Electronics (2025), DOI 10.1038/s41928-024-01319-5. Collision Clustering, an implementation of union-find; on simulated circuit-level memory data, FPGA (Xilinx XCVU3P) decodes distance 21 (881 qubits) in 810 ns per round using about 4.5% of logic; signed-off 12 nm ASIC design decodes distance 23 (1,057 qubits) in 240 ns per round in 0.06 mm² at about 8 mW (7.85 mW); threshold 0.78%; cites a ~1 W budget at 4 K; no sliding-window support yet.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Figures from arXiv v2. The paper also states 210 ns for the distance-23 ASIC in its conclusion; the lesson uses 240 ns from the main text. Journal volume and pages not checked."
+  }
+]

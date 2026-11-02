@@ -1,0 +1,27 @@
+[
+  {
+    "lesson": "ft-11-resource-estimation",
+    "question": "Under this lesson's model, at $p=10^{-3}$, a computation keeps 5,000 algorithm patches alive for $10^{10}$ cycles. Find the smallest odd distance for a failure budget of 10%.",
+    "answer": "Need $5000\\times10^{10}\\times\\varepsilon_d\\le0.1$, so $\\varepsilon_d\\le2\\times10^{-15}$. With $\\varepsilon_d=10^{-((d+1)/2+1)}$: $d=25$ gives $10^{-14}$ (failure $0.5$), too high; $d=27$ gives $10^{-15}$ (failure $0.05$). So $d=27$."
+  },
+  {
+    "lesson": "ft-11-resource-estimation",
+    "question": "A workload has $10^9$ Toffolis, a 10 µs reaction time and 2 factories, each taking $5.5\\,d$ cycles of 1 µs per state, at $d=25$. Is it reaction-limited or factory-limited, and what is the runtime?",
+    "answer": "Supply interval: $5.5\\times25\\times1\\ \\mu s/2=68.75\\ \\mu s$, longer than 10 µs, so it is factory-limited. Runtime: $10^9\\times68.75\\ \\mu s=6.875\\times10^4$ s, about 19 hours. To become reaction-limited it would need at least $5.5\\times25/10=13.75$, so 14 factories."
+  },
+  {
+    "lesson": "ft-11-resource-estimation",
+    "question": "Using the RSA preset, what does the model predict if the failure budget is tightened from 30% to 5%, and why does the runtime not change?",
+    "answer": "The distance rises from 27 to 29, so the error per cycle falls from $10^{-15}$ to $10^{-16}$ and the predicted failure from about 29% to about 3%. Physical qubits grow from about 20.8 million to 23.9 million. The runtime stays at 7.5 hours because the run is reaction-limited: the 10 µs reaction time, not the distance, sets the time per operation."
+  },
+  {
+    "lesson": "ft-13-full-chain",
+    "question": "How many bits of syndrome data per second does a board of 1,000 patches at distance 21 produce with a 1 µs cycle?",
+    "answer": "Each patch measures $d^2-1=440$ checks per cycle. $1000\\times440=440{,}000$ bits per µs, which is $4.4\\times10^{11}$ bits per second, about 440 Gbit/s, sustained for the whole computation."
+  },
+  {
+    "lesson": "ft-13-full-chain",
+    "question": "A roadmap claims 'a 10× increase in physical qubits next year'. Which inputs of the chain does that change, and what else must you know before updating an estimate?",
+    "answer": "It changes only the qubit supply. You also need Λ at the distances used (the physical error rate and correlated errors), the cycle and reaction times, decoder throughput at that scale, and whether control and calibration scaled with it. Without those, a qubit count does not translate into distance, runtime or success probability."
+  }
+]

@@ -144,7 +144,8 @@ All checked on 2 November 2026. Years are publication years, with the arXiv year
 | Babbush et al. | "Focus beyond quadratic speedups for error-corrected quantum advantage", PRX Quantum 2, 010103 (2021) [arXiv 2011.04149, 2020] | Added |
 | Microsoft Azure Quantum | "Interferometric single-shot parity measurement in InAs–Al hybrid devices", Nature 638, 651 (2025); Comment by Legg and Microsoft reply, Nature 654 (2026) | Dated claims only |
 | NIST | FIPS 203, 204, 205 (13 Aug 2024), csrc.nist.gov/pubs/fips/203/final (also /204/, /205/) | Added |
-| Aaronson, Gottesman | "Improved simulation of stabilizer circuits" (2004) | **Not yet verified.** Check before citing |
+| Aaronson, Gottesman | "Improved simulation of stabilizer circuits", PRA 70, 052328 (2004), arXiv quant-ph/0406196 | Verified 2 Nov 2026 (full text) |
+| Boykin, Mor, Pulver, Roychowdhury, Vatan | "On universal and fault-tolerant quantum computing", arXiv quant-ph/9906054 (1999) | Verified: H, CNOT and σ_z^{1/4} universal |
 
 ## Delivery: three phases, each a separate PR
 
@@ -191,10 +192,15 @@ Each report lists:
 **Gaps filled**
 - Babbush et al. quadratic-speedup analysis.
 - Sparse Blossom.
-- Aaronson–Gottesman, to be verified.
+- Aaronson–Gottesman (verified during Phase 2) and Boykin et al. for Clifford+T universality (verified during Phase 3).
 - New definitions the module needs.
 - Calculator inputs for factories and routing overhead.
 - A dated post-quantum cryptography note.
 - The topological-qubit dispute as dated claims.
 - Boundary nodes in matching.
 - Notebook latency labelled as software, not hardware.
+
+
+## Delivery status, 2 November 2026
+
+Phases 1 and 2 are merged (PRs #3 and #4). Phase 3 adds FT-06 to FT-13, the resource calculator, and the T-gate and magic-state definitions. Optional notebooks (Part 3, item 3) were not produced. Source verification for each lesson is recorded in `src/content/sources/ft*.json` and `decision-path.json`.

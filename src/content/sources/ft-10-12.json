@@ -1,0 +1,216 @@
+[
+  {
+    "id": "ft3-krinner-2019",
+    "title": "Engineering cryogenic setups for 100-qubit scale superconducting circuit systems",
+    "authors": "Sebastian Krinner; Simon Storz; Philipp Kurpiers; Paul Magnard; Johannes Heinsoo; Raphael Keller; Janis Luetolf; Christopher Eichler; Andreas Wallraff",
+    "url": "https://arxiv.org/abs/1806.07862",
+    "supports": "EPJ Quantum Technology 6, 2 (2019), doi 10.1140/epjqt/s40507-019-0072-0. Drive, flux and output lines; ~60 dB drive attenuation for ~1e-3 noise photons; up to 10 qubits per multiplexed readout line; Table 1 stage cooling powers (30 W at 45 K, 1.5 W at 4.2 K, 40 mW at 1.2 K, 200 µW at 140 mK, 19 µW at 20 mK); Table 2 measured passive loads per drive and flux line; 0.050 µW average DC flux-bias load per line at MXC; 124 RF lines for 50 qubits; 25 lines per port, six ports; ~30% largest load at CP and MXC for 50 qubits; thermal budget for ~150 qubits; ~400 and ~1000-qubit scenarios.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-patra-2018",
+    "title": "Cryo-CMOS Circuits and Systems for Quantum Computing Applications",
+    "authors": "Bishnu Patra; Rosario M. Incandela; Jeroen P. G. van Dijk; Harald A. R. Homulle; Lin Song; Mina Shahmohammadi; Robert Bogdan Staszewski; Andrei Vladimirescu; Masoud Babaie; Fabio Sebastiano; Edoardo Charbon",
+    "url": "https://doi.org/10.1109/JSSC.2017.2737549",
+    "supports": "IEEE J. Solid-State Circuits 53(1), 309–321 (2018). Case for cryo-CMOS control (down to 4 K) for large-scale quantum computers; demonstrated LNA for spin-qubit RF-reflectometry readout and a class-F2,3 DCO.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract and bibliographic record checked via TU Delft repository page and Crossref; full text not read."
+  },
+  {
+    "id": "ft3-bardin-2019",
+    "title": "Design and Characterization of a 28-nm Bulk-CMOS Cryogenic Quantum Controller Dissipating Less Than 2 mW at 3 K",
+    "authors": "Joseph C. Bardin et al. (Google)",
+    "url": "https://doi.org/10.1109/JSSC.2019.2937234",
+    "supports": "IEEE J. Solid-State Circuits 54(11), 3043–3060 (2019). Cryogenic CMOS XY controller for transmons at 3 K; under 2 mW total power; digital stream under 500 Mb/s.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Abstract via Google Research publication page; number of qubits per controller not checked."
+  },
+  {
+    "id": "ft3-kelly-dag",
+    "title": "Physical qubit calibration on a directed acyclic graph",
+    "authors": "Julian Kelly; Peter O'Malley; Matthew Neeley; Hartmut Neven; John M. Martinis",
+    "url": "https://arxiv.org/abs/1803.03226",
+    "supports": "arXiv 1803.03226 (2018), preprint. Calibration as a DAG of nodes with tolerance and timeout; check state / check data / calibrate; maintain and diagnose traversals; unrolling cycles into precision layers.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Preprint only; same paper as listed in the decision-path spec."
+  },
+  {
+    "id": "ft3-klimov-2018",
+    "title": "Fluctuations of Energy-Relaxation Times in Superconducting Qubits",
+    "authors": "P. V. Klimov et al.",
+    "url": "https://arxiv.org/abs/1809.01043",
+    "supports": "Phys. Rev. Lett. 121, 090502 (2018). T1 varies by up to an order of magnitude, with changes on 15-minute timescales and across 5 MHz, attributed mainly to TLS defects; qubit-frequency calibration stable within ±1 MHz over ~25 h in their setup.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-ibm-starling-2025",
+    "title": "IBM Sets the Course to Build World's First Large-Scale, Fault-Tolerant Quantum Computer at New IBM Quantum Data Center",
+    "authors": "IBM",
+    "url": "https://newsroom.ibm.com/2025-06-10-IBM-Sets-the-Course-to-Build-Worlds-First-Large-Scale,-Fault-Tolerant-Quantum-Computer-at-New-IBM-Quantum-Data-Center",
+    "supports": "Press release, 10 June 2025. Starling by 2029 in Poughkeepsie: 100 million quantum operations on 200 logical qubits; Blue Jay: 1 billion operations on 2,000 logical qubits; qLDPC codes; Loon 2025, Kookaburra 2026, Cockatoo 2027.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor roadmap claim."
+  },
+  {
+    "id": "ft3-ibm-ftqc-blog",
+    "title": "How IBM will build the world's first large-scale, fault-tolerant quantum computer",
+    "authors": "Ryan Mandelbaum; Jay Gambetta; Jerry Chow; Tushar Mittal; Theodore J. Yoder; Andrew Cross; Matthias Steffen",
+    "url": "https://www.ibm.com/quantum/blog/large-scale-ftqc",
+    "supports": "IBM blog, 10 June 2025. Gross code [[144,12,12]]: 144 data + 144 check = 288 physical qubits for 12 logical; needs long-range on-chip connections (c-couplers in Loon).",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim."
+  },
+  {
+    "id": "ft3-ibm-loon-2025",
+    "title": "IBM Delivers New Quantum Processors, Software, and Algorithm Breakthroughs on Path to Advantage and Fault Tolerance",
+    "authors": "IBM",
+    "url": "https://newsroom.ibm.com/2025-11-12-ibm-delivers-new-quantum-processors,-software,-and-algorithm-breakthroughs-on-path-to-advantage-and-fault-tolerance",
+    "supports": "Press release, 12 November 2025. Loon demonstrates key processor components for fault tolerance including longer c-couplers; real-time qLDPC decoding in under 480 ns on classical hardware; Nighthawk 120 qubits, 218 couplers, square lattice.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim; not checked against peer-reviewed papers."
+  },
+  {
+    "id": "ft3-moses-2023",
+    "title": "A Race Track Trapped-Ion Quantum Processor",
+    "authors": "S. A. Moses et al. (Quantinuum)",
+    "url": "https://arxiv.org/abs/2305.03828",
+    "supports": "Phys. Rev. X 13, 041052 (2023). 32 qubits; average two-qubit gate infidelity 1.84(5)e-3; arbitrary connectivity via ion transport; transport ~60% of circuit time on average.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-ryan-anderson-2021",
+    "title": "Realization of real-time fault-tolerant quantum error correction",
+    "authors": "C. Ryan-Anderson et al.",
+    "url": "https://arxiv.org/abs/2107.07505",
+    "supports": "Phys. Rev. X 11, 041058 (2021). Ten-qubit trapped-ion QCCD machine, [[7,1,3]] color code with real-time decoding; each QEC cycle under 200 ms; physical clock (one round of random-pair gating) 10.5 ms.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-quantinuum-2024",
+    "title": "Quantinuum Unveils Accelerated Roadmap to Achieve Universal, Fully Fault-Tolerant Quantum Computing by 2030",
+    "authors": "Quantinuum",
+    "url": "https://www.quantinuum.com/press-releases/quantinuum-unveils-accelerated-roadmap-to-achieve-universal-fault-tolerant-quantum-computing-by-2030",
+    "supports": "Press release, 10 September 2024. Apollo as universal, fully fault-tolerant system, 2030 in the headline; Helios as next system.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor roadmap claim."
+  },
+  {
+    "id": "ft3-quantinuum-2026",
+    "title": "Quantinuum Breaks Error-Correction World Record by 10x, Validating Its Leading Path to Fault-Tolerant Quantum Computing by 2029",
+    "authors": "Quantinuum",
+    "url": "https://kyodonewsprwire.jp/release/202610198245",
+    "supports": "Press release, 19 October 2026 (wire copy). Claims 99.9995% logical fidelity on Helios with a color code; factor of 12 error reduction per distance step; Helix code 10 physical per logical; Apollo expected by 2029.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim; underlying preprint not checked. Opened via Kyodo News PR Wire copy of the official release."
+  },
+  {
+    "id": "ft3-bluvstein-2024",
+    "title": "Logical quantum processor based on reconfigurable atom arrays",
+    "authors": "Dolev Bluvstein et al.",
+    "url": "https://arxiv.org/abs/2312.03982",
+    "supports": "Nature 626, 58–65 (2024); online 6 Dec 2023. Up to 280 physical qubits; surface-code distance 3 to 7 logical gate improvement; 48 logical qubits in [[8,3,2]] codes; two-qubit fidelity 99.3–99.5%; 270 ns entangling gates; ~200 µs moves; mid-circuit readout and feedforward cycle slightly under 1 ms.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-quera-2024",
+    "title": "QuEra Computing Releases a Groundbreaking Roadmap for Advanced Error-Corrected Quantum Computers",
+    "authors": "QuEra Computing",
+    "url": "https://www.quera.com/press-releases/quera-computing-releases-a-groundbreaking-roadmap-for-advanced-error-corrected-quantum-computers-pioneering-the-next-frontier-in-quantum-innovation-0",
+    "supports": "Press release, 9 January 2024. 2024: 10 logical qubits; 2025: 30 logical; 2026: 100 logical qubits and over 10,000 physical qubits.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor roadmap claim."
+  },
+  {
+    "id": "ft3-quera-libra-2026",
+    "title": "QuEra Announces 2028 Fault-Tolerant Quantum Computer and Expanded Multi-Year Strategic Collaboration with AWS",
+    "authors": "QuEra Computing",
+    "url": "https://www.quera.com/press-releases/quera-announces-2028-fault-tolerant-quantum-computer-and-expanded-multi-year-strategic-collaboration-with-aws",
+    "supports": "Press release, 15 June 2026. Libra on Amazon Braket in 2028; projected over 256 logical qubits, 1e-6 logical error rate, ~1e6 reliable logical operations.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor roadmap claim."
+  },
+  {
+    "id": "ft3-psiquantum-nature-2025",
+    "title": "A manufacturable platform for photonic quantum computing",
+    "authors": "PsiQuantum team (Koen Alexander et al.)",
+    "url": "https://arxiv.org/abs/2404.17570",
+    "supports": "Nature 641, 876–883 (2025), doi 10.1038/s41586-025-08820-7; arXiv 2404.17570 (2024). SPAM fidelity 99.98%, HOM visibility 99.50%, two-qubit fusion fidelity 99.22%, chip-to-chip interconnect fidelity 99.72% (excluding loss).",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Title and venue checked via Crossref; numbers from the arXiv abstract."
+  },
+  {
+    "id": "ft3-psiquantum-omega-2025",
+    "title": "PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing",
+    "authors": "PsiQuantum",
+    "url": "https://www.psiquantum.com/news-import/omega",
+    "supports": "Press release, 26 February 2025. Planned utility-scale sites in Brisbane and Chicago; rack-style cooling instead of dilution refrigerators.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim."
+  },
+  {
+    "id": "ft3-psiquantum-chicago-2025",
+    "title": "PsiQuantum Breaks Ground on America's Largest Quantum Computing Project in Chicago",
+    "authors": "PsiQuantum",
+    "url": "https://www.psiquantum.com/news-import/psiquantum-breaks-ground-chicago",
+    "supports": "Press release, 30 September 2025. Groundbreaking in Chicago for a million-qubit-scale fault-tolerant computer; no operational date given.",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim."
+  },
+  {
+    "id": "ft3-microsoft-majorana1",
+    "title": "Microsoft's Majorana 1 chip carves new path for quantum computing",
+    "authors": "Microsoft (Catherine Bolgar)",
+    "url": "https://news.microsoft.com/source/features/innovation/microsofts-majorana-1-chip-carves-new-path-for-quantum-computing/",
+    "supports": "Announcement, 19 February 2025. Eight topological qubits on a chip designed to scale to a million (company claim).",
+    "verified": "2026-11-02",
+    "verification": "official-doc",
+    "note": "Vendor claim."
+  },
+  {
+    "id": "ft3-microsoft-nature-2025",
+    "title": "Interferometric single-shot parity measurement in InAs–Al hybrid devices",
+    "authors": "Microsoft Azure Quantum",
+    "url": "https://www.nature.com/articles/s41586-024-08445-2",
+    "supports": "Nature 638, 651–655 (2025), published 19 Feb 2025. Single-shot parity measurement with 1% assignment error; Peer Review File carries the editorial statement that the results do not represent evidence for Majorana zero modes.",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "Editorial statement located in the Peer Review File PDF."
+  },
+  {
+    "id": "ft3-legg-2026",
+    "title": "On the robustness of topological gap detection via transport",
+    "authors": "Henry F. Legg",
+    "url": "https://doi.org/10.1038/s41586-026-10567-8",
+    "supports": "Nature 654, E22–E26 (24 June 2026), Matters Arising on Nature 638, 651. Argues the parity readout occurred in regions that appear gapless, suggesting trivial origins.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-microsoft-reply-2026",
+    "title": "Reply to: On the robustness of topological gap detection via transport",
+    "authors": "Microsoft Quantum",
+    "url": "https://www.nature.com/articles/s41586-026-10568-7",
+    "supports": "Nature 654, E27–E28 (24 June 2026). Microsoft maintains its measurements indicate a topological origin.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Opening paragraph only."
+  }
+]

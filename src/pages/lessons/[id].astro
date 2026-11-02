@@ -1,6 +1,7 @@
 ---
 import Book from '../../layouts/Book.astro';
 import Demo from '../../components/Demo.astro';
+import ResourceCalculator from '../../components/ResourceCalculator.astro';
 import {lessons,definitions,exercises,lessonMarkdown,render,timeEstimate,moduleNames,label,lessonNumber,tier,FT_MODULE,tierLabels,decisionPath,decisionLessons,type Lesson} from '../../lib/content';
 import revisits from '../../content/module-revisits.json';
 import ideas from '../../content/lesson-ideas.json';
@@ -33,9 +34,10 @@ const calloutHtml=decisionPath.callouts[lesson.id]?(await render(decisionPath.ca
 const time=await timeEstimate(lesson);
 const conceptLinks=lesson.concepts.map(id=>definitions.find(d=>d.id===id)).filter(d=>!!d);
 const demo=demoIds.includes(lesson.id);
+const calculator=['ft-11-resource-estimation','ft-13-full-chain'].includes(lesson.id);
 const revisit=revisits.find(r=>r.lesson===lesson.id);
 const revisitHtml=revisit?(await render(revisit.body)).html:'';
-const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'interactive-example',title:'Step through the example'}]:[]),...(revisit?[{id:'module-revisit',title:'Revisit the module'}]:[]),{id:'practice',title:'Practice & explained answers'},...body.sections.filter(s=>s.id==='references')];
+const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'interactive-example',title:'Step through the example'}]:[]),...(calculator?[{id:'resource-calculator',title:'Resource calculator'}]:[]),...(revisit?[{id:'module-revisit',title:'Revisit the module'}]:[]),{id:'practice',title:'Practice & explained answers'},...body.sections.filter(s=>s.id==='references')];
 ---
 <Book title={lesson.title} current={lesson.id} sections={sections} description={lesson.summary}>
 <article data-lesson-id={lesson.id}>
@@ -49,6 +51,7 @@ const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'i
 {lesson.editorial==='partial'&&<aside class="partial-notice"><strong>This chapter is partial.</strong> The material below is usable, but these teaching gaps remain:<ul>{lesson.gaps.map(g=><li>{g}</li>)}</ul></aside>}
 <div class="prose" set:html={mainHtml}/>
 {demo&&<><h2 id="interactive-example">Step through the example</h2><Demo id={lesson.id}/></>}
+{calculator&&<><h2 id="resource-calculator">Resource calculator</h2><ResourceCalculator/></>}
 {revisit&&<section class="prose" id="module-revisit"><h2>Revisit the module</h2><div set:html={revisitHtml}/></section>}
 <section id="practice" class="prose"><h2>Practice & explained answers</h2><p>Predict first. Then calculate with the definitions available. A correct prediction after changing one operation is stronger evidence of understanding than recognizing a formula.</p>{practice.map((e,i)=><div><h3>Check {i+1}</h3><div set:html={e.question}/><details><summary>Reveal worked answer</summary><div set:html={e.answer}/></details></div>)}</section>
 <div class="prose" set:html={referencesHtml}/>

@@ -84,7 +84,7 @@ This does not make quantum computing easy. Add the gate $T=\mathrm{diag}(1,e^{i\
 
 $$TXT^\dagger=\frac{X+Y}{\sqrt2}.$$
 
-That is not a single Pauli string, so the tableau cannot track it. Adding one such non-Clifford gate to the Clifford gates gives a universal gate set. (This is a standard result, but no source for it has been verified in this edition yet.) Two consequences run through the rest of this module:
+That is not a single Pauli string, so the tableau cannot track it. Adding $T$ to the Clifford gates gives a universal gate set: [Boykin et al. (1999)](https://arxiv.org/abs/quant-ph/9906054) prove that Hadamard, CNOT and $\sigma_z^{1/4}$ (which is $T$ up to a global phase) form a universal basis. Two consequences run through the rest of this module:
 
 1. **Error-correction circuits are Clifford circuits with Pauli noise**, so they can be simulated and benchmarked at full scale. [Stim](https://arxiv.org/abs/2103.02202) is a widely used simulator built on this idea.
 2. **The non-Clifford gates are the expensive part** of a fault-tolerant computation. They cannot be done as cheaply as Clifford gates on an error-corrected processor, which is why resource estimates count T or Toffoli gates.
@@ -122,4 +122,5 @@ The simulation reproduces the error-correction layer only. The computation it pr
 - Daniel Gottesman, [The Heisenberg representation of quantum computers](https://arxiv.org/abs/quant-ph/9807006), arXiv quant-ph/9807006 (1998), in Group22 proceedings (1999). "Knill's theorem" on efficient simulation.
 - Daniel Gottesman, [Stabilizer Codes and Quantum Error Correction](https://arxiv.org/abs/quant-ph/9705052), Caltech PhD thesis (1997). The stabilizer formalism.
 - Craig Gidney, [Stim: a fast stabilizer circuit simulator](https://arxiv.org/abs/2103.02202), Quantum 5, 497 (2021).
+- P. Oscar Boykin, Tal Mor, Matthew Pulver, Vwani Roychowdhury, Farrokh Vatan, [On universal and fault-tolerant quantum computing](https://arxiv.org/abs/quant-ph/9906054), arXiv quant-ph/9906054 (1999). Hadamard, $\sigma_z^{1/4}$ and CNOT form a universal basis.
 - Worked numbers: checked in `public/examples/ft-checks.py`.

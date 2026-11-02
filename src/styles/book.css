@@ -41,3 +41,12 @@ main{overflow-wrap:break-word}
 .decision-callout p{margin:.35rem 0}
 .decision-step{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;margin-top:18px;font-size:14px}
 .decision-step a{text-decoration:none}
+/* Resource estimate calculator. */
+.calculator{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:20px 22px;margin:22px 0}
+.preset-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px 18px;margin:14px 0}
+.calc-grid label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:550}
+.calc-grid input{font:inherit;font-weight:400;padding:7px 9px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);min-width:0}
+.calc-grid small{font-weight:400;font-size:11px}
+.calc-output table{width:100%;font-size:14px}
+.calc-output th{text-align:left;font-weight:550;background:none}
