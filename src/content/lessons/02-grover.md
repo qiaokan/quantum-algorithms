@@ -2,7 +2,7 @@
 
 There are four candidate labels: 00, 01, 10, 11. Exactly one is marked as the answer. You can test a candidate with a predicate $f$: marked means $f(x)=1$, unmarked means $f(x)=0$. The goal is to output the marked label. The label is hidden from the algorithm; the worked instance and demonstration controls reveal it to the reader so we can check the mechanism.
 
-For the quantum algorithm, assume a coherent **phase oracle** $O_f$:
+For the quantum algorithm, assume a coherent **phase [oracle](/definitions/oracles/)** $O_f$. Here $|x\rangle$ (“ket x”) names the basis state for label $x$; a state attaches an amplitude to every label, as set out in [State and gate conventions](#state-and-gate-conventions) below:
 
 $$O_f|x\rangle=(-1)^{f(x)}|x\rangle.$$
 
@@ -81,7 +81,7 @@ $$\frac12(a_{00}+a_{01}-a_{10}+a_{11})
 
 The 00 output is $\frac12(-1/2+1/2-1/2+1/2)=0$. Each cancellation is a sum of contributions **to one output amplitude**, not subtraction of probabilities.
 
-A valid deterministic gate preserves vector length. Here rows have squared length $4(1/4)=1$; distinct rows have inner product zero, since their four products contain two $+1/4$ and two $-1/4$. Therefore $D^TD=I$: it is [unitary](/definitions/unitarity/). Superscript $T$ transposes a real matrix. For complex matrices the corresponding condition uses conjugate transpose $\dagger$.
+A valid deterministic gate preserves vector length. Here rows have squared length $4(1/4)=1$; distinct rows have [inner product](/definitions/inner-products/) zero, since their four products contain two $+1/4$ and two $-1/4$. Therefore $D^TD=I$: it is [unitary](/definitions/unitarity/). Superscript $T$ transposes a real matrix. For complex matrices the corresponding condition uses conjugate transpose $\dagger$.
 
 <details data-derivation>
 <summary>Show algebra: why “reflection about the uniform state” means this matrix</summary>
@@ -102,7 +102,7 @@ $$D=(H\otimes H)S_0(H\otimes H).$$
 
 Operations act right-to-left: two Hadamards, then $S_0$, then two more Hadamards. Since $(H\otimes H)|00\rangle=|s\rangle$, this is the zero-state reflection expressed around the uniform direction. We can also verify it without assuming the reflection formula: $H\otimes H$ has rows $(1,1,1,1)$, $(1,-1,1,-1)$, $(1,1,-1,-1)$, and $(1,-1,-1,1)$, each divided by 2. Multiplication with the sign diagonal gives the displayed $D$.
 
-A controlled-$Z$ gate negates only 11. Surround it by $X$ on both qubits to negate only 00: this realizes $\operatorname{diag}(-1,1,1,1)=-S_0$. The resulting diffusion is $-D$, physically equivalent here because it differs by a global minus sign. For larger search registers, the zero-state phase flip uses a multi-controlled operation decomposed into elementary gates and workspace. These gates are fixed; the marked predicate is the function-dependent component.
+A [controlled](/definitions/controlled-gates/)-$Z$ gate negates only 11. Surround it by $X$ on both qubits to negate only 00: this realizes $\operatorname{diag}(-1,1,1,1)=-S_0$. The resulting diffusion is $-D$, physically equivalent here because it differs by a global minus sign. For larger search registers, the zero-state phase flip uses a multi-controlled operation decomposed into elementary gates and workspace. These gates are fixed; the marked predicate is the function-dependent component.
 
 For the toy oracle marking 10, conjugate a controlled-$Z$ by $X$ on the right bit. This flips label 10 to 11 before the controlled phase, then restores it. Teaching a specific oracle implementation does not mean the algorithm knows the marked label: an external problem provider supplies that circuit.
 
@@ -154,6 +154,8 @@ Only the oracle sign location changes. Preparation and $D$ are identical. The me
 No. After the sign flip the mean is zero, so diffusion negates all four amplitudes. Their magnitudes remain $1/2$, and the marked-set probability remains $1/2$. Here $\theta=\pi/4$ and $\sin^2(3\pi/4)=1/2$. Other phase schedules can change this behavior; the one-mark exact argument cannot be reused unchanged.
 
 </details>
+
+**Where Grover continues.** Lessons 03–05 return to Deutsch's sign trick with more input bits. Grover's rotation picture is generalized in lesson 06, [amplitude amplification](/lessons/amplitude-amplification/).
 
 ## References
 

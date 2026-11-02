@@ -109,7 +109,7 @@ test('practice math, bibliography ordering and full-text search include supporti
  await expect(page.locator('#practice .katex').first()).toBeAttached();
  expect(await page.evaluate(()=>Boolean(document.getElementById('interactive-example')!.compareDocumentPosition(document.getElementById('references')!)&Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
  const records=await (await page.request.get('/search-index.json')).json();
- expect(records.some((r:{kind:string;text:string})=>r.kind==='Exercise'&&r.text.includes('repeated row adds no rank'))).toBe(true);
+ expect(records.some((r:{kind:string;text:string})=>r.kind==='Exercise'&&r.text.includes('two rows are independent'))).toBe(true);
  expect(records.some((r:{kind:string;text:string})=>r.kind==='Module revisit'&&r.text.includes('output contracts differ'))).toBe(true);
  expect(records.some((r:{section:string})=>r.section==='Overview')).toBe(true);
 });
@@ -150,4 +150,19 @@ test('phone lessons open with the title on screen and the section list collapsed
 test('inline math inside disclosure labels and exercise answers is typeset',async({page})=>{
  await page.goto('/lessons/hallgren/');expect(await page.locator('summary .katex').count()).toBeGreaterThan(0);
  await page.goto('/lessons/amplitude-amplification/');await expect(page.locator('#practice')).not.toContainText('A-dagger');
+});
+
+test('Next follows the main path, offers branches, and branches lead back',async({page})=>{
+ await page.goto('/lessons/amplitude-amplification/');
+ await expect(page.locator('.prev-next').getByRole('link',{name:/NEXT LESSON/})).toHaveAttribute('href','/lessons/qft/');
+ await expect(page.locator('.path-note a')).toHaveAttribute('href','/lessons/bbht-search/');
+ await page.goto('/lessons/bbht-search/');await expect(page.locator('.path-note a')).toHaveAttribute('href','/lessons/qft/');
+ await page.goto('/lessons/qft/');await expect(page.locator('.prev-next').getByRole('link',{name:/PREVIOUS LESSON/})).toHaveAttribute('href','/lessons/amplitude-amplification/');
+});
+
+test('early lessons open with a short idea, a circuit sketch and linked concepts',async({page})=>{
+ await page.goto('/lessons/deutsch/');const idea=page.locator('.idea-box');
+ await expect(idea).toContainText('phase kickback');await expect(idea.locator('.circuit-sketch')).toContainText('U_f');
+ await idea.getByRole('link',{name:/simulator/}).click();await expect(page.locator('#interactive-example')).toBeInViewport();
+ await page.locator('.context-box a[href="/definitions/oracles/"]').click();await expect(page.getByRole('dialog')).toBeVisible();
 });

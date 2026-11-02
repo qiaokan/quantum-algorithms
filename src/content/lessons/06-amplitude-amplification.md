@@ -81,7 +81,7 @@ We do not materialize the enormous matrix $R_s$. Instead,
 
 $$R_s=A(2|0\rangle\langle0|-I)A^\dagger.$$
 
-The dagger means [conjugate transpose](/definitions/conjugate-transpose/), which is the inverse of a unitary circuit. Read the product right-to-left: undo preparation, apply a phase reflection about all-zero, and prepare again. A multiply-controlled phase can implement the all-zero reflection, with decomposition and ancilla costs. The checker can compute $f(x)$ into a flag, phase the flag, and uncompute its workspace. Count both computation and uncomputation, not only the phase gate.
+The dagger means [conjugate transpose](/definitions/conjugate-transpose/), which is the inverse of a unitary circuit. Read the product right-to-left: undo preparation, apply a phase reflection about all-zero, and prepare again. A multiply-controlled phase can implement the all-zero reflection, with decomposition and [ancilla](/definitions/ancillas/) costs. The checker can compute $f(x)$ into a flag, phase the flag, and [uncompute](/definitions/uncomputation/) its workspace. Count both computation and uncomputation, not only the phase gate.
 
 For small nonzero $a$, order $1/\sqrt a$ iterations suffice for constant success probability; each uses $A$, $A^\dagger$, and checking. A classical randomized program does not automatically provide a cheap coherent $A$: retain random seeds and garbage reversibly, then account for cleanup. No success is possible when $a=0$. The toy's exact success uses the special value $a=1/4$; arbitrary $a$ generally misses probability 1 with integer iteration counts.
 

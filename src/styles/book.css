@@ -14,3 +14,14 @@ main{overflow-wrap:break-word}
 /* The section list is a disclosure only on phones; elsewhere its label is a static heading. */
 .toc-details>summary{list-style:none;cursor:default}.toc-details>summary::-webkit-details-marker{display:none}.toc-count{display:none}
 @media(max-width:800px){.toc-details>summary{cursor:pointer;display:flex;align-items:center;min-height:40px}.toc-details>summary::after{content:'▸';margin-left:auto;font-size:13px;letter-spacing:0}.toc-details[open]>summary::after{content:'▾'}.toc-count{display:inline;font-weight:500;letter-spacing:.6px;white-space:pre}}
+/* A short intuition and circuit sketch ahead of the full derivation. */
+.idea-box{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:18px 22px;margin:26px 0 0;font-size:15px;line-height:1.65}
+.idea-box .idea-text p{margin:.5rem 0}
+.circuit-sketch{font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);padding:12px 14px;border-radius:5px;overflow-x:auto;margin:12px 0 4px;white-space:pre}
+.path-note{margin:14px 0 0;color:var(--muted)}
+@media print{.idea-box{border-color:#bbb}.path-note{display:none}}
+.start-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:22px 0 6px}
+.button-link{display:inline-block;background:var(--accent);color:var(--paper);text-decoration:none;font-weight:600;font-size:15px;padding:11px 18px;border-radius:6px}
+.button-link:hover{filter:brightness(1.08)}
+.path-module{font-family:Georgia,serif;font-weight:400;font-size:22px;margin:38px 0 4px}
+.catalog-list .path-minutes{font-size:12px;margin-top:2px}

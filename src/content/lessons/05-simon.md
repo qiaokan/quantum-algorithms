@@ -37,7 +37,7 @@ $$\frac1{\sqrt8}\bigl(
 |000,000\rangle+|001,001\rangle+|010,001\rangle+|011,000\rangle+
 |100,100\rangle+|101,101\rangle+|110,101\rangle+|111,100\rangle\bigr).$$
 
-A comma separates registers, not tensor factors inside a number. Each displayed term has probability $1/8$. The state is entangled: output labels record which pair the input belongs to. We cannot simply drop them and add all eight input amplitudes into a pure state.
+A comma separates registers, not tensor factors inside a number. Each displayed term has probability $1/8$. The state is [entangled](/definitions/tensor-products/), meaning it cannot be written as an input state times an output state: output labels record which pair the input belongs to. We cannot simply drop them and add all eight input amplitudes into a pure state.
 
 ## Condition on one output to see the mechanism
 
@@ -71,7 +71,7 @@ $$\frac{(-1)^{x\cdot y}+(-1)^{(x\oplus s)\cdot y}}{\sqrt{2\cdot2^n}}
 
 The factor $(-1)^{x\cdot y}$ is ±1 and does not affect probability. If $s\cdot y=1$, the bracket is $1-1=0$: the two paths to the same output cancel. If $s\cdot y=0$, it is 2, giving squared amplitude $4/2^{n+1}=1/2^{n-1}$. Exactly $2^{n-1}$ labels satisfy this constraint for nonzero $s$.
 
-For a second concrete pair, $x=001,x\oplus s=010$, the allowed outputs remain 000,011,100,111; their amplitudes are $(+,-,+,-)/2$. Those different relative signs do not change the measured distribution. Consequently, the algorithm need not record or even measure the output register. Ignoring it gives a mixture over pairs with the **same** input-outcome probabilities. The simulator retains the full joint state and sums output-register probabilities to compute this marginal; it does not pretend the input is an isolated pure state.
+For a second concrete pair, $x=001,x\oplus s=010$, the allowed outputs remain 000,011,100,111; their amplitudes are $(+,-,+,-)/2$. Those different relative signs do not change the measured distribution. Consequently, the algorithm need not record or even measure the output register. Ignoring it gives a [mixture](/definitions/density-matrices/) over pairs with the **same** input-outcome probabilities. The simulator retains the full joint state and sums output-register probabilities to compute this marginal; it does not pretend the input is an isolated pure state.
 
 ## Complete the classical linear-equation step
 
@@ -88,7 +88,7 @@ The last equation requires $s_1=s_2$. Thus the candidates are 000 and 011. The p
 
 If the samples were instead 111 and 011, XOR the rows: $111\oplus011=100$. Their equations become the same independent pair above. This is Gaussian elimination over bits: adding equations means XORing their rows, and $1+1=0$ modulo 2. [Binary linear algebra](/definitions/binary-linear-algebra/) works another elimination example.
 
-The sample order is random; no circuit guarantees those rows appear in that order. For three bits, after a first nonzero row there is probability $1/2$ that a new row lies outside its two-element span. More generally, after $k$ independent rows, their span has $2^k$ elements inside a space of size $2^{n-1}$, so the probability of gaining rank is $1-2^{k-(n-1)}$. Expected runs to reach rank $n-1$ are order $n$. A fixed budget of $n+O(\log(1/\delta))$ makes failure at most a chosen small $\delta$; insufficient rank should be reported and more samples taken, not guessed away.
+The sample order is random; no circuit guarantees those rows appear in that order. For three bits, after a first nonzero row there is probability $1/2$ that a new row lies outside its two-element [span](/definitions/binary-linear-algebra/), the set of XOR combinations of the rows collected so far. More generally, after $k$ independent rows, their span has $2^k$ elements inside a space of size $2^{n-1}$, so the probability of gaining rank is $1-2^{k-(n-1)}$. Expected runs to reach rank $n-1$ are order $n$. A fixed budget of $n+O(\log(1/\delta))$ makes failure at most a chosen small $\delta$; insufficient rank should be reported and more samples taken, not guessed away.
 
 ## Implementation, cost, and limitations
 

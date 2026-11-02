@@ -42,7 +42,7 @@
   {
     "lesson": "simon",
     "question": "Samples are 101 and 010 for a nonzero three-bit mask. Recover the mask.",
-    "answer": "The equations are $s_0\\oplus s_2=0$ and $s_1=0$. Solutions are 000 and 101; the nonzero promise selects 101. A repeated row adds no rank."
+    "answer": "The equations are $s_0\\oplus s_2=0$ and $s_1=0$. Solutions are 000 and 101; the nonzero promise selects 101. The two rows are independent, so they already reach the required rank $n-1=2$."
   },
   {
     "lesson": "simon",
