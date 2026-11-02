@@ -1,0 +1,30 @@
+{
+  "title": "Decision path: from useful application to hardware",
+  "summary": "The algorithms that dominate published fault-tolerant resource estimates, in the order you need them to follow an estimate from an application down to qubits and runtime.",
+  "lessons": [
+    "deutsch",
+    "grover",
+    "qft",
+    "phase-estimation",
+    "order-finding",
+    "shor",
+    "product-formulas",
+    "energy-estimation",
+    "hhl",
+    "block-encoding",
+    "qubitization"
+  ],
+  "callouts": {
+    "deutsch": "Every estimate on this path counts oracle calls, then the gates inside each call, then the qubits those gates need. Deutsch is the smallest case where that accounting matters: one coherent call replaces two classical calls, but the call is a circuit whose gates still have to be counted. Its oracles use only $X$ and CNOT. Those belong to the Clifford gates, which the error-correction module later shows are the cheap kind on fault-tolerant hardware.",
+    "grover": "Grover's quadratic speedup is the standard test of whether a speedup survives error correction. Each round calls the oracle once, and on error-corrected hardware that call is a reversible circuit costed in Toffoli or T gates, each lasting many error-correction cycles. Under their surface-code cost model, [Babbush et al. (2021)](https://arxiv.org/abs/2011.04149) estimate about 170 µs per Toffoli and conclude that quadratic speedups will not give advantage on early fault-tolerant machines. Keep this lesson's $\\sqrt N$ round count; the path later multiplies it by that time per gate.",
+    "qft": "The QFT turns hidden periodicity into a measured bit string, and it needs no extra qubits beyond its $n$-qubit register. Its exact circuit uses controlled rotations by ever smaller angles. Error-corrected hardware has no native arbitrary-angle rotation, so each one is synthesized from Clifford and T gates. That makes T-count, not raw gate count, its cost on the decision path.",
+    "phase-estimation": "Phase estimation is how most applications on this path read out their answer: Shor's order finding, and energy estimation for chemistry. Its cost is dominated by the controlled powers of $U$. Getting $m$ bits needs controlled-$U^{2^j}$ for $j=0,\\ldots,m-1$, which is $2^m-1$ applications of $U$ unless $U^{2^j}$ has a cheaper circuit. That doubling per extra bit of precision is the runtime term resource estimates must budget.",
+    "order-finding": "Order finding is the quantum core of Shor's algorithm, and nearly all of its cost is the reversible modular multiplication inside the controlled powers, not the QFT. RSA resource estimates therefore count Toffoli gates in modular arithmetic. [Gidney and Ekerå (2021)](https://arxiv.org/abs/1905.09749) estimate 20 million noisy qubits and 8 hours for RSA-2048, assuming 0.1% gate error, a 1 µs surface-code cycle and a 10 µs reaction time.",
+    "shor": "Shor's algorithm is the usual yardstick for useful fault-tolerant scale, and its estimates have moved fast. As of May 2025, a preprint by [Gidney](https://arxiv.org/abs/2505.15917) (not peer reviewed as of November 2026) reports fewer than a million noisy qubits and under a week for RSA-2048, under the same hardware assumptions as the 2021 estimate. The improvement comes from arithmetic and error-correction techniques, not better hardware. This lesson gives the algorithm; the error-correction module explains where those factors come from.",
+    "product-formulas": "Hamiltonian simulation is the main source of chemistry and materials applications, and product formulas are its simplest method. Their cost is the number of exponentials, which grows with simulated time, accuracy and the number of Hamiltonian terms. On error-corrected hardware each exponential becomes rotations synthesized from T gates. Qubitization, later on this path, often has better asymptotic scaling for the same task.",
+    "energy-estimation": "Estimating a ground-state energy to a target precision is the application behind most published chemistry resource estimates. The algorithm is phase estimation on a time-evolution or walk operator, so its cost is the number of controlled applications, set by the precision, times the cost of each. For one FeMoco model, [Lee et al. (2021)](https://arxiv.org/abs/2011.03494) report about 4 million physical qubits and roughly 3.5 days, assuming a 1 µs cycle and 0.1% physical error.",
+    "hhl": "HHL is on this path for its output contract as much as its speedup. It returns a quantum state proportional to the solution, not a printed vector, and its cost depends on the condition number and on how the matrix and right-hand side are loaded. For a decision, ask two things: does the application need only a few measured properties of the solution, and can the data be loaded efficiently? If not, the advertised speedup does not reach the user.",
+    "block-encoding": "Block encoding is how modern algorithms access a matrix that is not unitary: the matrix, scaled by a normalization factor, sits in one block of a larger unitary. That factor and the cost of one block-encoding circuit set how many repetitions later steps need, so both appear directly in runtime estimates. Tensor-hypercontraction chemistry estimates largely work by building cheaper block encodings with a smaller normalization. This lesson is self-contained; its mention of HHL is a backward cross-reference, not a prerequisite.",
+    "qubitization": "Qubitization turns a block encoding into a walk whose phases encode the eigenvalues. Phase estimation on that walk is the most expensive step in the chemistry estimates the decision path follows. Its cost is roughly the normalization factor divided by the target energy precision, times the Toffoli cost of one walk step. Error-correction overhead then turns that product into physical qubits and days."
+  }
+}

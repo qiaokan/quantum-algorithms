@@ -13,6 +13,11 @@ function syncToc(){if(!tocDetails)return;tocDetails.open=!mobileQuery.matches;to
 tocDetails?.addEventListener('toggle',()=>{if(!mobileQuery.matches&&!tocDetails.open)tocDetails.open=true});
 tocDetails?.addEventListener('click',e=>{if(mobileQuery.matches&&(e.target as HTMLElement).closest('a'))tocDetails.open=false});
 mobileQuery.addEventListener('change',syncToc);syncToc();
+// Deferred branches stay in sidebar order but are hidden until the reader asks for them.
+const deferredToggle=document.querySelector<HTMLButtonElement>('#toggle-deferred');
+function syncDeferred(show:boolean){sidebar.classList.toggle('show-deferred',show);if(deferredToggle){deferredToggle.setAttribute('aria-pressed',String(show));deferredToggle.textContent=deferredToggle.textContent!.replace(/^(Show|Hide)/,show?'Hide':'Show')}}
+syncDeferred(storage.get('qa-show-deferred')==='true');
+if(deferredToggle)deferredToggle.onclick=()=>{const show=deferredToggle.getAttribute('aria-pressed')!=='true';syncDeferred(show);storage.set('qa-show-deferred',String(show))};
 function closeMenu(){document.body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false');backdrop.hidden=true;syncSidebarAccess();}
 menu.onclick=()=>{const open=menu.getAttribute('aria-expanded')!=='true';document.body.classList.toggle('menu-open',open);menu.setAttribute('aria-expanded',String(open));backdrop.hidden=!open;syncSidebarAccess();if(open)$('#menu-close').focus()};
 $('#menu-close').onclick=()=>{closeMenu();menu.focus()};backdrop.onclick=closeMenu;

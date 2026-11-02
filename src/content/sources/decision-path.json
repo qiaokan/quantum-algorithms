@@ -1,0 +1,40 @@
+[
+  {
+    "id": "dp-babbush-quadratic",
+    "title": "Focus beyond Quadratic Speedups for Error-Corrected Quantum Advantage",
+    "authors": "Ryan Babbush; Jarrod R. McClean; Michael Newman; Craig Gidney; Sergio Boixo; Hartmut Neven",
+    "url": "https://arxiv.org/abs/2011.04149",
+    "supports": "PRX Quantum 2, 010103 (2021). Under a surface-code model with about 170 µs per Toffoli, quadratic speedups do not give advantage on early fault-tolerant devices (decision-path callout for Grover).",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "dp-gidney-ekera-2021",
+    "title": "How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits",
+    "authors": "Craig Gidney; Martin Ekerå",
+    "url": "https://arxiv.org/abs/1905.09749",
+    "supports": "Quantum 5, 433 (2021). RSA-2048 estimate of 20 million noisy qubits and 8 hours, assuming 0.1% gate error, 1 µs surface-code cycle and 10 µs reaction time (decision-path callout for order finding).",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "dp-gidney-2025",
+    "title": "How to factor 2048 bit RSA integers with less than a million noisy qubits",
+    "authors": "Craig Gidney",
+    "url": "https://arxiv.org/abs/2505.15917",
+    "supports": "arXiv preprint (May 2025), not peer reviewed as of the check date. Fewer than a million noisy qubits and under a week, under the same hardware assumptions as the 2021 estimate (decision-path callout for Shor).",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Preprint only."
+  },
+  {
+    "id": "dp-lee-thc-2021",
+    "title": "Even more efficient quantum computations of chemistry through tensor hypercontraction",
+    "authors": "Joonho Lee; Dominic W. Berry; Craig Gidney; William J. Huggins; Jarrod R. McClean; Nathan Wiebe; Ryan Babbush",
+    "url": "https://arxiv.org/abs/2011.03494",
+    "supports": "PRX Quantum 2, 030305 (2021). For the Reiher FeMoco model, about 4 million physical qubits and roughly 3.5 days, assuming a 1 µs cycle and 0.1% physical error (decision-path callout for energy estimation).",
+    "verified": "2026-11-02",
+    "verification": "full-text",
+    "note": "The paper reports 5.3×10^9 Toffolis in Table III and 6.7×10^9 in its surface-code compilation text."
+  }
+]
