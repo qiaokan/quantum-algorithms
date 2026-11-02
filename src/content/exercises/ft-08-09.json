@@ -1,0 +1,32 @@
+[
+  {
+    "lesson": "ft-08-lattice-surgery",
+    "question": "Teleport a $T$ gate onto the data state $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$ using the lesson's convention (data controls a CNOT onto $|T\\rangle$, then the magic qubit is measured in $Z$). Suppose the outcome is 1. Give the data qubit's amplitudes before and after the correction, and check the result against $T|+\\rangle$.",
+    "answer": "With $\\omega=e^{i\\pi/4}$ and $\\alpha=\\beta=1/\\sqrt2=0.7071$, outcome 1 leaves the data in $\\alpha\\omega|0\\rangle+\\beta|1\\rangle=(0.5+0.5i)|0\\rangle+0.7071|1\\rangle$, which is $\\omega T^\\dagger|+\\rangle$. The outcome had probability $(|\\alpha|^2+|\\beta|^2)/2=1/2$. Apply $S=\\mathrm{diag}(1,i)$: $(0.5+0.5i)|0\\rangle+0.7071i|1\\rangle$. Since $T|+\\rangle=0.7071|0\\rangle+(0.5+0.5i)|1\\rangle$, multiplying by $\\omega$ gives $(0.5+0.5i)|0\\rangle+0.7071\\,\\omega^2|1\\rangle=(0.5+0.5i)|0\\rangle+0.7071i|1\\rangle$. The two agree up to the global phase $\\omega$, as $ST^\\dagger=T$ requires."
+  },
+  {
+    "lesson": "ft-08-lattice-surgery",
+    "question": "Run the measurement-based CNOT of the lesson on control $0.6|0\\rangle+0.8|1\\rangle$, ancilla $|+\\rangle$, target $|0\\rangle$, with qubit order (C, A, T). Take the branch $m_1=0$ ($Z_CZ_A=+1$), $m_2=1$ ($X_AX_T=-1$), $m_3=1$ ($Z_A=-1$). Give the state after each step and after the corrections.",
+    "answer": "Start: $0.4243(|000\\rangle+|010\\rangle)+0.5657(|100\\rangle+|110\\rangle)$. $Z_CZ_A=+1$ keeps even parity of C and A: $0.6|000\\rangle+0.8|110\\rangle$ (probability 0.5). $X_AX_T=-1$ applies $(1-X_AX_T)/2$, with $|000\\rangle\\to|011\\rangle$ and $|110\\rangle\\to|101\\rangle$; renormalized, $0.4243|000\\rangle-0.4243|011\\rangle+0.5657|110\\rangle-0.5657|101\\rangle$ (probability 0.5). $Z_A=-1$ keeps A $=1$: $-0.6|011\\rangle+0.8|110\\rangle$ (probability 0.5), i.e. $-0.6|01\\rangle+0.8|10\\rangle$ on (C, T). Corrections: $m_1\\oplus m_3=1$ gives $X_T$, so $-0.6|00\\rangle+0.8|11\\rangle$; $m_2=1$ gives $Z_C$, so $-0.6|00\\rangle-0.8|11\\rangle=-(0.6|00\\rangle+0.8|11\\rangle)$, the CNOT output up to a global sign. Both corrections are Paulis, so in practice they are frame updates, not gates."
+  },
+  {
+    "lesson": "ft-08-lattice-surgery",
+    "question": "The Pauli frame owes an $X$ on a qubit just before a $T$ gate. Show what the owed operator becomes after the $T$ gate, and explain why this forces the control system to resolve the frame before it can continue.",
+    "answer": "Write $TX=(TXT^\\dagger)T$. With $T=\\mathrm{diag}(1,\\omega)$, $TXT^\\dagger=\\begin{pmatrix}0&\\bar\\omega\\\\ \\omega&0\\end{pmatrix}=e^{-i\\pi/4}SX$, which can be checked entry by entry: $SX=\\begin{pmatrix}0&1\\\\ i&0\\end{pmatrix}$ and $e^{-i\\pi/4}\\cdot i=\\omega$. So the owed $X$ becomes an owed $SX$ after the gate. $S$ is a Clifford gate, not a Pauli, so the frame can no longer be a simple list of Paulis. Equivalently, the control system must know whether the $X$ was owed in order to choose between applying $T$ and applying $T^\\dagger$ (up to Paulis). That choice depends on decoded measurement results, which is why every $T$ gate waits for the decoder. An owed $Z$ causes no problem, because $TZT^\\dagger=Z$."
+  },
+  {
+    "lesson": "ft-09-magic-states",
+    "question": "Raw injected magic states have error $\\epsilon=10^{-2}$. Using Bravyi and Kitaev's formulas, compute the one-level and two-level 15-to-1 output errors, the first-level success probability, and the expected number of raw states per two-level output.",
+    "answer": "One level: $35\\epsilon^3=35\\times10^{-6}=3.5\\times10^{-5}$ (the exact Eq. 36 gives $3.61\\times10^{-5}$). Success probability: $(1-2\\epsilon)^8=0.98^8=0.8508$, so $p_s=(1+15\\times0.8508)/16=0.860$; 14% of first-level attempts are discarded. Two levels: $35(3.5\\times10^{-5})^3=35\\times4.29\\times10^{-14}=1.5\\times10^{-12}$. Raw states: $15/0.860\\approx17.4$ per level-one output, and the second level succeeds with $p_s\\approx1-15\\times3.5\\times10^{-5}=0.9995$, so about $17.4\\times15/0.9995\\approx262$ raw states per output, against 225 if nothing were discarded."
+  },
+  {
+    "lesson": "ft-09-magic-states",
+    "question": "Use Litinski's $(15\\text{-to-}1)^6_{13,5,5}\\times(20\\text{-to-}4)_{23,11,13}$ factory (43,300 qubits, 130 cycles per state, output error $1.4\\times10^{-10}$ at $p=10^{-3}$) with a 1 µs cycle and a 10 µs reaction time. How many factories reach the reaction limit, how many qubits do they use, and how many bad states are expected in $2.6\\times10^9$ states?",
+    "answer": "One factory makes a state every 130 µs, i.e. $1/(1.3\\times10^{-4}\\,\\text{s})\\approx7{,}700$ states per second. The reaction limit is $1/(10^{-5}\\,\\text{s})=10^5$ per second, so we need $10^5/7{,}692=13$ factories ($130/10=13$). They use $13\\times43{,}300=562{,}900$ physical qubits. Expected bad states: $2.6\\times10^9\\times1.4\\times10^{-10}=0.36$, so the chance of at least one failure is about $1-e^{-0.36}\\approx30\\%$. That is too high for a single run, so a larger computation would need a lower-error protocol, such as his $4.5\\times10^{-20}$ design at 73,400 qubits and 128 cycles."
+  },
+  {
+    "lesson": "ft-09-magic-states",
+    "question": "For $2.6\\times10^9$ dependent non-Clifford operations, compare the runtime with (a) one 170 µs factory, (b) enough factories at a 10 µs reaction time, and (c) enough factories at a 1 µs reaction time. How many 170 µs factories does each of (b) and (c) need?",
+    "answer": "(a) $2.6\\times10^9\\times1.7\\times10^{-4}\\,\\text{s}=4.42\\times10^5$ s, which is 123 hours or 5.1 days. (b) $2.6\\times10^9\\times10^{-5}\\,\\text{s}=2.6\\times10^4$ s, which is 7.2 hours; it needs $170/10=17$ factories, about 2.2 million qubits at 130,000 each. (c) $2.6\\times10^9\\times10^{-6}\\,\\text{s}=2{,}600$ s, about 43 minutes; it needs $170/1=170$ factories, about 22 million qubits. Each tenfold cut in reaction time cuts runtime tenfold only if the magic-state supply also grows tenfold. These are order-of-magnitude illustrations: Gidney and Ekerå's detailed design reports 8 hours with 14 factories."
+  }
+]

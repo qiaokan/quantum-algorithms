@@ -1,0 +1,32 @@
+[
+  {
+    "lesson": "ft-06-decoding-union-find",
+    "question": "On the distance-7 repetition code (checks $c_0,\\ldots,c_5$; edge $q_0$ joins $c_0$ to the boundary, $q_k$ joins $c_{k-1}$ and $c_k$ for $k=1,\\ldots,5$, $q_6$ joins $c_5$ to the boundary; all weights 1), the defects are $c_1$ and $c_4$. Trace union-find round by round, peel, and compare with matching.",
+    "answer": "Round 1: both singletons are odd. From $c_1$, $q_1$ and $q_2$ reach 0.5; from $c_4$, $q_4$ and $q_5$ reach 0.5. Nothing fuses. Round 2: those four edges reach 1 and fuse, giving clusters $\\{c_0,c_1,c_2\\}$ and $\\{c_3,c_4,c_5\\}$, each holding one defect and still odd. Round 3: $q_0$ and $q_6$ reach 0.5, while $q_3$ is grown from both clusters, $0.5+0.5=1$, and fuses. The merged cluster $\\{c_0,\\ldots,c_5\\}$ holds 2 defects, so growth stops after 3 rounds. Peeling the path $c_0$–$c_5$ from $c_5$: $c_5$ is clear; $c_4$ takes $q_4$ and toggles $c_3$; $c_3$ takes $q_3$ and toggles $c_2$; $c_2$ takes $q_2$ and clears $c_1$. Correction $X_2X_3X_4$, weight 3. Matching compares pairing $c_1$ with $c_4$ (weight 3) against sending both to the boundary ($2+2=4$) and also picks $X_2X_3X_4$. The repository's `unionFindDecoder` returns the same edges with `rounds = 3`."
+  },
+  {
+    "lesson": "ft-06-decoding-union-find",
+    "question": "In the lesson's distance-3 surface-code example (defects $A$, $B$, $C$), matching's class has three weight-2 errors and union-find's class has seven weight-3 errors as its lightest members. Estimate the odds that matching is right at $p=0.001$, and explain why union-find's answer is still a valid correction.",
+    "answer": "To leading order the odds are $3p^2/(7p^3)=3/(7p)=3/0.007\\approx429$ to 1 in favour of matching's class. Union-find's correction $X_0X_1X_6$ still has exactly the observed syndrome: peeling always returns edges whose endpoints are the defects. It is valid but less likely, because peeling picks some correction inside the grown region rather than the lightest one. The difference between the two corrections is a logical $X$ times a check, so the choice decides whether a logical error is introduced. The syndrome needs at least two errors, beyond the $(d-1)/2=1$ that distance 3 guarantees to correct."
+  },
+  {
+    "lesson": "ft-06-decoding-union-find",
+    "question": "At distance 7, Google's offline neural-network decoder gave $1.43\\times10^{-3}$ per cycle and its correlated-matching ensemble $1.71\\times10^{-3}$. Using $\\Lambda=2.14$ as a rough exchange rate, how much code distance is the better decoder worth?",
+    "answer": "The error ratio is $1.71/1.43\\approx1.196$. One step of two in distance divides the error by $\\Lambda=2.14$. So the decoder improvement is worth $\\ln1.196/\\ln2.14\\approx0.179/0.761\\approx0.235$ of a distance step, roughly a quarter of the gain from going $d\\to d+2$. That is a rough exchange rate, not a precise equivalence, but it shows why decoder accuracy is part of the qubit budget. It must be weighed against speed: the neural network was run offline."
+  },
+  {
+    "lesson": "ft-07-real-time-decoding",
+    "question": "A machine runs distance-15 rotated surface codes with a 1.1 µs cycle. What raw syndrome rate does one logical qubit produce, and what do 100 logical qubits produce?",
+    "answer": "Checks per cycle: $15^2-1=224$ bits. Per second: $224/(1.1\\times10^{-6})\\approx2.036\\times10^8$ bit/s, about 204 Mbit/s per logical qubit. For 100 logical qubits: about $2.04\\times10^{10}$ bit/s, roughly 20.4 Gbit/s, counting only the data patches, raw and uncompressed."
+  },
+  {
+    "lesson": "ft-07-real-time-decoding",
+    "question": "A decoder runs at $f=r_{\\rm gen}/r_{\\rm proc}=1.05$. (a) Without feedforward, how much longer does a computation of duration $T$ take? (b) With feedforward at every T gate, what is the slowdown factor at the 100th gate, and after how many gates does it exceed $10^6$?",
+    "answer": "(a) The queue grows linearly at $(r_{\\rm gen}-r_{\\rm proc})t$, and draining it at the end takes $(f-1)T=0.05T$: a constant 5% slowdown, matching Terhal's $fT$ for a memory. (b) By Terhal's $D_k=f^kD_1$, the factor at $k=100$ is $1.05^{100}\\approx131.5$. It exceeds $10^6$ when $k>\\ln10^6/\\ln1.05\\approx13.82/0.0488\\approx283.2$, so at the 284th gate. The remedy is $f<1$ with margin for bursts."
+  },
+  {
+    "lesson": "ft-07-real-time-decoding",
+    "question": "Parallel window decoding at $d=15$ with a 1 µs round uses $n_{\\rm com}=15$ and $n_W=45$. If each window takes $\\tau_W=300$ µs to decode, would a sliding window keep up? How many parallel workers are needed, and what is the response time per T-gate layer?",
+    "answer": "A sliding window needs $\\tau_W<n_{\\rm com}\\tau_{\\rm rd}=15$ µs, so 300 µs fails by a factor of 20. In parallel, one A window and one B window commit $n_{\\rm com}+n_W=60$ rounds, or 60 µs of data. Skoric et al.'s condition gives $N_{\\rm par}\\ge2\\tau_W/((n_{\\rm com}+n_W)\\tau_{\\rm rd})=600/60=10$ workers. The response time is $N_{\\rm par}(n_{\\rm com}+n_W)\\tau_{\\rm rd}=10\\times60$ µs $=600$ µs $=2\\tau_W$. Parallelism fixes throughput, but each T gate still waits about 600 µs, which is a latency cost."
+  }
+]

@@ -69,5 +69,31 @@
     ],
     "file": "logical-qubits.md",
     "summary": "One qubit of information stored across many physical qubits by a code, acted on by logical operators that commute with every stabilizer."
+  },
+  {
+    "id": "t-gate",
+    "title": "The T gate",
+    "aliases": [
+      "T",
+      "pi/8 gate",
+      "T count",
+      "T-count",
+      "non-Clifford gate"
+    ],
+    "file": "t-gate.md",
+    "summary": "T = diag(1, e^{iπ/4}). It is not Clifford, makes the gate set universal with the Cliffords, and on a surface code each T consumes a magic state, so estimates count T gates."
+  },
+  {
+    "id": "magic-states",
+    "title": "Magic states",
+    "aliases": [
+      "magic state",
+      "|T⟩ state",
+      "distillation",
+      "magic state factory",
+      "CCZ state"
+    ],
+    "file": "magic-states.md",
+    "summary": "Resource states that, consumed with Clifford operations and measurement, apply a non-Clifford gate. Factories distil them; their supply rate can limit fault-tolerant runtime."
   }
 ]

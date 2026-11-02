@@ -51,7 +51,8 @@
     "concepts": [
       "stabilizers",
       "clifford-gates",
-      "pauli-operators"
+      "pauli-operators",
+      "t-gate"
     ],
     "reusedConcepts": [],
     "exampleIds": [],
@@ -59,7 +60,8 @@
       "ft-aaronson-gottesman",
       "ft-gottesman-1998",
       "ft-gottesman-thesis",
-      "ft-stim"
+      "ft-stim",
+      "ft3-boykin-universal"
     ],
     "path": "main",
     "editorial": "complete",
@@ -184,6 +186,357 @@
       "blossom"
     ],
     "file": "67-ft-05-decoding-matching.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-06-decoding-union-find",
+    "sequence": 68,
+    "module": 12,
+    "title": "Decoding II: union-find and the accuracy–speed trade-off",
+    "kind": "algorithm",
+    "summary": "Grow clusters around defects by half-edges, merge them with a union-find structure, then peel a correction, trading a little accuracy for almost-linear worst-case time.",
+    "why": "The decoder's worst-case time sets the logical clock and its accuracy sets the code distance, so choosing a decoder is a cost decision in the qubit and infrastructure budget.",
+    "prerequisites": [
+      "ft-05-decoding-matching"
+    ],
+    "concepts": [
+      "syndromes",
+      "code-distance",
+      "complexity"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft3-union-find",
+      "ft-sparse-blossom",
+      "ft-google-2024",
+      "ft3-battistel-review",
+      "ft3-alphaqubit"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Worst case O(n α(n)), with simulated toric-code thresholds slightly below matching (9.9% vs 10.3%); the repository's version is written for clarity and does not reach that bound.",
+    "aliases": [
+      "union-find decoder",
+      "UF decoder",
+      "peeling decoder",
+      "cluster growth",
+      "Delfosse–Nickerson",
+      "Sparse Blossom",
+      "correlated matching",
+      "neural-network decoder",
+      "AlphaQubit"
+    ],
+    "file": "68-ft-06-decoding-union-find.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-07-real-time-decoding",
+    "sequence": 69,
+    "module": 12,
+    "title": "Real-time decoding: throughput, backlog and latency",
+    "kind": "framework",
+    "summary": "Size the syndrome stream, show why a decoder slower than it causes Terhal's exponential backlog under T-gate feedforward, and see how windowed parallel decoding and dedicated hardware address throughput and latency.",
+    "why": "Decoder throughput, latency, bandwidth and power are where classical infrastructure becomes the binding constraint on fault-tolerant runtime.",
+    "prerequisites": [
+      "ft-06-decoding-union-find"
+    ],
+    "concepts": [
+      "syndromes",
+      "logical-qubits",
+      "code-distance"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-terhal",
+      "ft-google-2024",
+      "dp-gidney-ekera-2021",
+      "dp-gidney-2025",
+      "dp-lee-thc-2021",
+      "ft3-battistel-review",
+      "ft3-skoric-parallel-window",
+      "ft3-tan-parallel",
+      "ft3-barber-collision-clustering"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "No quantum-advantage claim: decoder throughput must exceed the generation rate (f < 1, with margin) to avoid exponential slowdown.",
+    "aliases": [
+      "backlog problem",
+      "decoder throughput",
+      "reaction time",
+      "feedforward",
+      "sliding window decoding",
+      "parallel window decoding",
+      "FPGA decoder",
+      "ASIC decoder",
+      "Collision Clustering"
+    ],
+    "file": "69-ft-07-real-time-decoding.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-08-lattice-surgery",
+    "sequence": 70,
+    "module": 12,
+    "title": "Logical operations: lattice surgery, cheap Cliffords and expensive T gates",
+    "kind": "protocol",
+    "summary": "Logical Paulis become classical frame updates, Clifford gates come from lattice-surgery joint measurements, and a T gate consumes a magic state with a correction that depends on the measurement outcome.",
+    "why": "This is why resource estimates count T or Toffoli gates and why decoder reaction time is on the critical path.",
+    "prerequisites": [
+      "ft-03-surface-code",
+      "ft-05-decoding-matching"
+    ],
+    "concepts": [
+      "logical-qubits",
+      "pauli-operators",
+      "clifford-gates",
+      "measurement",
+      "controlled-gates",
+      "t-gate",
+      "magic-states"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft3-horsman-lattice-surgery",
+      "ft3-litinski-game",
+      "ft3-boykin-universal",
+      "ft3-eastin-knill",
+      "ft3-bravyi-koenig",
+      "dp-gidney-ekera-2021",
+      "ft3-gidney-ekera-details"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup. It sets the cost tiers (free Paulis, about d cycles per Clifford, distilled and latency-bound T gates) that every runtime estimate uses.",
+    "aliases": [
+      "lattice surgery",
+      "merge and split",
+      "Pauli frame",
+      "joint measurement",
+      "Pauli product measurement",
+      "T-gate teleportation",
+      "gate teleportation",
+      "feedforward"
+    ],
+    "file": "70-ft-08-lattice-surgery.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-09-magic-states",
+    "sequence": 71,
+    "module": 12,
+    "title": "Magic states: distillation, cultivation and the logical clock",
+    "kind": "protocol",
+    "summary": "15-to-1 distillation cubes the magic-state error, factories cost qubits and cycles, and the machine runs at the lower of the factory T-rate and one dependent T gate per reaction time.",
+    "why": "It turns a T or Toffoli count into wall-clock time and factory qubits, and shows where decoder latency becomes the binding constraint.",
+    "prerequisites": [
+      "ft-08-lattice-surgery"
+    ],
+    "concepts": [
+      "clifford-gates",
+      "logical-qubits",
+      "probability",
+      "measurement",
+      "t-gate",
+      "magic-states"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft3-bravyi-kitaev",
+      "ft3-litinski-msd",
+      "ft3-litinski-game",
+      "dp-babbush-quadratic",
+      "dp-gidney-ekera-2021",
+      "ft3-gidney-ekera-details",
+      "ft3-cultivation"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup. It sets the logical clock speed and the magic-state footprint that decide fault-tolerant runtime.",
+    "aliases": [
+      "magic state distillation",
+      "15-to-1",
+      "magic state factory",
+      "cultivation",
+      "T factory",
+      "CCZ factory",
+      "reaction limit",
+      "logical clock"
+    ],
+    "file": "71-ft-09-magic-states.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-10-control-calibration",
+    "sequence": 72,
+    "module": 12,
+    "title": "The control and calibration stack",
+    "kind": "framework",
+    "summary": "The per-qubit lines, cryostat heat and space limits, and calibration as a dependency graph that a surface code needs on transmon hardware.",
+    "why": "It shows where infrastructure (wiring, electronics, data rates, calibration orchestration) limits scaling before the physics does.",
+    "prerequisites": [
+      "ft-03-surface-code"
+    ],
+    "concepts": [
+      "syndromes",
+      "logical-qubits"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-google-2024",
+      "ft3-krinner-2019",
+      "ft3-patra-2018",
+      "ft3-bardin-2019",
+      "ft3-kelly-dag",
+      "ft3-klimov-2018"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: this is the engineering cost any fault-tolerant advantage must carry.",
+    "aliases": [
+      "control stack",
+      "cryogenic wiring",
+      "heat budget",
+      "cryo-CMOS",
+      "calibration DAG",
+      "Optimus",
+      "qubit calibration"
+    ],
+    "file": "72-ft-10-control-calibration.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-11-resource-estimation",
+    "sequence": 73,
+    "module": 12,
+    "title": "End-to-end resource estimation",
+    "kind": "framework",
+    "summary": "From logical qubits and Toffoli counts to code distance, physical qubits and runtime, reproducing two published estimates.",
+    "why": "This is the calculation a business decision rests on: it shows which hardware assumptions drive the qubit count and the runtime.",
+    "prerequisites": [
+      "ft-04-noise-thresholds"
+    ],
+    "concepts": [
+      "logical-qubits",
+      "code-distance",
+      "t-gate",
+      "magic-states"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "dp-gidney-ekera-2021",
+      "dp-gidney-2025",
+      "dp-lee-thc-2021",
+      "dp-babbush-quadratic",
+      "ft-google-2024"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: the accounting that decides whether an algorithmic speedup survives error-correction overhead.",
+    "aliases": [
+      "resource estimate",
+      "physical qubit count",
+      "RSA-2048 estimate",
+      "FeMoco estimate",
+      "calculator"
+    ],
+    "file": "73-ft-11-resource-estimation.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-12-hardware-roadmaps",
+    "sequence": 74,
+    "module": 12,
+    "title": "Hardware modalities and roadmaps",
+    "kind": "framework",
+    "summary": "Superconducting, trapped-ion, neutral-atom, photonic and topological qubits compared by cycle time, connectivity and errors, with every roadmap item a dated claim.",
+    "why": "It turns vendor roadmaps into checkable inputs (cycle time, reaction time, code) for the resource model behind a timing decision.",
+    "prerequisites": [
+      "ft-04-noise-thresholds",
+      "ft-10-control-calibration"
+    ],
+    "concepts": [
+      "code-distance",
+      "logical-qubits"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-google-2024",
+      "dp-gidney-ekera-2021",
+      "ft3-ibm-starling-2025",
+      "ft3-ibm-ftqc-blog",
+      "ft3-ibm-loon-2025",
+      "ft3-moses-2023",
+      "ft3-ryan-anderson-2021",
+      "ft3-quantinuum-2024",
+      "ft3-quantinuum-2026",
+      "ft3-bluvstein-2024",
+      "ft3-quera-2024",
+      "ft3-quera-libra-2026",
+      "ft3-psiquantum-nature-2025",
+      "ft3-psiquantum-omega-2025",
+      "ft3-psiquantum-chicago-2025",
+      "ft3-microsoft-majorana1",
+      "ft3-microsoft-nature-2025",
+      "ft3-legg-2026",
+      "ft3-microsoft-reply-2026"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: slower reaction times scale wall-clock time linearly; connectivity reduces qubit counts, not dependent-step latency.",
+    "aliases": [
+      "qubit modalities",
+      "hardware roadmap",
+      "trapped ions",
+      "neutral atoms",
+      "photonic",
+      "Majorana",
+      "Starling",
+      "Apollo"
+    ],
+    "file": "74-ft-12-hardware-roadmaps.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-13-full-chain",
+    "sequence": 75,
+    "module": 12,
+    "title": "The full chain: from application to timeline",
+    "kind": "synthesis",
+    "summary": "Run one workload from application to hardware, and mark where each stage is bottlenecked, especially in classical infrastructure.",
+    "why": "The decision path's conclusion: a list of checkable conditions in place of a single qubit count or date.",
+    "prerequisites": [
+      "ft-11-resource-estimation"
+    ],
+    "concepts": [
+      "logical-qubits"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "dp-lee-thc-2021",
+      "dp-gidney-ekera-2021",
+      "ft-google-2024",
+      "ft-nist-pqc",
+      "ft-terhal"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Synthesis: no new speedup; it shows which conditions an advantage claim depends on.",
+    "aliases": [
+      "full chain",
+      "decision chain",
+      "bottlenecks",
+      "timeline"
+    ],
+    "file": "75-ft-13-full-chain.md",
     "gaps": []
   }
 ]

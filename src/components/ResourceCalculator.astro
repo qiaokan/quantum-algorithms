@@ -1,0 +1,66 @@
+---
+import {presets} from '../lib/resource-estimate';
+const fields:[string,string,string,string][]=[
+ ['physicalError','Physical error rate p','0.0001','Per physical operation. Must be below the model threshold 0.01.'],
+ ['cycleTimeUs','Cycle time (µs)','0.1','One round of stabilizer measurements.'],
+ ['reactionTimeUs','Reaction time (µs)','0.1','Decode plus feedforward before a dependent operation.'],
+ ['failureBudget','Failure budget','0.01','Acceptable probability that the run fails from logical errors.'],
+ ['nonCliffordOps','T / Toffoli count','any','Each consumes one magic state.'],
+ ['logicalQubits','Logical qubits','1','The algorithm’s qubits, before routing.'],
+ ['factories','Magic-state factories','1','Running in parallel.'],
+ ['routingOverhead','Routing overhead','0.05','Patches per algorithm qubit (≥ 1).'],
+ ['patchesPerFactory','Patches per factory','1','Factory footprint in logical patches.'],
+ ['cyclesPerStatePerD','Factory time per state (× d cycles)','0.1','5.5 follows Babbush et al. (2021).'],
+];
+---
+<section class="calculator" data-calculator aria-label="Resource estimate calculator">
+ <div class="demo-header"><span class="eyebrow">ESTIMATE IT YOURSELF</span><span class="badge">Teaching model · not a compiler</span></div>
+ <p class="small muted">Model: logical error per patch per cycle = 0.1 × (p / 0.01)<sup>(d+1)/2</sup>; time per non-Clifford operation is the slower of the reaction time and the factory supply interval; operations run one after another; each patch is 2d² physical qubits. Factory errors and parallel threads are not modelled.</p>
+ <div class="preset-row" role="group" aria-label="Presets">{Object.entries(presets).map(([key,p])=><button type="button" data-preset={key}>{p.label}</button>)}</div>
+ <p class="small" data-preset-note></p>
+ <div class="calc-grid">{fields.map(([key,label,step,help])=><label><span>{label}</span><input type="number" name={key} step={step} min="0" required/><small class="muted">{help}</small></label>)}</div>
+ <div class="calc-output" aria-live="polite">
+  <p data-calc-error class="partial-notice" hidden></p>
+  <table><tbody>
+   <tr><th scope="row">Code distance d</th><td data-out="distance">—</td></tr>
+   <tr><th scope="row">Logical error per patch per cycle</th><td data-out="eps">—</td></tr>
+   <tr><th scope="row">Time per non-Clifford operation</th><td data-out="op">—</td></tr>
+   <tr><th scope="row">Runtime</th><td data-out="runtime">—</td></tr>
+   <tr><th scope="row">Logical patches (algorithm + factories)</th><td data-out="patches">—</td></tr>
+   <tr><th scope="row">Physical qubits</th><td data-out="qubits">—</td></tr>
+   <tr><th scope="row">Predicted failure probability</th><td data-out="failure">—</td></tr>
+  </tbody></table>
+ </div>
+ <details class="state-inspector" open><summary>Sensitivity: halve or double one input</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Sensitivity table"><table><thead><tr><th>Input</th><th>× ½: qubits, runtime</th><th>× 2: qubits, runtime</th></tr></thead><tbody data-sensitivity></tbody></table></div></details>
+ <noscript>Enable JavaScript to use the calculator. The worked estimates in the lesson text do not need it.</noscript>
+</section>
+<script>
+import {estimate,presets,sensitivity,type EstimateInput,type Estimate} from '../lib/resource-estimate';
+const names:Record<string,string>={physicalError:'Physical error',cycleTimeUs:'Cycle time',reactionTimeUs:'Reaction time',failureBudget:'Failure budget',nonCliffordOps:'T / Toffoli count',logicalQubits:'Logical qubits',factories:'Factories'};
+const fmtQ=(n:number)=>n>=1e6?`${(n/1e6).toFixed(n>=1e8?0:1)} million`:n.toLocaleString('en-US');
+const fmtT=(s:number)=>s<120?`${s.toFixed(1)} s`:s<7200?`${(s/60).toFixed(1)} min`:s<172800?`${(s/3600).toFixed(1)} h`:s<3.15e7*2?`${(s/86400).toFixed(1)} days`:`${(s/3.15e7).toFixed(1)} years`;
+const brief=(e:Estimate|null)=>e?`${fmtQ(e.physicalQubits)}, ${fmtT(e.runtimeSeconds)} (d=${e.distance})`:'no distance meets the budget';
+for(const root of document.querySelectorAll<HTMLElement>('[data-calculator]')){
+ const inputs=[...root.querySelectorAll<HTMLInputElement>('input[name]')];
+ const out=(k:string)=>root.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+ const error=root.querySelector<HTMLElement>('[data-calc-error]')!;
+ function read():EstimateInput{return Object.fromEntries(inputs.map(i=>[i.name,Number(i.value)])) as unknown as EstimateInput}
+ function draw(){
+  let e:Estimate;const input=read();
+  try{e=estimate(input)}catch(err){error.hidden=false;error.textContent=(err as Error).message;root.querySelectorAll<HTMLElement>('[data-out]').forEach(x=>x.textContent='—');root.querySelector('[data-sensitivity]')!.replaceChildren();return}
+  error.hidden=true;
+  out('distance').textContent=String(e.distance);
+  out('eps').textContent=e.logicalErrorPerCycle.toExponential(1);
+  out('op').textContent=`${e.timePerOpUs.toFixed(1)} µs (${e.limitedBy==='reaction'?'reaction-limited':'factory-limited'})`;
+  out('runtime').textContent=fmtT(e.runtimeSeconds);
+  out('patches').textContent=`${Math.round(e.dataPatches).toLocaleString('en-US')} + ${Math.round(e.factoryPatches).toLocaleString('en-US')}`;
+  out('qubits').textContent=fmtQ(e.physicalQubits);
+  out('failure').textContent=`${(100*e.failureProbability).toFixed(e.failureProbability<0.001?3:1)}%`;
+  root.querySelector('[data-sensitivity]')!.replaceChildren(...sensitivity(input).map(r=>{const tr=document.createElement('tr');for(const text of [names[r.input],brief(r.low),brief(r.high)]){const td=document.createElement('td');td.textContent=text;tr.append(td)}return tr}));
+ }
+ function load(key:string){const p=presets[key];for(const i of inputs)i.value=String(p.input[i.name as keyof EstimateInput]);root.querySelector('[data-preset-note]')!.textContent=p.note;root.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.preset===key)));draw()}
+ root.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach(b=>b.onclick=()=>load(b.dataset.preset!));
+ inputs.forEach(i=>i.addEventListener('input',()=>{root.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach(b=>b.setAttribute('aria-pressed','false'));draw()}));
+ load('gidney-ekera-2021');
+}
+</script>

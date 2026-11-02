@@ -1,0 +1,32 @@
+[
+  {
+    "lesson": "ft-10-control-calibration",
+    "question": "Using Krinner et al.'s mixing-chamber numbers (19 µW at 20 mK; passive 0.013 µW per drive line and 0.025 µW per flux line; 0.050 µW average DC flux-bias load per flux line), how many qubits with one drive and one flux line each can the mixing chamber support? What if magnetic shielding removed the flux-bias load entirely?",
+    "answer": "Per qubit: $0.013+0.025+0.050=0.088$ µW, so $19/0.088\\approx216$ qubits. Without the flux-bias load, $0.038$ µW per qubit gives $19/0.038=500$ at this stage, but the cold plate (200 µW at 140 mK, 0.69 µW passive per qubit) would then limit first at $200/0.69\\approx290$. These counts ignore readout lines and drive-pulse dissipation, which Krinner et al.'s full budget includes; it puts the thermal limit near 150 qubits."
+  },
+  {
+    "lesson": "ft-10-control-calibration",
+    "question": "In the toy calibration DAG (RS → QS → Rabi → Ramsey → DRAG; RO depends on RS and Rabi; CZ depends on DRAG and RO of both qubits), consider a 3 × 3 grid of qubits. How many nodes are there, and how many must be rechecked if the centre qubit's QS node goes out of spec?",
+    "answer": "Single-qubit nodes: $6\\times9=54$. Nearest-neighbour pairs in a $3\\times3$ grid: $2\\cdot3\\cdot2=12$ CZ nodes. Total 66. If the centre qubit's QS fails, it and its descendants on that qubit are QS, Rabi, Ramsey, DRAG and RO (5 nodes), plus the CZ node of each of its 4 neighbouring pairs: 9 nodes. The other qubits' single-qubit nodes stay valid."
+  },
+  {
+    "lesson": "ft-10-control-calibration",
+    "question": "A logical qubit is a distance-27 rotated surface-code patch running at a 1.1 µs cycle. What syndrome data rate does it produce, and how does 1,000 such logical qubits compare with the under-500 Mb/s digital stream of one Bardin et al. cryo-CMOS controller?",
+    "answer": "The patch has $27^2-1=728$ measure qubits, each producing one bit per cycle: $728/(1.1\\times10^{-6}\\text{ s})\\approx6.6\\times10^8$ b/s, about 660 Mb/s per logical qubit. For 1,000 logical qubits, about $6.6\\times10^{11}$ b/s, or 660 Gb/s. One logical qubit's syndrome stream is already comparable to one controller's input stream, and the syndrome data must also reach a decoder with bounded latency."
+  },
+  {
+    "lesson": "ft-12-hardware-roadmaps",
+    "question": "Under a reaction-limited model, a workload has $10^9$ dependent non-Clifford operations. Compute the wall-clock time for reaction times of 10 µs and 1 ms, and find the reaction time that gives exactly one week.",
+    "answer": "$10^9\\times10^{-5}\\text{ s}=10^4$ s, about 2.8 hours. $10^9\\times10^{-3}\\text{ s}=10^6$ s, about 11.6 days. One week is $7\\times86{,}400=604{,}800$ s, so $t_r=604{,}800/10^9\\approx605$ µs."
+  },
+  {
+    "lesson": "ft-12-hardware-roadmaps",
+    "question": "IBM's gross code $[[144,12,12]]$ uses 288 physical qubits for 12 logical qubits. How many physical qubits would 12 separate distance-12 rotated surface-code patches use, and what does the gross code require in exchange?",
+    "answer": "Each patch uses $2\\cdot12^2-1=287$ qubits, so 12 patches use $12\\times287=3{,}444$, about $3{,}444/288\\approx12$ times as many. In exchange the gross code needs long-range connections on the chip, which IBM's June 2025 blog says its existing chips lacked and which its Loon processor was built to add. This compares memory footprints only; logical operations and factories add their own costs."
+  },
+  {
+    "lesson": "ft-12-hardware-roadmaps",
+    "question": "A decoder must handle one round of syndrome data per cycle. Compare the time per round available at Google's 1.1 µs cycle with a 2021 trapped-ion correction cycle of 200 ms, and say what this does and does not imply.",
+    "answer": "$0.2/(1.1\\times10^{-6})\\approx1.8\\times10^5$: the slower machine gives the decoder about 180,000 times longer per round, so real-time decoding is far less demanding. It does not mean the slower machine is better overall: in a reaction-limited model its wall-clock time grows in proportion to the cycle and reaction time, and the 2021 figure describes an early 10-qubit system, not a current one."
+  }
+]

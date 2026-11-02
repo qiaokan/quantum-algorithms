@@ -1,0 +1,11 @@
+[
+  {
+    "id": "ft-nist-pqc",
+    "title": "FIPS 203, 204 and 205: post-quantum cryptography standards",
+    "authors": "National Institute of Standards and Technology",
+    "url": "https://csrc.nist.gov/pubs/fips/203/final",
+    "supports": "FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) and FIPS 205 (SLH-DSA) were published on 13 August 2024; see also /pubs/fips/204/final and /pubs/fips/205/final.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  }
+]
