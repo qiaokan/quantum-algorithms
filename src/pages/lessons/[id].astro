@@ -1,7 +1,7 @@
 ---
 import Book from '../../layouts/Book.astro';
 import Demo from '../../components/Demo.astro';
-import {lessons,definitions,exercises,lessonMarkdown,render,timeEstimate,moduleNames,label,tier,tierLabels,decisionPath,decisionLessons,type Lesson} from '../../lib/content';
+import {lessons,definitions,exercises,lessonMarkdown,render,timeEstimate,moduleNames,label,lessonNumber,tier,FT_MODULE,tierLabels,decisionPath,decisionLessons,type Lesson} from '../../lib/content';
 import revisits from '../../content/module-revisits.json';
 import ideas from '../../content/lesson-ideas.json';
 import {demoIds} from '../../lib/demos';
@@ -15,9 +15,10 @@ const mainHtml=referencesOffset<0?body.html:body.html.slice(0,referencesOffset);
 const referencesHtml=referencesOffset<0?'':body.html.slice(referencesOffset);
 const index=lessons.findIndex(l=>l.id===lesson.id);
 // Main-path lessons step along the main path; an adjacent optional branch is offered, not forced.
+const isFt=lesson.module===FT_MODULE;
 const isMain=lesson.path==='main';
-const before=lessons.slice(0,index).reverse().filter(l=>l.editorial!=='planned');
-const after=lessons.slice(index+1).filter(l=>l.editorial!=='planned');
+const before=lessons.slice(0,index).reverse().filter(l=>l.editorial!=='planned'&&(l.module===FT_MODULE)===isFt);
+const after=lessons.slice(index+1).filter(l=>l.editorial!=='planned'&&(l.module===FT_MODULE)===isFt);
 const nextMain=after.find(l=>l.path==='main');
 const previous=isMain?(before.find(l=>l.path==='main')??before[0]):before[0];
 const next=isMain?(nextMain??after[0]):after[0];
@@ -38,10 +39,10 @@ const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'i
 ---
 <Book title={lesson.title} current={lesson.id} sections={sections} description={lesson.summary}>
 <article data-lesson-id={lesson.id}>
-<div class="breadcrumb"><a href="/">The textbook</a> / <a href={`/index/#module-${lesson.module}`}>Module {String(lesson.module).padStart(2,'0')}</a> / Lesson {String(lesson.sequence).padStart(2,'0')}</div>
+<div class="breadcrumb"><a href="/">The textbook</a> / <a href={`/index/#module-${lesson.module}`}>Module {String(lesson.module).padStart(2,'0')}</a> / Lesson {lessonNumber(lesson)}</div>
 <div class="lesson-kicker"><span class="eyebrow">{moduleNames[lesson.module]}</span><span class:list={['badge',{partial:lesson.editorial==='partial'}]}>{lesson.editorial==='complete'?'Authored · not independently reviewed':lesson.editorial==='reviewed'?'Reviewed':lesson.editorial}</span><span class:list={['tier-badge',`tier-${lessonTier}`]} data-tier={lessonTier}>{tierLabels[lessonTier]}</span></div>
 <h1>{lesson.title}</h1><p class="dek">{lesson.summary}</p>
-<div class="lesson-metadata"><span>{lesson.kind}</span><span>{lesson.path==='main'?'Complete algorithms path':'Optional branch'}</span><span title={`${time.reading} min reading, ${time.calculation} min calculation`}>≈ {time.total} min: {time.reading} reading + {time.calculation} calculation</span><span>Lesson {String(lesson.sequence).padStart(2,'0')}</span></div>
+<div class="lesson-metadata"><span>{lesson.kind}</span><span>{isFt?'Error-correction module':lesson.path==='main'?'Complete algorithms path':'Optional branch'}</span><span title={`${time.reading} min reading, ${time.calculation} min calculation`}>≈ {time.total} min: {time.reading} reading + {time.calculation} calculation</span><span>Lesson {lessonNumber(lesson)}</span></div>
 {calloutHtml&&<section class="decision-callout" aria-labelledby="decision-callout-heading"><p class="eyebrow" id="decision-callout-heading">WHY THIS MATTERS FOR THE DECISION PATH · STEP {step+1} OF {route.length}</p><div set:html={calloutHtml}/></section>}
 {idea&&<section class="idea-box" aria-labelledby="idea-heading"><p class="eyebrow" id="idea-heading">THE IDEA IN 30 SECONDS</p><div class="idea-text" set:html={ideaHtml}/><pre class="circuit-sketch" tabindex="0" aria-label="Circuit sketch">{idea.circuit}</pre>{demo&&<p class="small"><a href="#interactive-example">Step through this circuit in the simulator ↓</a></p>}</section>}
 <div class="context-box"><p><strong>The point of this lesson.</strong> {lesson.why}</p><p><strong>Useful prerequisites.</strong> {lesson.prerequisites.length?lesson.prerequisites.map((id,i)=><Fragment>{i>0?' · ':''}<a href={`/lessons/${id}/`}>{lessons.find(l=>l.id===id)?.title??id}</a></Fragment>):'Start here. Essential mathematics is introduced in the worked example.'}</p>{conceptLinks.length>0&&<p><strong>Concepts used here.</strong> {conceptLinks.map((d,i)=><Fragment>{i>0?' · ':''}<a href={`/definitions/${d!.id}/`}>{d!.title}</a></Fragment>)}</p>}<p class="small"><strong>Advantage status:</strong> {lesson.advantage}</p></div>
@@ -53,7 +54,7 @@ const sections=[...body.sections.filter(s=>s.id!=='references'),...(demo?[{id:'i
 <div class="prose" set:html={referencesHtml}/>
 <div class="lesson-actions"><p>Record your own assessment. Scrolling never marks a lesson understood.</p><div class="progress-controls"><button data-progress="read" aria-pressed="false">Read</button><button data-progress="practiced" aria-pressed="false">Practiced</button><button data-progress="revisit" aria-pressed="false">Revisit</button></div><p class="small muted" data-progress-status></p></div>
 {step>=0&&<nav class="decision-step" aria-label="Decision path sequence"><span class="eyebrow">DECISION PATH · STEP {step+1} OF {route.length}</span><span>{decisionPrev?<a href={`/lessons/${decisionPrev.id}/`}>← {label(decisionPrev)}</a>:<a href="/path/">← About the decision path</a>}</span><span>{decisionNext?<a href={`/lessons/${decisionNext.id}/`}>{label(decisionNext)} →</a>:<a href="/path/">Decision path overview →</a>}</span></nav>}
-<nav class="prev-next" aria-label="Lesson sequence">{previous?<a href={`/lessons/${previous.id}/`}><span>← PREVIOUS LESSON</span>{label(previous)}</a>:<a href="/"><span>← ORIENTATION</span>How to use this book</a>}{next?<a href={`/lessons/${next.id}/`}><span>{isMain&&next.path==='main'?'NEXT LESSON · COMPLETE PATH →':'NEXT LESSON →'}</span>{label(next)}</a>:<a href="/coverage/"><span>THE WHOLE PICTURE →</span>Coverage and next reading</a>}</nav>
+<nav class="prev-next" aria-label="Lesson sequence">{previous?<a href={`/lessons/${previous.id}/`}><span>← PREVIOUS LESSON</span>{label(previous)}</a>:isFt?<a href="/path/#error-correction-stage"><span>← DECISION PATH</span>Stage 2 overview</a>:<a href="/"><span>← ORIENTATION</span>How to use this book</a>}{next?<a href={`/lessons/${next.id}/`}><span>{isFt?'NEXT LESSON · FT MODULE →':isMain&&next.path==='main'?'NEXT LESSON · COMPLETE PATH →':'NEXT LESSON →'}</span>{label(next)}</a>:<a href="/coverage/"><span>THE WHOLE PICTURE →</span>Coverage and next reading</a>}</nav>
 {(branchOffer||backToMain)&&<p class="path-note small">{branchOffer?<Fragment>Optional detour first: <a href={`/lessons/${branchOffer.id}/`}>{label(branchOffer)}</a>. It deepens this family; the complete algorithms path continues without it.</Fragment>:<Fragment>This is an optional branch. <a href={`/lessons/${backToMain!.id}/`}>Back to the complete algorithms path: {label(backToMain!)} →</a></Fragment>}</p>}
 </article>
 </Book>

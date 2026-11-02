@@ -48,5 +48,10 @@
     "module": 10,
     "lesson": "forrelation",
     "body": "Deutsch's exact parity experiment and forrelation both expose a property of function-dependent signs through interference, but their promises and lower-bound comparisons differ. Kuperberg combines phase states to reveal a hidden shift, while Hallgren must construct a carefully discretized arithmetic function before Fourier sampling is meaningful. A quantum Metropolis sampler must handle rejected updates without silently cloning an unknown state. Across these advanced examples, the decisive question remains concrete: which operation is actually available, what information does its measurement expose, and how much repetition or classical reconstruction is needed?"
+  },
+  {
+    "module": 12,
+    "lesson": "ft-05-decoding-matching",
+    "body": "Trace one fault through the whole module. A single bit flip anticommutes with the stabilizers next to it ([FT-01](/lessons/ft-01-pauli-errors-repetition-code/), [FT-02](/lessons/ft-02-stabilizers-gottesman-knill/)). On the surface code that lights at most two $Z$ checks ([FT-03](/lessons/ft-03-surface-code/)). Repeated rounds turn it into two detection events joined by one edge of the decoding graph, and matching pairs them. Distance decides how many such faults must line up before a logical error, and $\\Lambda$ measures how quickly that becomes rare ([FT-04](/lessons/ft-04-noise-thresholds/)). Before moving on, recompute the distance needed for $10^{-6}$ per cycle at $\\Lambda=2.14$, then at $\\Lambda=4$, and say what each costs in qubits."
   }
 ]

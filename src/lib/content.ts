@@ -31,7 +31,10 @@ export const moduleNames = [
   'Modern algorithmic building blocks', 'Walks & combinatorial algorithms',
   'Variational, optimization & adiabatic methods', 'Learning, measurement & sampling',
   'Specialized advanced extensions', 'Connections & synthesis',
+  'FT: Error correction & fault tolerance',
 ];
+// Module 12 lessons carry their own FT-numbering; their catalog sequence starts after 62.
+export const FT_MODULE = 12, FT_OFFSET = 62;
 function readJson<T>(filename: string): T { return JSON.parse(fs.readFileSync(filename,'utf8')); }
 export const lessons: Lesson[] = fs.readdirSync(root).filter(f=>/^catalog-.*\.json$/.test(f)).flatMap(f=>readJson<Lesson[]>(path.join(root,f))).sort((a,b)=>a.sequence-b.sequence);
 export const sources: Source[] = fs.readdirSync(path.join(root,'sources')).filter(f=>f.endsWith('.json')).flatMap(f=>readJson<Source[]>(path.join(root,'sources',f)));
@@ -92,5 +95,8 @@ export const decisionPath: DecisionPath = readJson<DecisionPath>(path.join(root,
 export type Tier = 'decision' | 'complete' | 'deferred';
 export function tier(l: Lesson): Tier { return decisionPath.lessons.includes(l.id) ? 'decision' : l.path === 'main' ? 'complete' : 'deferred'; }
 export const tierLabels: Record<Tier, string> = { decision: 'Decision path', complete: 'Complete path', deferred: 'Deferred branch (read after the decision path)' };
+// The complete algorithms path is the main-path algorithm curriculum; the FT module has its own sequence.
+export function completePathLessons(): Lesson[] { return lessons.filter(l => l.path === 'main' && l.module !== FT_MODULE); }
 export function decisionLessons(): Lesson[] { return decisionPath.lessons.map(id => { const l = lessons.find(x => x.id === id); if (!l) throw new Error(`Decision path names unknown lesson ${id}`); return l; }); }
-export function label(l: Lesson) { return `${String(l.sequence).padStart(2,'0')}. ${l.title}`; }
+export function lessonNumber(l: Lesson) { return l.module === FT_MODULE ? `FT-${String(l.sequence - FT_OFFSET).padStart(2,'0')}` : String(l.sequence).padStart(2,'0'); }
+export function label(l: Lesson) { return `${lessonNumber(l)}. ${l.title}`; }

@@ -1,0 +1,189 @@
+[
+  {
+    "id": "ft-01-pauli-errors-repetition-code",
+    "sequence": 63,
+    "module": 12,
+    "title": "Pauli errors and the repetition code",
+    "kind": "protocol",
+    "summary": "Store a qubit in three, measure parities through ancillas, and correct a bit flip without learning the state.",
+    "why": "Every resource estimate rests on this mechanism: parity checks locate errors without measuring the data, and distance sets how fast failures fall.",
+    "prerequisites": [
+      "deutsch"
+    ],
+    "concepts": [
+      "pauli-operators",
+      "syndromes",
+      "code-distance",
+      "logical-qubits",
+      "controlled-gates"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-shor-1995",
+      "ft-gottesman-thesis",
+      "ft-terhal",
+      "ft-fowler-2012"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: error correction is the overhead that makes long quantum computations possible at all.",
+    "aliases": [
+      "bit-flip code",
+      "three-qubit code",
+      "repetition code",
+      "syndrome extraction"
+    ],
+    "file": "63-ft-01-pauli-errors-repetition-code.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-02-stabilizers-gottesman-knill",
+    "sequence": 64,
+    "module": 12,
+    "title": "Stabilizers, tableaus and Gottesman–Knill",
+    "kind": "primitive",
+    "summary": "Describe states by the Pauli strings that leave them unchanged, and simulate Clifford circuits efficiently.",
+    "why": "Error-correction circuits are Clifford circuits with Pauli noise, so they can be simulated at scale; non-Clifford gates are what make fault-tolerant computation expensive.",
+    "prerequisites": [
+      "ft-01-pauli-errors-repetition-code"
+    ],
+    "concepts": [
+      "stabilizers",
+      "clifford-gates",
+      "pauli-operators"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-aaronson-gottesman",
+      "ft-gottesman-1998",
+      "ft-gottesman-thesis",
+      "ft-stim"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Efficient classical simulation of a restricted circuit family; it marks where quantum advantage cannot come from.",
+    "aliases": [
+      "stabilizer formalism",
+      "tableau",
+      "Gottesman-Knill",
+      "Knill's theorem",
+      "CHP"
+    ],
+    "file": "64-ft-02-stabilizers-gottesman-knill.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-03-surface-code",
+    "sequence": 65,
+    "module": 12,
+    "title": "The surface code at distance 3",
+    "kind": "protocol",
+    "summary": "Seventeen qubits, eight local checks, one logical qubit: the code current hardware uses.",
+    "why": "Its 2d²−1 qubits per logical qubit is the multiplier that turns logical-qubit counts into physical-qubit counts.",
+    "prerequisites": [
+      "ft-02-stabilizers-gottesman-knill"
+    ],
+    "concepts": [
+      "stabilizers",
+      "logical-qubits",
+      "code-distance",
+      "syndromes"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-dennis-2002",
+      "ft-fowler-2012",
+      "ft-tomita-svore",
+      "ft-bombin",
+      "ft-google-2024"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: a local code with a threshold, at quadratic qubit cost in the distance.",
+    "aliases": [
+      "surface code",
+      "rotated surface code",
+      "Surface-17",
+      "toric code",
+      "planar code"
+    ],
+    "file": "65-ft-03-surface-code.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-04-noise-thresholds",
+    "sequence": 66,
+    "module": 12,
+    "title": "Noise models, thresholds and the suppression factor Λ",
+    "kind": "framework",
+    "summary": "Predict logical error per cycle from physical noise, and size the code distance for a target, using Google's 2024 data.",
+    "why": "Λ and the target error per cycle decide the code distance, and with it most of a machine's physical-qubit count.",
+    "prerequisites": [
+      "ft-03-surface-code"
+    ],
+    "concepts": [
+      "code-distance",
+      "logical-qubits"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-google-2024",
+      "ft-fowler-2012",
+      "ft-dennis-2002",
+      "dp-lee-thc-2021"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Not a speedup: the scaling law that converts error rates into qubit overhead.",
+    "aliases": [
+      "threshold",
+      "lambda",
+      "error suppression",
+      "circuit-level noise",
+      "code capacity"
+    ],
+    "file": "66-ft-04-noise-thresholds.md",
+    "gaps": []
+  },
+  {
+    "id": "ft-05-decoding-matching",
+    "sequence": 67,
+    "module": 12,
+    "title": "Decoding I: detection events and minimum-weight matching",
+    "kind": "algorithm",
+    "summary": "Turn noisy syndrome history into a correction by matching detection events on a weighted graph.",
+    "why": "The decoder is classical infrastructure that must run continuously and fast; its accuracy is part of Λ and its speed bounds the logical clock.",
+    "prerequisites": [
+      "ft-04-noise-thresholds"
+    ],
+    "concepts": [
+      "syndromes",
+      "code-distance"
+    ],
+    "reusedConcepts": [],
+    "exampleIds": [],
+    "sourceIds": [
+      "ft-edmonds",
+      "ft-fowler-2012",
+      "ft-pymatching",
+      "ft-sparse-blossom",
+      "ft-google-2024"
+    ],
+    "path": "main",
+    "editorial": "complete",
+    "advantage": "Polynomial-time classical decoding; exact matching here is exponential and for teaching only.",
+    "aliases": [
+      "MWPM",
+      "matching decoder",
+      "decoding graph",
+      "detection event",
+      "blossom"
+    ],
+    "file": "67-ft-05-decoding-matching.md",
+    "gaps": []
+  }
+]

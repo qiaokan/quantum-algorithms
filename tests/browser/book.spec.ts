@@ -170,7 +170,7 @@ test('early lessons open with a short idea, a circuit sketch and linked concepts
 test('decision path is the default route and the complete path is one click away',async({page})=>{
  await page.goto('/path/');await expect(page.locator('h1')).toContainText('Decision path');
  const steps=await page.locator('.decision-list > li > a').evaluateAll(a=>a.map(x=>x.getAttribute('href')));
- expect(steps).toEqual(['deutsch','grover','qft','phase-estimation','order-finding','shor','product-formulas','energy-estimation','hhl','block-encoding','qubitization'].map(id=>`/lessons/${id}/`));
+ expect(steps).toEqual(['deutsch','grover','qft','phase-estimation','order-finding','shor','product-formulas','energy-estimation','hhl','block-encoding','qubitization','ft-01-pauli-errors-repetition-code','ft-02-stabilizers-gottesman-knill','ft-03-surface-code','ft-04-noise-thresholds','ft-05-decoding-matching'].map(id=>`/lessons/${id}/`));
  await page.getByRole('link',{name:'complete algorithms path'}).first().click();await expect(page.locator('h1')).toHaveText('Complete algorithms path');
  expect(await page.locator('.catalog-list > li > a').count()).toBe(32);
  await page.goto('/');await expect(page.locator('.decision-feature a[href="/path/"]')).toBeVisible();
@@ -180,7 +180,7 @@ test('every lesson has exactly one tier, and decision lessons carry a callout an
  const curriculum=await (await request.get('/curriculum.json')).json();
  for(const l of curriculum.lessons)expect(['decision','complete','deferred'],l.id).toContain(l.tier);
  await page.goto('/lessons/qft/');await expect(page.locator('.tier-badge')).toHaveCount(1);await expect(page.locator('.tier-badge')).toHaveText('Decision path');
- await expect(page.locator('.decision-callout')).toContainText('STEP 3 OF 11');
+ await expect(page.locator('.decision-callout')).toContainText('STEP 3 OF 16');
  await expect(page.locator('.decision-step a').first()).toHaveAttribute('href','/lessons/grover/');await expect(page.locator('.decision-step a').last()).toHaveAttribute('href','/lessons/phase-estimation/');
  await page.goto('/lessons/bbht-search/');await expect(page.locator('.tier-badge')).toHaveText('Deferred branch (read after the decision path)');await expect(page.locator('.decision-callout')).toHaveCount(0);
  await page.goto('/lessons/simon/');await expect(page.locator('.tier-badge')).toHaveText('Complete path');
@@ -198,11 +198,21 @@ test('deferred branches are hidden in the sidebar until requested, without reord
 test('progress page tracks the decision path separately from the same store',async({page})=>{
  await page.goto('/lessons/qft/');await page.evaluate(()=>localStorage.clear());await page.reload();await page.locator('[data-progress="practiced"]').click();
  await page.goto('/progress/');await expect(page.locator('[data-decision-status-for="qft"]')).toHaveText('practiced');
- await expect(page.locator('[data-decision-summary]')).toHaveText('1 of 11 decision-path lessons marked; 1 practiced.');
+ await expect(page.locator('[data-decision-summary]')).toHaveText('1 of 16 decision-path lessons marked; 1 practiced.');
  await expect(page.locator('[data-status-for="qft"]')).toHaveText('practiced');
 });
 
 test('coverage keeps its original scope text and adds the dated error-correction note',async({page})=>{
  await page.goto('/coverage/');await expect(page.locator('main')).toContainText('error correction, and fault tolerance are supporting protocols/engineering topics');
  await expect(page.locator('#revision-2026-11-02')).toContainText('Revision note, 2 November 2026');
+});
+
+test('error-correction lessons render with FT numbering and their own sequence',async({page})=>{
+ await page.goto('/lessons/ft-01-pauli-errors-repetition-code/');
+ await expect(page.locator('.breadcrumb')).toContainText('Lesson FT-01');expect(await page.locator('.katex-error').count()).toBe(0);
+ await expect(page.locator('.tier-badge')).toHaveText('Decision path');await expect(page.locator('.decision-step')).toContainText('STEP 12 OF 16');
+ await expect(page.locator('.prev-next').getByRole('link',{name:/NEXT LESSON/})).toHaveAttribute('href','/lessons/ft-02-stabilizers-gottesman-knill/');
+ await page.goto('/lessons/ft-05-decoding-matching/');await expect(page.locator('#module-revisit')).toBeVisible();expect(await page.locator('#practice h3').count()).toBeGreaterThanOrEqual(2);
+ await page.goto('/lessons/synthesis/');await expect(page.locator('.prev-next')).toContainText('THE WHOLE PICTURE');
+ await page.goto('/path/complete/');await expect(page.locator('main')).not.toContainText('FT-01');
 });

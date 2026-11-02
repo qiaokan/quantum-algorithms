@@ -1,0 +1,57 @@
+[
+  {
+    "lesson": "ft-01-pauli-errors-repetition-code",
+    "question": "In the three-qubit bit-flip code, the state $0.6|000\\rangle+0.8|111\\rangle$ suffers $X_2$. Compute both parities, the correction, and the final logical measurement probabilities.",
+    "answer": "The state becomes $0.6|001\\rangle+0.8|110\\rangle$. Parity $q_0\\oplus q_1$ is $0$ in both branches, and $q_1\\oplus q_2$ is $1$ in both, so the syndrome is $(0,1)$ with certainty. Apply $X_2$ to restore $0.6|000\\rangle+0.8|111\\rangle$. Decoding and measuring gives 0 with probability $0.36$ and 1 with probability $0.64$."
+  },
+  {
+    "lesson": "ft-01-pauli-errors-repetition-code",
+    "question": "With independent bit flips at $p=0.05$, what is the logical failure probability of the three-qubit code, and how does it compare with an unprotected qubit?",
+    "answer": "Failure needs two or three flips: $3p^2-2p^3=3(0.0025)-2(0.000125)=0.00725$. That is about 6.9 times better than $0.05$. The gain shrinks as $p$ grows and vanishes at $p=1/2$."
+  },
+  {
+    "lesson": "ft-01-pauli-errors-repetition-code",
+    "question": "A $Z$ error hits qubit 1 of $0.6|000\\rangle+0.8|111\\rangle$. What syndrome results, and what happens to the logical state?",
+    "answer": "$Z_1$ gives $0.6|000\\rangle-0.8|111\\rangle$. Both $Z$-parity checks still read 0, so nothing is corrected. The logical state is now $0.6|\\bar0\\rangle-0.8|\\bar1\\rangle$, a logical phase flip caused by a single error. Against phase flips this code has distance 1."
+  },
+  {
+    "lesson": "ft-02-stabilizers-gottesman-knill",
+    "question": "Start from $|00\\rangle$, apply $H$ to qubit 1, then a CNOT from qubit 1 to qubit 0. Track the stabilizers.",
+    "answer": "Start with $\\{ZI,IZ\\}$. $H_1$ maps $IZ\\mapsto IX$, giving $\\{ZI,IX\\}$. The CNOT with control 1 and target 0 maps $X_1\\mapsto X_1X_0$ and $Z_0\\mapsto Z_0Z_1$, giving $\\{ZZ,XX\\}$: the Bell state $(|00\\rangle+|11\\rangle)/\\sqrt2$, reached with the roles of the qubits swapped."
+  },
+  {
+    "lesson": "ft-02-stabilizers-gottesman-knill",
+    "question": "For the GHZ state stabilized by $\\{XXX,ZZI,IZZ\\}$, what is $\\langle Z_0\\rangle$ and $\\langle Z_0Z_2\\rangle$?",
+    "answer": "$Z_0=ZII$ anticommutes with $XXX$ (they differ on one qubit), so $\\langle Z_0\\rangle=0$: a fair coin. $Z_0Z_2=ZIZ=ZZI\\cdot IZZ$ is a product of stabilizers with sign $+$, so $\\langle ZIZ\\rangle=+1$: qubits 0 and 2 always agree."
+  },
+  {
+    "lesson": "ft-03-surface-code",
+    "question": "In the distance-3 surface code, an $X$ error hits qubit 8. Give the $Z$ syndrome in the order $(Z_0Z_3,\\allowbreak Z_1Z_2Z_4Z_5,\\allowbreak Z_3Z_4Z_6Z_7,\\allowbreak Z_5Z_8)$ and a minimum-weight correction.",
+    "answer": "Qubit 8 belongs only to $Z_5Z_8$, so the syndrome is $(0,0,0,1)$. No other single qubit gives it: qubit 5 also belongs to $Z_1Z_2Z_4Z_5$, so $X_5$ would give $(0,1,0,1)$. The minimum-weight correction is $X_8$."
+  },
+  {
+    "lesson": "ft-03-surface-code",
+    "question": "How many physical qubits does a distance-11 rotated surface-code patch use, and how many errors of each type can it always correct?",
+    "answer": "$2d^2-1=2(121)-1=241$ qubits: 121 data and 120 measure. It corrects any $(11-1)/2=5$ $X$ errors and any 5 $Z$ errors."
+  },
+  {
+    "lesson": "ft-04-noise-thresholds",
+    "question": "Using Google's $\\varepsilon_7=1.43\\times10^{-3}$ and $\\Lambda=2.14$, find the smallest distance for $10^{-4}$ per cycle, assuming $\\Lambda$ stays constant.",
+    "answer": "Need $(d-7)/2\\ge\\ln(14.3)/\\ln2.14=2.660/0.761\\approx3.50$, so 4 steps and $d=15$. Check: $\\varepsilon_{15}=1.43\\times10^{-3}/2.14^4\\approx6.8\\times10^{-5}$, and $\\varepsilon_{13}\\approx1.46\\times10^{-4}$ misses. A $d=15$ patch uses $2(225)-1=449$ qubits."
+  },
+  {
+    "lesson": "ft-04-noise-thresholds",
+    "question": "In the empirical formula $P_L\\approx0.03(p/p_{\\rm th})^{(d+1)/2}$ with $p_{\\rm th}=0.57\\%$, what $\\Lambda$ does $p=0.2\\%$ give, and what does that say about Google's measured 2.14?",
+    "answer": "$\\Lambda\\approx p_{\\rm th}/p=0.57/0.2\\approx2.85$. A measured $\\Lambda$ of 2.14 is what this formula would give for an effective $p\\approx0.27\\%$. Treat that as a rough comparison only: the formula is a fit to one simulated noise model, not to Google's hardware."
+  },
+  {
+    "lesson": "ft-05-decoding-matching",
+    "question": "In a distance-3 repetition code read for three rounds, $c_1$ reads $0,1,1$ and $c_0$ reads $0,0,0$. List the detection events and the most likely single fault.",
+    "answer": "Only $c_1$ changes, between rounds 1 and 2, so there is a single event at $(c_1,2)$. A single event must pair with the boundary. The only single fault that lights only $c_1$ is a flip of the end qubit $q_2$, whose other side is the boundary. Correct with $X_2$."
+  },
+  {
+    "lesson": "ft-05-decoding-matching",
+    "question": "Data errors have $p=0.001$ and measurement errors $q=0.01$. Two events sit at the same check in consecutive rounds. Compare the weights of the two explanations.",
+    "answer": "One measurement error: $\\ln(99)\\approx4.60$. Two data errors to the boundary: $2\\ln(999)\\approx13.8$. Matching chooses the measurement error, by a factor of about $e^{9.2}\\approx10^4$ in likelihood."
+  }
+]
