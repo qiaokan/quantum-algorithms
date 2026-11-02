@@ -1,26 +1,30 @@
 ---
 import Book from '../../layouts/Book.astro';
-import {lessons,label,decisionPath,decisionLessons,timeEstimate,timeModel,formatMinutes,render} from '../../lib/content';
+import {lessons,label,decisionPath,decisionLessons,timeEstimate,timeModel,formatMinutes,render,FT_MODULE,completePathLessons} from '../../lib/content';
 const route=decisionLessons();
 const rows=await Promise.all(route.map(async l=>({lesson:l,time:await timeEstimate(l),callout:(await render(decisionPath.callouts[l.id]??'')).html})));
 const total=rows.reduce((t,r)=>t+r.time.total,0);
-const main=lessons.filter(l=>l.path==='main');
+const algorithmRows=rows.filter(r=>r.lesson.module!==FT_MODULE),ftRows=rows.filter(r=>r.lesson.module===FT_MODULE);
+const stageMinutes=(list:typeof rows)=>list.reduce((t,r)=>t+r.time.total,0);
+const main=completePathLessons();
 const mainTotal=(await Promise.all(main.map(l=>timeEstimate(l)))).reduce((t,e)=>t+e.total,0);
 const sections=[{id:'the-chain',title:'The chain this path follows'},{id:'algorithm-stage',title:'Stage 1: algorithms'},{id:'error-correction-stage',title:'Stage 2: error correction'},{id:'time-estimates',title:'How time is estimated'}];
 ---
 <Book title="Decision path" sections={sections} tocLabel="ON THIS PAGE"><span class="eyebrow">THE DEFAULT ROUTE</span><h1>{decisionPath.title}</h1><p class="dek">{decisionPath.summary}</p>
-<div class="context-box"><p><strong>Who this is for.</strong> Readers deciding what quantum computing means for a business or a career, who need to follow a published resource estimate from the application down to hardware and judge it.</p><p><strong>Length so far:</strong> {route.length} algorithm lessons, about {formatMinutes(total)} by the time model below. The error-correction module will be added to this path in phases.</p><p>Want every algorithm family instead? The <a href="/path/complete/">complete algorithms path</a> has {main.length} lessons, about {formatMinutes(mainTotal)}.</p></div>
+<div class="context-box"><p><strong>Who this is for.</strong> Readers deciding what quantum computing means for a business or a career, who need to follow a published resource estimate from the application down to hardware and judge it.</p><p><strong>Length so far:</strong> {route.length} lessons, about {formatMinutes(total)} by the time model below: {algorithmRows.length} algorithm lessons ({formatMinutes(stageMinutes(algorithmRows))}) and {ftRows.length} error-correction lessons ({formatMinutes(stageMinutes(ftRows))}). The rest of the error-correction module is being added in phases.</p><p>Want every algorithm family instead? The <a href="/path/complete/">complete algorithms path</a> has {main.length} lessons, about {formatMinutes(mainTotal)}.</p></div>
 <div class="prose">
 <h2 id="the-chain">The chain this path follows</h2>
 <ol><li><strong>What a useful application needs:</strong> logical qubits, T or Toffoli count, runtime.</li><li><strong>Error-correction overhead:</strong> code distance, physical qubits per logical qubit, magic-state supply.</li><li><strong>What the infrastructure must deliver:</strong> decoder throughput and latency, control channels, calibration.</li><li><strong>Hardware modalities and roadmaps.</strong></li><li><strong>A realistic timeline to usefulness.</strong></li></ol>
 <p>Each lesson on this path opens with a short note on why it matters for that chain. Lessons are also labelled by tier everywhere on the site: <em>Decision path</em>, <em>Complete path</em>, or <em>Deferred branch</em> (read after the decision path).</p>
 <h2 id="algorithm-stage">Stage 1: algorithms</h2>
 </div>
-<ol class="catalog-list decision-list">{rows.map(({lesson,time,callout},i)=><li data-decision-step={i+1}><a href={`/lessons/${lesson.id}/`}>{label(lesson)}</a><p>{lesson.summary}</p><div class="small decision-why" set:html={callout}/><p class="path-minutes">About {time.total} min: {time.reading} reading + {time.calculation} calculation</p></li>)}</ol>
+<ol class="catalog-list decision-list">{algorithmRows.map(({lesson,time,callout},i)=><li data-decision-step={i+1}><a href={`/lessons/${lesson.id}/`}>{label(lesson)}</a><p>{lesson.summary}</p><div class="small decision-why" set:html={callout}/><p class="path-minutes">About {time.total} min: {time.reading} reading + {time.calculation} calculation</p></li>)}</ol>
 <div class="prose">
 <p>Lessons 25 and 26 are on this path because lesson 27 lists them as prerequisites. Lesson 25 underpins the chemistry estimates, and lesson 26 explains why a solver's output is a quantum state rather than printed numbers.</p>
 <h2 id="error-correction-stage">Stage 2: error correction and fault tolerance</h2>
-<p>The module "FT: Error correction and fault tolerance" covers errors and the surface code, decoding and its real-time constraints, magic states, the control stack, end-to-end resource estimation, and hardware roadmaps. It is being written and checked in phases. It will appear here as each part is published, and nothing is linked before it exists.</p>
+<p>The module "FT: Error correction and fault tolerance" covers errors and the surface code, decoding and its real-time constraints, magic states, the control stack, end-to-end resource estimation, and hardware roadmaps. Published so far: FT-01 to FT-05, from Pauli errors to matching decoders. FT-06 to FT-12 and the synthesis page, "The full chain", are being written and checked, and nothing is linked before it exists.</p>
+</div><ol class="catalog-list decision-list">{ftRows.map(({lesson,time,callout},i)=><li data-decision-step={algorithmRows.length+i+1}><a href={`/lessons/${lesson.id}/`}>{label(lesson)}</a><p>{lesson.summary}</p><div class="small decision-why" set:html={callout}/><p class="path-minutes">About {time.total} min: {time.reading} reading + {time.calculation} calculation</p></li>)}</ol>
+<div class="prose">
 <h2 id="time-estimates">How time is estimated</h2>
 <p>Reading time is the rendered lesson text at {timeModel.wordsPerMinute} words per minute. Calculation time adds {timeModel.perDisplayEquation} minutes per display equation, {timeModel.perCheck} minutes per in-lesson prediction or derivation block, and {timeModel.perPractice} minutes per practice question. These constants are editorial estimates, not measurements of real readers. Time yourself on lessons 01 and 11 and scale the totals.</p>
 </div>

@@ -12,7 +12,12 @@
     "energy-estimation",
     "hhl",
     "block-encoding",
-    "qubitization"
+    "qubitization",
+    "ft-01-pauli-errors-repetition-code",
+    "ft-02-stabilizers-gottesman-knill",
+    "ft-03-surface-code",
+    "ft-04-noise-thresholds",
+    "ft-05-decoding-matching"
   ],
   "callouts": {
     "deutsch": "Every estimate on this path counts oracle calls, then the gates inside each call, then the qubits those gates need. Deutsch is the smallest case where that accounting matters: one coherent call replaces two classical calls, but the call is a circuit whose gates still have to be counted. Its oracles use only $X$ and CNOT. Those belong to the Clifford gates, which the error-correction module later shows are the cheap kind on fault-tolerant hardware.",

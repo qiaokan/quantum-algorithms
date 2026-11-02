@@ -1,0 +1,129 @@
+[
+  {
+    "id": "ft-shor-1995",
+    "title": "Scheme for reducing decoherence in quantum computer memory",
+    "authors": "Peter W. Shor",
+    "url": "https://journals.aps.org/pra/abstract/10.1103/PhysRevA.52.R2493",
+    "supports": "Phys. Rev. A 52, R2493 (1995). Quantum error correction via a quantum analog of classical error-correcting codes.",
+    "verified": "2026-11-02",
+    "verification": "abstract",
+    "note": "Nine-qubit construction details not checked against the full text."
+  },
+  {
+    "id": "ft-gottesman-thesis",
+    "title": "Stabilizer Codes and Quantum Error Correction",
+    "authors": "Daniel Gottesman",
+    "url": "https://arxiv.org/abs/quant-ph/9705052",
+    "supports": "Caltech PhD thesis (1997). Overview of the stabilizer formalism.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft-terhal",
+    "title": "Quantum error correction for quantum memories",
+    "authors": "Barbara M. Terhal",
+    "url": "https://arxiv.org/abs/1302.3428",
+    "supports": "Rev. Mod. Phys. 87, 307 (2015). Review of quantum memories and decoding; backlog argument in Sec. II.G.3.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-fowler-2012",
+    "title": "Surface codes: Towards practical large-scale quantum computation",
+    "authors": "Austin G. Fowler; Matteo Mariantoni; John M. Martinis; Andrew N. Cleland",
+    "url": "https://arxiv.org/abs/1208.0928",
+    "supports": "Phys. Rev. A 86, 032324 (2012). Eqs. (10)–(11) empirical scaling; threshold 0.57% per step with matching decoding.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-aaronson-gottesman",
+    "title": "Improved simulation of stabilizer circuits",
+    "authors": "Scott Aaronson; Daniel Gottesman",
+    "url": "https://arxiv.org/abs/quant-ph/0406196",
+    "supports": "Phys. Rev. A 70, 052328 (2004). Destabilizer tableau; measurement in O(n²) instead of O(n³).",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-gottesman-1998",
+    "title": "The Heisenberg Representation of Quantum Computers",
+    "authors": "Daniel Gottesman",
+    "url": "https://arxiv.org/abs/quant-ph/9807006",
+    "supports": "arXiv quant-ph/9807006 (1998); Group22 proceedings (1999). Theorem 1, \"Knill's theorem\": efficient classical simulation of Clifford circuits with Pauli measurements.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-stim",
+    "title": "Stim: a fast stabilizer circuit simulator",
+    "authors": "Craig Gidney",
+    "url": "https://arxiv.org/abs/2103.02202",
+    "supports": "Quantum 5, 497 (2021).",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft-dennis-2002",
+    "title": "Topological quantum memory",
+    "authors": "Eric Dennis; Alexei Kitaev; Andrew Landahl; John Preskill",
+    "url": "https://arxiv.org/abs/quant-ph/0110143",
+    "supports": "J. Math. Phys. 43, 4452 (2002). Surface-code memory; threshold via random-bond Ising model mapping.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-tomita-svore",
+    "title": "Low-distance surface codes under realistic quantum noise",
+    "authors": "Yu Tomita; Krysta M. Svore",
+    "url": "https://arxiv.org/abs/1404.3747",
+    "supports": "Phys. Rev. A 90, 062320 (2014). The 17-qubit 'Surface-17' layout: 9 data and 8 syndrome qubits.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-bombin",
+    "title": "Optimal resources for topological two-dimensional stabilizer codes: Comparative study",
+    "authors": "H. Bombin; M. A. Martin-Delgado",
+    "url": "https://arxiv.org/abs/quant-ph/0703272",
+    "supports": "Phys. Rev. A 76, 012305 (2007). Optimized layouts using fewer qubits per distance squared.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-google-2024",
+    "title": "Quantum error correction below the surface code threshold",
+    "authors": "Google Quantum AI and Collaborators (R. Acharya et al.)",
+    "url": "https://arxiv.org/abs/2408.13687",
+    "supports": "Nature 638, 920–926 (2025); arXiv 2408.13687 (2024). Λ = 2.14 ± 0.02; distance-3/5/7 logical error per cycle (Table S1); 1.1 µs cycle; 63 µs real-time decoder latency at distance 5; repetition-code error floor near 1e-10 from rare correlated events.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft-edmonds",
+    "title": "Paths, trees, and flowers",
+    "authors": "Jack Edmonds",
+    "url": "https://www.cambridge.org/core/journals/canadian-journal-of-mathematics/article/paths-trees-and-flowers/08B492B72322C4130AE800C0610E0E21",
+    "supports": "Canadian Journal of Mathematics 17, 449–467 (1965). Efficient maximum matching in general graphs.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft-pymatching",
+    "title": "PyMatching: A Python package for decoding quantum codes with minimum-weight perfect matching",
+    "authors": "Oscar Higgott",
+    "url": "https://arxiv.org/abs/2105.13082",
+    "supports": "ACM Transactions on Quantum Computing 3(3) (2022).",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft-sparse-blossom",
+    "title": "Sparse Blossom: correcting a million errors per core second with minimum-weight matching",
+    "authors": "Oscar Higgott; Craig Gidney",
+    "url": "https://arxiv.org/abs/2303.15933",
+    "supports": "Quantum 9, 1600 (2025).",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  }
+]

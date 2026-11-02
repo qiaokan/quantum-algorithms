@@ -4,6 +4,17 @@ A local-first, static textbook for programmers learning quantum algorithms throu
 
 Read online: **[quantum-algorithms-rho.vercel.app](https://quantum-algorithms-rho.vercel.app/)**. Source: [qiaokan/quantum-algorithms](https://github.com/qiaokan/quantum-algorithms).
 
+## Addendum, 2 November 2026: decision path and error-correction module
+
+The default route is now the [decision path](https://quantum-algorithms-rho.vercel.app/path/), from useful application to hardware. The former main path is the "Complete algorithms path" at `/path/complete/`. A new module, "FT: Error correction and fault tolerance", is being added in phases. Lessons FT-01 to FT-05 are published, with catalog sequences 63–67 and displayed as FT-01…FT-05. The counts elsewhere in this README describe the original 61-topic edition and are kept as written. Supporting code:
+
+- `src/lib/stabilizer.ts`: a stabilizer-tableau simulator for Clifford circuits with Pauli noise, up to 512 qubits.
+- `src/lib/surface-code.ts`: rotated surface-code layouts and decoding graphs.
+- `src/lib/decoders.ts`: exact minimum-weight matching and a union-find decoder.
+- `public/examples/ft-checks.py`: recomputes the FT lessons' numbers.
+
+The task specification and its source verification are in `docs/proposals/decision-path-ft-spec.md`.
+
 ## Run locally
 
 From a fresh clone, install dependencies and start the site with the commands below. On macOS, after installation, `./start.command` is an optional launcher that locates a compatible existing Node runtime without changing shell settings.

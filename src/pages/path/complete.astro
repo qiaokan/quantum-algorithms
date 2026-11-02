@@ -1,6 +1,6 @@
 ---
-import Book from '../../layouts/Book.astro';import{lessons,label,moduleNames,readingMinutes,formatMinutes}from'../../lib/content';
-const main=lessons.filter(l=>l.path==='main');
+import Book from '../../layouts/Book.astro';import{lessons,label,moduleNames,readingMinutes,formatMinutes,completePathLessons}from'../../lib/content';
+const main=completePathLessons();
 const minutes=new Map(await Promise.all(main.map(async l=>[l.id,await readingMinutes(l)] as const)));
 const modules=[...new Set(main.map(l=>l.module))].map(m=>({module:m,id:`module-${m}`,title:moduleNames[m],lessons:main.filter(l=>l.module===m)}));
 const sections=modules.map(m=>({id:m.id,title:`${String(m.module).padStart(2,'0')} · ${m.title}`}));

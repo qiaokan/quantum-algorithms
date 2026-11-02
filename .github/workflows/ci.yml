@@ -50,5 +50,6 @@ jobs:
           python public/examples/nand-checks.py
           python public/examples/hallgren-checks.py
           python public/examples/applications.py
+          python public/examples/ft-checks.py
       - name: Desktop and mobile browser checks
         run: npm run test:browser
