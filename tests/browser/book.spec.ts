@@ -34,6 +34,8 @@ test('full detail and print expose actual derivations; no horizontal viewport ov
 test('reading-layout screenshots for visual inspection',async({page},info)=>{
  await page.goto('/lessons/deutsch/');await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:`docs/screenshots/deutsch-${info.project.name}.png`,fullPage:false});
  await page.goto('/lessons/grover/#interactive-example');await page.evaluate(()=>document.fonts.ready);await expect(page.locator('[data-operation]')).toContainText('Step 0');
+ // Wait for the client script to finish laying out the demo before scrolling; the heading is server-rendered.
+ await expect(page.locator('[data-demo] [data-circuit] button').first()).toBeVisible();await page.waitForLoadState('networkidle');
  await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';const demo=document.querySelector('[data-demo]')!;window.scrollTo({top:demo.getBoundingClientRect().top+scrollY-90,behavior:'instant'})});
  await expect(page.locator('[data-demo]')).toBeInViewport();await page.screenshot({path:`docs/screenshots/grover-demo-${info.project.name}.png`,fullPage:false});
 });
