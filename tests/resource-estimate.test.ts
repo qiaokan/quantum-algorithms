@@ -14,7 +14,7 @@ describe('surface-code resource model',()=>{
   expect(e.failureProbability).toBeGreaterThan(0.25);expect(e.failureProbability).toBeLessThan(0.3);
   expect(e.dataPatches+e.factoryPatches).toBeCloseTo(226*63,-2);
  });
- it('lands near the published FeMoco figures with the paper's four factories',()=>{
+ it('lands near the published FeMoco figures with the four factories from the paper',()=>{
   const e=estimate(presets['lee-femoco-2021'].input);
   expect(e.distance).toBe(31);expect(e.limitedBy).toBe('factories');
   expect(e.runtimeSeconds/86400).toBeGreaterThan(3);expect(e.runtimeSeconds/86400).toBeLessThan(3.6);
