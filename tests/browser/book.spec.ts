@@ -34,6 +34,8 @@ test('full detail and print expose actual derivations; no horizontal viewport ov
 test('reading-layout screenshots for visual inspection',async({page},info)=>{
  await page.goto('/lessons/deutsch/');await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:`docs/screenshots/deutsch-${info.project.name}.png`,fullPage:false});
  await page.goto('/lessons/grover/#interactive-example');await page.evaluate(()=>document.fonts.ready);await expect(page.locator('[data-operation]')).toContainText('Step 0');
+ // Wait for the client script to finish laying out the demo before scrolling; the heading is server-rendered.
+ await expect(page.locator('[data-demo] [data-circuit] button').first()).toBeVisible();await page.waitForLoadState('networkidle');
  await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';const demo=document.querySelector('[data-demo]')!;window.scrollTo({top:demo.getBoundingClientRect().top+scrollY-90,behavior:'instant'})});
  await expect(page.locator('[data-demo]')).toBeInViewport();await page.screenshot({path:`docs/screenshots/grover-demo-${info.project.name}.png`,fullPage:false});
 });
@@ -235,4 +237,12 @@ test('every FT lesson renders cleanly and the module ends with the full-chain re
  for(const id of ft){await page.goto(`/lessons/${id}/`);expect(await page.locator('.katex-error').count(),id).toBe(0);expect(await page.locator('#practice h3').count(),id).toBeGreaterThanOrEqual(2)}
  await page.goto('/lessons/ft-13-full-chain/');await expect(page.locator('#your-open-questions')).toBeVisible();await expect(page.locator('[data-calculator]')).toBeVisible();
  await expect(page.locator('.breadcrumb')).toContainText('Lesson FT-13');
+});
+
+test('full chain separates today\'s binding constraint from the future one, and the calculator states its scope',async({page})=>{
+ await page.goto('/lessons/ft-13-full-chain/');
+ await expect(page.locator('main')).toContainText('Binding today?');await expect(page.locator('main')).toContainText('Binding once Λ ≈ 10?');
+ await expect(page.locator('main')).toContainText('Only Λ → 2.14 (device physics)');
+ await expect(page.locator('.calc-scope')).toContainText('does not model yoked surface codes');
+ await page.goto('/lessons/ft-12-hardware-roadmaps/');for(const t of ['IonQ','Atom Computing','Ocelot','Alice & Bob','Milestone 3'])await expect(page.locator('main')).toContainText(t);
 });

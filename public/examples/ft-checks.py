@@ -202,4 +202,17 @@ check(isclose(728 / 1.1e-6, 6.6e8, rel_tol=1e-2), "FT-10 data rate")
 check(12 * (2 * 12 * 12 - 1) == 3444 and round(3444 / 288) == 12, "FT-12 gross code versus surface code")
 check(isclose(1e9 * 1e-3 / 86400, 11.57, rel_tol=1e-3) and isclose(1e9 * 0.2 / 3.156e7, 6.34, rel_tol=1e-2) and isclose(604800 / 1e9 * 1e6, 604.8), "FT-12 clocks")
 
+# FT-13 decomposition: move one input at a time from the paper's assumptions to Google 2024 values.
+def row(**kw):
+    a = dict(p=1e-3, cycle=1, react=10)
+    a.update(kw)
+    r = model(a['p'], a['cycle'], a['react'], 0.3, 2.7e9, 6189, 28, 1.725, 127)
+    return r['d'], round(r['qubits'] / 1e6, 1), round(r['runtime'] / 3600, 1)
+check(row() == (27, 20.8, 7.5), "decomposition: paper")
+check(row(p=0.01 / 2.14) == (85, 205.7, 12.5), "decomposition: only Λ")
+check(row(react=63) == (29, 23.9, 47.2) or row(react=63) == (29, 23.9, 47.3), "decomposition: only reaction time")
+check(row(cycle=1.1) == (27, 20.8, 7.5), "decomposition: only cycle")
+check(row(p=0.01 / 2.14, cycle=1.1, react=63)[:2] == (89, 225.5), "decomposition: all three")
+check(isclose(205.7 / 20.8, 9.9, rel_tol=1e-2) and isclose(23.9 / 20.8, 1.15, rel_tol=1e-2) and isclose(20.8 / 1.0, 20.8), "decomposition ratios; ~20x over Gidney 2025's <1M")
+
 print(f"{checks} FT checks passed")

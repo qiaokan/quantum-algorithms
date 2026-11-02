@@ -50,3 +50,4 @@ main{overflow-wrap:break-word}
 .calc-grid small{font-weight:400;font-size:11px}
 .calc-output table{width:100%;font-size:14px}
 .calc-output th{text-align:left;font-weight:550;background:none}
+@media print{.calc-scope{font-weight:600}}
