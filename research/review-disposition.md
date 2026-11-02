@@ -46,3 +46,9 @@ Scope correction: round 2's “not inspected by any round” list is not an accu
 ## Executed release checks
 
 The author ran type checking (0 errors/warnings/hints), 67 unit tests, 38 browser tests, and 83 numerical checks across five Python suites. The final two prose corrections also passed the content/math build and built-link crawl: 114 HTML pages, 11,021 local references, zero errors. These are executed checks, not reviewer-executed tests. The content audit reports 5 reviewed, 56 complete, 1 partial, 0 planned chapters, 42 definitions, 124 exercises, and 83 source records.
+
+## Hosted CI follow-up and round 4
+
+[Hosted run 41409922696](https://github.com/qiaokan/quantum-algorithms/actions/runs/41409922696) passed the build, unit, numerical and link checks but found a 9-pixel mobile overflow in random-circuit-sampling (37 of 38 browser tests passed). Three long inline expressions are now scrollable display equations without changing the mathematics. The all-chapters test preserves its strict width bound, reports the problematic math, and collects all affected chapters with soft assertions that still fail CI.
+
+Local full validation passed again: 67 unit and 38 browser tests, plus build/audits. Claude round 4 verified the mathematical equivalence, display-renderer accessibility and unchanged test pass criterion, found no regressions, and agreed with the narrow fix. Its unedited report is `claude-review-round-4.md`. The author agrees. Hosted CI must pass on the follow-up commit; the definitive hosted result is attached to that commit in GitHub Actions.

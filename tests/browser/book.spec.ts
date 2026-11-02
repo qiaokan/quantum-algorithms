@@ -134,6 +134,7 @@ test('every authored chapter reflows with all worked answers expanded',async({pa
   await page.evaluate(()=>{document.querySelectorAll<HTMLDetailsElement>('main details').forEach(d=>d.open=true)});
   await page.evaluate(()=>document.fonts.ready);
   const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:document.documentElement.clientWidth}));
-  expect(widths.scroll,lesson.id).toBeLessThanOrEqual(widths.width+1);
+  const longMath=await page.locator('.katex').evaluateAll(nodes=>nodes.filter(e=>!e.closest('.katex-display')&&e.getBoundingClientRect().width>document.documentElement.clientWidth-46).map(e=>e.querySelector('annotation')?.textContent));
+  expect.soft(widths.scroll,`${lesson.id}: ${longMath.join('; ')}`).toBeLessThanOrEqual(widths.width+1);
  }
 });

@@ -119,4 +119,4 @@ The demonstrations are ideal simulations; no hardware experiments or physical sp
 
 ## Review record
 
-The [self-review and three Claude review rounds](research/review-disposition.md) record findings, fixes, executed tests, and the final scoped agreement. The optimized element-distinctness walk is explicitly marked partial; review agreement does not imply full-book mathematical peer review.
+The [self-review and four Claude review rounds](research/review-disposition.md) record findings, fixes, executed tests, and the final scoped agreement. The optimized element-distinctness walk is explicitly marked partial; review agreement does not imply full-book mathematical peer review.

@@ -18,7 +18,11 @@ Their squared magnitudes are
 
 $$p=( (2-\sqrt3)/8,\ (2+\sqrt3)/8,\ (2+\sqrt3)/8,\ (2-\sqrt3)/8).$$
 
-Numerically these are $(0.033494,0.466506,0.466506,0.033494)$ and sum to one. A sampler draws an outcome using these probabilities; it does not necessarily return the most likely bit string.
+Numerically these are
+
+$$(0.033494,0.466506,0.466506,0.033494),$$
+
+which sum to one. A sampler draws an outcome using these probabilities; it does not necessarily return the most likely bit string.
 
 ## Classical baseline and verification
 
@@ -28,13 +32,21 @@ A common diagnostic is linear cross-entropy benchmarking. For ideal probabilitie
 
 $$F_{\mathrm{XEB}}=\frac1m\sum_{j=1}^m2^n p(z_j)-1.$$
 
-It requires evaluating ideal probabilities for the observed strings, which can itself be expensive. For uniform samples its expectation is zero. For ideal samples from our two-qubit circuit, $\mathbb E[F]=4\sum_zp(z)^2-1$. The squared-probability sum is $2[(2-\sqrt3)^2+(2+\sqrt3)^2]/64=7/16$, so the expectation is 3/4. It is not one: statements about an ideal score near one depend on an appropriate large random-circuit distribution, not every circuit.
+It requires evaluating ideal probabilities for the observed strings, which can itself be expensive. For uniform samples its expectation is zero. For ideal samples from our two-qubit circuit, $\mathbb E[F]=4\sum_zp(z)^2-1$. The squared-probability sum is
+
+$$2[(2-\sqrt3)^2+(2+\sqrt3)^2]/64=7/16,$$
+
+so the expectation is 3/4. It is not one: statements about an ideal score near one depend on an appropriate large random-circuit distribution, not every circuit.
 
 ## Measure distributional error directly in the tiny example
 
 For two classical distributions p and q on the same outcomes, their total-variation distance is $\tfrac12\sum_z|p(z)-q(z)|$. It measures the largest difference they can assign to any event. This is a property of full distributions, not one scalar score based on selected samples.
 
-Let q always output 01. The difference at 01 is $1-p(01)$ and the sum of differences elsewhere is also $1-p(01)$. Therefore the distance is $1-p(01)=(6-\sqrt3)/8\approx0.533494$. That is a large mismatch despite the favorable XEB value calculated below. If we can compute all four probabilities, we can inspect the mismatch directly. On large instances, estimating every probability is itself difficult, so benchmark diagnostics need a theorem or stated model linking them to the property being claimed.
+Let q always output 01. The difference at 01 is $1-p(01)$ and the sum of differences elsewhere is also $1-p(01)$. Therefore the distance is
+
+$$1-p(01)=(6-\sqrt3)/8\approx0.533494.$$
+
+That is a large mismatch despite the favorable XEB value calculated below. If we can compute all four probabilities, we can inspect the mismatch directly. On large instances, estimating every probability is itself difficult, so benchmark diagnostics need a theorem or stated model linking them to the property being claimed.
 
 To draw an ideal simulated sample here, form cumulative probabilities $p_{00}$, $p_{00}+p_{01}$, $p_{00}+p_{01}+p_{10}$,1 and locate an independent uniform random number in these intervals. This samples the authored distribution; it is not a quantum hardware observation or evidence that the distribution was hard to compute.
 
