@@ -7,6 +7,12 @@ const menu=$<HTMLButtonElement>('#menu-toggle'),sidebar=$('#sidebar'),backdrop=$
 const mobileQuery=window.matchMedia('(max-width:800px)');
 function syncSidebarAccess(){const hidden=mobileQuery.matches&&!document.body.classList.contains('menu-open');sidebar.inert=hidden;sidebar.setAttribute('aria-hidden',String(hidden))};
 mobileQuery.addEventListener('change',syncSidebarAccess);syncSidebarAccess();
+// On phones the section list starts collapsed so the lesson title is on the first screen; wider layouts keep it open.
+const tocDetails=document.querySelector<HTMLDetailsElement>('.toc-details');
+function syncToc(){if(!tocDetails)return;tocDetails.open=!mobileQuery.matches;tocDetails.querySelector('summary')!.tabIndex=mobileQuery.matches?0:-1}
+tocDetails?.addEventListener('toggle',()=>{if(!mobileQuery.matches&&!tocDetails.open)tocDetails.open=true});
+tocDetails?.addEventListener('click',e=>{if(mobileQuery.matches&&(e.target as HTMLElement).closest('a'))tocDetails.open=false});
+mobileQuery.addEventListener('change',syncToc);syncToc();
 function closeMenu(){document.body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false');backdrop.hidden=true;syncSidebarAccess();}
 menu.onclick=()=>{const open=menu.getAttribute('aria-expanded')!=='true';document.body.classList.toggle('menu-open',open);menu.setAttribute('aria-expanded',String(open));backdrop.hidden=!open;syncSidebarAccess();if(open)$('#menu-close').focus()};
 $('#menu-close').onclick=()=>{closeMenu();menu.focus()};backdrop.onclick=closeMenu;

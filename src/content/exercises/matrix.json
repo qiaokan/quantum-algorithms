@@ -86,7 +86,7 @@
   },
   {
     "lesson": "signal-processing",
-    "question": "Why does a middle pi/2 phase make two signal calls independent of x?",
+    "question": "Why does a middle $\\pi/2$ phase make two signal calls independent of x?",
     "answer": "The good contributions become ix²+i(1-x²)=i, while off-diagonal terms cancel. This changes interference, not the probabilities immediately after the phase gate."
   },
   {
@@ -97,7 +97,7 @@
   {
     "lesson": "singular-value-transformation",
     "question": "Find the cubic-selected success probability on $|+\\rangle$ for diag(1/2,1/4).",
-    "answer": "The selected components are $(1,11/16)/\\sqrt2$. Squared norm is (1+121/256)/2=377/512; accepted state is (16,11)/sqrt(377)."
+    "answer": "The selected components are $(1,11/16)/\\sqrt2$. Squared norm is $(1+121/256)/2=377/512$; accepted state is $(16,11)/\\sqrt{377}$."
   },
   {
     "lesson": "modern-linear-solvers",

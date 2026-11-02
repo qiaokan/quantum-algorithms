@@ -3,7 +3,7 @@ import Book from '../layouts/Book.astro';
 import {lessons} from '../lib/content';
 const sections=[{id:'start-with-an-algorithm',title:'Start with an algorithm'},{id:'the-reading-loop',title:'The depth-first reading loop'},{id:'conventions',title:'Notation & conventions'},{id:'what-counts-as-learning',title:'What counts as learning'},{id:'scope',title:'Scope and evidence'}];
 ---
-<Book title="Quantum Algorithms, Step by Step" current="orientation" sections={sections}>
+<Book title="Quantum Algorithms, Step by Step" current="orientation" sections={sections} tocLabel="ON THIS PAGE">
 <div class="breadcrumb">The textbook / Orientation</div><span class="eyebrow">A WORKED PATH FROM FIRST QUERY TO MODERN ALGORITHMS</span><h1>Quantum algorithms,<br/>one calculation at a time.</h1><p class="dek">Start with a problem. Follow the amplitudes. Open a missing definition, calculate a small example, and return to the algorithm.</p>
 <div id="resume-reading" hidden class="context-box"></div>
 <div class="lesson-metadata"><span>{lessons.length} numbered topics</span><span>Arithmetic + basic programming</span><span>No account or cloud service</span></div>

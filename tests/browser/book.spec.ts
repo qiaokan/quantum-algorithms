@@ -138,3 +138,16 @@ test('every authored chapter reflows with all worked answers expanded',async({pa
   expect.soft(widths.scroll,`${lesson.id}: ${longMath.join('; ')}`).toBeLessThanOrEqual(widths.width+1);
  }
 });
+
+test('phone lessons open with the title on screen and the section list collapsed',async({page,isMobile})=>{
+ await page.goto('/lessons/deutsch/');const toc=page.locator('.toc-details');
+ if(!isMobile){await expect(toc).toHaveAttribute('open','');await page.locator('.toc-details > summary').click({force:true});await expect(toc).toHaveAttribute('open','');return}
+ await expect(toc).not.toHaveAttribute('open','');await expect(page.locator('h1')).toBeInViewport();
+ await page.locator('.toc-details > summary').click();await page.locator('[data-section-link="interference-and-final-output"]').click();
+ await expect(toc).not.toHaveAttribute('open','');await expect(page.locator('#interference-and-final-output')).toBeInViewport();
+});
+
+test('inline math inside disclosure labels and exercise answers is typeset',async({page})=>{
+ await page.goto('/lessons/hallgren/');expect(await page.locator('summary .katex').count()).toBeGreaterThan(0);
+ await page.goto('/lessons/amplitude-amplification/');await expect(page.locator('#practice')).not.toContainText('A-dagger');
+});

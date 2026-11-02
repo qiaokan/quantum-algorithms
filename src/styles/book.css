@@ -8,3 +8,9 @@
 /* Tool labels may grow after activation; preserve wrapping on narrow screens. */
 .reading-tools{display:flex;flex-direction:column;gap:8px}.page-toc .reading-tools button{margin:0;max-width:100%}
 @media(max-width:1200px){.reading-tools{flex-direction:row;flex-wrap:wrap}}
+
+/* Long URLs and identifiers wrap instead of widening the phone layout viewport. */
+main{overflow-wrap:break-word}
+/* The section list is a disclosure only on phones; elsewhere its label is a static heading. */
+.toc-details>summary{list-style:none;cursor:default}.toc-details>summary::-webkit-details-marker{display:none}.toc-count{display:none}
+@media(max-width:800px){.toc-details>summary{cursor:pointer;display:flex;align-items:center;min-height:40px}.toc-details>summary::after{content:'▸';margin-left:auto;font-size:13px;letter-spacing:0}.toc-details[open]>summary::after{content:'▾'}.toc-count{display:inline;font-weight:500;letter-spacing:.6px;white-space:pre}}

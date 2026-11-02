@@ -46,7 +46,7 @@ Measure only whether the system energy equals the old energy 0. This binary meas
 
 Define a second binary measurement by $Q_s=U^\dagger(I\otimes I\otimes|s\rangle\langle s|)U$ for s=0,1. To implement it, apply U, measure only the flag, and apply $U^\dagger$. After a failed P check, alternate a Q measurement with another P check. Stop only when $P_1$ returns. During recovery, a later $Q_1$ is **not** a fresh accepted Metropolis proposal; it is one branch of the repair procedure.
 
-To see an entire recovery round, start from $|\chi\rangle=-|e,0\rangle|+\rangle$ (choosing its irrelevant global sign). In basis $g00,g01,g10,g11,e00,e01,e10,e11$, the unnormalized Q branches are
+To see an entire recovery round, start from $|\chi\rangle=-|e,0\rangle|+\rangle$ (choosing its irrelevant global sign). In basis $g00,\allowbreak g01,\allowbreak g10,\allowbreak g11,\allowbreak e00,\allowbreak e01,\allowbreak e10,\allowbreak e11$, the unnormalized Q branches are
 
 $$Q_0\chi=\frac1{2\sqrt2}(1,0,0,0,-1,-2,0,0)^T,\qquad
 Q_1\chi=\frac1{2\sqrt2}(-1,0,0,0,-1,0,0,0)^T.$$

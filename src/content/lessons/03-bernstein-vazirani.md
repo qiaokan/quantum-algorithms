@@ -12,7 +12,7 @@ The quantum algorithm uses one coherent query plus order $n$ fixed gates. This i
 
 ## Fixed instance and preparation
 
-Choose $n=3$, hidden $s=101$. Our input labels are ordered $000,001,010,011,100,101,110,111$. Their function answers are
+Choose $n=3$, hidden $s=101$. Our input labels are ordered $000,\allowbreak 001,\allowbreak 010,\allowbreak 011,\allowbreak 100,\allowbreak 101,\allowbreak 110,\allowbreak 111$. Their function answers are
 
 $$\begin{array}{c|rrrrrrrr}x&000&001&010&011&100&101&110&111\\\hline
 f_s(x)&0&1&0&1&1&0&1&0\end{array}.$$
