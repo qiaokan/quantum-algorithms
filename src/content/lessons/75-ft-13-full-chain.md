@@ -38,18 +38,34 @@ That preset is factory-limited, at about 42.6 µs per Toffoli against a 10 µs r
 
 ## Where each stage is bottlenecked
 
-| Stage | Binding constraint | Who delivers it | Infrastructure-bound? |
-|---|---|---|---|
-| Application | A precision and size that change a real decision; a competitive classical baseline | Domain experts, algorithm researchers | No |
-| Logical requirements | Toffoli/T count and logical qubits; better arithmetic and block encodings | Algorithm and compiler researchers | Partly (compilers) |
-| Error correction | Λ at scale; correlated errors; leakage | Device physics, fabrication | No |
-| Decoding | Throughput ≥ syndrome rate everywhere; reaction latency | Classical hardware and systems engineers | **Yes** |
-| Control | Signal lines or multiplexing per qubit; cryogenic heat and wiring | Electronics and cryogenic engineers | **Yes** |
-| Calibration | A dependency graph of experiments run continuously against drift across millions of qubits | Software and automation engineers | **Yes** |
-| Orchestration | Scheduling lattice surgery, factory output, routing and feedforward in real time | Systems and runtime engineers | **Yes** |
-| Timeline | Every row above, demonstrated at increasing scale | All of the above | — |
+*Revision note, 2 November 2026.* An earlier version of this section marked four of eight stages as infrastructure-bound, without separating the present from the future. Run the site's own calculator one input at a time and the answer splits. Today the binding constraint is device physics. Infrastructure becomes binding once Λ improves. The section below replaces that earlier framing.
 
-Four of the eight rows are classical infrastructure problems: data rates, latency budgets, control planes and real-time scheduling. In this model, two of the most sensitive inputs, reaction time and decoder throughput, sit entirely in those rows.
+**Which change costs the most today?** Start from the RSA preset (Gidney–Ekerå's assumptions) and move one input to Google's 2024 measured value:
+
+| Change from the paper's assumptions | Distance | Physical qubits | Runtime |
+|---|---|---|---|
+| None (paper: Λ = 10, 1 µs cycle, 10 µs reaction) | 27 | 20.8 M | 7.5 h |
+| Only Λ → 2.14 (device physics) | 85 | 205.7 M | 12.5 h |
+| Only reaction time → 63 µs (decoding and control) | 29 | 23.9 M | 47.3 h |
+| Only cycle time → 1.1 µs | 27 | 20.8 M | 7.5 h |
+| All three (today's measured values) | 89 | 225.5 M | 47.3 h |
+
+Λ alone multiplies the qubit count by about 10. That is the difference between a machine that is very hard to build and one that is out of reach. The slower reaction time stretches runtime by 6.3×, but 47 hours is still a usable run, and it adds only about 15% to the qubit count. Within this model, then, the present gap is mostly physics.
+
+That changes once Λ improves. At Λ = 10, the reaction time is the largest remaining lever on runtime. Decoder throughput has to keep up across tens of millions of qubits, or the computation stalls ([FT-07](/lessons/ft-07-real-time-decoding/)).
+
+| Stage | Binding today? | Binding once Λ ≈ 10? | Who delivers it |
+|---|---|---|---|
+| Application and logical requirements | Partly: algorithm improvements still move estimates by large factors | Partly | Domain experts, algorithm and compiler researchers |
+| Error correction (Λ at scale, correlated errors, leakage) | **Yes**: the dominant term in qubit count | Less, if Λ ≈ 10 holds at scale | Device physics, fabrication |
+| Decoding (throughput, reaction latency) | Secondary: sets runtime, not feasibility | **Yes**: the main runtime lever; a stall risk if throughput lags | Classical hardware and systems engineers |
+| Control (lines or multiplexing per qubit, heat) | Open at scale; not in the calculator | **Yes**, at millions of qubits | Electronics and cryogenic engineers |
+| Calibration (a dependency graph run continuously against drift) | Open at scale; not in the calculator | **Yes**, at millions of qubits | Software and automation engineers |
+| Orchestration (surgery scheduling, factories, feedforward) | Secondary | **Yes** | Systems and runtime engineers |
+
+Two cautions. First, the calculator models Λ, cycle time, reaction time and factories. It does not model wiring or calibration. Those rows are marked "open at scale" because [FT-10](/lessons/ft-10-control-calibration/) shows they are unsolved at millions of qubits, not because the model shows them binding. Second, newer architectures, such as yoked codes, cultivation and qLDPC codes, reduce qubit counts in ways this model does not capture ([FT-11](/lessons/ft-11-resource-estimation/)).
+
+**What this means for a decision.** An infrastructure role, in decoding, control or calibration, is a bet that the physics will reach Λ near 10 at scale, so that systems problems become the hard part. That bet is reasonable, and a growing share of the remaining work is classical engineering. But it is a bet on a condition no published experiment has demonstrated yet. Make it knowingly, and watch the Λ trend as the leading indicator.
 
 ## Meanwhile
 

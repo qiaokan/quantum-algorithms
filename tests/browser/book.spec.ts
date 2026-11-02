@@ -236,3 +236,11 @@ test('every FT lesson renders cleanly and the module ends with the full-chain re
  await page.goto('/lessons/ft-13-full-chain/');await expect(page.locator('#your-open-questions')).toBeVisible();await expect(page.locator('[data-calculator]')).toBeVisible();
  await expect(page.locator('.breadcrumb')).toContainText('Lesson FT-13');
 });
+
+test('full chain separates today\'s binding constraint from the future one, and the calculator states its scope',async({page})=>{
+ await page.goto('/lessons/ft-13-full-chain/');
+ await expect(page.locator('main')).toContainText('Binding today?');await expect(page.locator('main')).toContainText('Binding once Λ ≈ 10?');
+ await expect(page.locator('main')).toContainText('Only Λ → 2.14 (device physics)');
+ await expect(page.locator('.calc-scope')).toContainText('does not model yoked surface codes');
+ await page.goto('/lessons/ft-12-hardware-roadmaps/');for(const t of ['IonQ','Atom Computing','Ocelot','Alice & Bob','Milestone 3'])await expect(page.locator('main')).toContainText(t);
+});

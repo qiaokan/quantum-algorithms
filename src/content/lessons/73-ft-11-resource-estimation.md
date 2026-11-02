@@ -2,7 +2,7 @@
 
 An algorithm paper states its needs in **logical** terms: how many logical qubits, how many non-Clifford operations (T, Toffoli or CCZ gates), and how reliable the run must be. A hardware team states its machine in **physical** terms: error rate per operation, cycle time, and how fast the decoder and control system can react. Resource estimation joins the two and answers three questions. What code distance is needed? How many physical qubits? How long does one run take?
 
-This lesson builds a small, explicit model, reproduces two published estimates with it, and shows which inputs dominate. The model is a teaching tool, not a compiler: it is simple enough to check by hand, and its assumptions are stated so you can see where real estimates differ. The calculator at the end of the page runs the same model.
+This lesson builds a small, explicit model, reproduces two published estimates with it, and shows which inputs dominate. **Scope:** the model reproduces 2021-era surface-code estimates. It does not apply to the newest ones: [Gidney's 2025 preprint](https://arxiv.org/abs/2505.15917) reaches fewer than a million qubits for RSA-2048 with techniques the model cannot represent. Read its outputs as an upper-end, older-architecture reference, not as the current state of the art. The model is a teaching tool, not a compiler: it is simple enough to check by hand, and its assumptions are stated so you can see where real estimates differ. The calculator at the end of the page runs the same model.
 
 ## Classical baseline: counting only logical qubits
 
@@ -68,12 +68,13 @@ As of May 2025, [Gidney's preprint](https://arxiv.org/abs/2505.15917) reports fe
 **Inputs from the paper:**
 
 - 2,142 logical qubits;
-- 6.7 billion Toffolis in its surface-code compilation (its Table III lists 5.3 billion for the algorithm alone);
-- physical error 0.1% and a 1 µs cycle.
+- 6.7 billion Toffolis in its surface-code compilation, which counts "approximately 483,000 inner loops times 13,880 Toffolis per inner loop". Its Table III lists 5.3 billion. The compilation section changes the circuit to save qubits, for example by loading phasing angles half at a time and halving a QROM expansion factor, which it says increases the Toffoli count. The paper does not reconcile the two numbers explicitly; linking the gap to those changes is this book's reading.
+- physical error 0.1% and a 1 µs cycle;
+- four CCZ factories distilling at a combined 25 kHz, that is 40 µs per Toffoli, and a 1% total error budget.
 
-**Published result:** distance 31, about 4 million physical qubits, about 3.5 days.
+**Published result:** distance 31 and about 4 million physical qubits. The runtime is "3 days" in the compilation section. The abstract says "under four days", and a later paragraph on optimistic error rates refers to 3.5 days, so the paper is not fully consistent.
 
-**Illustrative choices for this model** (not the paper's factory design): 4 factories of 10 patches each, routing overhead 1, and a 1% failure budget.
+**Choices for this model:** the paper's 4 factories and 1% budget, plus an illustrative 10 patches per factory and routing overhead 1. The model's factory speed ($5.5\,d$ cycles, from Babbush et al.) gives 42.6 µs per Toffoli at $d=31$, close to the paper's 40 µs.
 
 **Result.**
 
@@ -82,7 +83,7 @@ As of May 2025, [Gidney's preprint](https://arxiv.org/abs/2505.15917) reports fe
 - Distance: $d=29$ fails the budget (about 6%), and $d=31$ meets it (about 0.6%).
 - Qubits: $2{,}182\times2\times31^2\approx4.2$ million.
 
-All three land near the published figures. The factory count was chosen to match the runtime; that is the honest way to read the agreement.
+All three land near the published figures: 3.3 days against the paper's 3 days. The agreement is partly by construction, since the factory count and budget are the paper's own.
 
 ## Worked estimate (c): the same RSA workload on today's measured noise
 

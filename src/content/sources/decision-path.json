@@ -32,9 +32,9 @@
     "title": "Even more efficient quantum computations of chemistry through tensor hypercontraction",
     "authors": "Joonho Lee; Dominic W. Berry; Craig Gidney; William J. Huggins; Jarrod R. McClean; Nathan Wiebe; Ryan Babbush",
     "url": "https://arxiv.org/abs/2011.03494",
-    "supports": "PRX Quantum 2, 030305 (2021). For the Reiher FeMoco model, about 4 million physical qubits and roughly 3.5 days, assuming a 1 µs cycle and 0.1% physical error (decision-path callout for energy estimation).",
+    "supports": "PRX Quantum 2, 030305 (2021). For the Reiher FeMoco model, about 4 million physical qubits and 3 days with four CCZ factories at 25 kHz (Sec. III.C; the abstract says under four days), assuming a 1 µs cycle and 0.1% physical error.",
     "verified": "2026-11-02",
     "verification": "full-text",
-    "note": "The paper reports 5.3×10^9 Toffolis in Table III and 6.7×10^9 in its surface-code compilation text."
+    "note": "The paper reports 5.3×10^9 Toffolis in Table III and 6.7×10^9 in its surface-code compilation (483,000 inner loops × 13,880 Toffolis). A later paragraph refers to 3.5 days. Re-verified against the full text on 2026-11-02."
   }
 ]

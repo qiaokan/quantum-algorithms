@@ -416,7 +416,7 @@
     "module": 12,
     "title": "End-to-end resource estimation",
     "kind": "framework",
-    "summary": "From logical qubits and Toffoli counts to code distance, physical qubits and runtime, reproducing two published estimates.",
+    "summary": "From logical qubits and Toffoli counts to code distance, physical qubits and runtime, reproducing two 2021 published estimates; the simple model does not capture the newest (2025) architectures.",
     "why": "This is the calculation a business decision rests on: it shows which hardware assumptions drive the qubit count and the runtime.",
     "prerequisites": [
       "ft-04-noise-thresholds"
@@ -455,7 +455,7 @@
     "module": 12,
     "title": "Hardware modalities and roadmaps",
     "kind": "framework",
-    "summary": "Superconducting, trapped-ion, neutral-atom, photonic and topological qubits compared by cycle time, connectivity and errors, with every roadmap item a dated claim.",
+    "summary": "Superconducting, trapped-ion, neutral-atom, cat (bosonic), photonic and topological qubits compared by cycle time, connectivity and errors, with every roadmap item a dated claim.",
     "why": "It turns vendor roadmaps into checkable inputs (cycle time, reaction time, code) for the resource model behind a timing decision.",
     "prerequisites": [
       "ft-04-noise-thresholds",
@@ -486,7 +486,22 @@
       "ft3-microsoft-majorana1",
       "ft3-microsoft-nature-2025",
       "ft3-legg-2026",
-      "ft3-microsoft-reply-2026"
+      "ft3-microsoft-reply-2026",
+      "ft3-google-roadmap",
+      "ft3-google-echoes-2025",
+      "ft3-google-campus-2021",
+      "ft3-quantinuum-preprint-2026",
+      "ft3-ionq-roadmap",
+      "ft3-ionq-oxford-ionics",
+      "ft3-ionq-fidelity-2025",
+      "ft3-ionq-bothell",
+      "ft3-atom-microsoft-2024",
+      "ft3-magne-2025",
+      "ft3-guillaud-mirrahimi",
+      "ft3-ocelot-2025",
+      "ft3-ocelot-blog",
+      "ft3-alice-bob-roadmap",
+      "ft3-xzzx"
     ],
     "path": "main",
     "editorial": "complete",
@@ -499,7 +514,14 @@
       "photonic",
       "Majorana",
       "Starling",
-      "Apollo"
+      "Apollo",
+      "cat qubits",
+      "biased noise",
+      "IonQ",
+      "Ocelot",
+      "Alice & Bob",
+      "Atom Computing",
+      "Magne"
     ],
     "file": "74-ft-12-hardware-roadmaps.md",
     "gaps": []
@@ -510,7 +532,7 @@
     "module": 12,
     "title": "The full chain: from application to timeline",
     "kind": "synthesis",
-    "summary": "Run one workload from application to hardware, and mark where each stage is bottlenecked, especially in classical infrastructure.",
+    "summary": "Run one workload from application to hardware, and separate what binds today (Λ, device physics) from what binds once Λ ≈ 10 (decoding, control, calibration).",
     "why": "The decision path's conclusion: a list of checkable conditions in place of a single qubit count or date.",
     "prerequisites": [
       "ft-11-resource-estimation"

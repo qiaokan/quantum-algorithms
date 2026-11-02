@@ -16,6 +16,7 @@ const fields:[string,string,string,string][]=[
 <section class="calculator" data-calculator aria-label="Resource estimate calculator">
  <div class="demo-header"><span class="eyebrow">ESTIMATE IT YOURSELF</span><span class="badge">Teaching model · not a compiler</span></div>
  <p class="small muted">Model: logical error per patch per cycle = 0.1 × (p / 0.01)<sup>(d+1)/2</sup>; time per non-Clifford operation is the slower of the reaction time and the factory supply interval; operations run one after another; each patch is 2d² physical qubits. Factory errors and parallel threads are not modelled.</p>
+ <p class="small calc-scope"><strong>Scope:</strong> this reproduces 2021-era surface-code estimates. It does not model yoked surface codes, magic-state cultivation, approximate residue arithmetic or qLDPC codes. It therefore overstates the newest estimates: Gidney's 2025 preprint reports fewer than a million qubits for RSA-2048, about 20 times fewer than this model's 20.8 million under the same hardware assumptions.</p>
  <div class="preset-row" role="group" aria-label="Presets">{Object.entries(presets).map(([key,p])=><button type="button" data-preset={key}>{p.label}</button>)}</div>
  <p class="small" data-preset-note></p>
  <div class="calc-grid">{fields.map(([key,label,step,help])=><label><span>{label}</span><input type="number" name={key} step={step} min="0" required/><small class="muted">{help}</small></label>)}</div>

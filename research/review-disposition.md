@@ -68,3 +68,19 @@ Other changes:
 - Two wording corrections: the Simon check 1 answer and the module 1 revisit.
 
 These edits passed the build, the content audit, unit tests, browser tests and the four standard-library numerical suites. No independent reviewer has re-read the changed prose, so the `reviewed` labels rest on the earlier review of the unchanged derivations.
+
+## External review of the decision path and FT module, 2 November 2026
+
+An external review recomputed the numbers in FT-04, FT-07, FT-11 and FT-13 and found them consistent. It raised these issues, all addressed:
+
+- **FT-13 overstated infrastructure as today's bottleneck.** A one-input-at-a-time decomposition shows that Λ (device physics) dominates today's qubit count: about 10× from 20.8M to 205.7M qubits. The reaction time mainly stretches runtime: 7.5 h to 47 h, and only +15% qubits. The section now separates "binding today" from "binding once Λ ≈ 10", with a dated revision note.
+- **FT-12 omitted relevant hardware.** It now covers Google's roadmap, IonQ, Atom Computing with Microsoft, and cat qubits (AWS Ocelot, Alice & Bob, biased noise), each as dated, sourced claims.
+- **The calculator's scope versus the 2025 estimate.** This is now stated in the calculator and at the top of FT-11.
+- **Flagged facts, re-verified against primary sources:**
+  - Lee et al.'s runtime is "3 days" in Sec. III.C ("under four days" in the abstract; a later paragraph says 3.5 days). The site previously said 3.5 days. Its four factories and 1% budget are now credited to the paper.
+  - Gidney 2025 remains an arXiv preprint.
+  - Babbush's 5.5·d cycles, about 170 µs per Toffoli, is confirmed.
+  - The 2026 Quantinuum, QuEra and Nature items are confirmed. Quantinuum's underlying preprint is arXiv 2610.24077, and its 99.9995% is per-round memory fidelity.
+- **Stale text.** The coverage note's "being added in phases" now has a dated completion update.
+
+The review is not independent peer review of the lessons; the `complete` labels are unchanged.

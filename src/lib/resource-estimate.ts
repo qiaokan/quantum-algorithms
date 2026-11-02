@@ -94,7 +94,7 @@ export const presets: Record<string, { label: string; input: EstimateInput; note
       nonCliffordOps: 6.7e9, logicalQubits: 2142, factories: 4,
       routingOverhead: 1, patchesPerFactory: 10, cyclesPerStatePerD: 5.5,
     },
-    note: 'p = 0.1%, 1 µs cycle, 2,142 logical qubits and 6.7 billion Toffolis are from the paper (Table III lists 5.3 billion; its surface-code compilation uses 6.7 billion). The factory count, footprint and 1% failure budget are illustrative choices for this model, not the paper\'s design.',
+    note: 'p = 0.1%, 1 µs cycle, 2,142 logical qubits, 6.7 billion Toffolis (its compilation section; Table III lists 5.3 billion), four CCZ factories and a 1% error budget are from the paper, which reports about 4 million qubits and 3 days. The 10-patch factory footprint and routing overhead 1 are illustrative.',
   },
   'google-2024-noise': {
     label: 'Same RSA workload at Google 2024 noise (Λ ≈ 2.14)',

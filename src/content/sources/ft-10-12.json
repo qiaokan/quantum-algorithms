@@ -212,5 +212,140 @@
     "verified": "2026-11-02",
     "verification": "abstract",
     "note": "Opening paragraph only."
+  },
+  {
+    "id": "ft3-google-roadmap",
+    "title": "Google Quantum AI roadmap",
+    "authors": "Google Quantum AI",
+    "url": "https://quantumai.google/roadmap",
+    "supports": "Six milestones; milestones 1 (2019) and 2 (2023) marked reached; milestones 3–6 undated. Viewed November 2026.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-google-echoes-2025",
+    "title": "Quantum Echoes and verifiable quantum advantage (blog)",
+    "authors": "Google",
+    "url": "https://blog.google/innovation-and-ai/technology/research/quantum-echoes-willow-verifiable-quantum-advantage/",
+    "supports": "22 October 2025: Google states it is focused on achieving Milestone 3.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-google-campus-2021",
+    "title": "Unveiling our new Quantum AI campus (blog)",
+    "authors": "Google",
+    "url": "https://blog.google/innovation-and-ai/products/unveiling-our-new-quantum-ai-campus/",
+    "supports": "18 May 2021: aim to build a useful, error-corrected quantum computer within the decade.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-quantinuum-preprint-2026",
+    "title": "Quantum error correction well below the color code threshold",
+    "authors": "Ali Lavasani, Adam P. Reed, Joan M. Dreiling, et al. (Quantinuum)",
+    "url": "https://arxiv.org/abs/2610.24077",
+    "supports": "arXiv 2610.24077 (Oct 2026), not peer reviewed: color codes d=3,5,7; logical error as low as ~5e-6 per round; Λ = 12 (+3/−2).",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-ionq-roadmap",
+    "title": "IonQ roadmap",
+    "authors": "IonQ",
+    "url": "https://www.ionq.com/roadmap",
+    "supports": "Targets from 12 logical qubits (2026) to 80,000 logical on 2,000,000 physical (2030). Viewed November 2026; vendor plan.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-ionq-oxford-ionics",
+    "title": "IonQ completes acquisition of Oxford Ionics",
+    "authors": "IonQ",
+    "url": "https://www.ionq.com/news/ionq-completes-acquisition-of-oxford-ionics-rapidly-accelerating-its-quantum",
+    "supports": "Acquisition completed 17 September 2025.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-ionq-fidelity-2025",
+    "title": "Trapped-ion two-qubit gates with >99.99% fidelity without ground-state cooling",
+    "authors": "A. C. Hughes, R. Srinivas, C. M. Löschnauer, et al.",
+    "url": "https://arxiv.org/abs/2510.17286",
+    "supports": "arXiv 2510.17286 (Oct 2025), not peer reviewed: two-qubit gate error 8.4(7)×10^-5.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-ionq-bothell",
+    "title": "IonQ opens first dedicated quantum computing manufacturing facility in the U.S.",
+    "authors": "IonQ",
+    "url": "https://investors.ionq.com/news/news-details/2024/IonQ-Opens-Doors-to-First-Dedicated-Quantum-Computing-Manufacturing-Facility-in-the-U.S/default.aspx",
+    "supports": "15 February 2024: manufacturing facility in Bothell, Washington.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-atom-microsoft-2024",
+    "title": "Fault-tolerant quantum computation with a neutral atom processor",
+    "authors": "Ben W. Reichardt, Adam Paetznick, David Aasen, et al. (Microsoft and Atom Computing)",
+    "url": "https://arxiv.org/abs/2411.11822",
+    "supports": "arXiv 2411.11822 (v1 Nov 2024, originally titled 'Logical computation demonstrated with a neutral atom quantum processor'; v3 Jun 2025): 256 Yb atoms, 24 entangled logical qubits from 48 atoms, Bernstein–Vazirani on up to 28 logical qubits. No journal reference.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-magne-2025",
+    "title": "EIFO and the Novo Nordisk Foundation acquire Magne",
+    "authors": "Novo Nordisk Foundation",
+    "url": "https://novonordiskfonden.dk/en/news/eifo-and-the-novo-nordisk-foundation-acquire-the-worlds-most-powerful-quantum-computer/",
+    "supports": "17 July 2025: Level 2 machine, 50 logical qubits on more than 1,200 physical qubits; Atom Computing hardware, Microsoft software; first tasks around the turn of 2026/27.",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-guillaud-mirrahimi",
+    "title": "Repetition cat qubits for fault-tolerant quantum computation",
+    "authors": "Jérémie Guillaud; Mazyar Mirrahimi",
+    "url": "https://arxiv.org/abs/1904.09474",
+    "supports": "Phys. Rev. X 9, 041053 (2019): bit flips exponentially suppressed with photon number; repetition code against phase flips; bias-preserving gates.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
+  },
+  {
+    "id": "ft3-ocelot-2025",
+    "title": "Hardware-efficient quantum error correction via concatenated bosonic qubits",
+    "authors": "Harald Putterman et al. (AWS)",
+    "url": "https://arxiv.org/abs/2409.13025",
+    "supports": "Nature 638, 927–934 (2025): 5 cat qubits + 4 ancillas, distance-5 repetition code; bit-flip times >1 ms, phase-flip 27–33 µs; 1.65% logical error per cycle at d=5 vs 1.75% at d=3.",
+    "verified": "2026-11-02",
+    "verification": "full-text"
+  },
+  {
+    "id": "ft3-ocelot-blog",
+    "title": "Amazon announces Ocelot quantum chip",
+    "authors": "Amazon Science",
+    "url": "https://www.amazon.science/blog/amazon-announces-ocelot-quantum-chip",
+    "supports": "27 February 2025: projects up to 90% less error-correction overhead for scaled machines (projection).",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-alice-bob-roadmap",
+    "title": "Alice & Bob quantum computing roadmap",
+    "authors": "Alice & Bob",
+    "url": "https://alice-bob.com/newsroom/alice-bob-quantum-computing-roadmap/",
+    "supports": "December 2024: Graphene, 100 high-fidelity logical qubits by 2030 (about 2,000 cat qubits, 1e-6 logical error per the long-form roadmap).",
+    "verified": "2026-11-02",
+    "verification": "official-doc"
+  },
+  {
+    "id": "ft3-xzzx",
+    "title": "The XZZX surface code",
+    "authors": "J. Pablo Bonilla Ataides; David K. Tuckett; Stephen D. Bartlett; Steven T. Flammia; Benjamin J. Brown",
+    "url": "https://arxiv.org/abs/2009.07851",
+    "supports": "Nature Communications 12, 2172 (2021): threshold matching the hashing bound for single-qubit Pauli noise; far fewer qubits at high bias.",
+    "verified": "2026-11-02",
+    "verification": "abstract"
   }
 ]
