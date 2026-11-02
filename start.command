@@ -4,13 +4,13 @@ set -eu
 cd -- "$(dirname -- "$0")"
 qa_node=''
 for qa_candidate in "$(command -v node || true)" "$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node" "$HOME"/.nvm/versions/node/*/bin/node; do
-  if [ -n "$qa_candidate" ] && [ -x "$qa_candidate" ] && "$qa_candidate" -e 'const [major,minor,patch]=process.versions.node.split(".").map(Number);process.exit(major>22||(major===22&&(minor>23||(minor===23&&patch>=4)))?0:1)' 2>/dev/null; then
+  if [ -n "$qa_candidate" ] && [ -x "$qa_candidate" ] && "$qa_candidate" -e 'process.exit(Number(process.versions.node.split(".")[0])===24?0:1)' 2>/dev/null; then
     qa_node="$qa_candidate"
     break
   fi
 done
 if [ -z "$qa_node" ]; then
-  printf '%s\n' 'Node.js 22.23.4+ is required. Install Node 24, then run npm ci in this directory.'
+  printf '%s\n' 'Node.js 24.x is required. Install Node 24, then run npm ci in this directory.'
   exit 1
 fi
 if [ ! -f node_modules/.bin/astro ]; then

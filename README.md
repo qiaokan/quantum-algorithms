@@ -2,11 +2,13 @@
 
 A local-first, static textbook for programmers learning quantum algorithms through complete worked examples and depth-first prerequisite detours. Deutsch and Grover are the first two algorithm lessons. No account, paid API, cloud quantum service, or explanation-generation service is used.
 
+Read online: **[quantum-algorithms-rho.vercel.app](https://quantum-algorithms-rho.vercel.app/)**. Source: [qiaokan/quantum-algorithms](https://github.com/qiaokan/quantum-algorithms).
+
 ## Run locally
 
 From a fresh clone, install dependencies and start the site with the commands below. On macOS, after installation, `./start.command` is an optional launcher that locates a compatible existing Node runtime without changing shell settings.
 
-Requirements: Node.js **22.23.4 or later** (Node 24 recommended), npm 9.6.5+, and Python 3.11+ for all independent numerical checks.
+Requirements: Node.js **24.x**, npm 9.6.5+, and Python 3.11+ for all independent numerical checks. The Node major version is pinned consistently for local use, GitHub Actions, and Vercel builds.
 
 ```sh
 cd quantum-algorithms
@@ -95,22 +97,19 @@ State convention: column vectors; leftmost bit most significant; bit index 0 mea
 5. Run the content audit and appropriate numerical tests, then build and browser tests for interactive changes. A nonempty heading or word-count threshold cannot establish teaching completeness. Keep partial status until the worked instance reaches output and all declared gaps are resolved.
 6. Independent review is recorded with scope/findings under `research/`. Only independently reviewed content receives `reviewed`; learner progress remains separate.
 
-## Static deployment instructions (not performed)
+## Deployment
 
-Build with `npm ci && npm run build` and upload **only `dist/`** to a static host such as a static web server, Cloudflare Pages, or Netlify. No server-side runtime, environment secret, database, or paid resource is required. Serve at the site root, preserve trailing-slash directories, and map unknown URLs to `404.html`. All internal URLs currently assume the origin root; subpath deployment requires updating base-aware links and asset URLs first. This task did not register a hosted Site or publish anything.
+The production site is hosted on Vercel's Hobby plan in the `qiaokan's projects` team. The project is connected directly to this public GitHub repository; its production branch is `codex/initial-setup`. Pushes to that branch trigger production deployments.
 
-## Connect this repository to GitHub
+[vercel.json](vercel.json) specifies the Astro preset, `npm ci`, `npm run build`, the `dist` output directory, and trailing slashes. Node 24 is specified in `package.json`. No environment variables, server-side runtime, database, or paid resource is required. Vercel's GitHub installation for this account is limited to this repository. Local Vercel linkage files are ignored by Git.
 
-The project has its own Git history. Dependencies, build output, browser reports, local environment files, and machine caches are ignored. Keep the lockfile, authored content, numerical examples, and validation records in version control.
+The same output can be hosted elsewhere: build with `npm ci && npm run build` and upload **only `dist/`**. Serve at the site root, preserve trailing-slash directories, and map unknown URLs to `404.html`. All internal URLs currently assume the origin root; subpath deployment requires updating base-aware links and asset URLs first.
 
-After creating an empty GitHub repository with the intended owner and visibility, add its actual URL as `origin` and push the current branch:
+## Git repository
 
-```sh
-git remote add origin git@github.com:OWNER/quantum-algorithms.git
-git push -u origin HEAD
-```
+The standalone public repository is [qiaokan/quantum-algorithms](https://github.com/qiaokan/quantum-algorithms). Dependencies, build output, browser reports, local environment files, and machine caches are ignored. Keep the lockfile, authored content, numerical examples, and validation records in version control.
 
-Replace `OWNER` with the chosen account or organization. Creating or pushing the repository is separate from publishing the website. The full authoring requirements are preserved in [docs/SPECIFICATION.md](docs/SPECIFICATION.md), and the maintained content format is described in [docs/AUTHORING-CONTRACT.md](docs/AUTHORING-CONTRACT.md).
+The full authoring requirements are preserved in [docs/SPECIFICATION.md](docs/SPECIFICATION.md), and the maintained content format is described in [docs/AUTHORING-CONTRACT.md](docs/AUTHORING-CONTRACT.md).
 
 ## Deliberate limits
 
