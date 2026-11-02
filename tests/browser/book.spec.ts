@@ -166,3 +166,43 @@ test('early lessons open with a short idea, a circuit sketch and linked concepts
  await idea.getByRole('link',{name:/simulator/}).click();await expect(page.locator('#interactive-example')).toBeInViewport();
  await page.locator('.context-box a[href="/definitions/oracles/"]').click();await expect(page.getByRole('dialog')).toBeVisible();
 });
+
+test('decision path is the default route and the complete path is one click away',async({page})=>{
+ await page.goto('/path/');await expect(page.locator('h1')).toContainText('Decision path');
+ const steps=await page.locator('.decision-list > li > a').evaluateAll(a=>a.map(x=>x.getAttribute('href')));
+ expect(steps).toEqual(['deutsch','grover','qft','phase-estimation','order-finding','shor','product-formulas','energy-estimation','hhl','block-encoding','qubitization'].map(id=>`/lessons/${id}/`));
+ await page.getByRole('link',{name:'complete algorithms path'}).first().click();await expect(page.locator('h1')).toHaveText('Complete algorithms path');
+ expect(await page.locator('.catalog-list > li > a').count()).toBe(32);
+ await page.goto('/');await expect(page.locator('.decision-feature a[href="/path/"]')).toBeVisible();
+});
+
+test('every lesson has exactly one tier, and decision lessons carry a callout and step links',async({page,request})=>{
+ const curriculum=await (await request.get('/curriculum.json')).json();
+ for(const l of curriculum.lessons)expect(['decision','complete','deferred'],l.id).toContain(l.tier);
+ await page.goto('/lessons/qft/');await expect(page.locator('.tier-badge')).toHaveCount(1);await expect(page.locator('.tier-badge')).toHaveText('Decision path');
+ await expect(page.locator('.decision-callout')).toContainText('STEP 3 OF 11');
+ await expect(page.locator('.decision-step a').first()).toHaveAttribute('href','/lessons/grover/');await expect(page.locator('.decision-step a').last()).toHaveAttribute('href','/lessons/phase-estimation/');
+ await page.goto('/lessons/bbht-search/');await expect(page.locator('.tier-badge')).toHaveText('Deferred branch (read after the decision path)');await expect(page.locator('.decision-callout')).toHaveCount(0);
+ await page.goto('/lessons/simon/');await expect(page.locator('.tier-badge')).toHaveText('Complete path');
+});
+
+test('deferred branches are hidden in the sidebar until requested, without reordering lessons',async({page,isMobile})=>{
+ await page.goto('/lessons/deutsch/');if(isMobile)await page.locator('#menu-toggle').click();
+ await expect(page.locator('#sidebar .decision-nav [data-sequence]')).toHaveCount(0);
+ const branch=page.locator('#module-nav a[href="/lessons/bbht-search/"]');await expect(branch).toBeHidden();
+ await page.locator('#toggle-deferred').click();await expect(page.locator('#toggle-deferred')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#module-nav details.module:has(a[href="/lessons/bbht-search/"]) > summary').click();await expect(branch).toBeVisible();
+ await page.reload();if(isMobile)await page.locator('#menu-toggle').click();await expect(page.locator('#toggle-deferred')).toHaveAttribute('aria-pressed','true');
+});
+
+test('progress page tracks the decision path separately from the same store',async({page})=>{
+ await page.goto('/lessons/qft/');await page.evaluate(()=>localStorage.clear());await page.reload();await page.locator('[data-progress="practiced"]').click();
+ await page.goto('/progress/');await expect(page.locator('[data-decision-status-for="qft"]')).toHaveText('practiced');
+ await expect(page.locator('[data-decision-summary]')).toHaveText('1 of 11 decision-path lessons marked; 1 practiced.');
+ await expect(page.locator('[data-status-for="qft"]')).toHaveText('practiced');
+});
+
+test('coverage keeps its original scope text and adds the dated error-correction note',async({page})=>{
+ await page.goto('/coverage/');await expect(page.locator('main')).toContainText('error correction, and fault tolerance are supporting protocols/engineering topics');
+ await expect(page.locator('#revision-2026-11-02')).toContainText('Revision note, 2 November 2026');
+});

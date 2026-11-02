@@ -65,6 +65,32 @@ export async function render(markdown: string): Promise<Rendered> {
   return {html,sections,text:plainText(html)};
 }
 export function counts() { return Object.fromEntries(['reviewed','complete','partial','planned'].map(s=>[s,lessons.filter(l=>l.editorial===s).length])); }
-// Same estimate the lesson page shows: rendered lesson words at 150 per minute.
-export async function readingMinutes(l: Lesson) { return Math.ceil((await render(lessonMarkdown(l))).text.split(/\s+/).length/150); }
+// Reading is rendered words at 150 per minute. Calculation adds working time for each display
+// equation, in-lesson prediction or derivation block, and practice question. The constants are
+// editorial estimates, not measurements; the path pages state them.
+export const timeModel = { wordsPerMinute: 150, perDisplayEquation: 1.5, perCheck: 3, perPractice: 4 };
+export interface TimeEstimate { reading: number; calculation: number; total: number }
+const estimates = new Map<string, Promise<TimeEstimate>>();
+export function timeEstimate(l: Lesson): Promise<TimeEstimate> {
+  if (!estimates.has(l.id)) estimates.set(l.id, (async () => {
+    const r = await render(lessonMarkdown(l));
+    const reading = Math.ceil(r.text.split(/\s+/).length / timeModel.wordsPerMinute);
+    const equations = (r.html.match(/class="katex-display"/g) || []).length;
+    const checks = (r.html.match(/<details/g) || []).length;
+    const practice = exercises.filter(e => e.lesson === l.id).length;
+    const calculation = Math.ceil(timeModel.perDisplayEquation * equations + timeModel.perCheck * checks + timeModel.perPractice * practice);
+    return { reading, calculation, total: reading + calculation };
+  })());
+  return estimates.get(l.id)!;
+}
+export async function readingMinutes(l: Lesson) { return (await timeEstimate(l)).total; }
+export function formatMinutes(minutes: number) { return minutes < 60 ? `${minutes} min` : `${Math.floor(minutes / 60)} h ${minutes % 60} min`; }
+
+// The decision path is an ordered reading route; tiers label every lesson relative to it.
+export interface DecisionPath { title: string; summary: string; lessons: string[]; callouts: Record<string, string> }
+export const decisionPath: DecisionPath = readJson<DecisionPath>(path.join(root, 'decision-path.json'));
+export type Tier = 'decision' | 'complete' | 'deferred';
+export function tier(l: Lesson): Tier { return decisionPath.lessons.includes(l.id) ? 'decision' : l.path === 'main' ? 'complete' : 'deferred'; }
+export const tierLabels: Record<Tier, string> = { decision: 'Decision path', complete: 'Complete path', deferred: 'Deferred branch (read after the decision path)' };
+export function decisionLessons(): Lesson[] { return decisionPath.lessons.map(id => { const l = lessons.find(x => x.id === id); if (!l) throw new Error(`Decision path names unknown lesson ${id}`); return l; }); }
 export function label(l: Lesson) { return `${String(l.sequence).padStart(2,'0')}. ${l.title}`; }
