@@ -12,11 +12,11 @@ Without the chain, decisions get made from headline qubit counts and vendor road
 
 **1. Application to logical requirements.** Estimating the ground-state energy of the FeMoco molecule is a standard chemistry benchmark. [Lee et al. (2021)](https://arxiv.org/abs/2011.03494) need 2,142 logical qubits and 6.7 billion Toffolis in their surface-code compilation. The algorithm is phase estimation on a qubitized walk, which the decision path covered in lessons 25, 27 and 30. Ask: is this precision enough to change a decision in chemistry? That question belongs to the application expert, not to the quantum engineer.
 
-**2. Logical requirements to error-correction overhead.** With the paper's assumptions (0.1% physical error, 1 µs cycle) and Λ = 10, the model picks distance 31. That means $2\times31^2=1{,}922$ physical qubits per patch, and about 4.2 million physical qubits with factories. The paper reports about 4 million. What has to be true: Λ near 10 at that scale, and no correlated error bursts above the per-cycle budget ([FT-04](/lessons/ft-04-noise-thresholds/)).
+**2. Logical requirements to error-correction overhead.** With the paper's assumptions (0.1% physical error, 1 µs cycle) and Λ = 10, the model picks distance 31. That means $2\times31^2=1{,}922$ physical qubits per patch, and about 3.7 million physical qubits on the paper's own layout of 1,908 patches including factories (3.9 million with the paper's $2(d+1)^2$ per patch). The paper reports about 4 million. What has to be true: Λ near 10 at that scale, and no correlated error bursts above the per-cycle budget ([FT-04](/lessons/ft-04-noise-thresholds/)).
 
-**3. Overhead to infrastructure.** Every patch measures $d^2-1=960$ checks each cycle. For $2{,}182$ patches at 1 µs per cycle, that is
+**3. Overhead to infrastructure.** Every patch measures $d^2-1=960$ checks each cycle. For $1{,}908$ patches at 1 µs per cycle, that is
 
-$$2{,}182\times960=2{,}094{,}720\ \text{bits per}\ \mu\text{s}\approx2.1\ \text{Tbit/s}$$
+$$1{,}908\times960=1{,}831{,}680\ \text{bits per}\ \mu\text{s}\approx1.8\ \text{Tbit/s}$$
 
 of syndrome data to decode continuously, for about 3.3 days. The RSA estimate's board of $14{,}232$ patches at $d=27$ produces $14{,}232\times728\approx10.4$ Tbit/s. What has to be true:
 
@@ -26,13 +26,13 @@ of syndrome data to decode continuously, for about 3.3 days. The RSA estimate's 
 
 **4. Infrastructure to hardware.** Use the calculator's third preset on the RSA workload: Google's 2024 measured noise (Λ = 2.14) and its 63 µs decoder latency used as the reaction time. The model then needs distance 89, about 225 million qubits and about 47 hours. That compares with 20 million qubits and 7.5 hours under the published assumptions. Different modalities change different inputs: cycle time, connectivity (which changes the code and the routing overhead), and error rates ([FT-12](/lessons/ft-12-hardware-roadmaps/)).
 
-**5. Hardware to timeline.** A timeline follows only when each "what has to be true" above has a dated, checkable status. Today, Λ ≈ 2 has been demonstrated at distance 7 on about 100 qubits. The estimates assume Λ ≈ 10 on millions. Every step between those is a claim to watch for, not a date to assume.
+**5. Hardware to timeline.** A timeline follows only when each "what has to be true" above has a dated, checkable status. Today, on superconducting qubits, Λ ≈ 2 has been demonstrated at distance 7 on about 100 qubits. A trapped-ion preprint from October 2026, not yet peer reviewed, reports Λ ≈ 12 with color codes up to distance 7, on a small system with a much slower cycle ([FT-12](/lessons/ft-12-hardware-roadmaps/)). The estimates assume Λ ≈ 10 on millions. Every step between those is a claim to watch for, not a date to assume.
 
 Use the calculator below. Load the FeMoco preset, then change one input at a time to today's measured value and see which change costs the most.
 
 <details><summary>Predict: for the FeMoco preset, which hurts more, doubling the reaction time or doubling the physical error rate?</summary>
 
-That preset is factory-limited, at about 42.6 µs per Toffoli against a 10 µs reaction time. Doubling the reaction time to 20 µs therefore changes nothing. Doubling the physical error rate to 0.2% halves Λ to 5. The model then needs $d=45$ instead of 31, about 8.8 million qubits instead of 4.2 million, and 4.8 days instead of 3.3, because the factories take $5.5\,d$ cycles each. In a reaction-limited preset the answer would be different. Checking which regime you are in comes first.
+That preset is factory-limited, at about 42.6 µs per Toffoli against a 10 µs reaction time. Doubling the reaction time to 20 µs therefore changes nothing. Doubling the physical error rate to 0.2% halves Λ to 5. The model then needs $d=45$ instead of 31, about 7.7 million qubits instead of 3.7 million, and 4.8 days instead of 3.3, because the factories take $5.5\,d$ cycles each. In a reaction-limited preset the answer would be different. Checking which regime you are in comes first.
 
 </details>
 
@@ -50,22 +50,22 @@ That preset is factory-limited, at about 42.6 µs per Toffoli against a 10 µs r
 | Only cycle time → 1.1 µs | 27 | 20.8 M | 7.5 h |
 | All three (today's measured values) | 89 | 225.5 M | 47.3 h |
 
-Λ alone multiplies the qubit count by about 10. That is the difference between a machine that is very hard to build and one that is out of reach. The slower reaction time stretches runtime by 6.3×, but 47 hours is still a usable run, and it adds only about 15% to the qubit count. Within this model, then, the present gap is mostly physics.
+Λ alone multiplies the qubit count by about 10. In that row the runtime also rises, to 12.5 h, because the 28 factories, now running at $d=85$ (16.7 µs per state), become the limit. Two caveats: the model matches Google's Λ but not its absolute error (anchoring on it gives $d=87$ and about 215 million), and the factory settings are carried over from $p=0.1\%$. That is the difference between a machine that is very hard to build and one that is out of reach. The slower reaction time stretches runtime by 6.3×, but 47 hours is still a usable run, and it adds only about 15% to the qubit count. Within this model, then, the present gap is mostly physics.
 
 That changes once Λ improves. At Λ = 10, the reaction time is the largest remaining lever on runtime. Decoder throughput has to keep up across tens of millions of qubits, or the computation stalls ([FT-07](/lessons/ft-07-real-time-decoding/)).
 
-| Stage | Binding today? | Binding once Λ ≈ 10? | Who delivers it |
+| Stage | Binding today? (superconducting) | Binding once Λ ≈ 10? | Who delivers it |
 |---|---|---|---|
 | Application and logical requirements | Partly: algorithm improvements still move estimates by large factors | Partly | Domain experts, algorithm and compiler researchers |
 | Error correction (Λ at scale, correlated errors, leakage) | **Yes**: the dominant term in qubit count | Less, if Λ ≈ 10 holds at scale | Device physics, fabrication |
-| Decoding (throughput, reaction latency) | Secondary: sets runtime, not feasibility | **Yes**: the main runtime lever; a stall risk if throughput lags | Classical hardware and systems engineers |
+| Decoding (throughput, reaction latency) | Secondary in this model, which holds the 63 µs distance-5 latency fixed; throughput at distance ≈ 89 is undemonstrated and could itself bind | **Yes**: the main runtime lever; a stall risk if throughput lags | Classical hardware and systems engineers |
 | Control (lines or multiplexing per qubit, heat) | Open at scale; not in the calculator | **Yes**, at millions of qubits | Electronics and cryogenic engineers |
 | Calibration (a dependency graph run continuously against drift) | Open at scale; not in the calculator | **Yes**, at millions of qubits | Software and automation engineers |
 | Orchestration (surgery scheduling, factories, feedforward) | Secondary | **Yes** | Systems and runtime engineers |
 
 Two cautions. First, the calculator models Λ, cycle time, reaction time and factories. It does not model wiring or calibration. Those rows are marked "open at scale" because [FT-10](/lessons/ft-10-control-calibration/) shows they are unsolved at millions of qubits, not because the model shows them binding. Second, newer architectures, such as yoked codes, cultivation and qLDPC codes, reduce qubit counts in ways this model does not capture ([FT-11](/lessons/ft-11-resource-estimation/)).
 
-**What this means for a decision.** An infrastructure role, in decoding, control or calibration, is a bet that the physics will reach Λ near 10 at scale, so that systems problems become the hard part. That bet is reasonable, and a growing share of the remaining work is classical engineering. But it is a bet on a condition no published experiment has demonstrated yet. Make it knowingly, and watch the Λ trend as the leading indicator.
+**What this means for a decision.** An infrastructure role, in decoding, control or calibration, is a bet that the physics will reach Λ near 10 at scale, so that systems problems become the hard part. That bet is reasonable, and a growing share of the remaining work is classical engineering. But it is a bet on a condition no peer-reviewed experiment has shown at scale. On superconducting hardware, Λ is about 2. A 2026 trapped-ion preprint claims about 12, but on a small, slow system, where cycle and reaction time would then become the binding inputs. Make it knowingly, and watch the Λ trend as the leading indicator.
 
 ## Meanwhile
 

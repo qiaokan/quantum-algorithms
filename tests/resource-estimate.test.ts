@@ -18,7 +18,7 @@ describe('surface-code resource model',()=>{
   const e=estimate(presets['lee-femoco-2021'].input);
   expect(e.distance).toBe(31);expect(e.limitedBy).toBe('factories');
   expect(e.runtimeSeconds/86400).toBeGreaterThan(3);expect(e.runtimeSeconds/86400).toBeLessThan(3.6);
-  expect(e.physicalQubits/1e6).toBeCloseTo(4.2,1);
+  expect(e.physicalQubits/1e6).toBeCloseTo(3.67,2);expect(e.dataPatches+e.factoryPatches).toBeCloseTo(1908,6);
  });
  it('shows how much worse the same workload is at Λ ≈ 2.14 with a 63 µs reaction time',()=>{
   const e=estimate(presets['google-2024-noise'].input);

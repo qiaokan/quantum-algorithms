@@ -15,7 +15,8 @@
     "url": "https://arxiv.org/abs/1905.09749",
     "supports": "Quantum 5, 433 (2021). RSA-2048 estimate of 20 million noisy qubits and 8 hours, assuming 0.1% gate error, 1 µs surface-code cycle and 10 µs reaction time (decision-path callout for order finding).",
     "verified": "2026-11-02",
-    "verification": "abstract"
+    "verification": "full-text",
+    "note": "Full text checked 2026-11-02/03: Sec. 2.10–2.14 (14 factories per thread, 28 in parallel; 226×63 board; 2(d+1)^2 qubits per patch; 27% topological error; runtime from lookup additions)."
   },
   {
     "id": "dp-gidney-2025",

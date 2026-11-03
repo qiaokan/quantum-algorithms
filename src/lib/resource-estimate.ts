@@ -91,10 +91,10 @@ export const presets: Record<string, { label: string; input: EstimateInput; note
     label: 'FeMoco (Reiher), Lee et al. (2021) assumptions',
     input: {
       physicalError: 1e-3, cycleTimeUs: 1, reactionTimeUs: 10, failureBudget: 0.01,
-      nonCliffordOps: 6.7e9, logicalQubits: 2142, factories: 4,
-      routingOverhead: 1, patchesPerFactory: 10, cyclesPerStatePerD: 5.5,
+      nonCliffordOps: 6.7e9, logicalQubits: 700, factories: 4,
+      routingOverhead: 1428 / 700, patchesPerFactory: 120, cyclesPerStatePerD: 5.5,
     },
-    note: 'p = 0.1%, 1 µs cycle, 2,142 logical qubits, 6.7 billion Toffolis (its compilation section; Table III lists 5.3 billion), four CCZ factories and a 1% error budget are from the paper, which reports about 4 million qubits and 3 days. The 10-patch factory footprint and routing overhead 1 are illustrative.',
+    note: 'From the paper: p = 0.1%, 1 µs cycle, 6.7 billion Toffolis (its compilation section; Table III lists 5.3 billion), fewer than 700 stored data qubits, four CCZ factories of 15d × 8d (about 120 patches each), a 1% error budget, and a 53 × 36 = 1,908-patch layout. Routing overhead is fitted so the data and routing fill the 1,428 patches left after the factories. The paper reports about 4 million qubits (it counts 2(d+1)² per patch) and 3 days.',
   },
   'google-2024-noise': {
     label: 'Same RSA workload at Google 2024 noise (Λ ≈ 2.14)',

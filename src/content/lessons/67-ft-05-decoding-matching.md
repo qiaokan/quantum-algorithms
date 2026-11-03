@@ -15,7 +15,7 @@ Trying every possible error and keeping the most likely one would be exact but e
 
 ## Detection events
 
-A **detection event** marks a change: a check whose outcome differs from its outcome in the previous round, or from its known starting value in the first round. (Google's paper uses the related term "detection probability" without defining the event itself. This lesson follows the usual meaning.)
+A **detection event** marks a change: a check whose outcome differs from its outcome in the previous round, or from its known starting value in the first round. (Google's paper uses "detection events" without a formal definition; this lesson follows the usual meaning.)
 
 Take a distance-3 repetition code with data qubits $q_0,q_1,q_2$ and checks $c_0=q_0\oplus q_1$ and $c_1=q_1\oplus q_2$, measured for three rounds.
 
@@ -70,6 +70,8 @@ The two nodes $(c_0,2)$ and $(c_1,2)$ are joined by the single space-like edge f
 ## Minimum-weight perfect matching
 
 Pair up all the lit nodes, allowing any node to pair with the boundary instead, so that the total weight of the shortest paths between pairs is as small as possible. That is **minimum-weight perfect matching**. The correction is the set of edges along the chosen paths.
+
+Strictly, matching finds the most likely *single error* consistent with the lit nodes. The best possible decoder would instead pick the most likely *equivalence class* of errors, summing over all errors that differ by checks (degeneracy, [FT-03](/lessons/ft-03-surface-code/)). It would also account for $Y$ errors lighting both $X$ and $Z$ checks. Matching is therefore an approximation to optimal decoding, and a very good one in practice for the surface code.
 
 [Edmonds (1965)](https://www.cambridge.org/core/journals/canadian-journal-of-mathematics/article/paths-trees-and-flowers/08B492B72322C4130AE800C0610E0E21) gave an efficient algorithm for maximum matching in general graphs. Matching decoders build on that line of algorithms. [Fowler et al. (2012)](https://arxiv.org/abs/1208.0928) decode with "Edmonds' minimum-weight perfect-matching algorithm". [PyMatching](https://arxiv.org/abs/2105.13082) and its [Sparse Blossom](https://arxiv.org/abs/2303.15933) successor are widely used open-source implementations.
 

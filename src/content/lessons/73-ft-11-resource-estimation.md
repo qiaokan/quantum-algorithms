@@ -44,7 +44,7 @@ The reaction time sets the runtime directly. It changes the distance only weakly
 
 $$2.7\times10^9\times10\ \mu s=2.7\times10^4\ s=7.5\ \text{hours}.$$
 
-The paper reports 0.31 days, about 7.4 hours, for this variant.
+The paper reports 0.31 days, about 7.4 hours, for this variant. The figures match, but the derivations differ. The paper times its run as about 37 ms per lookup addition (14 ms limited by code depth, 22 ms by reaction time), with its two pieces overlapped using carry runways. It is not simply Toffolis × reaction time.
 
 **Distance.** The run lasts $2.7\times10^{10}$ cycles.
 
@@ -53,7 +53,7 @@ The paper reports 0.31 days, about 7.4 hours, for this variant.
 
 The paper's own count is about 27%, and it notes the run would need repeating "roughly 1.4 times, on average". Choosing $d=29$ instead brings the failure to about 3% at the cost of roughly 15% more qubits, a trade-off the paper also discusses.
 
-**Qubits.** $14{,}232$ patches $\times\,2\times27^2=20.8$ million physical qubits. The paper reports 20 million.
+**Qubits.** $14{,}232$ patches $\times\,2\times27^2=20.8$ million physical qubits. The paper reports 20 million. It counts $2(d+1)^2=1{,}568$ qubits per patch, including the spacing between patches, so its own hand count for this board is about 23 million. The 20 million headline comes from its more detailed estimates. The model's $2d^2$ is about 7.5% lower per patch, so this agreement is also partly coincidence.
 
 **One factory instead of 28.** The model becomes **factory-limited** at about 170 µs per operation and needs $d=31$, giving roughly 5.3 days. The paper's single-factory variant reports 6 days. The model is close but not exact, because its factory speed is borrowed from another paper, not taken from Gidney–Ekerå's factory design.
 
@@ -74,22 +74,26 @@ As of May 2025, [Gidney's preprint](https://arxiv.org/abs/2505.15917) reports fe
 
 **Published result:** distance 31 and about 4 million physical qubits. The runtime is "3 days" in the compilation section. The abstract says "under four days", and a later paragraph on optimistic error rates refers to 3.5 days, so the paper is not fully consistent.
 
-**Choices for this model:** the paper's 4 factories and 1% budget, plus an illustrative 10 patches per factory and routing overhead 1. The model's factory speed ($5.5\,d$ cycles, from Babbush et al.) gives 42.6 µs per Toffoli at $d=31$, close to the paper's 40 µs.
+**Choices for this model,** following the paper's own layout: a board of $53\times36=1{,}908$ patches, four factories of $15d\times8d$ (about 120 patches each), and fewer than 700 stored data qubits. The routing overhead is set so that data and routing fill the remaining $1{,}908-480=1{,}428$ patches. The model's factory speed ($5.5\,d$ cycles, from Babbush et al.) gives 42.6 µs per Toffoli at $d=31$, close to the paper's 40 µs.
 
 **Result.**
 
 - The supply interval is $5.5\times31/4=42.6$ µs, longer than the reaction time, so the run is factory-limited.
 - Runtime: $6.7\times10^9\times42.6\ \mu s\approx2.9\times10^5$ s, about 3.3 days.
-- Distance: $d=29$ fails the budget (about 6%), and $d=31$ meets it (about 0.6%).
-- Qubits: $2{,}182\times2\times31^2\approx4.2$ million.
+- Distance: $d=29$ fails the budget (about 4%), and $d=31$ meets it (about 0.4%).
+- Qubits: $1{,}908\times2\times31^2\approx3.7$ million with the model's $2d^2$, or $3.9$ million with the paper's $2(d+1)^2$.
 
-All three land near the published figures: 3.3 days against the paper's 3 days. The agreement is partly by construction, since the factory count and budget are the paper's own.
+All three land near the published figures: about 4 million qubits and 3 days. The agreement is largely by construction, because the layout, factory count and budget are the paper's own. An earlier version of this lesson matched the qubit total only through two offsetting errors: factories that were too small and a data count that was too large.
 
 ## Worked estimate (c): the same RSA workload on today's measured noise
 
 Google's 2024 experiment measured $\Lambda=2.14$ with a 1.1 µs cycle and a 63 µs average real-time decoder latency at distance 5 ([FT-04](/lessons/ft-04-noise-thresholds/)). In this model, $\Lambda=0.01/p$, so $p=0.01/2.14\approx0.47\%$ reproduces that $\Lambda$. Treat the 63 µs as the reaction time; that is an assumption, since a decoder's average latency is not the same thing as a full reaction time.
 
-Keep everything else from estimate (a).
+Keep everything else from estimate (a). Three hedges apply:
+
+- **The model matches Google's Λ, not its absolute error.** It gives $4.8\times10^{-3}$ per cycle at $d=7$, against Google's measured $1.43\times10^{-3}$. Anchoring on the measured value instead gives $d=87$ and about 215 million qubits, not $d=89$ and 225 million.
+- **Factory settings are borrowed.** The factories keep the $5.5\,d$ speed and 127-patch footprint calibrated at $p=0.1\%$.
+- **The latency is a single measurement.** The 63 µs was measured at distance 5 on a 105-qubit chip. Holding it fixed at $d\approx89$ assumes decoder throughput scales to that size, which has not been demonstrated.
 
 - **Runtime:** $2.7\times10^9\times63\ \mu s$, about **47 hours**.
 - **Distance:** the error per cycle falls only by 2.14 per step, so the model needs **$d=89$**.
@@ -99,7 +103,7 @@ Compare 20 million qubits and 7.5 hours. The gap between today's demonstrated ha
 
 ## A quadratic-speedup reality check
 
-[Babbush et al. (2021)](https://arxiv.org/abs/2011.04149) model a Toffoli as about $5.5\,d$ surface-code cycles at about 1 µs per cycle, with $d\approx30$ and a single factory. That is about 170 µs per Toffoli. Their conclusion is that "quadratic speedups will not enable quantum advantage on early generations of such fault-tolerant devices". For example, they report 2.4 hours to break even for a primitive costing 100 Toffolis.
+[Babbush et al. (2021)](https://arxiv.org/abs/2011.04149) model a Toffoli as about $5.5\,d$ surface-code cycles at about 1 µs per cycle, with $d\approx30$ and a single factory. That is about 170 µs per Toffoli. Their conclusion is that "quadratic speedups will not enable quantum advantage on early generations of such fault-tolerant devices". For example, they report 2.4 hours to break even for a primitive costing 100 Toffolis. That figure assumes a classical step of $t_C=33$ ns and a break-even time $t_Q^2/t_C$: $(17\ \text{ms})^2/33\ \text{ns}\approx2.4$ hours.
 
 The arithmetic behind that is simple. Grover with an oracle of $C$ Toffolis takes about $(\pi/4)\sqrt N\cdot C\cdot170\ \mu s$. A classical scan takes $N\cdot t$, where $t$ is the classical time per check. The quantum side wins only when $N$ is large enough for $\sqrt N$ to beat a slowdown factor of $C\cdot170\ \mu s/t$. With $C=100$ and an illustrative $t=1$ ns, the factor is $100\times170\ \mu s/1\ \text{ns}=1.7\times10^7$, and the two sides are equal when $\sqrt N=(\pi/4)\times1.7\times10^7\approx1.3\times10^7$, that is $N\approx1.8\times10^{14}$. A single classical core needs $1.8\times10^{14}$ ns, about 50 hours, to reach that point. That pushes the crossover to runtimes measured in hours or days, before even counting classical parallelism.
 

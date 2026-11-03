@@ -13,6 +13,7 @@ The default route is now the [decision path](https://quantum-algorithms-rho.verc
 - `src/lib/decoders.ts`: exact minimum-weight matching and a union-find decoder.
 - `src/lib/resource-estimate.ts` and `src/components/ResourceCalculator.astro`: the teaching resource model and calculator.
 - `public/examples/ft-checks.py`: recomputes the FT lessons' numbers, including an independent version of the resource model.
+- `public/examples/notebooks/`: optional companion notebooks (Stim and PyMatching; simulation only, not run in CI). One covers Λ and thresholds up to d = 9; the other times software decoder latency against distance. Pinned dependencies are in `requirements-ft-notebooks.txt`, and `make_notebooks.py` regenerates and re-executes both.
 
 The task specification and its source verification are in `docs/proposals/decision-path-ft-spec.md`.
 

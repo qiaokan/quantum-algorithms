@@ -1,0 +1,6 @@
+# Companion notebooks for the FT module (simulation only). Not run in CI.
+# python3 -m venv .venv-ft && .venv-ft/bin/pip install -r public/examples/notebooks/requirements-ft-notebooks.txt
+stim==1.15.0
+pymatching==2.2.2
+numpy==2.2.6
+jupyter==1.1.1

@@ -52,7 +52,7 @@ Feed $3.5\times10^{-8}$ back in: $35(3.5\times10^{-8})^3$, about $1.5\times10^{-
 
 ## Factory footprint and time
 
-[Litinski (2019b)](https://arxiv.org/abs/1905.06903) designs factories in which the qubits that can catch errors use small code distances, and only the output path uses a large one. Selected rows of his Table 1 give the space cost including ancillas, and the time in code cycles per output state:
+[Litinski (2019b)](https://arxiv.org/abs/1905.06903) designs factories in which the qubits that can catch errors use small code distances, and only the output path uses a large one. Selected rows of his Table 1 give the space cost including ancillas, and the time in code cycles **per protocol run**. The 20-to-4 row yields 4 states per run; Litinski notes that for such protocols the space-time cost and output error are per magic state:
 
 | Protocol | $p_{\rm phys}$ | Output error | Qubits | Cycles |
 |---|---|---|---|---|
@@ -62,7 +62,7 @@ Feed $3.5\times10^{-8}$ back in: $35(3.5\times10^{-8})^3$, about $1.5\times10^{-
 
 The subscripts are the code distances used inside the factory.
 
-At 1 µs per cycle, the first factory makes a state every 42.6 µs, about 23,500 per second. Its output, $4.5\times10^{-8}$, is good for only about $1/(4.5\times10^{-8})\approx2.2\times10^7$ gates. The second makes a state every 130 µs, about 7,700 per second, at $1.4\times10^{-10}$: for $10^9$ states, that is $0.14$ expected bad states.
+At 1 µs per cycle, the first factory makes a state every 42.6 µs, about 23,500 per second. Its output, $4.5\times10^{-8}$, is good for only about $1/(4.5\times10^{-8})\approx2.2\times10^7$ gates. The second makes 4 states every 130 µs, one every 32.5 µs or about 30,800 per second, each at $1.4\times10^{-10}$: for $10^9$ states, that is $0.14$ expected bad states. (Check: $43{,}300\times130/4\approx1.41\times10^6$ qubit-cycles per state, as his table lists.)
 
 [Babbush et al. (2021)](https://arxiv.org/abs/2011.04149) use a coarser model for Toffoli gates. A factory distils one CCZ state, used for one Toffoli, in about $5.5d$ cycles. With $d\approx30$ and 1 µs per cycle, that is $30\times5.5\times1$ µs $=165$ µs, which they round to about 170 µs. They quote a footprint of around 130,000 physical qubits, and assume one factory running in series.
 
@@ -83,15 +83,15 @@ Two limits apply.
 
 $$\text{T-rate limit:}\quad R_T=\frac{\text{number of factories}}{\text{time per state}}.\qquad \text{Reaction limit:}\quad R_{\rm react}=\frac1{t_r}\ \text{dependent gates per second}.$$
 
-The machine runs at the smaller of the two, for the dependent part of the computation. [Litinski (2019a)](https://arxiv.org/abs/1808.02892) makes the reaction limit concrete: in the time-optimal scheme he describes, a circuit of $n_L$ layers of $T$ gates takes $n_L\cdot t_m$, where $t_m$ is the measurement and classical-processing time, independent of code distance. At $t_m=10$ µs, his $10^8$-gate example takes 10 seconds.
+The machine runs at the smaller of the two, for the dependent part of the computation. [Litinski (2019a)](https://arxiv.org/abs/1808.02892) makes the reaction limit concrete: in the time-optimal scheme he describes, a circuit of $n_L$ layers of $T$ gates takes $n_L\cdot t_m$, where $t_m$ is the measurement and classical-processing time, independent of code distance. At $t_m=10$ µs, his example of $10^8$ $T$ gates arranged in $10^6$ layers of 100 takes 10 seconds.
 
 **Worked: reaction limit.** At $t_r=10$ µs, $R_{\rm react}=1/(10^{-5}\,\text{s})=10^5$ dependent gates per second. [Gidney and Ekerå (2021)](https://arxiv.org/abs/1905.09749) count $0.3n^3+0.0005n^3\lg n$ Toffolis for $n$-bit RSA. At $n=2048$ that is $2.6\times10^9$. If all of them ran one after another, one per reaction time, that would take $2.6\times10^9\times10^{-5}\,\text{s}=2.6\times10^4$ s, or 7.2 hours.
 
-Their reported runtime is 8 hours, under the same 0.1% gate error, 1 µs cycle and 10 µs reaction time. The agreement in order of magnitude is the point, not a reproduction. Their measurement depth, $500n^2+n^2\lg n=2.1\times10^9$, gives 5.9 hours at one reaction time per layer. Their layout also has phases limited by code depth rather than reaction time: each lookup addition takes about 37 ms, of which about 22 ms is reaction-limited.
+Their reported runtime is 8 hours, under the same 0.1% gate error, 1 µs cycle and 10 µs reaction time. The agreement in order of magnitude is the point, not a reproduction. Their measurement depth, $500n^2+n^2\lg n=2.1\times10^9$, gives about 6 hours (5.95) at one reaction time per layer. Their layout also has phases limited by code depth rather than reaction time: each lookup addition takes about 37 ms, of which about 22 ms is reaction-limited.
 
 **Worked: one factory.** At 170 µs per Toffoli, $2.6\times10^9\times1.7\times10^{-4}\,\text{s}=4.42\times10^5$ s, which is 123 hours or 5.1 days. Gidney and Ekerå's own single-factory row reports 6 days, with 16 million physical qubits.
 
-**Worked: how many factories reach the reaction limit?** We need $R_T\ge R_{\rm react}$, so the number of factories must be at least $170\ \mu\text{s}/10\ \mu\text{s}=17$. At Babbush et al.'s roughly 130,000 qubits per factory, that is about $17\times130{,}000=2.2$ million physical qubits for factories alone. Gidney and Ekerå, with their own factory design at distance 27, report needing 14 CCZ factories to run at the reaction-limited rate. With Litinski's $1.4\times10^{-10}$ factory instead, $130/10=13$ factories, or $13\times43{,}300=562{,}900$ qubits.
+**Worked: how many factories reach the reaction limit?** We need $R_T\ge R_{\rm react}$, so the number of factories must be at least $170\ \mu\text{s}/10\ \mu\text{s}=17$. At Babbush et al.'s roughly 130,000 qubits per factory, that is about $17\times130{,}000=2.2$ million physical qubits for factories alone. Gidney and Ekerå, with their own factory design at distance 27, report needing 14 CCZ factories to run at the reaction-limited rate. Litinski's factories make $T$ states, not CCZ states, so first convert. A Toffoli costs 4 $T$ states with the cheaper construction in Litinski (2019a), or 7 with the plain one. The reaction limit of $10^5$ Toffolis per second then needs $4\times10^5$ $T$ states per second. His $1.4\times10^{-10}$ factory makes about 30,800 per second, so $4\times10^5/30{,}800\approx13$ factories, or $13\times43{,}300=562{,}900$ qubits. With 7 $T$ per Toffoli it is about 23 factories.
 
 Beyond that point, more factories buy nothing. Only a faster reaction time, or fewer dependent layers, makes the computation faster.
 
