@@ -6,6 +6,7 @@ Verification date: **2026-11-02**. The results below are from executed commands 
 
 - **62 authored chapters:** the 61 requested numbered topics and the synthesis chapter.
 - **5 independently reviewed, 56 complete authored, 1 partial, 0 planned.** These are mutually exclusive editorial states; all 62 have worked content. The review of lessons 01–05 is documented in `research/review-first-five.md`. Later focused reviews do not imply a full-book review.
+- **FT module, 13 lessons (FT-01 to FT-13), all independently reviewed** as of 2026-11-03, so the catalog totals are 18 reviewed, 56 complete, 1 partial. That review was an internal agent review, recorded in `research/ft-review-round-1.md`; it is not human expert review.
 - **42 prerequisite explanations, 124 separately stored explained exercises, 83 source records.** Chapters also contain inline prediction/reveal questions.
 - **7 interactive demonstrations:** Deutsch, Grover, Bernstein–Vazirani, Deutsch–Jozsa, Simon, QFT, and phase estimation. They compute ideal state transitions and sample the resulting distributions.
 - The current machine-readable counts, dependency validation, and exact gaps are in `docs/content-audit.json`; `/coverage/` exposes the editorial distinctions to readers.
