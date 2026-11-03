@@ -60,4 +60,6 @@ Three reviewer agents each read the lesson files, exercises, definitions, source
 
 ## Label decision
 
-The repository's `reviewed` status has previously been granted on an internal independent-agent review (lessons 01–05). These FT lessons now meet the reviewers' stated standard after fixes. Nevertheless, they keep `complete` ("not independently reviewed") until the owner decides whether this agent review should count. An external reader has explicitly said that recomputation is not review.
+The repository's `reviewed` status has previously been granted on an internal independent-agent review (lessons 01–05). These FT lessons meet the reviewers' stated standard after fixes.
+
+**Decision, 2026-11-03:** the owner decided that this agent review counts. FT-01 to FT-13 are now labelled `reviewed`, on the same basis as lessons 01–05. The label means an internal independent-agent review with its findings fixed. It does not mean human expert or external scientific review. An external reader has explicitly said that recomputation is not review. The items listed above as "not verified by any reviewer" remain unverified.

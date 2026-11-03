@@ -84,3 +84,7 @@ An external review recomputed the numbers in FT-04, FT-07, FT-11 and FT-13 and f
 - **Stale text.** The coverage note's "being added in phases" now has a dated completion update.
 
 The review is not independent peer review of the lessons; the `complete` labels are unchanged.
+
+## FT labels after the agent review round, 3 November 2026
+
+The independent agent review of FT-01 to FT-13 is recorded in `research/ft-review-round-1.md`, and its P1 to P3 findings were fixed in PR #7. On 3 November 2026 the owner decided that this review grants the `reviewed` label, matching how lessons 01–05 were labelled. It is an internal agent review, not human expert or external peer review.

@@ -26,7 +26,7 @@
       "ft-fowler-2012"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: error correction is the overhead that makes long quantum computations possible at all.",
     "aliases": [
       "bit-flip code",
@@ -64,7 +64,7 @@
       "ft3-boykin-universal"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Efficient classical simulation of a restricted circuit family; it marks where quantum advantage cannot come from.",
     "aliases": [
       "stabilizer formalism",
@@ -103,7 +103,7 @@
       "ft-google-2024"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: a local code with a threshold, at quadratic qubit cost in the distance.",
     "aliases": [
       "surface code",
@@ -139,7 +139,7 @@
       "dp-lee-thc-2021"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: the scaling law that converts error rates into qubit overhead.",
     "aliases": [
       "threshold",
@@ -176,7 +176,7 @@
       "ft-google-2024"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Polynomial-time classical decoding; exact matching here is exponential and for teaching only.",
     "aliases": [
       "MWPM",
@@ -214,7 +214,7 @@
       "ft3-alphaqubit"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Worst case O(n α(n)), with simulated toric-code thresholds slightly below matching (9.9% vs 10.3%); the repository's version is written for clarity and does not reach that bound.",
     "aliases": [
       "union-find decoder",
@@ -260,7 +260,7 @@
       "ft3-barber-collision-clustering"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "No quantum-advantage claim: decoder throughput must exceed the generation rate (f < 1, with margin) to avoid exponential slowdown.",
     "aliases": [
       "backlog problem",
@@ -309,7 +309,7 @@
       "ft3-gidney-ekera-details"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup. It sets the cost tiers (free Paulis, about d cycles per Clifford, distilled and latency-bound T gates) that every runtime estimate uses.",
     "aliases": [
       "lattice surgery",
@@ -355,7 +355,7 @@
       "ft3-cultivation"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup. It sets the logical clock speed and the magic-state footprint that decide fault-tolerant runtime.",
     "aliases": [
       "magic state distillation",
@@ -396,7 +396,7 @@
       "ft3-klimov-2018"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: this is the engineering cost any fault-tolerant advantage must carry.",
     "aliases": [
       "control stack",
@@ -437,7 +437,7 @@
       "ft-google-2024"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: the accounting that decides whether an algorithmic speedup survives error-correction overhead.",
     "aliases": [
       "resource estimate",
@@ -504,7 +504,7 @@
       "ft3-xzzx"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Not a speedup: slower reaction times scale wall-clock time linearly; connectivity reduces qubit counts, not dependent-step latency.",
     "aliases": [
       "qubit modalities",
@@ -550,7 +550,7 @@
       "ft-terhal"
     ],
     "path": "main",
-    "editorial": "complete",
+    "editorial": "reviewed",
     "advantage": "Synthesis: no new speedup; it shows which conditions an advantage claim depends on.",
     "aliases": [
       "full chain",
