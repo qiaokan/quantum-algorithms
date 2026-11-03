@@ -62,7 +62,7 @@ Dividing consecutive odd distances gives $\Lambda\approx p_{\rm th}/p$. At $p=0.
 | 5 | $(3.03\pm0.03)\times10^{-3}$ |
 | 7 | $(1.43\pm0.03)\times10^{-3}$, i.e. 0.143% |
 
-The paper reports $\Lambda=2.14\pm0.02$, with a 1.1 µs cycle. Check it against the table: $6.50/3.03\approx2.15$ and $3.03/1.43\approx2.12$. The distance-3 and distance-5 values are averages over several sub-grids of the chip, which is why the two ratios differ slightly from the fitted $\Lambda$.
+The paper reports $\Lambda=2.14\pm0.02$, with a 1.1 µs cycle. Check it against the table: $6.50/3.03\approx2.15$ and $3.03/1.43\approx2.12$. The distance-3 and distance-5 values are averages over several sub-grids of the chip. Λ itself is a weighted fit across all three distances, so the individual step ratios scatter around it.
 
 **How large must $d$ be for $10^{-6}$ per cycle?** Assume $\Lambda$ stays at 2.14 as distance grows; the next section examines that assumption. Then
 
@@ -77,15 +77,16 @@ $\Lambda$ is the lever. With the same starting point but $\Lambda=4$, the same t
 A computation fails if any logical qubit fails in any cycle. Take an illustrative machine with 1,000 logical qubits running for $10^9$ cycles, which is 1,100 seconds at 1.1 µs per cycle. That is $10^{12}$ logical-qubit-cycles. Keeping the total failure probability near $0.1$ needs $\varepsilon\approx10^{-13}$ per qubit per cycle.
 
 - **At $\Lambda=2.14$:** $d=69$, which is 9,521 physical qubits per logical qubit and about 9.5 million for the 1,000 data patches alone.
-- **At $\Lambda=10$,** the value [Lee et al. (2021)](https://arxiv.org/abs/2011.03494) assume: $d=29$, which is 1,681 per logical qubit and about 1.7 million.
+- **At $\Lambda=10$,** the suppression [Lee et al. (2021)](https://arxiv.org/abs/2011.03494) assume at 0.1% physical error, but still starting from Google's $\varepsilon_7$: $d=29$, which is 1,681 per logical qubit and about 1.7 million. This is not Lee et al.'s own figure. Their compilation starts from a much lower error at small distance, uses data distance 31, and counts $2(d+1)^2$ qubits per patch ([FT-11](/lessons/ft-11-resource-estimation/)).
 
 Both counts leave out routing space and magic-state factories, which later lessons add. They show why published estimates assume physical error rates well below today's: the qubit count depends steeply on $\Lambda$.
 
 ## Implementation and honest cost
 
-- **Λ need not stay constant.** The extrapolation assumes errors stay independent and local as the code grows. Google also ran repetition codes up to distance 29 on a 72-qubit processor. They report "an apparent logical error floor of $10^{-10}$", caused by rare correlated error bursts "approximately once every hour, or $3\times10^9$ cycles". A burst that hits many qubits at once is not suppressed by distance. Extrapolating to $10^{-13}$ per cycle therefore assumes that such bursts are themselves fixed, which no published experiment has demonstrated.
+- **Λ need not stay constant.** The extrapolation assumes errors stay independent and local as the code grows. Google also ran repetition codes up to distance 29 on a 72-qubit processor. They report "an apparent logical error floor of $10^{-10}$", caused by rare correlated error bursts "approximately once every hour, or $3\times10^9$ cycles". A burst that hits many qubits at once is not suppressed by distance. Extrapolating to $10^{-13}$ per cycle therefore assumes that such bursts are themselves fixed, which, as of November 2026, this book has not found demonstrated at that level.
 - **Memory is not computation.** These are memory experiments: they store a logical state. Logical gates add their own failure modes, which later lessons in this module cover.
 - **The decoder changes the result.** With Google's matching-based decoder, the same data give $1.71\times10^{-3}$ at $d=7$ rather than $1.43\times10^{-3}$. Decoder quality is part of $\Lambda$.
+- **Run it yourself at larger distance (simulation).** The companion notebook [ft-lambda-larger-distance.ipynb](/examples/notebooks/ft-lambda-larger-distance.ipynb) simulates circuit-level surface-code memories with Stim and decodes them with PyMatching up to $d=9$. Under its uniform noise model, Λ is about 3.2 at $p=0.3\%$ and about 2.0 at $p=0.5\%$, and it falls to 1 between 1.0% and 1.3%. These are simulated numbers for one idealized noise model, not hardware data.
 - **Time adds up.** Every cycle has to be decoded. A run of $10^9$ cycles produces $10^9$ rounds of syndrome data per logical qubit, a central infrastructure problem later in this module.
 
 ## Misunderstandings and prediction checks
@@ -104,7 +105,7 @@ Nothing. The logical error would be the same as at distance 3, with about 1,200 
 
 <details><summary>Why can't we just measure $\varepsilon$ at $d=27$ instead of extrapolating?</summary>
 
-A $d=27$ patch needs 1,457 qubits at hardware quality, far more than the 101 qubits of Google's distance-7 experiment. Measuring $10^{-6}$ per cycle would also take millions of cycles to see even a few failures. Extrapolation is all that is available, and it should be presented as extrapolation.
+A $d=27$ patch needs 1,457 qubits at hardware quality, far more than the 101 qubits of Google's distance-7 experiment. Each failure at $10^{-6}$ per cycle takes about a million cycles, so good statistics need many repeated runs. Extrapolation is all that is available, and it should be presented as extrapolation.
 
 </details>
 

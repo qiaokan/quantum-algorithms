@@ -2,7 +2,7 @@
   {
     "lesson": "ft-10-control-calibration",
     "question": "Using Krinner et al.'s mixing-chamber numbers (19 µW at 20 mK; passive 0.013 µW per drive line and 0.025 µW per flux line; 0.050 µW average DC flux-bias load per flux line), how many qubits with one drive and one flux line each can the mixing chamber support? What if magnetic shielding removed the flux-bias load entirely?",
-    "answer": "Per qubit: $0.013+0.025+0.050=0.088$ µW, so $19/0.088\\approx216$ qubits. Without the flux-bias load, $0.038$ µW per qubit gives $19/0.038=500$ at this stage, but the cold plate (200 µW at 140 mK, 0.69 µW passive per qubit) would then limit first at $200/0.69\\approx290$. These counts ignore readout lines and drive-pulse dissipation, which Krinner et al.'s full budget includes; it puts the thermal limit near 150 qubits."
+    "answer": "Per qubit: $0.013+0.025+0.050=0.088$ µW, so $19/0.088\\approx216$ qubits. Without the flux-bias load, $0.038$ µW per qubit gives $19/0.038=500$ at this stage, but the cold plate (200 µW at 140 mK, 0.69 µW passive per qubit) would then limit first at $200/0.69\\approx289$. These counts ignore readout lines and drive-pulse dissipation, which Krinner et al.'s full budget includes; it puts the thermal limit near 150 qubits."
   },
   {
     "lesson": "ft-10-control-calibration",

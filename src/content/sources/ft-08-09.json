@@ -15,7 +15,8 @@
     "url": "https://arxiv.org/abs/1808.02892",
     "supports": "Quantum 3, 128 (2019). Pauli product measurements via lattice surgery in about d code cycles; Clifford gates commuted to the end and absorbed into measurements; magic state consumed via P⊗Z measurement with P_{π/4} correction on -1 and Pauli correction after X measurement; controlled-Pauli gates from a |+> ancilla and Pauli product measurements (Fig. 33b); compact block 1.5n+3 tiles; time-optimal scheme runs n_L T layers in n_L·t_m; 10^8 T gates in 10 s at 10 µs feed-forward.",
     "verified": "2026-11-02",
-    "verification": "full-text"
+    "verification": "full-text",
+    "note": "The 10-second example assumes 10^8 T gates arranged in 10^6 layers of 100. A Toffoli costs 7 π/8 rotations, or 4 T gates with a cheaper construction (Sec. 6)."
   },
   {
     "id": "ft3-boykin-universal",
@@ -61,7 +62,8 @@
     "url": "https://arxiv.org/abs/1905.06903",
     "supports": "Quantum 3, 205 (2019). Table 1: at p=1e-3, (15-to-1)_{17,7,7} gives 4.5e-8 with 4,620 qubits and 42.6 cycles; (15-to-1)^6_{13,5,5}×(20-to-4)_{23,11,13} gives 1.4e-10 with 43,300 qubits and 130 cycles; (15-to-1)^6_{17,7,7}×(15-to-1)_{41,17,17} gives 4.5e-20 with 73,400 qubits and 128 cycles; historical designs up to 800,000 qubits. Origin of 35p^3 (35 undetected weight-3 fault combinations; exact 3.501e-11 at p=1e-4). About 10% of qubits for distillation in a 100-qubit example at p=1e-3.",
     "verified": "2026-11-02",
-    "verification": "full-text"
+    "verification": "full-text",
+    "note": "Table 1 qubits and cycles are per protocol run; for multi-output protocols (e.g. 20-to-4) the space-time cost and output error are per magic state."
   },
   {
     "id": "ft3-cultivation",

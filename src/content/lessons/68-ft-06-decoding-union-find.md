@@ -68,7 +68,7 @@ The correction is $X_1X_2$, weight 2, exactly the matching answer. The grown reg
 
 ## Worked example 2: where union-find and matching differ
 
-On the repetition code the two decoders agree: a brute-force run of the repository's code found no disagreement on any syndrome at distances 5, 7 or 9, nor at distance 5 with every assignment of weights 1, 2 or 3. Disagreement needs more than one route between defects.
+On the unweighted repetition code the two decoders agree: a brute-force run of the repository's code found no disagreement on any syndrome at distances 5, 7 or 9. With unequal weights they can differ. At distance 5, over every assignment of weights 1, 2 or 3 and every syndrome (3,645 cases), they pick corrections with opposite logical effect in 103 cases. In every one of those, the two corrections have equal weight, so union-find never returns a heavier correction there. A weight tie means the evidence cannot separate the two classes. To see union-find lose on weight, you need a graph where cluster growth meets defects in the wrong order.
 
 Take the distance-3 surface code of [FT-03](/lessons/ft-03-surface-code/), decoding $X$ errors. Its four $Z$ checks are $A=Z_0Z_3$, $B=Z_1Z_2Z_4Z_5$, $C=Z_3Z_4Z_6Z_7$ and $D=Z_5Z_8$. Qubits $q_0,q_1,q_2,q_6,q_7,q_8$ each meet one check and the boundary. $q_3$ joins $A$–$C$, $q_4$ joins $B$–$C$, and $q_5$ joins $B$–$D$. Let the defects be $A$, $B$ and $C$.
 

@@ -95,7 +95,7 @@ A traversal called *maintain* starts measuring at the node closest to the root t
 
 **A topological order** lists every node after its dependencies: RS, QS, Rabi, Ramsey, DRAG, RO, CZ. RO is only constrained to come after Rabi and before CZ, so it may sit in any of three places. There are exactly 3 valid orders.
 
-**Drift invalidates descendants.** Suppose the qubit frequency drifts, so Ramsey goes out of spec. Its descendants are DRAG and CZ, and Kelly et al.'s rule marks them unverified until they are rechecked. If instead the drift is large enough that QS fails, the descendants are Rabi, Ramsey, DRAG, RO and CZ, which is everything except the root.
+**Drift invalidates descendants.** Suppose the qubit frequency drifts, so Ramsey goes out of spec. Its descendants are DRAG and CZ, and Kelly et al.'s rule marks them unverified until they are rechecked. If instead the drift is large enough that QS fails, the descendants are Rabi, Ramsey, DRAG, RO and CZ, which is every node except RS and QS itself.
 
 <details><summary>Predict: how many calibration nodes does a 10 × 10 grid of qubits have in this toy model?</summary>
 

@@ -51,7 +51,7 @@
   },
   {
     "lesson": "ft-05-decoding-matching",
-    "question": "Data errors have $p=0.001$ and measurement errors $q=0.01$. Two events sit at the same check in consecutive rounds. Compare the weights of the two explanations.",
+    "question": "Data errors have $p=0.001$ and measurement errors $q=0.01$. Two events sit at an end check of the distance-3 repetition code, in consecutive rounds. Compare the weights of the two explanations.",
     "answer": "One measurement error: $\\ln(99)\\approx4.60$. Two data errors to the boundary: $2\\ln(999)\\approx13.8$. Matching chooses the measurement error, by a factor of about $e^{9.2}\\approx10^4$ in likelihood."
   }
 ]

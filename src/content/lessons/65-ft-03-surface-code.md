@@ -63,14 +63,14 @@ Each check uses one measure qubit, reset to $|0\rangle$ before each round.
 The repository runs this on its stabilizer simulator with all 17 qubits:
 
 1. **Round 1 from $|0\cdots0\rangle$.** Every $Z$ check reads 0, since the data qubits are all 0. The $X$ checks read random bits: that first measurement projects the data into one eigenstate of each $X$ check.
-2. **Round 2 repeats round 1 exactly.** The state is now an eigenstate of all 8 checks.
+2. **Round 2 repeats round 1 exactly.** Round 1 already left the state in an eigenstate of all 8 checks; round 2 confirms it.
 3. **Inject $X_4$, then measure a third round.** Exactly the two interior $Z$ checks change.
 
 What the decoder uses is that *change* between rounds, a **detection event**, not the raw outcome. [FT-05](/lessons/ft-05-decoding-matching/) builds on this.
 
 ## Implementation and honest cost
 
-- **Qubits.** $2d^2-1$ physical qubits per logical qubit: 17 at $d=3$, 49 at $d=5$, 97 at $d=7$. [Google Quantum AI's 2024 experiment](https://arxiv.org/abs/2408.13687) reports a "101-qubit distance-7 code" on a 105-qubit processor. The basic count gives 97, and this lesson does not account for the remaining qubits in their layout.
+- **Qubits.** $2d^2-1$ physical qubits per logical qubit: 17 at $d=3$, 49 at $d=5$, 97 at $d=7$. [Google Quantum AI's 2024 experiment](https://arxiv.org/abs/2408.13687) reports a "101-qubit distance-7 code" on a 105-qubit processor. The paper's distance-7 code comprises 49 data qubits, 48 measure qubits and 4 additional leakage-removal qubits: the basic 97 plus 4.
 - **Rounds.** One round of checks is one **cycle**. Google reports 1.1 µs per cycle. A memory runs cycles continuously, and a computation runs them for its entire length.
 - **Circuit faults.** Faults inside the check circuits matter. A fault on a measure qubit mid-circuit can spread to two data qubits, so practical layouts choose the CNOT order carefully. This lesson does not cover that ordering.
 - **Simple, not efficient.** Only nearest-neighbour coupling is needed, which suits fixed superconducting grids. The price is efficiency: other codes encode more logical qubits per physical qubit when longer-range connections are available, and a later lesson in this module compares hardware on this point.

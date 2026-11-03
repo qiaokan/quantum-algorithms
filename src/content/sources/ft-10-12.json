@@ -113,7 +113,7 @@
     "supports": "Press release, 19 October 2026 (wire copy). Claims 99.9995% logical fidelity on Helios with a color code; factor of 12 error reduction per distance step; Helix code 10 physical per logical; Apollo expected by 2029.",
     "verified": "2026-11-02",
     "verification": "official-doc",
-    "note": "Vendor claim; underlying preprint not checked. Opened via Kyodo News PR Wire copy of the official release."
+    "note": "Vendor claim; underlying preprint not checked. Opened via Kyodo News PR Wire copy of the official release. This is a PR Newswire copy hosted by Kyodo; Quantinuum's own link redirects to the underlying preprint (arXiv 2610.24077), recorded separately."
   },
   {
     "id": "ft3-bluvstein-2024",

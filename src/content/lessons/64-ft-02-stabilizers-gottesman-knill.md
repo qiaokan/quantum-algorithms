@@ -8,7 +8,7 @@ The input is a circuit built from Hadamard $H$, phase $S=\mathrm{diag}(1,i)$, CN
 
 A state vector of $n$ qubits holds $2^n$ complex numbers, about 16 bytes each in double precision. At $n=17$ that is $2^{17}\times16=2{,}097{,}152$ bytes, about 2 MB. At $n=50$ it is $2^{50}\times16\approx1.8\times10^{16}$ bytes, about 18 petabytes. This book's own state-vector simulator stops at 8 qubits on purpose.
 
-The method below stores $2n$ Pauli strings of $n$ letters each, plus signs. At $n=50$ that is $2\cdot50\cdot(2\cdot50+1)=10{,}100$ bits, about 1.3 KB.
+The method below stores $2n$ Pauli strings of $n$ letters each, plus signs: $n$ stabilizers and $n$ helper rows, explained below. At $n=50$ that is $2\cdot50\cdot(2\cdot50+1)=10{,}100$ bits, about 1.3 KB.
 
 ## Stabilizers: describe a state by what leaves it unchanged
 
@@ -55,7 +55,7 @@ Outcome 0 or 1 with probability 1/2 each. Qubit 1 then gives the same bit with c
 
 To measure $Z$ on qubit $a$, ask whether $Z_a$ commutes with every stabilizer.
 
-- **If one stabilizer anticommutes with $Z_a$**, the outcome is a fair coin. Replace that stabilizer by $\pm Z_a$, with the sign set by the outcome. Before that, multiply it into any other anticommuting stabilizer to make them commute.
+- **If at least one stabilizer anticommutes with $Z_a$**, the outcome is a fair coin. Replace that stabilizer by $\pm Z_a$, with the sign set by the outcome. Before that, multiply it into any other anticommuting stabilizer to make them commute.
 - **If every stabilizer commutes with $Z_a$**, the outcome is determined: $\pm Z_a$ is a product of stabilizers, and its sign is the answer.
 
 For the Bell state, $Z_0$ anticommutes with $XX$ and commutes with $ZZ$. So the first measurement is random. Suppose it reads 0: replace $XX$ by $+ZI$, giving $\{ZI,ZZ\}$, which describes $|00\rangle$. Now measure qubit 1: $IZ=ZI\cdot ZZ$ is a product of stabilizers with sign $+$, so the outcome is 0 with certainty. The repository's simulator test does exactly this, then repeats it for a 60-qubit GHZ state.
@@ -78,7 +78,7 @@ Redo the Bell circuit in bits. $ZI$ is $(x=00,z=10)$. $H_0$ swaps $x_0$ and $z_0
 
 ## The Gottesman–Knill theorem
 
-The result is usually called the Gottesman–Knill theorem. [Gottesman (1998)](https://arxiv.org/abs/quant-ph/9807006) states it as "Knill's theorem", crediting Knill. Circuits of Clifford gates, Pauli measurements and Clifford gates controlled by earlier classical outcomes can be simulated in polynomial time on a probabilistic classical computer. In that paper the circuits start from a stabilizer state such as $|0\cdots0\rangle$.
+The result is usually called the Gottesman–Knill theorem. [Gottesman (1998)](https://arxiv.org/abs/quant-ph/9807006) states it as "Knill's theorem", crediting Knill. Circuits of Clifford gates, Pauli measurements and Clifford gates controlled by earlier classical outcomes can be simulated in polynomial time on a probabilistic classical computer. The theorem leaves the input implicit; the simulation needs a stabilizer-state input such as $|0\cdots0\rangle$.
 
 This does not make quantum computing easy. Add the gate $T=\mathrm{diag}(1,e^{i\pi/4})$:
 
@@ -87,7 +87,7 @@ $$TXT^\dagger=\frac{X+Y}{\sqrt2}.$$
 That is not a single Pauli string, so the tableau cannot track it. Adding $T$ to the Clifford gates gives a universal gate set: [Boykin et al. (1999)](https://arxiv.org/abs/quant-ph/9906054) prove that Hadamard, CNOT and $\sigma_z^{1/4}$ (which is $T$ up to a global phase) form a universal basis. Two consequences run through the rest of this module:
 
 1. **Error-correction circuits are Clifford circuits with Pauli noise**, so they can be simulated and benchmarked at full scale. [Stim](https://arxiv.org/abs/2103.02202) is a widely used simulator built on this idea.
-2. **The non-Clifford gates are the expensive part** of a fault-tolerant computation. They cannot be done as cheaply as Clifford gates on an error-corrected processor, which is why resource estimates count T or Toffoli gates.
+2. **The non-Clifford gates are the expensive part** of a fault-tolerant computation. On a surface-code processor they cannot be done as cheaply as Clifford gates, which is why resource estimates count T or Toffoli gates.
 
 ## Implementation and honest cost
 
